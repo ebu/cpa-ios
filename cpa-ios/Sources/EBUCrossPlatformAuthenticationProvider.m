@@ -110,19 +110,21 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
     [request setHTTPBody:body];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            completionBlock ? completionBlock(nil, nil, error) : nil;
-            return;
-        }
-        
-        NSError *parseError = nil;
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-        if (parseError) {
-            completionBlock ? completionBlock(nil, nil, parseError) : nil;
-            return;
-        }
-        
-        completionBlock ? completionBlock(responseDictionary[@"client_id"], responseDictionary[@"client_secret"], nil) : nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                completionBlock ? completionBlock(nil, nil, error) : nil;
+                return;
+            }
+            
+            NSError *parseError = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (parseError) {
+                completionBlock ? completionBlock(nil, nil, parseError) : nil;
+                return;
+            }
+            
+            completionBlock ? completionBlock(responseDictionary[@"client_id"], responseDictionary[@"client_secret"], nil) : nil;
+        });
     }] resume];
 }
 
@@ -171,19 +173,21 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
     [request setHTTPBody:body];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;
-            return;
-        }
-        
-        NSError *parseError = nil;
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-        if (parseError) {
-            completionBlock ? completionBlock(nil, nil, nil, 0, parseError) : nil;
-            return;
-        }
-        
-        completionBlock ? completionBlock(responseDictionary[@"access_token"], responseDictionary[@"token_type"], responseDictionary[@"domain_display_name"], [responseDictionary[@"expires_in"] integerValue], nil) : nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;
+                return;
+            }
+            
+            NSError *parseError = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (parseError) {
+                completionBlock ? completionBlock(nil, nil, nil, 0, parseError) : nil;
+                return;
+            }
+            
+            completionBlock ? completionBlock(responseDictionary[@"access_token"], responseDictionary[@"token_type"], responseDictionary[@"domain_display_name"], [responseDictionary[@"expires_in"] integerValue], nil) : nil;
+        });
     }] resume];
 }
 

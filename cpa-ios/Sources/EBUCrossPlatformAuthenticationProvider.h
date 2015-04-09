@@ -20,6 +20,9 @@
  *
  * You can instantiate as many providers as required. In most cases a single provider should suffice, which you can 
  * instantiate and install as default provider by calling +setDefaultCrossPlatformAuthenticationProvider:
+ *
+ * This authentication provider is intended to be used from the main application thread. Using it from other threads
+ * results in undefined behavior.
  */
 @interface EBUCrossPlatformAuthenticationProvider : NSObject
 
