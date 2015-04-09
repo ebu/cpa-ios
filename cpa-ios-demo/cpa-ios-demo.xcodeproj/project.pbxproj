@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E606502F1AD65BCB008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502C1AD65BCB008FC7EE /* AppDelegate.m */; };
-		E60650301AD65BCB008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502D1AD65BCB008FC7EE /* main.m */; };
 		E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E606503B1AD65D15008FC7EE /* libcpa-ios.a */; };
 		E60650401AD661BB008FC7EE /* version.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E606503F1AD661BB008FC7EE /* version.xcconfig */; };
+		E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504C1AD673A5008FC7EE /* AppDelegate.m */; };
+		E606504F1AD673A5008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504D1AD673A5008FC7EE /* main.m */; };
+		E60650511AD673B0008FC7EE /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E60650501AD673B0008FC7EE /* Application.storyboard */; };
+		E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* AuthenticationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,11 +28,14 @@
 /* Begin PBXFileReference section */
 		E6064FF81AD65B0C008FC7EE /* cpa-ios-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60650281AD65BCB008FC7EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E606502B1AD65BCB008FC7EE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E606502C1AD65BCB008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E606502D1AD65BCB008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cpa-ios.xcodeproj"; path = "../cpa-ios/cpa-ios.xcodeproj"; sourceTree = "<group>"; };
 		E606503F1AD661BB008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		E606504B1AD673A5008FC7EE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E606504C1AD673A5008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E606504D1AD673A5008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E60650501AD673B0008FC7EE /* Application.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Application.storyboard; sourceTree = "<group>"; };
+		E60650551AD67926008FC7EE /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
+		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,19 +80,14 @@
 		E60650291AD65BCB008FC7EE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E606502A1AD65BCB008FC7EE /* Application */,
+				E606504B1AD673A5008FC7EE /* AppDelegate.h */,
+				E606504C1AD673A5008FC7EE /* AppDelegate.m */,
+				E60650501AD673B0008FC7EE /* Application.storyboard */,
+				E60650551AD67926008FC7EE /* AuthenticationViewController.h */,
+				E60650561AD67926008FC7EE /* AuthenticationViewController.m */,
+				E606504D1AD673A5008FC7EE /* main.m */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		E606502A1AD65BCB008FC7EE /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				E606502B1AD65BCB008FC7EE /* AppDelegate.h */,
-				E606502C1AD65BCB008FC7EE /* AppDelegate.m */,
-				E606502D1AD65BCB008FC7EE /* main.m */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		E60650351AD65D0C008FC7EE /* Dependencies */ = {
@@ -181,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E60650401AD661BB008FC7EE /* version.xcconfig in Resources */,
+				E60650511AD673B0008FC7EE /* Application.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,8 +192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60650301AD65BCB008FC7EE /* main.m in Sources */,
-				E606502F1AD65BCB008FC7EE /* AppDelegate.m in Sources */,
+				E606504F1AD673A5008FC7EE /* main.m in Sources */,
+				E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */,
+				E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

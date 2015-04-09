@@ -8,11 +8,4 @@
 
 @implementation AppDelegate
 
-#pragma mark Application lifecycle
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    return YES;
-}
-
 @end
