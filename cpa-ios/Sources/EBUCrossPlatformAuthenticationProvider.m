@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 // TODO: Friendly CFNetwork errors
-// TODO: Store tokens in keychain separately for domain / client or user
+// TODO: Store tokens in keychain separately by domain. To allow multiple users we should store user tokens by domain / user_name
+//       but user_name is a display name and not reliable enough. Currently only support a single user per app
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
 
