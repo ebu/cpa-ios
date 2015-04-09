@@ -7,10 +7,19 @@
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
 // TODO: Friendly CFNetwork errors
-// TODO: Deal with error field returned in JSON responses, as well as reason field returnd in user token requests. Check each
-//       request from the spec and ensure it is dealt with correctly
+// TODO: Store tokens in keychain separately for domain / client or user
+// TODO: Deal with localization (use custom macro accessing the library bundle)
+// TODO: Prevent multiple requests
 
+// Variable and constant declarations
 static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
+NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
+
+// Function declarations
+static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier);
+static NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode errorCode);
+static NSString *EBULocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier);
+static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 @interface EBUCrossPlatformAuthenticationProvider ()
 
@@ -60,8 +69,6 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
     NSAssert(softwareIdentifier, @"A software identifier is required");
     NSAssert(softwareVersion, @"A software version is required");
     
-    // TODO: Store in keychain as client token for the specified domain
-    
     [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         if (error) {
             completionBlock ? completionBlock(nil, nil, error) : nil;
@@ -73,6 +80,16 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
                 completionBlock ? completionBlock(nil, nil, error) : nil;
                 return;
             }
+            
+            // FIXME: Incorrect, currently for tests purposes. Must redirect to browser first if token not already available
+            [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                if (error) {
+                    completionBlock ? completionBlock(nil, nil, error) : nil;
+                    return;
+                }
+                
+                completionBlock ? completionBlock(accessToken, domainName, nil) : nil;
+            }];
         }];
     }];
 }
@@ -88,8 +105,6 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
     NSAssert(clientName, @"A client name is required");
     NSAssert(softwareIdentifier, @"A software identifier is required");
     NSAssert(softwareVersion, @"A software version is required");
-    
-    // TODO: Store in keychain as client token for the specified domain
     
     [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         if (error) {
@@ -146,6 +161,13 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
                 return;
             }
             
+            NSString *errorIdentifier = responseDictionary[@"error"];
+            if (errorIdentifier) {
+                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
+                completionBlock ? completionBlock(nil, nil, responseError) : nil;
+                return;
+            }
+            
             NSString *clientIdentifier = responseDictionary[@"client_id"];
             NSString *clientSecret = responseDictionary[@"client_secret"];
             
@@ -187,6 +209,13 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
             if (parseError) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, 0, parseError) : nil;
+                return;
+            }
+            
+            NSString *errorIdentifier = responseDictionary[@"error"];
+            if (errorIdentifier) {
+                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
+                completionBlock ? completionBlock(nil, nil, nil, 0, 0, responseError) : nil;
                 return;
             }
             
@@ -242,6 +271,13 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
                 return;
             }
             
+            NSString *errorIdentifier = responseDictionary[@"error"] ?: responseDictionary[@"reason"];
+            if (errorIdentifier) {
+                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
+                completionBlock ? completionBlock(nil, nil, nil, nil, 0, responseError) : nil;
+                return;
+            }
+            
             NSString *userName = responseDictionary[@"user_name"];
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
@@ -290,6 +326,13 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
                 return;
             }
             
+            NSString *errorIdentifier = responseDictionary[@"error"];
+            if (errorIdentifier) {
+                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
+                completionBlock ? completionBlock(nil, nil, nil, 0, responseError) : nil;
+                return;
+            }
+            
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_display_name"];
@@ -301,3 +344,49 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
 }
 
 @end
+
+#pragma mark Functions
+
+static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier)
+{
+    static NSDictionary *s_errorCodes;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_errorCodes = @{ @"invalid_request" : @(EBUAuthenticationErrorInvalidRequest),
+                          @"invalid_client" : @(EBUAuthenticationErrorInvalidClient),
+                          @"slow_down" : @(EBUAuthenticationErrorTooFast),
+                          @"authorization_pending" : @(EBUAuthenticationErrorPendingAuthorization) };
+    });
+    
+    NSNumber *errorCode = s_errorCodes[errorIdentifier];
+    return errorCode ? [errorCode integerValue] : EBUAuthenticationErrorUnknown;
+}
+
+static NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode errorCode)
+{
+    static NSDictionary *s_localizedErrorDescriptions;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_localizedErrorDescriptions = @{ @(EBUAuthenticationErrorUnknown) : NSLocalizedString(@"An unknown error has been encountered", nil),
+                                          @(EBUAuthenticationErrorInvalidRequest) : NSLocalizedString(@"The request is invalid", nil),
+                                          @(EBUAuthenticationErrorInvalidClient) : NSLocalizedString(@"The client is invalid", nil),
+                                          @(EBUAuthenticationErrorTooFast) : NSLocalizedString(@"Too many requests are being made", nil),
+                                          @(EBUAuthenticationErrorPendingAuthorization) : NSLocalizedString(@"Authorization is still pending", nil) };
+    });
+    return s_localizedErrorDescriptions[@(errorCode)];
+}
+
+static NSString *EBULocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier)
+{
+    EBUAuthenticationErrorCode errorCode = EBUAuthenticationErrorCodeForIdentifier(errorIdentifier);
+    return EBULocalizedErrorDescriptionForCode(errorCode);
+}
+
+static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier)
+{
+    NSCParameterAssert(errorIdentifier);
+    
+    return [NSError errorWithDomain:EBUAuthenticationErrorDomain
+                               code:EBUAuthenticationErrorCodeForIdentifier(errorIdentifier)
+                           userInfo:@{ NSLocalizedDescriptionKey : EBULocalizedErrorDescriptionForIdentifier(errorIdentifier) } ];
+}

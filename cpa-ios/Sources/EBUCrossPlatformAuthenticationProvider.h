@@ -7,6 +7,22 @@
 #import <Foundation/Foundation.h>
 
 /**
+ * Authentication error codes
+ */
+typedef NS_ENUM(NSInteger, EBUAuthenticationErrorCode) {
+    EBUAuthenticationErrorUnknown,                  // An unknown error has occurred
+    EBUAuthenticationErrorInvalidRequest,           // The request is invalid
+    EBUAuthenticationErrorInvalidClient,            // The client is invalid
+    EBUAuthenticationErrorTooFast,                  // Requests are made too fast. Slow down
+    EBUAuthenticationErrorPendingAuthorization      // Authorization has not yet been made
+};
+
+/**
+ * Common domain of authentication errors
+ */
+OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
+
+/**
  * Manage cross-platform authentication (CPA) with an authorization provider.
  *
  * For more information about CPA, refer to https://tech.ebu.ch/docs/tech/tech3366.pdf
