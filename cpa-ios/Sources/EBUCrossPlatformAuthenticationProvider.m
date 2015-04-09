@@ -53,9 +53,17 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
 
 - (NSURLSessionTask *)clientTokenWithCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock
 {
-    // TODO: Implement
-    [self doesNotRecognizeSelector:_cmd];
-    return nil;
+    NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
+    NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
+    NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    
+    NSAssert(clientName, @"A client name is required");
+    NSAssert(softwareIdentifier, @"A software identifier is required");
+    NSAssert(softwareVersion, @"A software version is required");
+    
+    return [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
+        NSLog(@"Client id: %@, client secret: %@, error: %@", clientIdentifier, clientSecret, error);
+    }];
 }
 
 #pragma mark Stateless authentication methods
@@ -63,11 +71,40 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
 + (NSURLSessionTask *)registerClientWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
                                                       clientName:(NSString *)clientName
                                               softwareIdentifier:(NSString *)softwareIdentifier
-                                                 softwareVersion:(NSString *)sotfwareVersion
+                                                 softwareVersion:(NSString *)softwareVersion
                                                  completionBlock:(void (^)(NSString *clientIdentifier, NSString *clientSecret, NSError *error))completionBlock
 {
-    // TODO: Implement
-    [self doesNotRecognizeSelector:_cmd];
+    NSParameterAssert(clientName);
+    NSParameterAssert(softwareIdentifier);
+    NSParameterAssert(softwareVersion);
+    
+    NSURL *URL = [authorizationProviderURL URLByAppendingPathComponent:@"register"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSDictionary *requestDictionary = @{ @"client_name" : clientName,
+                                         @"software_id" : softwareIdentifier,
+                                         @"software_version" : softwareVersion };
+    NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
+    [request setHTTPBody:body];
+    
+    return [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, error) : nil;
+            return;
+        }
+        
+        NSError *parseError = nil;
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+        if (parseError) {
+            completionBlock ? completionBlock(nil, nil, parseError) : nil;
+            return;
+        }
+        
+        completionBlock ? completionBlock(responseDictionary[@"client_id"], responseDictionary[@"client_secret"], nil) : nil;
+    }];
+    
     return nil;
 }
 

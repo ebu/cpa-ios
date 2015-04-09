@@ -45,14 +45,14 @@
 
 /**
  * Request a token associated with a user account. During the process of token retrieval, and if the device is not already associated
- * with the account, the user will be redirected to a URL for authentication
+ * with the account, the user will be redirected to a URL for authentication. Call -resume on the task to start it
  *
  * If a valid token is available from the keychain, it is directly returned
  */
 - (NSURLSessionTask *)userTokenWithCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock;
 
 /**
- * Request a token not associated with any user account
+ * Request a token not associated with any user account. Call -resume on the task to start it
  *
  * If a valid token is available from the keychain, it is directly returned
  */
