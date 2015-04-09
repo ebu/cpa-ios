@@ -7,6 +7,8 @@
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
 // TODO: Friendly CFNetwork errors
+// TODO: Deal with error field returned in JSON responses, as well as reason field returnd in user token requests. Check each
+//       request from the spec and ensure it is dealt with correctly
 
 static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
 
@@ -207,8 +209,48 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider =
                                                     domain:(NSString *)domain
                                            completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock
 {
-    // TODO: Implement
-    [self doesNotRecognizeSelector:_cmd];
+    NSParameterAssert(authorizationProviderURL);
+    NSParameterAssert(deviceCode);
+    NSParameterAssert(clientIdentifier);
+    NSParameterAssert(clientSecret);
+    NSParameterAssert(domain);
+    
+    NSURL *URL = [authorizationProviderURL URLByAppendingPathComponent:@"token"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSDictionary *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/device_code",
+                                         @"device_code" : deviceCode,
+                                         @"client_id" : clientIdentifier,
+                                         @"client_secret" : clientSecret,
+                                         @"domain" : domain };
+    NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
+    [request setHTTPBody:body];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
+                return;
+            }
+            
+            NSError *parseError = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (parseError) {
+                completionBlock ? completionBlock(nil, nil, nil, nil, 0, parseError) : nil;
+                return;
+            }
+            
+            NSString *userName = responseDictionary[@"user_name"];
+            NSString *accessToken = responseDictionary[@"access_token"];
+            NSString *tokenType = responseDictionary[@"token_type"];
+            NSString *domainName = responseDictionary[@"domain_name"];
+            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            
+            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
+        });
+    }] resume];
 }
 
 + (void)requestClientAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
