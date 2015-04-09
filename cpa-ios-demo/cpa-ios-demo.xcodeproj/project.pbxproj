@@ -10,6 +10,7 @@
 		E606502F1AD65BCB008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502C1AD65BCB008FC7EE /* AppDelegate.m */; };
 		E60650301AD65BCB008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502D1AD65BCB008FC7EE /* main.m */; };
 		E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E606503B1AD65D15008FC7EE /* libcpa-ios.a */; };
+		E60650401AD661BB008FC7EE /* version.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E606503F1AD661BB008FC7EE /* version.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		E606502C1AD65BCB008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E606502D1AD65BCB008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cpa-ios.xcodeproj"; path = "../cpa-ios/cpa-ios.xcodeproj"; sourceTree = "<group>"; };
+		E606503F1AD661BB008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 				E60650291AD65BCB008FC7EE /* Sources */,
 				E60650271AD65BCB008FC7EE /* Resources */,
 				E6064FF91AD65B0C008FC7EE /* Products */,
+				E606503F1AD661BB008FC7EE /* version.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60650401AD661BB008FC7EE /* version.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +233,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -264,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -273,6 +277,7 @@
 		};
 		E606501C1AD65B0C008FC7EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -284,6 +289,7 @@
 		};
 		E606501D1AD65B0C008FC7EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Resources/Info.plist;

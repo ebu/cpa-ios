@@ -26,6 +26,8 @@
 		E6064FA31AD659B2008FC7EE /* libcpa-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcpa-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60650321AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUCrossPlatformAuthenticationService.h; sourceTree = "<group>"; };
 		E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUCrossPlatformAuthenticationService.m; sourceTree = "<group>"; };
+		E606503E1AD661AE008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		E60650451AD66275008FC7EE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,8 @@
 			children = (
 				E60650311AD65CD5008FC7EE /* Sources */,
 				E6064FA41AD659B2008FC7EE /* Products */,
+				E60650451AD66275008FC7EE /* LICENSE */,
+				E606503E1AD661AE008FC7EE /* version.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,7 +165,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -195,7 +199,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -204,6 +208,7 @@
 		};
 		E6064FB81AD659B2008FC7EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -213,6 +218,7 @@
 		};
 		E6064FB91AD659B2008FC7EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
