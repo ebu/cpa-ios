@@ -6,6 +6,8 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
+#import <UIKit/UIKit.h>
+
 // TODO: Friendly CFNetwork errors
 // TODO: Store tokens in keychain separately for domain / client or user
 // TODO: Deal with localization (use custom macro accessing the library bundle)
@@ -81,15 +83,23 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                 return;
             }
             
-            // FIXME: Incorrect, currently for tests purposes. Must redirect to browser first if token not already available
-            [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                if (error) {
-                    completionBlock ? completionBlock(nil, nil, error) : nil;
-                    return;
-                }
+            // Open verification URL in (trusted) Safari. If no verification URL is received, single sign-on is provided by
+            // the authorization provider for a new service provider (see 8.2.2.3 in spec)
+            if (verificationURL) {
+                [[UIApplication sharedApplication] openURL:verificationURL];
                 
-                completionBlock ? completionBlock(accessToken, domainName, nil) : nil;
-            }];
+                // TODO: Workflow should resume when coming back from the browser
+            }
+            else {
+                [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                    if (error) {
+                        completionBlock ? completionBlock(nil, nil, error) : nil;
+                        return;
+                    }
+                    
+                    completionBlock ? completionBlock(accessToken, domainName, nil) : nil;
+                }];
+            }
         }];
     }];
 }
