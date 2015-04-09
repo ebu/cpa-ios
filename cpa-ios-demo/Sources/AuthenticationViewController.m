@@ -12,6 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *clientTokenLabel;
 @property (nonatomic, weak) IBOutlet UILabel *userTokenLabel;
+@property (nonatomic, weak) IBOutlet UILabel *localTokenLabel;
 
 @end
 
@@ -25,6 +26,7 @@
     
     self.clientTokenLabel.text = nil;
     self.userTokenLabel.text = nil;
+    self.localTokenLabel.text = nil;
 }
 
 #pragma mark Actions
@@ -59,6 +61,17 @@
         
         self.userTokenLabel.text = token.value;
     }];
+}
+
+- (IBAction)retrieveLocalToken:(id)sender
+{
+    EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:@"cpa.rts.ch"];
+    if (token) {
+        self.localTokenLabel.text = [NSString stringWithFormat:@"%@ (%@)", token.value, token.authenticated ? @"user" : @"client"];
+    }
+    else {
+        self.localTokenLabel.text = NSLocalizedString(@"None", nil);
+    }
 }
 
 @end
