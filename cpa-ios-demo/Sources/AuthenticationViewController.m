@@ -31,7 +31,7 @@
 
 - (IBAction)retrieveClientToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] clientTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] clientTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSString *domainName, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -47,7 +47,7 @@
 
 - (IBAction)retrieveUserToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] userTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] userTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSString *domainName, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
