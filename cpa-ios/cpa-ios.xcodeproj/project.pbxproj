@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */; };
+		E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* EBUToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,9 @@
 		E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUCrossPlatformAuthenticationProvider.m; sourceTree = "<group>"; };
 		E606503E1AD661AE008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		E60650451AD66275008FC7EE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E6257C981AD6C044005FE6D2 /* EBUToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUToken.h; sourceTree = "<group>"; };
+		E6257C991AD6C044005FE6D2 /* EBUToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUToken.m; sourceTree = "<group>"; };
+		E6257C9B1AD6C3B8005FE6D2 /* EBUToken+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EBUToken+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,9 @@
 			children = (
 				E60650321AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.h */,
 				E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */,
+				E6257C981AD6C044005FE6D2 /* EBUToken.h */,
+				E6257C991AD6C044005FE6D2 /* EBUToken.m */,
+				E6257C9B1AD6C3B8005FE6D2 /* EBUToken+Private.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */,
 				E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

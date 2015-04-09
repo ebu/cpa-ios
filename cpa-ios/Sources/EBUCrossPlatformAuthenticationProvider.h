@@ -4,6 +4,8 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "EBUToken.h"
+
 #import <Foundation/Foundation.h>
 
 /**
@@ -27,12 +29,16 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
  *
  * For more information about CPA, refer to https://tech.ebu.ch/docs/tech/tech3366.pdf
  *
- * An authorization provider delivers tokens associating devices with an identity. Two modes are available:
- *   - client mode (unauthenticated association): An anonymous identity is created and the device is associated with it
- *   - user mode (authenticated associated): The device is linked with a user account, which requires the user to log in
+ * An authorization provider delivers tokens associating applications with an identity. Two modes are available:
+ *   - client mode (unauthenticated association): An anonymous identity is created and the application is associated with it
+ *   - user mode (authenticated associated): The application is linked with a user account, which requires the user to log in
  *
- * When a device has been successfully associated, a token is retrieved and stored in the keychain. This token can then
+ * When an application has been successfully associated, a token is retrieved and stored in the keychain. This token can then
  * be used to access other services on behalf of the identity.
+ *
+ * Usually, tokens must be retrieved by calling the method -tokenForDomain:withCompletionBlock:, except when your user
+ * needs to be able to link its account with the application. In such cases, call -userTokenForDomain:withCompletionBlock:
+ * instead
  *
  * You can instantiate as many providers as required. In most cases a single provider should suffice, which you can 
  * instantiate and install as default provider by calling +setDefaultCrossPlatformAuthenticationProvider:
@@ -63,19 +69,25 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
 @property (nonatomic, readonly) NSURL *authorizationProviderURL;
 
 /**
- * Request a token associated with a user account. During the process of token retrieval, and if the device is not already associated
- * with the account, the user will be redirected to a URL for authentication. Call -resume on the task to start it
- *
- * If a valid token is available from the keychain, it is directly returned
+ * Return the token locally available for a given domain, nil if none
  */
-- (void)userTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *accessToken, NSString *domainName, NSError *error))completionBlock;
+- (EBUToken *)tokenForDomain:(NSString *)domain;
 
 /**
- * Request a token not associated with any user account. Call -resume on the task to start it
+ * Retrieve a token for the specified domain, authenticated or not. Before calling this method, you should check whether a
+ * an appropriate token is locally already available by calling -tokenForDomain: method first.
  *
- * If a valid token is available from the keychain, it is directly returned
+ * If the request token must be authenticated, the user will be redirected to a verification URL to enter her credentials
+ *
+ * If a token request is performed while a token is already available locally, and if the request is successful, the
+ * old token will be discarded.
  */
-- (void)clientTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *accessToken, NSString *domainName, NSError *error))completionBlock;
+- (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock;
+
+/**
+ * Discard a locally available token for the given domain, if any
+ */
+- (void)discardTokenForDomain:(NSString *)domain;
 
 @end
 

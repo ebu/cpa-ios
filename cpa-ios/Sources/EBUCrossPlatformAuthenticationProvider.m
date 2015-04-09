@@ -6,10 +6,12 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
+#import "EBUToken+Private.h"
+
 #import <UIKit/UIKit.h>
 
 // TODO: Friendly CFNetwork errors
-// TODO: Store tokens in keychain separately by domain. To allow multiple users we should store user tokens by domain / user_name
+// TODO: Store tokens in keychain separately by provider / domain. To allow multiple users we should store user tokens by provider / domain / user_name
 //       but user_name is a display name and not reliable enough. Currently only support a single user per app
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
@@ -27,6 +29,9 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 @interface EBUCrossPlatformAuthenticationProvider ()
 
 @property (nonatomic) NSURL *authorizationProviderURL;
+
+// TODO: Temporary. Later in keychain
+@property (nonatomic) NSMutableDictionary *tokens;
 
 @end
 
@@ -54,16 +59,23 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     
     if (self = [super init]) {
         self.authorizationProviderURL = authorizationProviderURL;
+        self.tokens = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
-#pragma mark Authentication
+#pragma mark Token management
 
-- (void)userTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *, NSString *, NSError *))completionBlock
+- (EBUToken *)tokenForDomain:(NSString *)domain
 {
     NSParameterAssert(domain);
-    
+    return self.tokens[domain];
+}
+
+- (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock
+{
+    NSParameterAssert(domain);
+        
     NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
     NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
     NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
@@ -74,64 +86,64 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     
     [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         if (error) {
-            completionBlock ? completionBlock(nil, nil, error) : nil;
+            completionBlock ? completionBlock(nil, error) : nil;
             return;
         }
         
-        [EBUCrossPlatformAuthenticationProvider requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, error) : nil;
-                return;
-            }
-            
-            // Open verification URL in (trusted) Safari. If no verification URL is received, single sign-on is provided by
-            // the authorization provider for a new service provider (see 8.2.2.3 in spec)
-            if (verificationURL) {
-                [[UIApplication sharedApplication] openURL:verificationURL];
+        if (authenticated) {
+            [EBUCrossPlatformAuthenticationProvider requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
+                if (error) {
+                    completionBlock ? completionBlock(nil, error) : nil;
+                    return;
+                }
                 
-                // TODO: Workflow should resume when coming back from the browser
-            }
-            else {
-                [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                    if (error) {
-                        completionBlock ? completionBlock(nil, nil, error) : nil;
-                        return;
-                    }
+                // Open verification URL in (trusted) Safari. If no verification URL is received, single sign-on is provided by
+                // the authorization provider for a new service provider (see 8.2.2.3 in spec)
+                if (verificationURL) {
+                    [[UIApplication sharedApplication] openURL:verificationURL];
                     
-                    completionBlock ? completionBlock(accessToken, domainName, nil) : nil;
-                }];
-            }
-        }];
+                    // TODO: Workflow should resume when coming back from the browser
+                }
+                else {
+                    [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                        if (error) {
+                            completionBlock ? completionBlock(nil, error) : nil;
+                            return;
+                        }
+                        
+                        EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
+                        token.domainName = domainName;
+                        token.authenticated = YES;
+                        
+                        [self.tokens setObject:token forKey:domain];
+                        
+                        completionBlock ? completionBlock(token, nil) : nil;
+                    }];
+                }
+            }];
+        }
+        else {
+            [EBUCrossPlatformAuthenticationProvider requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                if (error) {
+                    completionBlock ? completionBlock(nil, error) : nil;
+                    return;
+                }
+                
+                EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
+                token.domainName = domainName;
+                token.authenticated = NO;
+                
+                [self.tokens setObject:token forKey:domain];
+                
+                completionBlock ? completionBlock(token, nil) : nil;
+            }];
+        }
     }];
 }
 
-- (void)clientTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *, NSString *, NSError *))completionBlock
+- (void)discardTokenForDomain:(NSString *)domain
 {
-    NSParameterAssert(domain);
-    
-    NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
-    NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
-    NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-    
-    NSAssert(clientName, @"A client name is required");
-    NSAssert(softwareIdentifier, @"A software identifier is required");
-    NSAssert(softwareVersion, @"A software version is required");
-    
-    [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
-        if (error) {
-            completionBlock ? completionBlock(nil, nil, error) : nil;
-            return;
-        }
-        
-        [EBUCrossPlatformAuthenticationProvider requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, error) : nil;
-                return;
-            }
-            
-            completionBlock ? completionBlock(accessToken, domainName, nil) : nil;
-        }];
-    }];
+    [self.tokens removeObjectForKey:domain];
 }
 
 #pragma mark Stateless authentication methods

@@ -31,7 +31,7 @@
 
 - (IBAction)retrieveClientToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] clientTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSString *domainName, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" authenticated:NO withCompletionBlock:^(EBUToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -41,13 +41,13 @@
             [alertView show];
         }
         
-        self.clientTokenLabel.text = accessToken;
+        self.clientTokenLabel.text = token.value;
     }];
 }
 
 - (IBAction)retrieveUserToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] userTokenForDomain:@"cpa.rts.ch" withCompletionBlock:^(NSString *accessToken, NSString *domainName, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" authenticated:YES withCompletionBlock:^(EBUToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -57,7 +57,7 @@
             [alertView show];
         }
         
-        self.userTokenLabel.text = accessToken;
+        self.userTokenLabel.text = token.value;
     }];
 }
 
