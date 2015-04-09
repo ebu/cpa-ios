@@ -13,6 +13,7 @@
 		E606504F1AD673A5008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504D1AD673A5008FC7EE /* main.m */; };
 		E60650511AD673B0008FC7EE /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E60650501AD673B0008FC7EE /* Application.storyboard */; };
 		E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* AuthenticationViewController.m */; };
+		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		E60650501AD673B0008FC7EE /* Application.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Application.storyboard; sourceTree = "<group>"; };
 		E60650551AD67926008FC7EE /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
+		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */,
 				E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +59,7 @@
 				E60650351AD65D0C008FC7EE /* Dependencies */,
 				E60650291AD65BCB008FC7EE /* Sources */,
 				E60650271AD65BCB008FC7EE /* Resources */,
+				E6257CB01AD6D327005FE6D2 /* Frameworks */,
 				E6064FF91AD65B0C008FC7EE /* Products */,
 				E606503F1AD661BB008FC7EE /* version.xcconfig */,
 			);
@@ -104,6 +108,14 @@
 				E606503B1AD65D15008FC7EE /* libcpa-ios.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E6257CB01AD6D327005FE6D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6257CAD1AD6D321005FE6D2 /* Security.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
