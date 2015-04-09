@@ -49,14 +49,14 @@
  *
  * If a valid token is available from the keychain, it is directly returned
  */
-- (NSURLSessionTask *)userTokenWithCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock;
+- (void)userTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock;
 
 /**
  * Request a token not associated with any user account. Call -resume on the task to start it
  *
  * If a valid token is available from the keychain, it is directly returned
  */
-- (NSURLSessionTask *)clientTokenWithCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock;
+- (void)clientTokenForDomain:(NSString *)domain withCompletionBlock:(void (^)(NSString *accessToken, NSError *error))completionBlock;
 
 @end
 
