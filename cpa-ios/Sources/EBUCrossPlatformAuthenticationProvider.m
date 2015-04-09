@@ -30,7 +30,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 @property (nonatomic) NSURL *authorizationProviderURL;
 
-// TODO: Temporary. Later in keychain
+// TODO: Temporary. Later persisted in keychain
 @property (nonatomic) NSMutableDictionary *tokens;
 
 @end
@@ -77,11 +77,12 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSParameterAssert(domain);
         
     NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
-    NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
-    NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-    
     NSAssert(clientName, @"A client name is required");
+    
+    NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
     NSAssert(softwareIdentifier, @"A software identifier is required");
+    
+    NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     NSAssert(softwareVersion, @"A software version is required");
     
     [EBUCrossPlatformAuthenticationProvider registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
@@ -97,12 +98,12 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                     return;
                 }
                 
-                // Open verification URL in (trusted) Safari. If no verification URL is received, single sign-on is provided by
-                // the authorization provider for a new service provider (see 8.2.2.3 in spec)
+                // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
+                // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
                     [[UIApplication sharedApplication] openURL:verificationURL];
                     
-                    // TODO: Workflow should resume when coming back from the browser
+                    // TODO: Workflow needs to be resumed when coming back from the browser
                 }
                 else {
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {

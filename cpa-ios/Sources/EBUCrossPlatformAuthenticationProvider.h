@@ -36,14 +36,10 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
  * When an application has been successfully associated, a token is retrieved and stored in the keychain. This token can then
  * be used to access other services on behalf of the identity.
  *
- * Usually, tokens must be retrieved by calling the method -tokenForDomain:withCompletionBlock:, except when your user
- * needs to be able to link its account with the application. In such cases, call -userTokenForDomain:withCompletionBlock:
- * instead
- *
  * You can instantiate as many providers as required. In most cases a single provider should suffice, which you can 
- * instantiate and install as default provider by calling +setDefaultCrossPlatformAuthenticationProvider:
+ * instantiate and install as default provider by calling +setDefaultAuthenticationProvider:
  *
- * This authentication provider is intended to be used from the main application thread. Using it from other threads
+ * The authentication provider is intended to be used from the main application thread. Using it from any other thread
  * results in undefined behavior.
  */
 @interface EBUCrossPlatformAuthenticationProvider : NSObject
@@ -75,12 +71,13 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
 
 /**
  * Retrieve a token for the specified domain, authenticated or not. Before calling this method, you should check whether a
- * an appropriate token is locally already available by calling -tokenForDomain: method first.
+ * an appropriate token is locally already available by calling the -tokenForDomain: method first, and checking its
+ * authenticated property
  *
  * If the request token must be authenticated, the user will be redirected to a verification URL to enter her credentials
  *
- * If a token request is performed while a token is already available locally, and if the request is successful, the
- * old token will be discarded.
+ * Note that if a token request is performed while a token is already available locally, and if the request is successful, 
+ * the previous local token will be replaced.
  */
 - (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock;
 
