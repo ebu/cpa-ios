@@ -26,12 +26,12 @@
 /**
  * Set the default authentication provider, returning the previously installed one (if any)
  */
-+ (EBUCrossPlatformAuthenticationProvider *)setDefaultCrossPlatformAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)crossPlatformAuthenticationProvider;
++ (EBUCrossPlatformAuthenticationProvider *)setDefaultAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)authenticationProvider;
 
 /**
  * Return the currently set authentication provider, nil if none
  */
-+ (instancetype)defaultCrossPlatformAuthenticationProvider;
++ (instancetype)defaultAuthenticationProvider;
 
 /**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory)

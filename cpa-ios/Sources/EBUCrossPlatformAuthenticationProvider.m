@@ -6,7 +6,7 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
-static EBUCrossPlatformAuthenticationProvider *s_defaultCrossPlatformAuthenticationProvider = nil;
+static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
 
 @interface EBUCrossPlatformAuthenticationProvider ()
 
@@ -18,16 +18,16 @@ static EBUCrossPlatformAuthenticationProvider *s_defaultCrossPlatformAuthenticat
 
 #pragma mark Class methods
 
-+ (EBUCrossPlatformAuthenticationProvider *)setDefaultCrossPlatformAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)crossPlatformAuthenticationProvider
++ (EBUCrossPlatformAuthenticationProvider *)setDefaultAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)authenticationProvider
 {
-    EBUCrossPlatformAuthenticationProvider *previousDefaultCrossPlatformAuthenticationProvider = s_defaultCrossPlatformAuthenticationProvider;
-    s_defaultCrossPlatformAuthenticationProvider = crossPlatformAuthenticationProvider;
-    return previousDefaultCrossPlatformAuthenticationProvider;
+    EBUCrossPlatformAuthenticationProvider *previousAuthenticationProvider = s_defaultAuthenticationProvider;
+    s_defaultAuthenticationProvider = authenticationProvider;
+    return previousAuthenticationProvider;
 }
 
-+ (instancetype)defaultCrossPlatformAuthenticationProvider
++ (instancetype)defaultAuthenticationProvider
 {
-    return s_defaultCrossPlatformAuthenticationProvider;
+    return s_defaultAuthenticationProvider;
 }
 
 #pragma mark Object lifecycle
