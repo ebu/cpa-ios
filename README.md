@@ -25,7 +25,7 @@ More information on the [EBU Cross-Platform Authentication project](http://tech.
 
 ## Contributors
 
-* [Samuel Défago](https://github.com/sdefago) (RTS)
+* [Samuel Défago](https://github.com/defagos) (RTS)
 * [Michael Barroco](https://github.com/barroco) (EBU)
 
 
