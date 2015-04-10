@@ -9,23 +9,6 @@
 #import <Foundation/Foundation.h>
 
 /**
- * Authentication error codes
- */
-typedef NS_ENUM(NSInteger, EBUAuthenticationErrorCode) {
-    EBUAuthenticationErrorUnknown,                  // An unknown error has occurred
-    EBUAuthenticationErrorInvalidRequest,           // The request is invalid
-    EBUAuthenticationErrorInvalidClient,            // The client is invalid
-    EBUAuthenticationErrorTooFast,                  // Requests are made too fast. Slow down
-    EBUAuthenticationErrorPendingAuthorization,     // Authorization has not yet been made
-    EBUAuthenticationErrorAuthorizationDenied       // The user denied access to the application
-};
-
-/**
- * Common domain of authentication errors
- */
-OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
-
-/**
  * Manage cross-platform authentication (CPA) with an authorization provider.
  *
  * For more information about CPA, refer to https://tech.ebu.ch/docs/tech/tech3366.pdf
@@ -90,6 +73,8 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
  *
  * Note that if a token request is performed while a token is already available locally, and if the request is successful, 
  * the previous local token will be replaced.
+ *
+ * For possible errors, check EBUErrors.h
  */
 - (void)requestTokenForDomain:(NSString *)domain withType:(EBUTokenType)type completionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock;
 

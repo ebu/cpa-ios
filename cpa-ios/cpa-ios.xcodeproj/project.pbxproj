@@ -10,6 +10,8 @@
 		E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */; };
 		E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* EBUToken.m */; };
 		E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E65A41721AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */; };
+		E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* EBUErrors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +38,11 @@
 		E6257CA71AD6D2FA005FE6D2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E6257CA81AD6D2FA005FE6D2 /* EBUUICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUUICKeyChainStore.h; sourceTree = "<group>"; };
 		E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUUICKeyChainStore.m; sourceTree = "<group>"; };
+		E65A41701AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+EBUJSONExtensions.h"; sourceTree = "<group>"; };
+		E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+EBUJSONExtensions.m"; sourceTree = "<group>"; };
+		E65A41731AD7EABC00D8F289 /* EBUErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUErrors.h; sourceTree = "<group>"; };
+		E65A41741AD7EABC00D8F289 /* EBUErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUErrors.m; sourceTree = "<group>"; };
+		E65A41761AD7EB4400D8F289 /* EBUErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EBUErrors+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +80,14 @@
 			children = (
 				E60650321AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.h */,
 				E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */,
+				E65A41731AD7EABC00D8F289 /* EBUErrors.h */,
+				E65A41741AD7EABC00D8F289 /* EBUErrors.m */,
+				E65A41761AD7EB4400D8F289 /* EBUErrors+Private.h */,
 				E6257C981AD6C044005FE6D2 /* EBUToken.h */,
 				E6257C991AD6C044005FE6D2 /* EBUToken.m */,
 				E6257C9B1AD6C3B8005FE6D2 /* EBUToken+Private.h */,
+				E65A41701AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.h */,
+				E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -155,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E65A41721AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m in Sources */,
 				E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */,
+				E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */,
 				E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */,
 				E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */,
 			);

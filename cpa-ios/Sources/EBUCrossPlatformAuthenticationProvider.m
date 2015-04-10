@@ -6,30 +6,22 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
+#import "EBUErrors+Private.h"
 #import "EBUUICKeyChainStore.h"
 #import "EBUToken+Private.h"
+#import "NSURLSession+EBUJSONExtensions.h"
 
 #import <UIKit/UIKit.h>
 
-// TODO: Friendly CFNetwork errors
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
 
 // Typedefs
 typedef void (^EBUVoidCompletionBlock)(NSError *error);
 
-// Constants
-NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
-
 // Globals
 static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
 static NSMutableDictionary *s_callbackCompletionBlocks = nil;
-
-// Function declarations
-static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier);
-static NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode errorCode);
-static NSString *EBULocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier);
-static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 @interface EBUCrossPlatformAuthenticationProvider ()
 
@@ -266,24 +258,10 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, error) : nil;
-                return;
-            }
-            
-            NSError *parseError = nil;
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            if (parseError) {
-                completionBlock ? completionBlock(nil, nil, parseError) : nil;
-                return;
-            }
-            
-            NSString *errorIdentifier = responseDictionary[@"error"];
-            if (errorIdentifier) {
-                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
-                completionBlock ? completionBlock(nil, nil, responseError) : nil;
                 return;
             }
             
@@ -317,24 +295,10 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
-                return;
-            }
-            
-            NSError *parseError = nil;
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            if (parseError) {
-                completionBlock ? completionBlock(nil, nil, nil, 0, 0, parseError) : nil;
-                return;
-            }
-            
-            NSString *errorIdentifier = responseDictionary[@"error"];
-            if (errorIdentifier) {
-                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
-                completionBlock ? completionBlock(nil, nil, nil, 0, 0, responseError) : nil;
                 return;
             }
             
@@ -376,24 +340,10 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            NSError *parseError = nil;
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            if (parseError) {
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, parseError) : nil;
-                return;
-            }
-            
-            NSString *errorIdentifier = responseDictionary[@"error"] ?: responseDictionary[@"reason"];
-            if (errorIdentifier) {
-                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, responseError) : nil;
                 return;
             }
             
@@ -431,24 +381,10 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;
-                return;
-            }
-            
-            NSError *parseError = nil;
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            if (parseError) {
-                completionBlock ? completionBlock(nil, nil, nil, 0, parseError) : nil;
-                return;
-            }
-            
-            NSString *errorIdentifier = responseDictionary[@"error"];
-            if (errorIdentifier) {
-                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
-                completionBlock ? completionBlock(nil, nil, nil, 0, responseError) : nil;
                 return;
             }
             
@@ -464,50 +400,4 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 @end
 
-#pragma mark Functions
 
-static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier)
-{
-    static NSDictionary *s_errorCodes;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_errorCodes = @{ @"invalid_request" : @(EBUAuthenticationErrorInvalidRequest),
-                          @"invalid_client" : @(EBUAuthenticationErrorInvalidClient),
-                          @"slow_down" : @(EBUAuthenticationErrorTooFast),
-                          @"authorization_pending" : @(EBUAuthenticationErrorPendingAuthorization),
-                          @"user_code:denied" : @(EBUAuthenticationErrorAuthorizationDenied) };
-    });
-    
-    NSNumber *errorCode = s_errorCodes[errorIdentifier];
-    return errorCode ? [errorCode integerValue] : EBUAuthenticationErrorUnknown;
-}
-
-static NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode errorCode)
-{
-    static NSDictionary *s_localizedErrorDescriptions;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_localizedErrorDescriptions = @{ @(EBUAuthenticationErrorUnknown) : NSLocalizedString(@"An unknown error has been encountered", nil),
-                                          @(EBUAuthenticationErrorInvalidRequest) : NSLocalizedString(@"The request is invalid", nil),
-                                          @(EBUAuthenticationErrorInvalidClient) : NSLocalizedString(@"The client is invalid", nil),
-                                          @(EBUAuthenticationErrorTooFast) : NSLocalizedString(@"Too many requests are being made", nil),
-                                          @(EBUAuthenticationErrorPendingAuthorization) : NSLocalizedString(@"Authorization is still pending", nil),
-                                          @(EBUAuthenticationErrorAuthorizationDenied) : NSLocalizedString(@"Authorization was denied", nil)};
-    });
-    return s_localizedErrorDescriptions[@(errorCode)];
-}
-
-static NSString *EBULocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier)
-{
-    EBUAuthenticationErrorCode errorCode = EBUAuthenticationErrorCodeForIdentifier(errorIdentifier);
-    return EBULocalizedErrorDescriptionForCode(errorCode);
-}
-
-static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier)
-{
-    NSCParameterAssert(errorIdentifier);
-    
-    return [NSError errorWithDomain:EBUAuthenticationErrorDomain
-                               code:EBUAuthenticationErrorCodeForIdentifier(errorIdentifier)
-                           userInfo:@{ NSLocalizedDescriptionKey : EBULocalizedErrorDescriptionForIdentifier(errorIdentifier) } ];
-}
