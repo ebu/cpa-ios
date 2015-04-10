@@ -15,6 +15,7 @@
 
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
+// FIXME: Does not work correctly if the app gets killed while in Safari
 
 // Typedefs
 typedef void (^EBUVoidCompletionBlock)(NSError *error);
