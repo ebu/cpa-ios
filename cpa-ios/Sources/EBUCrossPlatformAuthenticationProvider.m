@@ -123,7 +123,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     
     NSString *key = [self keyChainKeyForDomain:domain];
     NSData *tokenData = [self.keyChainStore dataForKey:key];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:tokenData];
+    return tokenData ? [NSKeyedUnarchiver unarchiveObjectWithData:tokenData] : nil;
 }
 
 - (void)requestTokenForDomain:(NSString *)domain withType:(EBUTokenType)type completionBlock:(void (^)(EBUToken *, NSError *))completionBlock
