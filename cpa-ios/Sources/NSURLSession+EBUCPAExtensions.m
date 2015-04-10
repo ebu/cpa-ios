@@ -4,13 +4,13 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "NSURLSession+EBUJSONExtensions.h"
+#import "NSURLSession+EBUCPAExtensions.h"
 
 #import "EBUErrors+Private.h"
 
-@implementation NSURLSession (EBUJSONExtensions)
+@implementation NSURLSession (EBUCPAExtensions)
 
-- (NSURLSessionDataTask *)JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error))completionHandler
+- (NSURLSessionDataTask *)ebucpa_JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error))completionHandler
 {
     return [self dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

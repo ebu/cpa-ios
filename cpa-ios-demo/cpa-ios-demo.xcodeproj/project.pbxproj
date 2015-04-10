@@ -14,6 +14,8 @@
 		E60650511AD673B0008FC7EE /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E60650501AD673B0008FC7EE /* Application.storyboard */; };
 		E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* AuthenticationViewController.m */; };
 		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
+		E6897B4C1AD800660083E1BB /* cpa-ios-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */; };
+		E6897B511AD802B50083E1BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4F1AD802B50083E1BB /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +25,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = E6064FA31AD659B2008FC7EE;
 			remoteInfo = "cpa-ios";
+		};
+		E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6CAEBFC1AD7F9E8008EB753;
+			remoteInfo = "cpa-ios-resources";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -38,6 +47,9 @@
 		E60650551AD67926008FC7EE /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E67785191AD802EB00BC230D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6897B501AD802B50083E1BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				E60650281AD65BCB008FC7EE /* Info.plist */,
+				E6897B4F1AD802B50083E1BB /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -98,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */,
+				E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -106,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				E606503B1AD65D15008FC7EE /* libcpa-ios.a */,
+				E6897B451AD7FC4A0083E1BB /* cpa-ios-resources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +175,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = E6064FEF1AD65B0C008FC7EE;
 			productRefGroup = E6064FF91AD65B0C008FC7EE /* Products */;
@@ -185,6 +201,13 @@
 			remoteRef = E606503A1AD65D15008FC7EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E6897B451AD7FC4A0083E1BB /* cpa-ios-resources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "cpa-ios-resources.bundle";
+			remoteRef = E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -193,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E60650401AD661BB008FC7EE /* version.xcconfig in Resources */,
+				E6897B511AD802B50083E1BB /* Localizable.strings in Resources */,
+				E6897B4C1AD800660083E1BB /* cpa-ios-resources.bundle in Resources */,
 				E60650511AD673B0008FC7EE /* Application.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +236,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E6897B4F1AD802B50083E1BB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6897B501AD802B50083E1BB /* en */,
+				E67785191AD802EB00BC230D /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E60650191AD65B0C008FC7EE /* Debug */ = {

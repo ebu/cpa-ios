@@ -67,7 +67,7 @@
 {
     EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:@"cpa.rts.ch"];
     if (token) {
-        self.localTokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? @"client" : @"user"];
+        self.localTokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
     }
     else {
         self.localTokenLabel.text = NSLocalizedString(@"None", nil);

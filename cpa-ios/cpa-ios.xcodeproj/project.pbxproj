@@ -10,9 +10,21 @@
 		E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */; };
 		E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* EBUToken.m */; };
 		E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		E65A41721AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */; };
+		E65A41721AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m */; };
 		E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* EBUErrors.m */; };
+		E65A417B1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m */; };
+		E6897B401AD7FB100083E1BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6897B3E1AD7FB100083E1BB /* Localizable.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E6897B4D1AD800BA0083E1BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6064F9B1AD659B2008FC7EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6CAEBFB1AD7F9E8008EB753;
+			remoteInfo = "cpa-ios-resources";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		E6064FA11AD659B2008FC7EE /* CopyFiles */ = {
@@ -38,15 +50,28 @@
 		E6257CA71AD6D2FA005FE6D2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E6257CA81AD6D2FA005FE6D2 /* EBUUICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUUICKeyChainStore.h; sourceTree = "<group>"; };
 		E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUUICKeyChainStore.m; sourceTree = "<group>"; };
-		E65A41701AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+EBUJSONExtensions.h"; sourceTree = "<group>"; };
-		E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+EBUJSONExtensions.m"; sourceTree = "<group>"; };
+		E65A41701AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+EBUCPAExtensions.h"; sourceTree = "<group>"; };
+		E65A41711AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+EBUCPAExtensions.m"; sourceTree = "<group>"; };
 		E65A41731AD7EABC00D8F289 /* EBUErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUErrors.h; sourceTree = "<group>"; };
 		E65A41741AD7EABC00D8F289 /* EBUErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUErrors.m; sourceTree = "<group>"; };
 		E65A41761AD7EB4400D8F289 /* EBUErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EBUErrors+Private.h"; sourceTree = "<group>"; };
+		E65A41791AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+EBUCPAExtensions.h"; sourceTree = "<group>"; };
+		E65A417A1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+EBUCPAExtensions.m"; sourceTree = "<group>"; };
+		E6897B3F1AD7FB100083E1BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E6897B411AD7FB180083E1BB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6CAEC031AD7FAB7008EB753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E6064FA01AD659B2008FC7EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6CAEBF91AD7F9E8008EB753 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,6 +86,7 @@
 			children = (
 				E6257CA51AD6D2FA005FE6D2 /* Externals */,
 				E60650311AD65CD5008FC7EE /* Sources */,
+				E6CAEBF71AD7F9CE008EB753 /* Resources */,
 				E6064FA41AD659B2008FC7EE /* Products */,
 				E60650451AD66275008FC7EE /* LICENSE */,
 				E606503E1AD661AE008FC7EE /* version.xcconfig */,
@@ -71,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				E6064FA31AD659B2008FC7EE /* libcpa-ios.a */,
+				E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,8 +113,10 @@
 				E6257C981AD6C044005FE6D2 /* EBUToken.h */,
 				E6257C991AD6C044005FE6D2 /* EBUToken.m */,
 				E6257C9B1AD6C3B8005FE6D2 /* EBUToken+Private.h */,
-				E65A41701AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.h */,
-				E65A41711AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m */,
+				E65A41701AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.h */,
+				E65A41711AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m */,
+				E65A41791AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.h */,
+				E65A417A1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -110,6 +139,15 @@
 			path = "UICKeyChainStore-2.0.4";
 			sourceTree = "<group>";
 		};
+		E6CAEBF71AD7F9CE008EB753 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E6897B3E1AD7FB100083E1BB /* Localizable.strings */,
+				E6CAEC031AD7FAB7008EB753 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,11 +162,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				E6897B4E1AD800BA0083E1BB /* PBXTargetDependency */,
 			);
 			name = "cpa-ios";
 			productName = "cpa-ios";
 			productReference = E6064FA31AD659B2008FC7EE /* libcpa-ios.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */;
+			buildPhases = (
+				E6CAEBF81AD7F9E8008EB753 /* Sources */,
+				E6CAEBF91AD7F9E8008EB753 /* Frameworks */,
+				E6CAEBFA1AD7F9E8008EB753 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-resources";
+			productName = "cpa-ios-resources";
+			productReference = E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -143,6 +199,9 @@
 					E6064FA21AD659B2008FC7EE = {
 						CreatedOnToolsVersion = 6.2;
 					};
+					E6CAEBFB1AD7F9E8008EB753 = {
+						CreatedOnToolsVersion = 6.2;
+					};
 				};
 			};
 			buildConfigurationList = E6064F9E1AD659B2008FC7EE /* Build configuration list for PBXProject "cpa-ios" */;
@@ -151,6 +210,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
 			);
 			mainGroup = E6064F9A1AD659B2008FC7EE;
 			productRefGroup = E6064FA41AD659B2008FC7EE /* Products */;
@@ -158,24 +218,64 @@
 			projectRoot = "";
 			targets = (
 				E6064FA21AD659B2008FC7EE /* cpa-ios */,
+				E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E6CAEBFA1AD7F9E8008EB753 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6897B401AD7FB100083E1BB /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E6064F9F1AD659B2008FC7EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E65A41721AD7E8C300D8F289 /* NSURLSession+EBUJSONExtensions.m in Sources */,
+				E65A41721AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m in Sources */,
 				E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */,
 				E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */,
 				E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */,
+				E65A417B1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m in Sources */,
 				E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6CAEBF81AD7F9E8008EB753 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E6897B4E1AD800BA0083E1BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */;
+			targetProxy = E6897B4D1AD800BA0083E1BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E6897B3E1AD7FB100083E1BB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6897B3F1AD7FB100083E1BB /* en */,
+				E6897B411AD7FB180083E1BB /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E6064FB51AD659B2008FC7EE /* Debug */ = {
@@ -272,6 +372,24 @@
 			};
 			name = Release;
 		};
+		E6CAEC011AD7F9E8008EB753 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "cpa-ios-resources";
+			};
+			name = Debug;
+		};
+		E6CAEC021AD7F9E8008EB753 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "cpa-ios-resources";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -289,6 +407,15 @@
 			buildConfigurations = (
 				E6064FB81AD659B2008FC7EE /* Debug */,
 				E6064FB91AD659B2008FC7EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6CAEC011AD7F9E8008EB753 /* Debug */,
+				E6CAEC021AD7F9E8008EB753 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

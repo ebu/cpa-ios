@@ -9,7 +9,7 @@
 #import "EBUErrors+Private.h"
 #import "EBUUICKeyChainStore.h"
 #import "EBUToken+Private.h"
-#import "NSURLSession+EBUJSONExtensions.h"
+#import "NSURLSession+EBUCPAExtensions.h"
 
 #import <UIKit/UIKit.h>
 
@@ -262,7 +262,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, error) : nil;
@@ -299,7 +299,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
@@ -344,7 +344,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
@@ -385,7 +385,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;

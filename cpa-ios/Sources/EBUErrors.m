@@ -6,6 +6,8 @@
 
 #import "EBUErrors.h"
 
+#import "NSBundle+EBUCPAExtensions.h"
+
 // Constants
 NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
 
@@ -30,13 +32,13 @@ NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode errorCo
     static NSDictionary *s_localizedErrorDescriptions;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_localizedErrorDescriptions = @{ @(EBUAuthenticationErrorUnknown) : NSLocalizedString(@"An unknown error has been encountered", nil),
-                                          @(EBUAuthenticationErrorInvalidRequest) : NSLocalizedString(@"The request is invalid", nil),
-                                          @(EBUAuthenticationErrorInvalidResponse) : NSLocalizedString(@"The response is invalid", nil),
-                                          @(EBUAuthenticationErrorInvalidClient) : NSLocalizedString(@"The client is invalid", nil),
-                                          @(EBUAuthenticationErrorTooFast) : NSLocalizedString(@"Too many requests are being made", nil),
-                                          @(EBUAuthenticationErrorPendingAuthorization) : NSLocalizedString(@"Authorization is still pending", nil),
-                                          @(EBUAuthenticationErrorAuthorizationDenied) : NSLocalizedString(@"Authorization was denied", nil)};
+        s_localizedErrorDescriptions = @{ @(EBUAuthenticationErrorUnknown) : EBUCPALocalizedString(@"An unknown error has been encountered", nil),
+                                          @(EBUAuthenticationErrorInvalidRequest) : EBUCPALocalizedString(@"The request is invalid", nil),
+                                          @(EBUAuthenticationErrorInvalidResponse) : EBUCPALocalizedString(@"The response is invalid", nil),
+                                          @(EBUAuthenticationErrorInvalidClient) : EBUCPALocalizedString(@"The client is invalid", nil),
+                                          @(EBUAuthenticationErrorTooFast) : EBUCPALocalizedString(@"Too many requests are being made", nil),
+                                          @(EBUAuthenticationErrorPendingAuthorization) : EBUCPALocalizedString(@"Authorization is still pending", nil),
+                                          @(EBUAuthenticationErrorAuthorizationDenied) : EBUCPALocalizedString(@"Authorization was denied", nil)};
     });
     return s_localizedErrorDescriptions[@(errorCode)];
 }
