@@ -54,6 +54,8 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
  */
 + (EBUCrossPlatformAuthenticationProvider *)defaultAuthenticationProvider;
 
++ (void)handleURL:(NSURL *)URL;
+
 /**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory), and sharing tokens
  * within a given key chain group (if set to nil, no group sharing is made)

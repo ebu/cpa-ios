@@ -15,12 +15,15 @@
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
 
+// Typedefs
+typedef void (^EBUSimpleBlock)(void);
+
 // Constants
 NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
 
 // Globals
 static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
-static NSMutableDictionary *s_authenticationProviders = nil;
+static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 
 // Function declarations
 static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier);
@@ -46,7 +49,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
         return;
     }
     
-    s_authenticationProviders = [NSMutableDictionary dictionary];
+    s_callbackCompletionBlocks = [NSMutableDictionary dictionary];
 }
 
 + (EBUCrossPlatformAuthenticationProvider *)setDefaultAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)authenticationProvider
@@ -61,6 +64,12 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     return s_defaultAuthenticationProvider;
 }
 
++ (void)handleURL:(NSURL *)URL
+{
+    EBUSimpleBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
+    callbackCompletionBlock ? callbackCompletionBlock() : nil;
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -70,18 +79,12 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(callbackURLScheme);
     
-    NSAssert(! s_authenticationProviders[@(authorizationProviderURL.absoluteString.hash)], @"At most one authentication provider can be defined for a given provider authorization URL");
-    
     if (self = [super init]) {
         self.authorizationProviderURL = authorizationProviderURL;
         self.callbackURLScheme = callbackURLScheme;
         
         NSString *serviceIdentifier = [NSBundle mainBundle].bundleIdentifier;
         self.keyChainStore = [EBUUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
-        
-        // Keep track of all available providers. This is required to route callbacks from Safari to the correct authentication
-        // provider from which the request emerged
-        s_authenticationProviders[@(authorizationProviderURL.absoluteString.hash)] = [NSValue valueWithNonretainedObject:self];
     }
     return self;
 }
@@ -91,12 +94,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     return [self initWithAuthorizationProviderURL:authorizationProviderURL callbackURLScheme:callbackURLScheme keyChainAccessGroup:nil];
 }
 
-- (void)dealloc
-{
-    [s_authenticationProviders removeObjectForKey:@(self.authorizationProviderURL.absoluteString.hash)];
-}
-
-#pragma mark Token management
+#pragma mark Token retrieval and management
 
 - (EBUToken *)tokenForDomain:(NSString *)domain
 {
@@ -133,21 +131,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                     return;
                 }
                 
-                // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
-                // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
-                if (verificationURL) {
-                    NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
-                    callbackURLComponents.scheme = self.callbackURLScheme;
-                    callbackURLComponents.host = @(self.authorizationProviderURL.absoluteString.hash).stringValue;
-                    NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
-                    
-                    // .query automatically adds percent encoding
-                    NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
-                    fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
-                    
-                    [[UIApplication sharedApplication] openURL:fullVerificationURLComponents.URL];
-                }
-                else {
+                EBUSimpleBlock tokenRequestBlock = ^{
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                         if (error) {
                             completionBlock ? completionBlock(nil, error) : nil;
@@ -161,6 +145,27 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                         
                         completionBlock ? completionBlock(token, nil) : nil;
                     }];
+                };
+                
+                // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
+                // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
+                if (verificationURL) {
+                    NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
+                    callbackURLComponents.scheme = self.callbackURLScheme;
+                    callbackURLComponents.host = @"callback";
+                    NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
+                    
+                    // .query automatically adds percent encoding
+                    NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
+                    fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
+                    
+                    [[UIApplication sharedApplication] openURL:fullVerificationURLComponents.URL];
+                    
+                    // Save for execution when coming back from the browser. A scheme univoquely points at an authentication provider
+                    [s_callbackCompletionBlocks setObject:tokenRequestBlock forKey:self.callbackURLScheme];
+                }
+                else {
+                    tokenRequestBlock();
                 }
             }];
         }

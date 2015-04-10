@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    NSLog(@"URL: %@", URL);
+    [EBUCrossPlatformAuthenticationProvider handleURL:URL];
     return YES;
 }
 
