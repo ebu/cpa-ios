@@ -6,13 +6,12 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
+#import "EBUUICKeyChainStore.h"
 #import "EBUToken+Private.h"
 
 #import <UIKit/UIKit.h>
 
 // TODO: Friendly CFNetwork errors
-// TODO: Store tokens in keychain separately by provider / domain. To allow multiple users we should store user tokens by provider / domain / user_name
-//       but user_name is a display name and not reliable enough. Currently only support a single user per app
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
 
@@ -29,9 +28,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 @interface EBUCrossPlatformAuthenticationProvider ()
 
 @property (nonatomic) NSURL *authorizationProviderURL;
-
-// TODO: Temporary. Later persisted in keychain
-@property (nonatomic) NSMutableDictionary *tokens;
+@property (nonatomic) EBUUICKeyChainStore *keyChainStore;
 
 @end
 
@@ -53,15 +50,22 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL keyChainAccessGroup:(NSString *)keyChainAccessGroup
 {
     NSParameterAssert(authorizationProviderURL);
     
     if (self = [super init]) {
         self.authorizationProviderURL = authorizationProviderURL;
-        self.tokens = [NSMutableDictionary dictionary];
+        
+        NSString *serviceIdentifier = [NSBundle mainBundle].bundleIdentifier;
+        self.keyChainStore = [EBUUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
     }
     return self;
+}
+
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+{
+    return [self initWithAuthorizationProviderURL:authorizationProviderURL keyChainAccessGroup:nil];
 }
 
 #pragma mark Token management
@@ -69,7 +73,10 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 - (EBUToken *)tokenForDomain:(NSString *)domain
 {
     NSParameterAssert(domain);
-    return self.tokens[domain];
+    
+    NSString *key = [self keyChainKeyForDomain:domain];
+    NSData *tokenData = [self.keyChainStore dataForKey:key];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:tokenData];
 }
 
 - (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock
@@ -115,8 +122,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                         EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
                         token.domainName = domainName;
                         token.authenticated = YES;
-                        
-                        [self.tokens setObject:token forKey:domain];
+                        [self setToken:token forDomain:domain];
                         
                         completionBlock ? completionBlock(token, nil) : nil;
                     }];
@@ -133,8 +139,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                 EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
                 token.domainName = domainName;
                 token.authenticated = NO;
-                
-                [self.tokens setObject:token forKey:domain];
+                [self setToken:token forDomain:domain];
                 
                 completionBlock ? completionBlock(token, nil) : nil;
             }];
@@ -144,7 +149,29 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 - (void)discardTokenForDomain:(NSString *)domain
 {
-    [self.tokens removeObjectForKey:domain];
+    NSString *key = [self keyChainKeyForDomain:domain];
+    [self.keyChainStore removeItemForKey:key];
+}
+
+#pragma mark Keychain storage management
+
+- (NSString *)keyChainKeyForDomain:(NSString *)domain
+{
+    NSParameterAssert(domain);
+    
+    // FIXME: If we want to support multiple users per application, the key should also contain a reference
+    //        to a reliable user identifier. Currently only the user display name can be retrieved (user_name),
+    //        which is sadly not reliable enough since it might change
+    return [NSString stringWithFormat:@"%@_%@", [self.authorizationProviderURL absoluteString], domain];
+}
+
+- (void)setToken:(EBUToken *)token forDomain:(NSString *)domain
+{
+    NSParameterAssert(domain);
+    
+    NSData *tokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
+    NSString *key = [self keyChainKeyForDomain:domain];
+    [self.keyChainStore setData:tokenData forKey:key];
 }
 
 #pragma mark Stateless authentication methods

@@ -31,6 +31,26 @@
     return self;
 }
 
+#pragma mark NSCoding protocol
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    EBUToken *token = [EBUToken new];
+    token.value = [aDecoder decodeObjectForKey:@"value"];
+    token.domain = [aDecoder decodeObjectForKey:@"domain"];
+    token.domainName = [aDecoder decodeObjectForKey:@"domainName"];
+    token.authenticated = [aDecoder decodeBoolForKey:@"authenticated"];
+    return token;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.value forKey:@"value"];
+    [aCoder encodeObject:self.domain forKey:@"domain"];
+    [aCoder encodeObject:self.domainName forKey:@"domainName"];
+    [aCoder encodeBool:self.authenticated forKey:@"authenticated"];
+}
+
 #pragma mark Description
 
 - (NSString *)description

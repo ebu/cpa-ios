@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m */; };
 		E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* EBUToken.m */; };
-		E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */; };
+		E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */

@@ -7,9 +7,9 @@
 #import <Foundation/Foundation.h>
 
 /**
- * A service token
+ * Service token
  */
-@interface EBUToken : NSObject
+@interface EBUToken : NSObject <NSCoding>
 
 /**
  * The token string
