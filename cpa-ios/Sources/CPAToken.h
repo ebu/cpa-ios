@@ -9,15 +9,15 @@
 /**
  * Token type
  */
-typedef NS_ENUM(NSInteger, EBUTokenType) {
-    EBUTokenTypeClient,                 // Client token (unauthenticated)
-    EBUTokenTypeUser                    // User token (authenticated)
+typedef NS_ENUM(NSInteger, CPATokenType) {
+    CPATokenTypeClient,                 // Client token (unauthenticated)
+    CPATokenTypeUser                    // User token (authenticated)
 };
 
 /**
  * Service token
  */
-@interface EBUToken : NSObject <NSCoding>
+@interface CPAToken : NSObject <NSCoding>
 
 /**
  * The token string
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, EBUTokenType) {
 /**
  * The token type
  */
-@property (nonatomic, readonly) EBUTokenType type;
+@property (nonatomic, readonly) CPATokenType type;
 
 /**
  * Lifetime of the token in seconds
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, EBUTokenType) {
 
 @end
 
-@interface EBUToken (UnavailableMethods)
+@interface CPAToken (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
 

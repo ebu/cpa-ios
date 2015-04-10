@@ -4,28 +4,28 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "NSBundle+EBUCPAExtensions.h"
+#import "NSBundle+CPAExtensions.h"
 
-#import "EBUToken.h"
+#import "CPAToken.h"
 
-@implementation NSBundle (EBUCPAExtensions)
+@implementation NSBundle (CPAExtensions)
 
-+ (NSBundle *)ebucpa_principalBundle
++ (NSBundle *)cpa_principalBundle
 {
     static NSBundle *s_principalBundle;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_principalBundle = [NSBundle bundleForClass:[EBUToken class]];
+        s_principalBundle = [NSBundle bundleForClass:[CPAToken class]];
     });
     return s_principalBundle;
 }
 
-+ (NSBundle *)ebucpa_resourceBundle
++ (NSBundle *)cpa_resourceBundle
 {
     NSString *resourceBundlePath = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"cpa-ios-resources.bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
     if (! resourceBundle) {
-        resourceBundle = [self ebucpa_principalBundle];
+        resourceBundle = [self cpa_principalBundle];
         NSAssert(resourceBundle, @"The EBU CPA resource bundle must be available");
     }
     return resourceBundle;

@@ -1,6 +1,6 @@
 //
-//  EBUUICKeyChainStore.h
-//  EBUUICKeyChainStore
+//  CPAUICKeyChainStore.h
+//  CPAUICKeyChainStore
 //
 //  Created by Kishikawa Katsumi on 11/11/20.
 //  Copyright (c) 2011 Kishikawa Katsumi. All rights reserved.
@@ -8,89 +8,89 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const EBUUICKeyChainStoreErrorDomain;
+extern NSString * const CPAUICKeyChainStoreErrorDomain;
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreErrorCode) {
-    EBUUICKeyChainStoreErrorInvalidArguments = 1,
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreErrorCode) {
+    CPAUICKeyChainStoreErrorInvalidArguments = 1,
 };
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreItemClass) {
-    EBUUICKeyChainStoreItemClassGenericPassword = 1,
-    EBUUICKeyChainStoreItemClassInternetPassword,
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreItemClass) {
+    CPAUICKeyChainStoreItemClassGenericPassword = 1,
+    CPAUICKeyChainStoreItemClassInternetPassword,
 };
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreProtocolType) {
-    EBUUICKeyChainStoreProtocolTypeFTP = 1,
-    EBUUICKeyChainStoreProtocolTypeFTPAccount,
-    EBUUICKeyChainStoreProtocolTypeHTTP,
-    EBUUICKeyChainStoreProtocolTypeIRC,
-    EBUUICKeyChainStoreProtocolTypeNNTP,
-    EBUUICKeyChainStoreProtocolTypePOP3,
-    EBUUICKeyChainStoreProtocolTypeSMTP,
-    EBUUICKeyChainStoreProtocolTypeSOCKS,
-    EBUUICKeyChainStoreProtocolTypeIMAP,
-    EBUUICKeyChainStoreProtocolTypeLDAP,
-    EBUUICKeyChainStoreProtocolTypeAppleTalk,
-    EBUUICKeyChainStoreProtocolTypeAFP,
-    EBUUICKeyChainStoreProtocolTypeTelnet,
-    EBUUICKeyChainStoreProtocolTypeSSH,
-    EBUUICKeyChainStoreProtocolTypeFTPS,
-    EBUUICKeyChainStoreProtocolTypeHTTPS,
-    EBUUICKeyChainStoreProtocolTypeHTTPProxy,
-    EBUUICKeyChainStoreProtocolTypeHTTPSProxy,
-    EBUUICKeyChainStoreProtocolTypeFTPProxy,
-    EBUUICKeyChainStoreProtocolTypeSMB,
-    EBUUICKeyChainStoreProtocolTypeRTSP,
-    EBUUICKeyChainStoreProtocolTypeRTSPProxy,
-    EBUUICKeyChainStoreProtocolTypeDAAP,
-    EBUUICKeyChainStoreProtocolTypeEPPC,
-    EBUUICKeyChainStoreProtocolTypeNNTPS,
-    EBUUICKeyChainStoreProtocolTypeLDAPS,
-    EBUUICKeyChainStoreProtocolTypeTelnetS,
-    EBUUICKeyChainStoreProtocolTypeIRCS,
-    EBUUICKeyChainStoreProtocolTypePOP3S,
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreProtocolType) {
+    CPAUICKeyChainStoreProtocolTypeFTP = 1,
+    CPAUICKeyChainStoreProtocolTypeFTPAccount,
+    CPAUICKeyChainStoreProtocolTypeHTTP,
+    CPAUICKeyChainStoreProtocolTypeIRC,
+    CPAUICKeyChainStoreProtocolTypeNNTP,
+    CPAUICKeyChainStoreProtocolTypePOP3,
+    CPAUICKeyChainStoreProtocolTypeSMTP,
+    CPAUICKeyChainStoreProtocolTypeSOCKS,
+    CPAUICKeyChainStoreProtocolTypeIMAP,
+    CPAUICKeyChainStoreProtocolTypeLDAP,
+    CPAUICKeyChainStoreProtocolTypeAppleTalk,
+    CPAUICKeyChainStoreProtocolTypeAFP,
+    CPAUICKeyChainStoreProtocolTypeTelnet,
+    CPAUICKeyChainStoreProtocolTypeSSH,
+    CPAUICKeyChainStoreProtocolTypeFTPS,
+    CPAUICKeyChainStoreProtocolTypeHTTPS,
+    CPAUICKeyChainStoreProtocolTypeHTTPProxy,
+    CPAUICKeyChainStoreProtocolTypeHTTPSProxy,
+    CPAUICKeyChainStoreProtocolTypeFTPProxy,
+    CPAUICKeyChainStoreProtocolTypeSMB,
+    CPAUICKeyChainStoreProtocolTypeRTSP,
+    CPAUICKeyChainStoreProtocolTypeRTSPProxy,
+    CPAUICKeyChainStoreProtocolTypeDAAP,
+    CPAUICKeyChainStoreProtocolTypeEPPC,
+    CPAUICKeyChainStoreProtocolTypeNNTPS,
+    CPAUICKeyChainStoreProtocolTypeLDAPS,
+    CPAUICKeyChainStoreProtocolTypeTelnetS,
+    CPAUICKeyChainStoreProtocolTypeIRCS,
+    CPAUICKeyChainStoreProtocolTypePOP3S,
 };
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreAuthenticationType) {
-    EBUUICKeyChainStoreAuthenticationTypeNTLM = 1,
-    EBUUICKeyChainStoreAuthenticationTypeMSN,
-    EBUUICKeyChainStoreAuthenticationTypeDPA,
-    EBUUICKeyChainStoreAuthenticationTypeRPA,
-    EBUUICKeyChainStoreAuthenticationTypeHTTPBasic,
-    EBUUICKeyChainStoreAuthenticationTypeHTTPDigest,
-    EBUUICKeyChainStoreAuthenticationTypeHTMLForm,
-    EBUUICKeyChainStoreAuthenticationTypeDefault,
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreAuthenticationType) {
+    CPAUICKeyChainStoreAuthenticationTypeNTLM = 1,
+    CPAUICKeyChainStoreAuthenticationTypeMSN,
+    CPAUICKeyChainStoreAuthenticationTypeDPA,
+    CPAUICKeyChainStoreAuthenticationTypeRPA,
+    CPAUICKeyChainStoreAuthenticationTypeHTTPBasic,
+    CPAUICKeyChainStoreAuthenticationTypeHTTPDigest,
+    CPAUICKeyChainStoreAuthenticationTypeHTMLForm,
+    CPAUICKeyChainStoreAuthenticationTypeDefault,
 };
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreAccessibility) {
-    EBUUICKeyChainStoreAccessibilityWhenUnlocked = 1,
-    EBUUICKeyChainStoreAccessibilityAfterFirstUnlock,
-    EBUUICKeyChainStoreAccessibilityAlways,
-    EBUUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreAccessibility) {
+    CPAUICKeyChainStoreAccessibilityWhenUnlocked = 1,
+    CPAUICKeyChainStoreAccessibilityAfterFirstUnlock,
+    CPAUICKeyChainStoreAccessibilityAlways,
+    CPAUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly
     __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0),
-    EBUUICKeyChainStoreAccessibilityWhenUnlockedThisDeviceOnly,
-    EBUUICKeyChainStoreAccessibilityAfterFirstUnlockThisDeviceOnly,
-    EBUUICKeyChainStoreAccessibilityAlwaysThisDeviceOnly,
+    CPAUICKeyChainStoreAccessibilityWhenUnlockedThisDeviceOnly,
+    CPAUICKeyChainStoreAccessibilityAfterFirstUnlockThisDeviceOnly,
+    CPAUICKeyChainStoreAccessibilityAlwaysThisDeviceOnly,
 }
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_4_0);
 
-typedef NS_ENUM(NSInteger, EBUUICKeyChainStoreAuthenticationPolicy) {
-    EBUUICKeyChainStoreAuthenticationPolicyUserPresence = kSecAccessControlUserPresence,
+typedef NS_ENUM(NSInteger, CPAUICKeyChainStoreAuthenticationPolicy) {
+    CPAUICKeyChainStoreAuthenticationPolicyUserPresence = kSecAccessControlUserPresence,
 };
 
-@interface EBUUICKeyChainStore : NSObject
+@interface CPAUICKeyChainStore : NSObject
 
-@property (nonatomic, readonly) EBUUICKeyChainStoreItemClass itemClass;
+@property (nonatomic, readonly) CPAUICKeyChainStoreItemClass itemClass;
 
 @property (nonatomic, readonly) NSString *service;
 @property (nonatomic, readonly) NSString *accessGroup;
 
 @property (nonatomic, readonly) NSURL *server;
-@property (nonatomic, readonly) EBUUICKeyChainStoreProtocolType protocolType;
-@property (nonatomic, readonly) EBUUICKeyChainStoreAuthenticationType authenticationType;
+@property (nonatomic, readonly) CPAUICKeyChainStoreProtocolType protocolType;
+@property (nonatomic, readonly) CPAUICKeyChainStoreAuthenticationType authenticationType;
 
-@property (nonatomic) EBUUICKeyChainStoreAccessibility accessibility;
-@property (nonatomic, readonly) EBUUICKeyChainStoreAuthenticationPolicy authenticationPolicy
+@property (nonatomic) CPAUICKeyChainStoreAccessibility accessibility;
+@property (nonatomic, readonly) CPAUICKeyChainStoreAuthenticationPolicy authenticationPolicy
 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 @property (nonatomic) BOOL synchronizable;
@@ -104,19 +104,19 @@ __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0);
 + (NSString *)defaultService;
 + (void)setDefaultService:(NSString *)defaultService;
 
-+ (EBUUICKeyChainStore *)keyChainStore;
-+ (EBUUICKeyChainStore *)keyChainStoreWithService:(NSString *)service;
-+ (EBUUICKeyChainStore *)keyChainStoreWithService:(NSString *)service accessGroup:(NSString *)accessGroup;
++ (CPAUICKeyChainStore *)keyChainStore;
++ (CPAUICKeyChainStore *)keyChainStoreWithService:(NSString *)service;
++ (CPAUICKeyChainStore *)keyChainStoreWithService:(NSString *)service accessGroup:(NSString *)accessGroup;
 
-+ (EBUUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType;
-+ (EBUUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType authenticationType:(EBUUICKeyChainStoreAuthenticationType)authenticationType;
++ (CPAUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType;
++ (CPAUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType authenticationType:(CPAUICKeyChainStoreAuthenticationType)authenticationType;
 
 - (instancetype)init;
 - (instancetype)initWithService:(NSString *)service;
 - (instancetype)initWithService:(NSString *)service accessGroup:(NSString *)accessGroup;
 
-- (instancetype)initWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType;
-- (instancetype)initWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType authenticationType:(EBUUICKeyChainStoreAuthenticationType)authenticationType;
+- (instancetype)initWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType;
+- (instancetype)initWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType authenticationType:(CPAUICKeyChainStoreAuthenticationType)authenticationType;
 
 + (NSString *)stringForKey:(NSString *)key;
 + (NSString *)stringForKey:(NSString *)key service:(NSString *)service;
@@ -157,13 +157,13 @@ __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0);
 - (NSString *)objectForKeyedSubscript:(NSString <NSCopying> *)key;
 - (void)setObject:(NSString *)obj forKeyedSubscript:(NSString <NSCopying> *)key;
 
-+ (NSArray *)allKeysWithItemClass:(EBUUICKeyChainStoreItemClass)itemClass;
++ (NSArray *)allKeysWithItemClass:(CPAUICKeyChainStoreItemClass)itemClass;
 - (NSArray *)allKeys;
 
-+ (NSArray *)allItemsWithItemClass:(EBUUICKeyChainStoreItemClass)itemClass;
++ (NSArray *)allItemsWithItemClass:(CPAUICKeyChainStoreItemClass)itemClass;
 - (NSArray *)allItems;
 
-- (void)setAccessibility:(EBUUICKeyChainStoreAccessibility)accessibility authenticationPolicy:(EBUUICKeyChainStoreAuthenticationPolicy)authenticationPolicy
+- (void)setAccessibility:(CPAUICKeyChainStoreAccessibility)accessibility authenticationPolicy:(CPAUICKeyChainStoreAuthenticationPolicy)authenticationPolicy
 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 #if TARGET_OS_IPHONE
@@ -181,7 +181,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 @end
 
-@interface EBUUICKeyChainStore (ErrorHandling)
+@interface CPAUICKeyChainStore (ErrorHandling)
 
 + (NSString *)stringForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 + (NSString *)stringForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
@@ -221,7 +221,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 @end
 
-@interface EBUUICKeyChainStore (ForwardCompatibility)
+@interface CPAUICKeyChainStore (ForwardCompatibility)
 
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key genericAttribute:(id)genericAttribute;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key genericAttribute:(id)genericAttribute error:(NSError * __autoreleasing *)error;
@@ -249,7 +249,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 @end
 
-@interface EBUUICKeyChainStore (Deprecation)
+@interface CPAUICKeyChainStore (Deprecation)
 
 - (void)synchronize __attribute__((deprecated("calling this method is no longer required")));
 - (BOOL)synchronizeWithError:(NSError *__autoreleasing *)error __attribute__((deprecated("calling this method is no longer required")));

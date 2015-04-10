@@ -6,14 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
-#define EBUCPALocalizedString(key, comment) \
-    [[NSBundle ebucpa_resourceBundle] localizedStringForKey:(key) value:@"" table:nil]
+#define CPALocalizedString(key, comment) \
+    [[NSBundle cpa_resourceBundle] localizedStringForKey:(key) value:@"" table:nil]
 
-@interface NSBundle (EBUCPAExtensions)
+@interface NSBundle (CPAExtensions)
 
 /**
  * The resource bundle associated with the library
  */
-+ (NSBundle *)ebucpa_resourceBundle;
++ (NSBundle *)cpa_resourceBundle;
 
 @end

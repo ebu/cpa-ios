@@ -4,18 +4,18 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "NSURLSession+EBUCPAExtensions.h"
+#import "NSURLSession+CPAExtensions.h"
 
-#import "EBUErrors+Private.h"
+#import "CPAErrors+Private.h"
 
-@implementation NSURLSession (EBUCPAExtensions)
+@implementation NSURLSession (CPAExtensions)
 
-- (NSURLSessionDataTask *)ebucpa_JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error))completionHandler
+- (NSURLSessionDataTask *)cpa_JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error))completionHandler
 {
     return [self dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
-                NSString *betterLocalizedDescription = EBULocalizedDescriptionForCFNetworkError(error.code);
+                NSString *betterLocalizedDescription = CPALocalizedDescriptionForCFNetworkError(error.code);
                 if (! betterLocalizedDescription) {
                     completionHandler ? completionHandler(nil, response, error) : nil;
                 }
@@ -31,7 +31,7 @@
             
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
             if (! responseJSON || ! [responseJSON isKindOfClass:[NSDictionary class]]) {
-                NSError *parsingError = EBUErrorFromCode(EBUAuthenticationErrorInvalidResponse);
+                NSError *parsingError = CPAErrorFromCode(CPAErrorInvalidResponse);
                 completionHandler ? completionHandler(nil, response, parsingError) : nil;
                 return;
             }
@@ -41,7 +41,7 @@
             // Deal with errors which might have been returned in the response JSON
             NSString *errorIdentifier = responseDictionary[@"error"] ?: responseDictionary[@"reason"];
             if (errorIdentifier) {
-                NSError *responseError = EBUErrorFromIdentifier(errorIdentifier);
+                NSError *responseError = CPAErrorFromIdentifier(errorIdentifier);
                 completionHandler ? completionHandler(nil, response, responseError) : nil;
                 return;
             }

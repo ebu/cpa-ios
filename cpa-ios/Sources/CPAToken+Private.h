@@ -4,12 +4,12 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "EBUToken.h"
+#import "CPAToken.h"
 
 /**
  * Private interface for implementation purposes
  */
-@interface EBUToken (Private)
+@interface CPAToken (Private)
 
 /**
  * Create a token with the specified value and domain (both mandatory)
@@ -22,9 +22,9 @@
 @property (nonatomic, copy) NSString *domainName;
 
 /**
- * Token type. Defaults to EBUTokenTypeClient
+ * Token type. Defaults to CPATokenTypeClient
  */
-@property (nonatomic) EBUTokenType type;
+@property (nonatomic) CPATokenType type;
 
 /**
  * Lifetime of the token in seconds

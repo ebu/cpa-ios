@@ -4,39 +4,39 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "EBUCrossPlatformAuthenticationProvider.h"
+#import "CPAProvider.h"
 
-#import "EBUErrors+Private.h"
-#import "EBUStatelessRequest.h"
-#import "EBUUICKeyChainStore.h"
-#import "EBUToken+Private.h"
+#import "CPAErrors+Private.h"
+#import "CPAStatelessRequest.h"
+#import "CPAUICKeyChainStore.h"
+#import "CPAToken+Private.h"
 
 #import <UIKit/UIKit.h>
 
 // FIXME: Does not work correctly if the app gets killed while in Safari
 
 // Typedefs
-typedef void (^EBUVoidCompletionBlock)(NSError *error);
+typedef void (^CPAVoidCompletionBlock)(NSError *error);
 
 // Globals
-static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
+static CPAProvider *s_defaultProvider = nil;
 static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 
-@interface EBUCrossPlatformAuthenticationProvider ()
+@interface CPAProvider ()
 
 @property (nonatomic) NSURL *authorizationProviderURL;
 @property (nonatomic, copy) NSString *callbackURLScheme;
-@property (nonatomic) EBUUICKeyChainStore *keyChainStore;
+@property (nonatomic) CPAUICKeyChainStore *keyChainStore;
 
 @end
 
-@implementation EBUCrossPlatformAuthenticationProvider
+@implementation CPAProvider
 
 #pragma mark Class methods
 
 + (void)initialize
 {
-    if (self != [EBUCrossPlatformAuthenticationProvider class]) {
+    if (self != [CPAProvider class]) {
         return;
     }
     
@@ -44,21 +44,21 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     s_callbackCompletionBlocks = [NSMutableDictionary dictionary];
 }
 
-+ (EBUCrossPlatformAuthenticationProvider *)setDefaultAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)authenticationProvider
++ (CPAProvider *)setDefaultProvider:(CPAProvider *)provider
 {
-    EBUCrossPlatformAuthenticationProvider *previousAuthenticationProvider = s_defaultAuthenticationProvider;
-    s_defaultAuthenticationProvider = authenticationProvider;
-    return previousAuthenticationProvider;
+    CPAProvider *previousProvider = s_defaultProvider;
+    s_defaultProvider = provider;
+    return previousProvider;
 }
 
-+ (EBUCrossPlatformAuthenticationProvider *)defaultAuthenticationProvider
++ (CPAProvider *)defaultProvider
 {
-    return s_defaultAuthenticationProvider;
+    return s_defaultProvider;
 }
 
 + (void)handleURL:(NSURL *)URL
 {
-    EBUVoidCompletionBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
+    CPAVoidCompletionBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
     if (! callbackCompletionBlock) {
         return;
     }
@@ -81,7 +81,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     
     NSString *errorIdentifier = queryItems[@"info"];
     if (errorIdentifier) {
-        NSError *error = EBUErrorFromIdentifier(errorIdentifier);
+        NSError *error = CPAErrorFromIdentifier(errorIdentifier);
         callbackCompletionBlock(error);
     }
     else {
@@ -105,7 +105,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
         self.callbackURLScheme = callbackURLScheme;
         
         NSString *serviceIdentifier = [NSBundle mainBundle].bundleIdentifier;
-        self.keyChainStore = [EBUUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
+        self.keyChainStore = [CPAUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
     }
     return self;
 }
@@ -117,7 +117,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 
 #pragma mark Token retrieval and management
 
-- (EBUToken *)tokenForDomain:(NSString *)domain
+- (CPAToken *)tokenForDomain:(NSString *)domain
 {
     NSParameterAssert(domain);
     
@@ -126,7 +126,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     return tokenData ? [NSKeyedUnarchiver unarchiveObjectWithData:tokenData] : nil;
 }
 
-- (void)requestTokenForDomain:(NSString *)domain withType:(EBUTokenType)type completionBlock:(void (^)(EBUToken *, NSError *))completionBlock
+- (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(void (^)(CPAToken *, NSError *))completionBlock
 {
     NSParameterAssert(domain);
         
@@ -139,7 +139,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     NSAssert(softwareVersion, @"A software version is required");
     
-    [EBUStatelessRequest registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
+    [CPAStatelessRequest registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         if (error) {
             completionBlock ? completionBlock(nil, error) : nil;
             return;
@@ -151,7 +151,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                 return;
             }
             
-            EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
+            CPAToken *token = [[CPAToken alloc] initWithValue:accessToken domain:domain];
             token.domainName = domainName;
             token.type = type;
             [self setToken:token forDomain:domain];
@@ -159,20 +159,20 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
             completionBlock ? completionBlock(token, nil) : nil;
         };
         
-        if (type == EBUTokenTypeUser) {
-            [EBUStatelessRequest requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
+        if (type == CPATokenTypeUser) {
+            [CPAStatelessRequest requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
                 if (error) {
                     completionBlock ? completionBlock(nil, error) : nil;
                     return;
                 }
                 
-                EBUVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
+                CPAVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
                     if (error) {
                         completionBlock ? completionBlock(nil, error) : nil;
                         return;
                     }
                     
-                    [EBUStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                    [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                         tokenRequestCompletionBlock(accessToken, domainName, error);
                     }];
                 };
@@ -202,7 +202,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
             }];
         }
         else {
-            [EBUStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+            [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                 tokenRequestCompletionBlock(accessToken, domainName, error);
             }];
         }
@@ -227,7 +227,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     return [NSString stringWithFormat:@"%@_%@", self.authorizationProviderURL.absoluteString, domain];
 }
 
-- (void)setToken:(EBUToken *)token forDomain:(NSString *)domain
+- (void)setToken:(CPAToken *)token forDomain:(NSString *)domain
 {
     NSParameterAssert(domain);
     

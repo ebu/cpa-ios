@@ -6,7 +6,7 @@
 
 #import "AppDelegate.h"
 
-#import "EBUCrossPlatformAuthenticationProvider.h"
+#import "CPAProvider.h"
 
 @implementation AppDelegate
 
@@ -15,15 +15,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSURL *providerURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
-    EBUCrossPlatformAuthenticationProvider *authenticationProvider = [[EBUCrossPlatformAuthenticationProvider alloc] initWithAuthorizationProviderURL:providerURL callbackURLScheme:@"cpademo"];
-    [EBUCrossPlatformAuthenticationProvider setDefaultAuthenticationProvider:authenticationProvider];
+    CPAProvider *provider = [[CPAProvider alloc] initWithAuthorizationProviderURL:providerURL callbackURLScheme:@"cpademo"];
+    [CPAProvider setDefaultProvider:provider];
     
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    [EBUCrossPlatformAuthenticationProvider handleURL:URL];
+    [CPAProvider handleURL:URL];
     return YES;
 }
 

@@ -4,11 +4,11 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "EBUStatelessRequest.h"
+#import "CPAStatelessRequest.h"
 
-#import "NSURLSession+EBUCPAExtensions.h"
+#import "NSURLSession+CPAExtensions.h"
 
-@implementation EBUStatelessRequest
+@implementation CPAStatelessRequest
 
 + (void)registerClientWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
                                         clientName:(NSString *)clientName
@@ -32,7 +32,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, error) : nil;
@@ -69,7 +69,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
@@ -114,7 +114,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
@@ -155,7 +155,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] ebucpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;

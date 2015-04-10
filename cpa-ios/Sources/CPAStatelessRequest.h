@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EBUStatelessRequest : NSObject
+@interface CPAStatelessRequest : NSObject
 
 + (void)registerClientWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
                                         clientName:(NSString *)clientName

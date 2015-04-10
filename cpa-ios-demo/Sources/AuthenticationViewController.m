@@ -6,7 +6,7 @@
 
 #import "AuthenticationViewController.h"
 
-#import "EBUCrossPlatformAuthenticationProvider.h"
+#import "CPAProvider.h"
 
 static NSString * const kDomain = @"cpa.rts.ch";
 
@@ -33,9 +33,9 @@ static NSString * const kDomain = @"cpa.rts.ch";
 
 - (void)reloadData
 {
-    EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:kDomain];
+    CPAToken *token = [[CPAProvider defaultProvider] tokenForDomain:kDomain];
     if (token) {
-        self.tokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
+        self.tokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == CPATokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
     }
     else {
         self.tokenLabel.text = NSLocalizedString(@"None", nil);
@@ -46,7 +46,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
 
 - (IBAction)retrieveToken:(id)sender
 {
-    EBUToken *existingToken = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:kDomain];
+    CPAToken *existingToken = [[CPAProvider defaultProvider] tokenForDomain:kDomain];
     if (existingToken && ! self.forceRenewalSwitch.on) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", nil)
                                                             message:NSLocalizedString(@"A token is already available", nil)
@@ -57,8 +57,8 @@ static NSString * const kDomain = @"cpa.rts.ch";
         return;
     }
     
-    EBUTokenType type = self.userTokenSwitch.on ? EBUTokenTypeUser : EBUTokenTypeClient;
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:kDomain withType:type completionBlock:^(EBUToken *token, NSError *error) {
+    CPATokenType type = self.userTokenSwitch.on ? CPATokenTypeUser : CPATokenTypeClient;
+    [[CPAProvider defaultProvider] requestTokenForDomain:kDomain withType:type completionBlock:^(CPAToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]

@@ -1,21 +1,21 @@
 //
-//  EBUUICKeyChainStore.m
-//  EBUUICKeyChainStore
+//  CPAUICKeyChainStore.m
+//  CPAUICKeyChainStore
 //
 //  Created by Kishikawa Katsumi on 11/11/20.
 //  Copyright (c) 2011 Kishikawa Katsumi. All rights reserved.
 //
 
-#import "EBUUICKeyChainStore.h"
+#import "CPAUICKeyChainStore.h"
 
-NSString * const EBUUICKeyChainStoreErrorDomain = @"com.kishikawakatsumi.EBUUICkeychainstore";
+NSString * const CPAUICKeyChainStoreErrorDomain = @"com.kishikawakatsumi.CPAUICKeyChainstore";
 static NSString *_defaultService;
 
-@interface EBUUICKeyChainStore ()
+@interface CPAUICKeyChainStore ()
 
 @end
 
-@implementation EBUUICKeyChainStore
+@implementation CPAUICKeyChainStore
 
 + (NSString *)defaultService
 {
@@ -33,29 +33,29 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-+ (EBUUICKeyChainStore *)keyChainStore
++ (CPAUICKeyChainStore *)keyChainStore
 {
     return [[self alloc] initWithService:nil accessGroup:nil];
 }
 
-+ (EBUUICKeyChainStore *)keyChainStoreWithService:(NSString *)service
++ (CPAUICKeyChainStore *)keyChainStoreWithService:(NSString *)service
 {
     return [[self alloc] initWithService:service accessGroup:nil];
 }
 
-+ (EBUUICKeyChainStore *)keyChainStoreWithService:(NSString *)service accessGroup:(NSString *)accessGroup
++ (CPAUICKeyChainStore *)keyChainStoreWithService:(NSString *)service accessGroup:(NSString *)accessGroup
 {
     return [[self alloc] initWithService:service accessGroup:accessGroup];
 }
 
 #pragma mark -
 
-+ (EBUUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType
++ (CPAUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType
 {
-    return [[self alloc] initWithServer:server protocolType:protocolType authenticationType:EBUUICKeyChainStoreAuthenticationTypeDefault];
+    return [[self alloc] initWithServer:server protocolType:protocolType authenticationType:CPAUICKeyChainStoreAuthenticationTypeDefault];
 }
 
-+ (EBUUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType authenticationType:(EBUUICKeyChainStoreAuthenticationType)authenticationType
++ (CPAUICKeyChainStore *)keyChainStoreWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType authenticationType:(CPAUICKeyChainStoreAuthenticationType)authenticationType
 {
     return [[self alloc] initWithServer:server protocolType:protocolType authenticationType:authenticationType];
 }
@@ -76,7 +76,7 @@ static NSString *_defaultService;
 {
     self = [super init];
     if (self) {
-        _itemClass = EBUUICKeyChainStoreItemClassGenericPassword;
+        _itemClass = CPAUICKeyChainStoreItemClassGenericPassword;
         
         if (!service) {
             service = [self.class defaultService];
@@ -91,16 +91,16 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-- (instancetype)initWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType
+- (instancetype)initWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType
 {
-    return [self initWithServer:server protocolType:protocolType authenticationType:EBUUICKeyChainStoreAuthenticationTypeDefault];
+    return [self initWithServer:server protocolType:protocolType authenticationType:CPAUICKeyChainStoreAuthenticationTypeDefault];
 }
 
-- (instancetype)initWithServer:(NSURL *)server protocolType:(EBUUICKeyChainStoreProtocolType)protocolType authenticationType:(EBUUICKeyChainStoreAuthenticationType)authenticationType
+- (instancetype)initWithServer:(NSURL *)server protocolType:(CPAUICKeyChainStoreProtocolType)protocolType authenticationType:(CPAUICKeyChainStoreAuthenticationType)authenticationType
 {
     self = [super init];
     if (self) {
-        _itemClass = EBUUICKeyChainStoreItemClassInternetPassword;
+        _itemClass = CPAUICKeyChainStoreItemClassInternetPassword;
         
         _server = server.copy;
         _protocolType = protocolType;
@@ -116,7 +116,7 @@ static NSString *_defaultService;
 
 - (void)commonInit
 {
-    _accessibility = EBUUICKeyChainStoreAccessibilityAfterFirstUnlock;
+    _accessibility = CPAUICKeyChainStoreAccessibilityAfterFirstUnlock;
 }
 
 #pragma mark -
@@ -159,7 +159,7 @@ static NSString *_defaultService;
         service = [self defaultService];
     }
     
-    EBUUICKeyChainStore *keychain = [EBUUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
+    CPAUICKeyChainStore *keychain = [CPAUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
     return [keychain stringForKey:key error:error];
 }
 
@@ -276,7 +276,7 @@ static NSString *_defaultService;
         service = [self defaultService];
     }
     
-    EBUUICKeyChainStore *keychain = [EBUUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
+    CPAUICKeyChainStore *keychain = [CPAUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
     return [keychain dataForKey:key error:error];
 }
 
@@ -350,7 +350,7 @@ static NSString *_defaultService;
         service = [self defaultService];
     }
     
-    EBUUICKeyChainStore *keychain = [EBUUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
+    CPAUICKeyChainStore *keychain = [CPAUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
     return [keychain setData:data forKey:key genericAttribute:genericAttribute];
 }
 
@@ -654,7 +654,7 @@ static NSString *_defaultService;
         service = [self defaultService];
     }
     
-    EBUUICKeyChainStore *keychain = [EBUUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
+    CPAUICKeyChainStore *keychain = [CPAUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
     return [keychain removeItemForKey:key error:error];
 }
 
@@ -687,7 +687,7 @@ static NSString *_defaultService;
 
 + (BOOL)removeAllItemsForService:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError *__autoreleasing *)error
 {
-    EBUUICKeyChainStore *keychain = [EBUUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
+    CPAUICKeyChainStore *keychain = [CPAUICKeyChainStore keyChainStoreWithService:service accessGroup:accessGroup];
     return [keychain removeAllItemsWithError:error];
 }
 
@@ -769,12 +769,12 @@ static NSString *_defaultService;
     return keys.copy;
 }
 
-+ (NSArray *)allKeysWithItemClass:(EBUUICKeyChainStoreItemClass)itemClass
++ (NSArray *)allKeysWithItemClass:(CPAUICKeyChainStoreItemClass)itemClass
 {
     CFTypeRef itemClassObject = kSecClassGenericPassword;
-    if (itemClass == EBUUICKeyChainStoreItemClassGenericPassword) {
+    if (itemClass == CPAUICKeyChainStoreItemClassGenericPassword) {
         itemClassObject = kSecClassGenericPassword;
-    } else if (itemClass == EBUUICKeyChainStoreItemClassInternetPassword) {
+    } else if (itemClass == CPAUICKeyChainStoreItemClassInternetPassword) {
         itemClassObject = kSecClassInternetPassword;
     }
     
@@ -804,12 +804,12 @@ static NSString *_defaultService;
     return nil;
 }
 
-+ (NSArray *)allItemsWithItemClass:(EBUUICKeyChainStoreItemClass)itemClass
++ (NSArray *)allItemsWithItemClass:(CPAUICKeyChainStoreItemClass)itemClass
 {
     CFTypeRef itemClassObject = kSecClassGenericPassword;
-    if (itemClass == EBUUICKeyChainStoreItemClassGenericPassword) {
+    if (itemClass == CPAUICKeyChainStoreItemClassGenericPassword) {
         itemClassObject = kSecClassGenericPassword;
-    } else if (itemClass == EBUUICKeyChainStoreItemClassInternetPassword) {
+    } else if (itemClass == CPAUICKeyChainStoreItemClassInternetPassword) {
         itemClassObject = kSecClassInternetPassword;
     }
     
@@ -927,7 +927,7 @@ static NSString *_defaultService;
     }
 }
 
-- (void)setAccessibility:(EBUUICKeyChainStoreAccessibility)accessibility authenticationPolicy:(EBUUICKeyChainStoreAuthenticationPolicy)authenticationPolicy
+- (void)setAccessibility:(CPAUICKeyChainStoreAccessibility)accessibility authenticationPolicy:(CPAUICKeyChainStoreAuthenticationPolicy)authenticationPolicy
 {
     _accessibility = accessibility;
     _authenticationPolicy = authenticationPolicy;
@@ -1189,11 +1189,11 @@ static NSString *_defaultService;
 #endif
         }
     } else {
-        if (floor(NSFoundationVersionNumber) <= floor(iOS_7_1_or_10_9_2) && _accessibility == EBUUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly) {
+        if (floor(NSFoundationVersionNumber) <= floor(iOS_7_1_or_10_9_2) && _accessibility == CPAUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly) {
 #if TARGET_OS_IPHONE
-            NSLog(@"%@", @"Unavailable 'EBUUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly' attribute on iOS versions prior to 8.0.");
+            NSLog(@"%@", @"Unavailable 'CPAUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly' attribute on iOS versions prior to 8.0.");
 #else
-            NSLog(@"%@", @"Unavailable 'EBUUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly' attribute on OS X versions prior to 10.10.");
+            NSLog(@"%@", @"Unavailable 'CPAUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly' attribute on OS X versions prior to 10.10.");
 #endif
         } else {
             if (accessibilityObject) {
@@ -1212,9 +1212,9 @@ static NSString *_defaultService;
 - (CFTypeRef)itemClassObject
 {
     switch (_itemClass) {
-        case EBUUICKeyChainStoreItemClassGenericPassword:
+        case CPAUICKeyChainStoreItemClassGenericPassword:
             return kSecClassGenericPassword;
-        case EBUUICKeyChainStoreItemClassInternetPassword:
+        case CPAUICKeyChainStoreItemClassInternetPassword:
             return kSecClassInternetPassword;
         default:
             return nil;
@@ -1224,63 +1224,63 @@ static NSString *_defaultService;
 - (CFTypeRef)protocolTypeObject
 {
     switch (_protocolType) {
-        case EBUUICKeyChainStoreProtocolTypeFTP:
+        case CPAUICKeyChainStoreProtocolTypeFTP:
             return kSecAttrProtocolFTP;
-        case EBUUICKeyChainStoreProtocolTypeFTPAccount:
+        case CPAUICKeyChainStoreProtocolTypeFTPAccount:
             return kSecAttrProtocolFTPAccount;
-        case EBUUICKeyChainStoreProtocolTypeHTTP:
+        case CPAUICKeyChainStoreProtocolTypeHTTP:
             return kSecAttrProtocolHTTP;
-        case EBUUICKeyChainStoreProtocolTypeIRC:
+        case CPAUICKeyChainStoreProtocolTypeIRC:
             return kSecAttrProtocolIRC;
-        case EBUUICKeyChainStoreProtocolTypeNNTP:
+        case CPAUICKeyChainStoreProtocolTypeNNTP:
             return kSecAttrProtocolNNTP;
-        case EBUUICKeyChainStoreProtocolTypePOP3:
+        case CPAUICKeyChainStoreProtocolTypePOP3:
             return kSecAttrProtocolPOP3;
-        case EBUUICKeyChainStoreProtocolTypeSMTP:
+        case CPAUICKeyChainStoreProtocolTypeSMTP:
             return kSecAttrProtocolSMTP;
-        case EBUUICKeyChainStoreProtocolTypeSOCKS:
+        case CPAUICKeyChainStoreProtocolTypeSOCKS:
             return kSecAttrProtocolSOCKS;
-        case EBUUICKeyChainStoreProtocolTypeIMAP:
+        case CPAUICKeyChainStoreProtocolTypeIMAP:
             return kSecAttrProtocolIMAP;
-        case EBUUICKeyChainStoreProtocolTypeLDAP:
+        case CPAUICKeyChainStoreProtocolTypeLDAP:
             return kSecAttrProtocolLDAP;
-        case EBUUICKeyChainStoreProtocolTypeAppleTalk:
+        case CPAUICKeyChainStoreProtocolTypeAppleTalk:
             return kSecAttrProtocolAppleTalk;
-        case EBUUICKeyChainStoreProtocolTypeAFP:
+        case CPAUICKeyChainStoreProtocolTypeAFP:
             return kSecAttrProtocolAFP;
-        case EBUUICKeyChainStoreProtocolTypeTelnet:
+        case CPAUICKeyChainStoreProtocolTypeTelnet:
             return kSecAttrProtocolTelnet;
-        case EBUUICKeyChainStoreProtocolTypeSSH:
+        case CPAUICKeyChainStoreProtocolTypeSSH:
             return kSecAttrProtocolSSH;
-        case EBUUICKeyChainStoreProtocolTypeFTPS:
+        case CPAUICKeyChainStoreProtocolTypeFTPS:
             return kSecAttrProtocolFTPS;
-        case EBUUICKeyChainStoreProtocolTypeHTTPS:
+        case CPAUICKeyChainStoreProtocolTypeHTTPS:
             return kSecAttrProtocolHTTPS;
-        case EBUUICKeyChainStoreProtocolTypeHTTPProxy:
+        case CPAUICKeyChainStoreProtocolTypeHTTPProxy:
             return kSecAttrProtocolHTTPProxy;
-        case EBUUICKeyChainStoreProtocolTypeHTTPSProxy:
+        case CPAUICKeyChainStoreProtocolTypeHTTPSProxy:
             return kSecAttrProtocolHTTPSProxy;
-        case EBUUICKeyChainStoreProtocolTypeFTPProxy:
+        case CPAUICKeyChainStoreProtocolTypeFTPProxy:
             return kSecAttrProtocolFTPProxy;
-        case EBUUICKeyChainStoreProtocolTypeSMB:
+        case CPAUICKeyChainStoreProtocolTypeSMB:
             return kSecAttrProtocolSMB;
-        case EBUUICKeyChainStoreProtocolTypeRTSP:
+        case CPAUICKeyChainStoreProtocolTypeRTSP:
             return kSecAttrProtocolRTSP;
-        case EBUUICKeyChainStoreProtocolTypeRTSPProxy:
+        case CPAUICKeyChainStoreProtocolTypeRTSPProxy:
             return kSecAttrProtocolRTSPProxy;
-        case EBUUICKeyChainStoreProtocolTypeDAAP:
+        case CPAUICKeyChainStoreProtocolTypeDAAP:
             return kSecAttrProtocolDAAP;
-        case EBUUICKeyChainStoreProtocolTypeEPPC:
+        case CPAUICKeyChainStoreProtocolTypeEPPC:
             return kSecAttrProtocolEPPC;
-        case EBUUICKeyChainStoreProtocolTypeNNTPS:
+        case CPAUICKeyChainStoreProtocolTypeNNTPS:
             return kSecAttrProtocolNNTPS;
-        case EBUUICKeyChainStoreProtocolTypeLDAPS:
+        case CPAUICKeyChainStoreProtocolTypeLDAPS:
             return kSecAttrProtocolLDAPS;
-        case EBUUICKeyChainStoreProtocolTypeTelnetS:
+        case CPAUICKeyChainStoreProtocolTypeTelnetS:
             return kSecAttrProtocolTelnetS;
-        case EBUUICKeyChainStoreProtocolTypeIRCS:
+        case CPAUICKeyChainStoreProtocolTypeIRCS:
             return kSecAttrProtocolIRCS;
-        case EBUUICKeyChainStoreProtocolTypePOP3S:
+        case CPAUICKeyChainStoreProtocolTypePOP3S:
             return kSecAttrProtocolPOP3S;
         default:
             return nil;
@@ -1290,21 +1290,21 @@ static NSString *_defaultService;
 - (CFTypeRef)authenticationTypeObject
 {
     switch (_authenticationType) {
-        case EBUUICKeyChainStoreAuthenticationTypeNTLM:
+        case CPAUICKeyChainStoreAuthenticationTypeNTLM:
             return kSecAttrAuthenticationTypeNTLM;
-        case EBUUICKeyChainStoreAuthenticationTypeMSN:
+        case CPAUICKeyChainStoreAuthenticationTypeMSN:
             return kSecAttrAuthenticationTypeMSN;
-        case EBUUICKeyChainStoreAuthenticationTypeDPA:
+        case CPAUICKeyChainStoreAuthenticationTypeDPA:
             return kSecAttrAuthenticationTypeDPA;
-        case EBUUICKeyChainStoreAuthenticationTypeRPA:
+        case CPAUICKeyChainStoreAuthenticationTypeRPA:
             return kSecAttrAuthenticationTypeRPA;
-        case EBUUICKeyChainStoreAuthenticationTypeHTTPBasic:
+        case CPAUICKeyChainStoreAuthenticationTypeHTTPBasic:
             return kSecAttrAuthenticationTypeHTTPBasic;
-        case EBUUICKeyChainStoreAuthenticationTypeHTTPDigest:
+        case CPAUICKeyChainStoreAuthenticationTypeHTTPDigest:
             return kSecAttrAuthenticationTypeHTTPDigest;
-        case EBUUICKeyChainStoreAuthenticationTypeHTMLForm:
+        case CPAUICKeyChainStoreAuthenticationTypeHTMLForm:
             return kSecAttrAuthenticationTypeHTMLForm;
-        case EBUUICKeyChainStoreAuthenticationTypeDefault:
+        case CPAUICKeyChainStoreAuthenticationTypeDefault:
             return kSecAttrAuthenticationTypeDefault;
         default:
             return nil;
@@ -1314,19 +1314,19 @@ static NSString *_defaultService;
 - (CFTypeRef)accessibilityObject
 {
     switch (_accessibility) {
-        case EBUUICKeyChainStoreAccessibilityWhenUnlocked:
+        case CPAUICKeyChainStoreAccessibilityWhenUnlocked:
             return kSecAttrAccessibleWhenUnlocked;
-        case EBUUICKeyChainStoreAccessibilityAfterFirstUnlock:
+        case CPAUICKeyChainStoreAccessibilityAfterFirstUnlock:
             return kSecAttrAccessibleAfterFirstUnlock;
-        case EBUUICKeyChainStoreAccessibilityAlways:
+        case CPAUICKeyChainStoreAccessibilityAlways:
             return kSecAttrAccessibleAlways;
-        case EBUUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly:
+        case CPAUICKeyChainStoreAccessibilityWhenPasscodeSetThisDeviceOnly:
             return kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly;
-        case EBUUICKeyChainStoreAccessibilityWhenUnlockedThisDeviceOnly:
+        case CPAUICKeyChainStoreAccessibilityWhenUnlockedThisDeviceOnly:
             return kSecAttrAccessibleWhenUnlockedThisDeviceOnly;
-        case EBUUICKeyChainStoreAccessibilityAfterFirstUnlockThisDeviceOnly:
+        case CPAUICKeyChainStoreAccessibilityAfterFirstUnlockThisDeviceOnly:
             return kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
-        case EBUUICKeyChainStoreAccessibilityAlwaysThisDeviceOnly:
+        case CPAUICKeyChainStoreAccessibilityAlwaysThisDeviceOnly:
             return kSecAttrAccessibleAlwaysThisDeviceOnly;
         default:
             return nil;
@@ -1335,14 +1335,14 @@ static NSString *_defaultService;
 
 + (NSError *)argumentError:(NSString *)message
 {
-    NSError *error = [NSError errorWithDomain:EBUUICKeyChainStoreErrorDomain code:EBUUICKeyChainStoreErrorInvalidArguments userInfo:@{NSLocalizedDescriptionKey: message}];
+    NSError *error = [NSError errorWithDomain:CPAUICKeyChainStoreErrorDomain code:CPAUICKeyChainStoreErrorInvalidArguments userInfo:@{NSLocalizedDescriptionKey: message}];
     NSLog(@"error: [%@] %@", @(error.code), error.localizedDescription);
     return error;
 }
 
 + (NSError *)conversionError:(NSString *)message
 {
-    NSError *error = [NSError errorWithDomain:EBUUICKeyChainStoreErrorDomain code:-67594 userInfo:@{NSLocalizedDescriptionKey: message}];
+    NSError *error = [NSError errorWithDomain:CPAUICKeyChainStoreErrorDomain code:-67594 userInfo:@{NSLocalizedDescriptionKey: message}];
     NSLog(@"error: [%@] %@", @(error.code), error.localizedDescription);
     return error;
 }
@@ -1356,14 +1356,14 @@ static NSString *_defaultService;
         message = (__bridge_transfer NSString *)description;
     }
 #endif
-    NSError *error = [NSError errorWithDomain:EBUUICKeyChainStoreErrorDomain code:status userInfo:@{NSLocalizedDescriptionKey: message}];
+    NSError *error = [NSError errorWithDomain:CPAUICKeyChainStoreErrorDomain code:status userInfo:@{NSLocalizedDescriptionKey: message}];
     NSLog(@"OSStatus error: [%@] %@", @(error.code), error.localizedDescription);
     return error;
 }
 
 + (NSError *)unexpectedError:(NSString *)message
 {
-    NSError *error = [NSError errorWithDomain:EBUUICKeyChainStoreErrorDomain code:-99999 userInfo:@{NSLocalizedDescriptionKey: message}];
+    NSError *error = [NSError errorWithDomain:CPAUICKeyChainStoreErrorDomain code:-99999 userInfo:@{NSLocalizedDescriptionKey: message}];
     NSLog(@"error: [%@] %@", @(error.code), error.localizedDescription);
     return error;
 }

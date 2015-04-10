@@ -4,19 +4,19 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "EBUToken.h"
+#import "CPAToken.h"
 
-@interface EBUToken ()
+@interface CPAToken ()
 
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) NSString *domain;
 @property (nonatomic, copy) NSString *domainName;
-@property (nonatomic) EBUTokenType type;
+@property (nonatomic) CPATokenType type;
 @property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end
 
-@implementation EBUToken
+@implementation CPAToken
 
 #pragma mark Object lifecycle
 
@@ -36,7 +36,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    EBUToken *token = [EBUToken new];
+    CPAToken *token = [CPAToken new];
     token.value = [aDecoder decodeObjectForKey:@"value"];
     token.domain = [aDecoder decodeObjectForKey:@"domain"];
     token.domainName = [aDecoder decodeObjectForKey:@"domainName"];
@@ -64,7 +64,7 @@
             self.value,
             self.domain,
             self.domainName,
-            (self.type == EBUTokenTypeClient) ? @"Client" : @"User",
+            (self.type == CPATokenTypeClient) ? @"Client" : @"User",
             @(self.lifetimeInSeconds)];
 }
 
