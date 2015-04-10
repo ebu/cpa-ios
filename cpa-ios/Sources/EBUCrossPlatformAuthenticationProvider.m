@@ -153,6 +153,20 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
             return;
         }
         
+        void (^tokenRequestCompletionBlock)(NSString *, NSString *, NSError *) = ^(NSString *accessToken, NSString *domainName, NSError *error) {
+            if (error) {
+                completionBlock ? completionBlock(nil, error) : nil;
+                return;
+            }
+            
+            EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
+            token.domainName = domainName;
+            token.type = type;
+            [self setToken:token forDomain:domain];
+            
+            completionBlock ? completionBlock(token, nil) : nil;
+        };
+        
         if (type == EBUTokenTypeUser) {
             [EBUCrossPlatformAuthenticationProvider requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
                 if (error) {
@@ -167,17 +181,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                     }
                     
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                        if (error) {
-                            completionBlock ? completionBlock(nil, error) : nil;
-                            return;
-                        }
-                        
-                        EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
-                        token.domainName = domainName;
-                        token.type = type;
-                        [self setToken:token forDomain:domain];
-                        
-                        completionBlock ? completionBlock(token, nil) : nil;
+                        tokenRequestCompletionBlock(accessToken, domainName, error);
                     }];
                 };
                 
@@ -205,17 +209,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
         }
         else {
             [EBUCrossPlatformAuthenticationProvider requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                if (error) {
-                    completionBlock ? completionBlock(nil, error) : nil;
-                    return;
-                }
-                
-                EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
-                token.domainName = domainName;
-                token.type = type;
-                [self setToken:token forDomain:domain];
-                
-                completionBlock ? completionBlock(token, nil) : nil;
+                tokenRequestCompletionBlock(accessToken, domainName, error);
             }];
         }
     }];
