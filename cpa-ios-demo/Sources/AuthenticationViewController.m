@@ -33,7 +33,7 @@
 
 - (IBAction)retrieveClientToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" authenticated:NO withCompletionBlock:^(EBUToken *token, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" withType:EBUTokenTypeClient completionBlock:^(EBUToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -49,7 +49,7 @@
 
 - (IBAction)retrieveUserToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" authenticated:YES withCompletionBlock:^(EBUToken *token, NSError *error) {
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" withType:EBUTokenTypeUser completionBlock:^(EBUToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -67,7 +67,7 @@
 {
     EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:@"cpa.rts.ch"];
     if (token) {
-        self.localTokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, token.authenticated ? @"user" : @"client"];
+        self.localTokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? @"client" : @"user"];
     }
     else {
         self.localTokenLabel.text = NSLocalizedString(@"None", nil);

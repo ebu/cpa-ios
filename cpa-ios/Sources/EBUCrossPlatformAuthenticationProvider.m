@@ -134,7 +134,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     return [NSKeyedUnarchiver unarchiveObjectWithData:tokenData];
 }
 
-- (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock
+- (void)requestTokenForDomain:(NSString *)domain withType:(EBUTokenType)type completionBlock:(void (^)(EBUToken *, NSError *))completionBlock
 {
     NSParameterAssert(domain);
         
@@ -153,7 +153,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
             return;
         }
         
-        if (authenticated) {
+        if (type == EBUTokenTypeUser) {
             [EBUCrossPlatformAuthenticationProvider requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
                 if (error) {
                     completionBlock ? completionBlock(nil, error) : nil;
@@ -174,7 +174,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                         
                         EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
                         token.domainName = domainName;
-                        token.authenticated = YES;
+                        token.type = type;
                         [self setToken:token forDomain:domain];
                         
                         completionBlock ? completionBlock(token, nil) : nil;
@@ -212,7 +212,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                 
                 EBUToken *token = [[EBUToken alloc] initWithValue:accessToken domain:domain];
                 token.domainName = domainName;
-                token.authenticated = NO;
+                token.type = type;
                 [self setToken:token forDomain:domain];
                 
                 completionBlock ? completionBlock(token, nil) : nil;

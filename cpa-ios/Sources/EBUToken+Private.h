@@ -22,8 +22,13 @@
 @property (nonatomic, copy) NSString *domainName;
 
 /**
- * Set to YES if the token is authenticated (user token), no otherwise (client token). Default is NO
+ * Token type. Defaults to EBUTokenTypeClient
  */
-@property (nonatomic, getter=isAuthenticated) BOOL authenticated;
+@property (nonatomic) EBUTokenType type;
+
+/**
+ * Lifetime of the token in seconds
+ */
+@property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end

@@ -82,16 +82,16 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
 - (EBUToken *)tokenForDomain:(NSString *)domain;
 
 /**
- * Retrieve a token for the specified domain, authenticated or not. Before calling this method, you should check whether a
+ * Retrieve a token for the specified domain with a given type. Before calling this method, you should check whether
  * an appropriate token is locally already available by calling the -tokenForDomain: method first, and checking its
- * authenticated property
+ * type property
  *
- * If the request token must be authenticated, the user will be redirected to a verification URL to enter her credentials
+ * If a user token is requested, the user will be redirected to a verification URL to enter her credentials
  *
  * Note that if a token request is performed while a token is already available locally, and if the request is successful, 
  * the previous local token will be replaced.
  */
-- (void)requestTokenForDomain:(NSString *)domain authenticated:(BOOL)authenticated withCompletionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock;
+- (void)requestTokenForDomain:(NSString *)domain withType:(EBUTokenType)type completionBlock:(void (^)(EBUToken *token, NSError *error))completionBlock;
 
 /**
  * Discard a locally available token for the given domain, if any

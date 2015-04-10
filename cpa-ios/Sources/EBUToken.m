@@ -11,7 +11,8 @@
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) NSString *domain;
 @property (nonatomic, copy) NSString *domainName;
-@property (nonatomic, getter=isAuthenticated) BOOL authenticated;
+@property (nonatomic) EBUTokenType type;
+@property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end
 
@@ -39,7 +40,8 @@
     token.value = [aDecoder decodeObjectForKey:@"value"];
     token.domain = [aDecoder decodeObjectForKey:@"domain"];
     token.domainName = [aDecoder decodeObjectForKey:@"domainName"];
-    token.authenticated = [aDecoder decodeBoolForKey:@"authenticated"];
+    token.type = [aDecoder decodeIntegerForKey:@"type"];
+    token.lifetimeInSeconds = [aDecoder decodeIntegerForKey:@"lifetimeInSeconds"];
     return token;
 }
 
@@ -48,20 +50,22 @@
     [aCoder encodeObject:self.value forKey:@"value"];
     [aCoder encodeObject:self.domain forKey:@"domain"];
     [aCoder encodeObject:self.domainName forKey:@"domainName"];
-    [aCoder encodeBool:self.authenticated forKey:@"authenticated"];
+    [aCoder encodeInteger:self.type forKey:@"type"];
+    [aCoder encodeInteger:self.lifetimeInSeconds forKey:@"lifetimeInSeconds"];
 }
 
 #pragma mark Description
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; authenticated: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; type: %@; lifetimeInSeconds: %@>",
             [self class],
             self,
             self.value,
             self.domain,
             self.domainName,
-            self.authenticated ? @"YES" : @"NO"];
+            (self.type == EBUTokenTypeClient) ? @"Client" : @"User",
+            @(self.lifetimeInSeconds)];
 }
 
 @end

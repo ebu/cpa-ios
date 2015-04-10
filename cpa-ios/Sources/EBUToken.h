@@ -7,6 +7,14 @@
 #import <Foundation/Foundation.h>
 
 /**
+ * Token type
+ */
+typedef NS_ENUM(NSInteger, EBUTokenType) {
+    EBUTokenTypeClient,                 // Client token (unauthenticated)
+    EBUTokenTypeUser                    // User token (authenticated)
+};
+
+/**
  * Service token
  */
 @interface EBUToken : NSObject <NSCoding>
@@ -27,9 +35,14 @@
 @property (nonatomic, readonly, copy) NSString *domainName;
 
 /**
- * Return YES if the token is authenticated (user token), no otherwise (client token)
+ * The token type
  */
-@property (nonatomic, readonly, getter=isAuthenticated) BOOL authenticated;
+@property (nonatomic, readonly) EBUTokenType type;
+
+/**
+ * Lifetime of the token in seconds
+ */
+@property (nonatomic, readonly) NSInteger lifetimeInSeconds;
 
 @end
 
