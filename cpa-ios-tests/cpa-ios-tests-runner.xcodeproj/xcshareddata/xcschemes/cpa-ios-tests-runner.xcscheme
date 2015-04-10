@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6064FF71AD65B0C008FC7EE"
-               BuildableName = "cpa-ios-demo.app"
-               BlueprintName = "cpa-ios-demo"
-               ReferencedContainer = "container:cpa-ios-demo.xcodeproj">
+               BlueprintIdentifier = "E684D3A51AD8093000EDCA66"
+               BuildableName = "cpa-ios-tests-runner.app"
+               BlueprintName = "cpa-ios-tests-runner"
+               ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E684D3BE1AD8093000EDCA66"
+               BuildableName = "cpa-ios-tests-runnerTests.xctest"
+               BlueprintName = "cpa-ios-tests-runnerTests"
+               ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +42,24 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E684D3BE1AD8093000EDCA66"
+               BuildableName = "cpa-ios-tests-runnerTests.xctest"
+               BlueprintName = "cpa-ios-tests-runnerTests"
+               ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FF71AD65B0C008FC7EE"
-            BuildableName = "cpa-ios-demo.app"
-            BlueprintName = "cpa-ios-demo"
-            ReferencedContainer = "container:cpa-ios-demo.xcodeproj">
+            BlueprintIdentifier = "E684D3A51AD8093000EDCA66"
+            BuildableName = "cpa-ios-tests-runner.app"
+            BlueprintName = "cpa-ios-tests-runner"
+            ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,10 +76,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FF71AD65B0C008FC7EE"
-            BuildableName = "cpa-ios-demo.app"
-            BlueprintName = "cpa-ios-demo"
-            ReferencedContainer = "container:cpa-ios-demo.xcodeproj">
+            BlueprintIdentifier = "E684D3A51AD8093000EDCA66"
+            BuildableName = "cpa-ios-tests-runner.app"
+            BlueprintName = "cpa-ios-tests-runner"
+            ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,10 +95,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FF71AD65B0C008FC7EE"
-            BuildableName = "cpa-ios-demo.app"
-            BlueprintName = "cpa-ios-demo"
-            ReferencedContainer = "container:cpa-ios-demo.xcodeproj">
+            BlueprintIdentifier = "E684D3A51AD8093000EDCA66"
+            BuildableName = "cpa-ios-tests-runner.app"
+            BlueprintName = "cpa-ios-tests-runner"
+            ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
