@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, EBUAuthenticationErrorCode) {
     EBUAuthenticationErrorInvalidRequest,           // The request is invalid
     EBUAuthenticationErrorInvalidClient,            // The client is invalid
     EBUAuthenticationErrorTooFast,                  // Requests are made too fast. Slow down
-    EBUAuthenticationErrorPendingAuthorization      // Authorization has not yet been made
+    EBUAuthenticationErrorPendingAuthorization,     // Authorization has not yet been made
+    EBUAuthenticationErrorAuthorizationDenied       // The user denied access to the application
 };
 
 /**

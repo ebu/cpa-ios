@@ -16,7 +16,7 @@
 // TODO: Prevent multiple requests
 
 // Typedefs
-typedef void (^EBUSimpleBlock)(void);
+typedef void (^EBUVoidCompletionBlock)(NSError *error);
 
 // Constants
 NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
@@ -66,8 +66,37 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 + (void)handleURL:(NSURL *)URL
 {
-    EBUSimpleBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
-    callbackCompletionBlock ? callbackCompletionBlock() : nil;
+    EBUVoidCompletionBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
+    if (! callbackCompletionBlock) {
+        return;
+    }
+    
+    // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
+    //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
+    
+    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+    for (NSString *queryItemString in queryItemStrings) {
+        NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
+        NSString *key = [queryItemComponents firstObject];
+        NSString *value = [queryItemComponents lastObject];
+        
+        if (key && value) {
+            [queryItems setObject:value forKey:key];
+        }
+    }
+    
+    NSString *errorIdentifier = queryItems[@"info"];
+    if (errorIdentifier) {
+        NSError *error = EBUErrorFromIdentifier(errorIdentifier);
+        callbackCompletionBlock(error);
+    }
+    else {
+        callbackCompletionBlock(nil);
+    }
+    
+    [s_callbackCompletionBlocks removeObjectForKey:URL.scheme];
 }
 
 #pragma mark Object lifecycle
@@ -131,7 +160,12 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                     return;
                 }
                 
-                EBUSimpleBlock tokenRequestBlock = ^{
+                EBUVoidCompletionBlock tokenRequestBlock = ^(NSError *error) {
+                    if (error) {
+                        completionBlock ? completionBlock(nil, error) : nil;
+                        return;
+                    }
+                    
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                         if (error) {
                             completionBlock ? completionBlock(nil, error) : nil;
@@ -165,7 +199,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                     [s_callbackCompletionBlocks setObject:tokenRequestBlock forKey:self.callbackURLScheme];
                 }
                 else {
-                    tokenRequestBlock();
+                    tokenRequestBlock(nil);
                 }
             }];
         }
@@ -446,7 +480,8 @@ static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSStri
         s_errorCodes = @{ @"invalid_request" : @(EBUAuthenticationErrorInvalidRequest),
                           @"invalid_client" : @(EBUAuthenticationErrorInvalidClient),
                           @"slow_down" : @(EBUAuthenticationErrorTooFast),
-                          @"authorization_pending" : @(EBUAuthenticationErrorPendingAuthorization) };
+                          @"authorization_pending" : @(EBUAuthenticationErrorPendingAuthorization),
+                          @"user_code:denied" : @(EBUAuthenticationErrorAuthorizationDenied) };
     });
     
     NSNumber *errorCode = s_errorCodes[errorIdentifier];
@@ -462,7 +497,8 @@ static NSString *EBULocalizedErrorDescriptionForCode(EBUAuthenticationErrorCode 
                                           @(EBUAuthenticationErrorInvalidRequest) : NSLocalizedString(@"The request is invalid", nil),
                                           @(EBUAuthenticationErrorInvalidClient) : NSLocalizedString(@"The client is invalid", nil),
                                           @(EBUAuthenticationErrorTooFast) : NSLocalizedString(@"Too many requests are being made", nil),
-                                          @(EBUAuthenticationErrorPendingAuthorization) : NSLocalizedString(@"Authorization is still pending", nil) };
+                                          @(EBUAuthenticationErrorPendingAuthorization) : NSLocalizedString(@"Authorization is still pending", nil),
+                                          @(EBUAuthenticationErrorAuthorizationDenied) : NSLocalizedString(@"Authorization was denied", nil)};
     });
     return s_localizedErrorDescriptions[@(errorCode)];
 }
