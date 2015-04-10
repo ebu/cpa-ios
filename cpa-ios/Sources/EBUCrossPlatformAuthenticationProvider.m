@@ -15,9 +15,12 @@
 // TODO: Deal with localization (use custom macro accessing the library bundle)
 // TODO: Prevent multiple requests
 
-// Variable and constant declarations
-static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
+// Constants
 NSString * const EBUAuthenticationErrorDomain = @"ch.ebu.cpa.error";
+
+// Globals
+static EBUCrossPlatformAuthenticationProvider *s_defaultAuthenticationProvider = nil;
+static NSMutableDictionary *s_authenticationProviders = nil;
 
 // Function declarations
 static EBUAuthenticationErrorCode EBUAuthenticationErrorCodeForIdentifier(NSString *errorIdentifier);
@@ -28,6 +31,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 @interface EBUCrossPlatformAuthenticationProvider ()
 
 @property (nonatomic) NSURL *authorizationProviderURL;
+@property (nonatomic, copy) NSString *callbackURLScheme;
 @property (nonatomic) EBUUICKeyChainStore *keyChainStore;
 
 @end
@@ -35,6 +39,15 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 @implementation EBUCrossPlatformAuthenticationProvider
 
 #pragma mark Class methods
+
++ (void)initialize
+{
+    if (self != [EBUCrossPlatformAuthenticationProvider class]) {
+        return;
+    }
+    
+    s_authenticationProviders = [NSMutableDictionary dictionary];
+}
 
 + (EBUCrossPlatformAuthenticationProvider *)setDefaultAuthenticationProvider:(EBUCrossPlatformAuthenticationProvider *)authenticationProvider
 {
@@ -50,22 +63,37 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL keyChainAccessGroup:(NSString *)keyChainAccessGroup
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                               callbackURLScheme:(NSString *)callbackURLScheme
+                             keyChainAccessGroup:(NSString *)keyChainAccessGroup
 {
     NSParameterAssert(authorizationProviderURL);
+    NSParameterAssert(callbackURLScheme);
+    
+    NSAssert(! s_authenticationProviders[@(authorizationProviderURL.absoluteString.hash)], @"At most one authentication provider can be defined for a given provider authorization URL");
     
     if (self = [super init]) {
         self.authorizationProviderURL = authorizationProviderURL;
+        self.callbackURLScheme = callbackURLScheme;
         
         NSString *serviceIdentifier = [NSBundle mainBundle].bundleIdentifier;
         self.keyChainStore = [EBUUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
+        
+        // Keep track of all available providers. This is required to route callbacks from Safari to the correct authentication
+        // provider from which the request emerged
+        s_authenticationProviders[@(authorizationProviderURL.absoluteString.hash)] = [NSValue valueWithNonretainedObject:self];
     }
     return self;
 }
 
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL callbackURLScheme:(NSString *)callbackURLScheme
 {
-    return [self initWithAuthorizationProviderURL:authorizationProviderURL keyChainAccessGroup:nil];
+    return [self initWithAuthorizationProviderURL:authorizationProviderURL callbackURLScheme:callbackURLScheme keyChainAccessGroup:nil];
+}
+
+- (void)dealloc
+{
+    [s_authenticationProviders removeObjectForKey:@(self.authorizationProviderURL.absoluteString.hash)];
 }
 
 #pragma mark Token management
@@ -108,7 +136,16 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                 // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
                 // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
-                    [[UIApplication sharedApplication] openURL:verificationURL];
+                    NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
+                    callbackURLComponents.scheme = self.callbackURLScheme;
+                    callbackURLComponents.host = @(self.authorizationProviderURL.absoluteString.hash).stringValue;
+                    NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
+                    
+                    // .query automatically adds percent encoding
+                    NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
+                    fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
+                    
+                    [[UIApplication sharedApplication] openURL:fullVerificationURLComponents.URL];
                 }
                 else {
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
@@ -160,7 +197,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     // FIXME: If we want to support multiple users per application, the key should also contain a reference
     //        to a reliable user identifier. Currently only the user display name can be retrieved (user_name),
     //        which is sadly not reliable enough since it might change
-    return [NSString stringWithFormat:@"%@_%@", [self.authorizationProviderURL absoluteString], domain];
+    return [NSString stringWithFormat:@"%@_%@", self.authorizationProviderURL.absoluteString, domain];
 }
 
 - (void)setToken:(EBUToken *)token forDomain:(NSString *)domain

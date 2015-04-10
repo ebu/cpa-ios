@@ -58,13 +58,15 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory), and sharing tokens
  * within a given key chain group (if set to nil, no group sharing is made)
  */
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL keyChainAccessGroup:(NSString *)keyChainAccessGroup NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                               callbackURLScheme:(NSString *)callbackURLScheme
+                             keyChainAccessGroup:(NSString *)keyChainAccessGroup NS_DESIGNATED_INITIALIZER;
 
 /**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory) without
  * keychain group sharing
  */
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL;
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL callbackURLScheme:(NSString *)callbackURLScheme;
 
 /**
  * The associated authorization provider URL
