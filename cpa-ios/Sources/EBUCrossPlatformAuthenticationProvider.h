@@ -38,6 +38,10 @@
  */
 + (EBUCrossPlatformAuthenticationProvider *)defaultAuthenticationProvider;
 
+/**
+ * Call this method from your application delegate - application:openURL:sourceApplication:annotation: method implementation
+ * to ensure that the application correctly resumes after the user has entered her credentials in Safari
+ */
 + (void)handleURL:(NSURL *)URL;
 
 /**
