@@ -13,7 +13,6 @@
 
 #import <UIKit/UIKit.h>
 
-// TODO: Prevent multiple requests
 // FIXME: Does not work correctly if the app gets killed while in Safari
 
 // Typedefs
