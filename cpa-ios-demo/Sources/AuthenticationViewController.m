@@ -8,11 +8,13 @@
 
 #import "EBUCrossPlatformAuthenticationProvider.h"
 
+static NSString * const kDomain = @"cpa.rts.ch";
+
 @interface AuthenticationViewController ()
 
-@property (nonatomic, weak) IBOutlet UILabel *clientTokenLabel;
-@property (nonatomic, weak) IBOutlet UILabel *userTokenLabel;
-@property (nonatomic, weak) IBOutlet UILabel *localTokenLabel;
+@property (nonatomic, weak) IBOutlet UILabel *tokenLabel;
+@property (nonatomic, weak) IBOutlet UISwitch *userTokenSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *forceRenewalSwitch;
 
 @end
 
@@ -24,16 +26,39 @@
 {
     [super viewDidLoad];
     
-    self.clientTokenLabel.text = nil;
-    self.userTokenLabel.text = nil;
-    self.localTokenLabel.text = nil;
+    [self reloadData];
+}
+
+#pragma mark UI
+
+- (void)reloadData
+{
+    EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:kDomain];
+    if (token) {
+        self.tokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
+    }
+    else {
+        self.tokenLabel.text = NSLocalizedString(@"None", nil);
+    }
 }
 
 #pragma mark Actions
 
-- (IBAction)retrieveClientToken:(id)sender
+- (IBAction)retrieveToken:(id)sender
 {
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" withType:EBUTokenTypeClient completionBlock:^(EBUToken *token, NSError *error) {
+    EBUToken *existingToken = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:kDomain];
+    if (existingToken && ! self.forceRenewalSwitch.on) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", nil)
+                                                            message:NSLocalizedString(@"A token is already available", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    EBUTokenType type = self.userTokenSwitch.on ? EBUTokenTypeUser : EBUTokenTypeClient;
+    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:kDomain withType:type completionBlock:^(EBUToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -41,37 +66,11 @@
                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                       otherButtonTitles:nil];
             [alertView show];
+            return;
         }
         
-        self.clientTokenLabel.text = token.value;
+        [self reloadData];
     }];
-}
-
-- (IBAction)retrieveUserToken:(id)sender
-{
-    [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] requestTokenForDomain:@"cpa.rts.ch" withType:EBUTokenTypeUser completionBlock:^(EBUToken *token, NSError *error) {
-        if (error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                                message:[error localizedDescription]
-                                                               delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                      otherButtonTitles:nil];
-            [alertView show];
-        }
-        
-        self.userTokenLabel.text = token.value;
-    }];
-}
-
-- (IBAction)retrieveLocalToken:(id)sender
-{
-    EBUToken *token = [[EBUCrossPlatformAuthenticationProvider defaultAuthenticationProvider] tokenForDomain:@"cpa.rts.ch"];
-    if (token) {
-        self.localTokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == EBUTokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
-    }
-    else {
-        self.localTokenLabel.text = NSLocalizedString(@"None", nil);
-    }
 }
 
 @end

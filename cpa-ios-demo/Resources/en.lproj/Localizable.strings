@@ -4,8 +4,10 @@
 //  Licence information is available from the LICENCE file.
 //
 
+"A token is already available"="A token is already available";
 "Client"="Client";
 "Dismiss"="Dismiss";
 "Error"="Error";
+"Information"="Information";
 "None"="None";
 "User"="User";

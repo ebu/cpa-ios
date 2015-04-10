@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Authenticated"; ObjectID = "KKC-gB-Iyh"; */
+"KKC-gB-Iyh.text" = "Authenticated";
+
+/* Class = "UILabel"; text = "Force renewal"; ObjectID = "m6f-lp-DQy"; */
+"m6f-lp-DQy.text" = "Force renewal";
+
+/* Class = "UIButton"; normalTitle = "Retrieve token"; ObjectID = "rXy-lv-sL5"; */
+"rXy-lv-sL5.normalTitle" = "Retrieve token";
