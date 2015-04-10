@@ -52,7 +52,7 @@ OBJC_EXPORT NSString * const EBUAuthenticationErrorDomain;
 /**
  * Return the currently set authentication provider, nil if none
  */
-+ (instancetype)defaultAuthenticationProvider;
++ (EBUCrossPlatformAuthenticationProvider *)defaultAuthenticationProvider;
 
 /**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory), and sharing tokens

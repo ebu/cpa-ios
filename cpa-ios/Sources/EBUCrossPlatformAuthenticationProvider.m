@@ -43,7 +43,7 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
     return previousAuthenticationProvider;
 }
 
-+ (instancetype)defaultAuthenticationProvider
++ (EBUCrossPlatformAuthenticationProvider *)defaultAuthenticationProvider
 {
     return s_defaultAuthenticationProvider;
 }
@@ -109,8 +109,6 @@ static NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
                 // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
                     [[UIApplication sharedApplication] openURL:verificationURL];
-                    
-                    // TODO: Workflow needs to be resumed when coming back from the browser
                 }
                 else {
                     [EBUCrossPlatformAuthenticationProvider requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
