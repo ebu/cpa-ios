@@ -41,6 +41,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
         return;
     }
     
+    // Will be used to store completion blocks to be called after a roundtrip to Safari
     s_callbackCompletionBlocks = [NSMutableDictionary dictionary];
 }
 
@@ -166,7 +167,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                     return;
                 }
                 
-                EBUVoidCompletionBlock tokenRequestBlock = ^(NSError *error) {
+                EBUVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
                     if (error) {
                         completionBlock ? completionBlock(nil, error) : nil;
                         return;
@@ -180,6 +181,8 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                 // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
                 // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
+                    // Use a callback URL of the form scheme://callback. If the user does not authorize the application, an info parameter will be
+                    // appended to it with value user_code:denied
                     NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
                     callbackURLComponents.scheme = self.callbackURLScheme;
                     callbackURLComponents.host = @"callback";
@@ -192,10 +195,10 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                     [[UIApplication sharedApplication] openURL:fullVerificationURLComponents.URL];
                     
                     // Save for execution when coming back from the browser. A scheme univoquely points at an authentication provider
-                    [s_callbackCompletionBlocks setObject:tokenRequestBlock forKey:self.callbackURLScheme];
+                    [s_callbackCompletionBlocks setObject:userTokenRequestBlock forKey:self.callbackURLScheme];
                 }
                 else {
-                    tokenRequestBlock(nil);
+                    userTokenRequestBlock(nil);
                 }
             }];
         }
@@ -399,5 +402,3 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 }
 
 @end
-
-
