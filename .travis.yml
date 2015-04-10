@@ -1,0 +1,9 @@
+language: objective-c
+
+before_install:
+    - brew update
+    - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+
+script: 
+    - set -o pipefail
+    - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo | xcpretty -c
