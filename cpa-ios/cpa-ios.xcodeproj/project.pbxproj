@@ -13,6 +13,7 @@
 		E65A41721AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+EBUCPAExtensions.m */; };
 		E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* EBUErrors.m */; };
 		E65A417B1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m */; };
+		E684D3DA1AD80AE600EDCA66 /* EBUStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* EBUStatelessRequest.m */; };
 		E6897B401AD7FB100083E1BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6897B3E1AD7FB100083E1BB /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,8 @@
 		E65A41761AD7EB4400D8F289 /* EBUErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EBUErrors+Private.h"; sourceTree = "<group>"; };
 		E65A41791AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+EBUCPAExtensions.h"; sourceTree = "<group>"; };
 		E65A417A1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+EBUCPAExtensions.m"; sourceTree = "<group>"; };
+		E684D3D81AD80AE600EDCA66 /* EBUStatelessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUStatelessRequest.h; sourceTree = "<group>"; };
+		E684D3D91AD80AE600EDCA66 /* EBUStatelessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUStatelessRequest.m; sourceTree = "<group>"; };
 		E6897B3F1AD7FB100083E1BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E6897B411AD7FB180083E1BB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +113,8 @@
 				E65A41731AD7EABC00D8F289 /* EBUErrors.h */,
 				E65A41741AD7EABC00D8F289 /* EBUErrors.m */,
 				E65A41761AD7EB4400D8F289 /* EBUErrors+Private.h */,
+				E684D3D81AD80AE600EDCA66 /* EBUStatelessRequest.h */,
+				E684D3D91AD80AE600EDCA66 /* EBUStatelessRequest.m */,
 				E6257C981AD6C044005FE6D2 /* EBUToken.h */,
 				E6257C991AD6C044005FE6D2 /* EBUToken.m */,
 				E6257C9B1AD6C3B8005FE6D2 /* EBUToken+Private.h */,
@@ -243,6 +248,7 @@
 				E6257C9A1AD6C044005FE6D2 /* EBUToken.m in Sources */,
 				E65A41751AD7EABC00D8F289 /* EBUErrors.m in Sources */,
 				E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationProvider.m in Sources */,
+				E684D3DA1AD80AE600EDCA66 /* EBUStatelessRequest.m in Sources */,
 				E65A417B1AD7F76600D8F289 /* NSBundle+EBUCPAExtensions.m in Sources */,
 				E6257CAA1AD6D2FA005FE6D2 /* EBUUICKeyChainStore.m in Sources */,
 			);
