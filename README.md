@@ -1,7 +1,8 @@
 # Cross-Platform Authentication - iOS Client
 
-This project contains a reference implementation of the Cross-Platform
-Authentication client for iOS.
+[![Build Status](https://img.shields.io/travis/ebu/cpa-ios/feature/authentication.svg?style=flat)](https://travis-ci.org/ebu/cpa-ios)
+
+This project contains a reference implementation of the Cross-Platform Authentication client for iOS.
 
 This software implements version 1.0 of the Cross-Platform Authentication Protocol ([EBU Tech 3366](https://tech.ebu.ch/docs/tech/tech3366.pdf))
 
@@ -13,6 +14,7 @@ More information on the [EBU Cross-Platform Authentication project](http://tech.
 
 ## Development
 
+Run the `install_git_hooks.sh` script available from the main directory to install git hooks correctly assigining the Travis CI build status for each branch.
 
 ## Related projects
 
