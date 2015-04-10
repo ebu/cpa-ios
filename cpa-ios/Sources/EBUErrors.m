@@ -62,3 +62,10 @@ NSError *EBUErrorFromIdentifier(NSString *errorIdentifier)
                                code:EBUAuthenticationErrorCodeForIdentifier(errorIdentifier)
                            userInfo:@{ NSLocalizedDescriptionKey : EBULocalizedErrorDescriptionForIdentifier(errorIdentifier) } ];
 }
+
+NSString *EBULocalizedDescriptionForCFNetworkError(NSInteger errorCode)
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
+    NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
+    return [bundle localizedStringForKey:key value:nil table:nil];
+}

@@ -15,7 +15,17 @@
     return [self dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
-                completionHandler ? completionHandler(nil, response, error) : nil;
+                NSString *betterLocalizedDescription = EBULocalizedDescriptionForCFNetworkError(error.code);
+                if (! betterLocalizedDescription) {
+                    completionHandler ? completionHandler(nil, response, error) : nil;
+                }
+                else {
+                    NSMutableDictionary *betterUserInfo = [NSMutableDictionary dictionaryWithDictionary:error.userInfo];
+                    betterUserInfo[NSLocalizedDescriptionKey] = betterLocalizedDescription;
+                    
+                    NSError *betterError = [NSError errorWithDomain:error.domain code:error.code userInfo:betterUserInfo];
+                    completionHandler ? completionHandler(nil, response, betterError) : nil;
+                }                
                 return;
             }
             

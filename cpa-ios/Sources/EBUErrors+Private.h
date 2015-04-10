@@ -26,3 +26,8 @@ NSString *EBULocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier);
  */
 NSError *EBUErrorFromCode(EBUAuthenticationErrorCode errorCode);
 NSError *EBUErrorFromIdentifier(NSString *errorIdentifier);
+
+/**
+ * Return nicer CFNetwork-related error messages
+ */
+NSString *EBULocalizedDescriptionForCFNetworkError(NSInteger errorCode);
