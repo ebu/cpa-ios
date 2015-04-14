@@ -14,7 +14,10 @@ typedef void (^CPAURLSessionDictionaryResponseBlock)(NSDictionary * __nullable r
 /**
  * Convenience NSURLSession additions
  */
-@interface NSURLSession (CPAExtensions)
+// TODO: Ugly hack to solve issues with categories on NSURLSession in static libs prior to iOS 8. Remove when minimum required
+//       version is iOS 8
+//       See http://stackoverflow.com/questions/21629682/ios-nsurlsession-category-methods-not-being-found-at-runtime
+@interface NSObject /*NSURLSession*/ (CPAExtensions)
 
 /**
  * Helper method to conveniently get a response as a JSON dictionary, with a completion handler called on the main thread

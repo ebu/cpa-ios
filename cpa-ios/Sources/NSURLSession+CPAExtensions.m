@@ -8,11 +8,12 @@
 
 #import "CPAErrors+Private.h"
 
-@implementation NSURLSession (CPAExtensions)
+@implementation NSObject /*NSURLSession*/ (CPAExtensions)
 
 - (NSURLSessionDataTask *)cpa_JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(CPAURLSessionDictionaryResponseBlock)completionHandler
 {
-    return [self dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    // TODO: Remove cast
+    return [(NSURLSession *)self dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 NSString *betterLocalizedDescription = CPALocalizedDescriptionForCFNetworkError(error.code);
