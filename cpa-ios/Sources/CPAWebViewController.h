@@ -8,6 +8,12 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
+// Types
+typedef void (^CPAWebViewControllerCallbackBlock)(NSURL *callbackURL);
+
+// When a request having this scheme is encountered, the callback block will be called
+extern NSString * const CPAWebViewCallbackURLScheme;
+
 /**
  * A basic web browser
  */
@@ -22,6 +28,11 @@
  * The initial request
  */
 @property (nonatomic, readonly) NSURLRequest *request;
+
+/**
+ * An optional block which gets called for URLs with the CPAWebViewCallbackURLScheme scheme
+ */
+@property (nonatomic, copy) CPAWebViewControllerCallbackBlock callbackURLBlock;
 
 @end
 

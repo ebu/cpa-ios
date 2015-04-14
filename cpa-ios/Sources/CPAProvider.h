@@ -46,12 +46,6 @@ typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * _
 + (nullable CPAProvider *)defaultProvider;
 
 /**
- * Call this method from your application delegate - application:openURL:sourceApplication:annotation: method implementation
- * to ensure that the application correctly resumes after the user has entered her credentials in Safari (user token retrieval)
- */
-+ (void)handleURL:(NSURL *)URL;
-
-/**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory), and sharing tokens
  * within a given key chain group (if set to nil, no group sharing is made)
  */

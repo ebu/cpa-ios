@@ -13,6 +13,8 @@
 
 static void *s_KVOContext = &s_KVOContext;
 
+NSString * const CPAWebViewCallbackURLScheme = @"cparesult";
+
 // TODO: Remove fake constants and variables when iOS 8 or above is required
 static const NSTimeInterval CPAWebViewMaxFakeDuration = 3.;
 static const NSTimeInterval CPAWebViewFakeTimerInterval = 1. / 60.;
@@ -40,10 +42,10 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 
-@property (nonatomic, strong) NSArray *normalToolbarItems;
-@property (nonatomic, strong) NSArray *loadingToolbarItems;
+@property (nonatomic) NSArray *normalToolbarItems;
+@property (nonatomic) NSArray *loadingToolbarItems;
 
-@property (nonatomic, strong) NSTimer *fakeProgressTimer;
+@property (nonatomic) NSTimer *fakeProgressTimer;
 
 @end
 
@@ -397,6 +399,28 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 #pragma mark WKWebViewDelegate protocol implementation
 
 // TODO: When iOS 8 only, use explicit WKWebView type here, instead of common UIView * type (use to help the compiler catch errors)
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    // Implemented so that -webView:didReceiveServerRedirectForProvisionalNavigation: gets called
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)webView:(UIView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation
+{
+    NSURL *URL = nil;
+    if ([WKWebView class]) {
+        URL = ((WKWebView *)self.webView).URL;
+    }
+    else {
+        URL = ((UIWebView *)self.webView).request.URL;
+    }
+    
+    if ([URL.scheme isEqualToString:CPAWebViewCallbackURLScheme]) {
+        self.callbackURLBlock ? self.callbackURLBlock(URL) : nil;
+    }
+}
+
 - (void)webView:(UIView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     if (webView == self.errorWebView) {
@@ -477,6 +501,12 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [self webView:(WKWebView *)webView didFailProvisionalNavigation:nil withError:error];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    [self webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:nil];
+    return YES;
 }
 
 #pragma mark Action callbacks

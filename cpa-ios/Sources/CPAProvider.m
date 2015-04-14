@@ -56,41 +56,6 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     return s_defaultProvider;
 }
 
-+ (void)handleURL:(NSURL *)URL
-{
-    CPAVoidCompletionBlock callbackCompletionBlock = s_callbackCompletionBlocks[URL.scheme];
-    if (! callbackCompletionBlock) {
-        return;
-    }
-    
-    // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
-    //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
-    NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
-    
-    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
-    for (NSString *queryItemString in queryItemStrings) {
-        NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
-        NSString *key = [queryItemComponents firstObject];
-        NSString *value = [queryItemComponents lastObject];
-        
-        if (key && value) {
-            [queryItems setObject:value forKey:key];
-        }
-    }
-    
-    NSString *errorIdentifier = queryItems[@"info"];
-    if (errorIdentifier) {
-        NSError *error = CPAErrorFromIdentifier(errorIdentifier);
-        callbackCompletionBlock(error);
-    }
-    else {
-        callbackCompletionBlock(nil);
-    }
-    
-    [s_callbackCompletionBlocks removeObjectForKey:URL.scheme];
-}
-
 #pragma mark Object lifecycle
 
 - (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -210,30 +175,30 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                 // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
                 // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
-                    NSURLRequest *request = [NSURLRequest requestWithURL:verificationURL];
-                    CPAWebViewController *webViewController = [[CPAWebViewController alloc] initWithRequest:request];
-                    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
-                    [rootViewController presentViewController:navigationController animated:YES completion:nil];
-                    
-                    
-#if 0
-                    // Use a callback URL of the form scheme://callback. If the user does not authorize the application, an info parameter will be
-                    // appended to it with value user_code:denied
+                    // To automatically enter the user code, we need to add a user_code and a redirect_uri paramters to the URL. The redirect URI could be
+                    // used as a way to return to the application if Safari was used to enter credentials. This safe way of supplying credentials sadly leads
+                    // to App Store rejection nowadays (see http://furbo.org/2014/09/24/in-app-browsers-considered-harmful/, for example), an in-app web
+                    // browser is therefore used
                     NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
-                    callbackURLComponents.scheme = self.callbackURLScheme;
-                    callbackURLComponents.host = @"callback";
+                    callbackURLComponents.scheme = CPAWebViewCallbackURLScheme;
+                    callbackURLComponents.host = @"verification";
                     NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
                     
                     // .query automatically adds percent encoding
                     NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
                     fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
                     
-                    [[UIApplication sharedApplication] openURL:fullVerificationURLComponents.URL];
-                    
                     // Save for execution when coming back from the browser. A scheme univoquely points at an authentication provider
-                    [s_callbackCompletionBlocks setObject:userTokenRequestBlock forKey:self.callbackURLScheme];
-#endif
+                    [s_callbackCompletionBlocks setObject:userTokenRequestBlock forKey:@"http"];
+                    
+                    NSURLRequest *request = [NSURLRequest requestWithURL:fullVerificationURLComponents.URL];
+                    CPAWebViewController *webViewController = [[CPAWebViewController alloc] initWithRequest:request];
+                    webViewController.callbackURLBlock = ^(NSURL *URL) {
+                        NSLog(@"%@", URL);
+                    };
+                    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+                    [rootViewController presentViewController:navigationController animated:YES completion:nil];
                 }
                 else {
                     userTokenRequestBlock(nil);
