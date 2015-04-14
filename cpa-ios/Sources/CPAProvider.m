@@ -77,6 +77,14 @@ static CPAProvider *s_defaultProvider = nil;
 
 - (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(CPATokenCompletionBlock)completionBlock
 {
+    [self requestTokenForDomain:domain withType:type credentialsPresentationBlock:nil completionBlock:completionBlock];
+}
+
+- (void)requestTokenForDomain:(NSString *)domain
+                     withType:(CPATokenType)type
+ credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
+              completionBlock:(CPATokenCompletionBlock)completionBlock
+{
     NSParameterAssert(domain);
     
     // User tokens can be refreshed without requiring the application to be paired again with the user account, provided the previously
@@ -87,7 +95,7 @@ static CPAProvider *s_defaultProvider = nil;
             if (error) {
                 // The application has been revoked. Register again
                 if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
-                    [self registerAndRequestTokenForDomain:domain withType:type completionBlock:completionBlock];
+                    [self registerAndRequestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
                     return;
                 }
                 
@@ -104,11 +112,14 @@ static CPAProvider *s_defaultProvider = nil;
         }];
     }
     else {
-        [self registerAndRequestTokenForDomain:domain withType:type completionBlock:completionBlock];
+        [self registerAndRequestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
     }
 }
 
-- (void)registerAndRequestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(CPATokenCompletionBlock)completionBlock
+- (void)registerAndRequestTokenForDomain:(NSString *)domain
+                                withType:(CPATokenType)type
+            credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
+                         completionBlock:(CPATokenCompletionBlock)completionBlock
 {
     NSParameterAssert(domain);
         
@@ -120,6 +131,21 @@ static CPAProvider *s_defaultProvider = nil;
     
     NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     NSAssert(softwareVersion, @"A software version is required");
+    
+    // Default: Modal presentation
+    if (! credentialsPresentationBlock) {
+        credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
+            UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+            if (isPresenting) {
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+                navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+                [rootViewController presentViewController:navigationController animated:YES completion:nil];
+            }
+            else {
+                [rootViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+        };
+    }
     
     [CPAStatelessRequest registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         if (error) {
@@ -165,16 +191,13 @@ static CPAProvider *s_defaultProvider = nil;
                 // Open verification URL built-in browser
                 if (verificationURL) {
                     CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
-                    
-                    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    credentialsPresentationBlock(authorizationViewController, YES);
+
+                    __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
                     authorizationViewController.completionBlock = ^(NSError *error) {
-                        [rootViewController dismissViewControllerAnimated:YES completion:nil];
+                        credentialsPresentationBlock(weakAuthorizationViewController, NO);
                         userTokenRequestBlock(error);
                     };
-                    
-                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:authorizationViewController];
-                    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    [rootViewController presentViewController:navigationController animated:YES completion:nil];
                 }
                 // If no verification URL is received, this means that single sign-on is provided by the authorization provider when connecting
                 // to a new service provider affiliated to it (see 8.2.2.3 in spec). Proceed with token retrieval

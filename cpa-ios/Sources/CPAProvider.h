@@ -7,10 +7,12 @@
 #import "CPAToken.h"
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 // Types
+typedef void (^CPACredentialsPresentationBlock)(UIViewController *viewController, BOOL isPresenting);
 typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * __nullable error);
 
 /**
@@ -80,6 +82,19 @@ typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * _
  * For possible errors, check CPAErrors.h
  */
 - (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(nullable CPATokenCompletionBlock)completionBlock;
+
+/**
+ * Same as -requestTokenForDomain:withType:completionBlock:, but providing a way to customise how the credentials view
+ * controller is added and removed from the view controller hierarchy, through the credentialsPresentationBlock block. 
+ * Use the isPresenting boolean flag to find whether the view controller is being presented or dismissed.
+ *
+ * If credentialsPresentationBlock is set to nil, the view controller is displayed modally within a navigation controller
+ * (as a modal sheet on iPad)
+ */
+- (void)requestTokenForDomain:(NSString *)domain
+                     withType:(CPATokenType)type
+ credentialsPresentationBlock:(nullable CPACredentialsPresentationBlock)credentialsPresentationBlock
+              completionBlock:(nullable CPATokenCompletionBlock)completionBlock;
 
 /**
  * Discard a locally available token for the given domain, if any

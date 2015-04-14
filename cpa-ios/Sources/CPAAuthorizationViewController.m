@@ -237,10 +237,10 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     
     self.normalToolbarItems = self.toolbar.items;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(close)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(close)];
     
     // Build the toolbar displayed when the web view is loading content
     NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
