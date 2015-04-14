@@ -57,6 +57,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 @implementation CPAAuthorizationViewController {
 @private
     CGFloat _progress;
+    BOOL _isFinished;
 }
 
 #pragma mark Object creation and destruction
@@ -237,11 +238,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     
     self.normalToolbarItems = self.toolbar.items;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(close)];
-    
     // Build the toolbar displayed when the web view is loading content
     NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
@@ -273,6 +269,29 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     }
     else {
         [(UIWebView *)self.webView stopLoading];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Climb up the parent view controller hierarchy to find if modal dismissal is taking place
+    BOOL isBeingDismissed = [self isBeingDismissed];
+    UIViewController *parentViewController = self.parentViewController;
+    while (! isBeingDismissed && parentViewController) {
+        isBeingDismissed = [parentViewController isBeingDismissed];
+        if (isBeingDismissed) {
+            break;
+        }
+        parentViewController = parentViewController.parentViewController;
+    }
+    
+    if ([self isMovingFromParentViewController] || isBeingDismissed) {
+        if (! _isFinished) {
+            NSError *error = CPAErrorFromCode(CPAErrorAuthorizationCancelled);
+            self.completionBlock ? self.completionBlock(error) : nil;
+        }
     }
 }
 
@@ -431,6 +450,8 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     }
     
     if ([URL.scheme isEqualToString:CPAWebViewCallbackURLScheme]) {
+        _isFinished = YES;
+        
         NSError *error = CPAErrorFromCallbackURL(URL);
         self.completionBlock ? self.completionBlock(error) : nil;
     }
@@ -580,12 +601,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
         [(UIWebView *)self.webView stopLoading];
     }
     [self updateInterfaceAnimated:YES];
-}
-
-- (void)close
-{
-    NSError *error = CPAErrorFromCode(CPAErrorAuthorizationCancelled);
-    self.completionBlock ? self.completionBlock(error) : nil;
 }
 
 #pragma mark Timer callbacks

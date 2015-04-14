@@ -11,6 +11,7 @@
 #import "CPAUICKeyChainStore.h"
 #import "CPAToken+Private.h"
 #import "CPAAuthorizationViewController.h"
+#import "NSBundle+CPAExtensions.h"
 
 #import <UIKit/UIKit.h>
 
@@ -132,9 +133,14 @@ static CPAProvider *s_defaultProvider = nil;
     NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     NSAssert(softwareVersion, @"A software version is required");
     
-    // Default: Modal presentation
+    // Default: Modal presentation, wrapped in a navigation controller, with a cancel button at the top left
     if (! credentialsPresentationBlock) {
         credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
+            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
+                                                                                               style:UIBarButtonItemStylePlain
+                                                                                              target:self
+                                                                                              action:@selector(closeCredentials:)];
+            
             UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
             if (isPresenting) {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -242,6 +248,14 @@ static CPAProvider *s_defaultProvider = nil;
     NSData *tokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
     NSString *key = [self keyChainKeyForDomain:domain];
     [self.keyChainStore setData:tokenData forKey:key];
+}
+
+#pragma mark Actions
+
+- (void)closeCredentials:(id)sender
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
