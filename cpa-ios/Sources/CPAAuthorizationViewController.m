@@ -6,14 +6,15 @@
 
 // Most of this implementation has been borrowed from CoconutKit HLSWebViewController (see https://github.com/defagos/CoconutKit)
 
+#import "CPAAuthorizationViewController.h"
+
 #import "CPAErrors+Private.h"
 #import "CPAKeyboardInformation.h"
-#import "CPAWebViewController.h"
 #import "NSBundle+CPAExtensions.h"
 
 static void *s_KVOContext = &s_KVOContext;
 
-NSString * const CPAWebViewCallbackURLScheme = @"cparesult";
+static NSString * const CPAWebViewCallbackURLScheme = @"cpacred";
 
 // TODO: Remove fake constants and variables when iOS 8 or above is required
 static const NSTimeInterval CPAWebViewMaxFakeDuration = 3.;
@@ -22,7 +23,11 @@ static const CGFloat CPAWebViewFakeTimerMaxProgress = 0.95f;
 static const CGFloat CPAWebViewFakeTimerProgressIncrement = CPAWebViewFakeTimerMaxProgress / CPAWebViewMaxFakeDuration * CPAWebViewFakeTimerInterval;
 static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 
-@interface CPAWebViewController ()
+// Static functions
+static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode);
+static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
+
+@interface CPAAuthorizationViewController ()
 
 @property (nonatomic) NSURLRequest *request;
 @property (nonatomic) NSURL *currentURL;
@@ -49,17 +54,21 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 
 @end
 
-@implementation CPAWebViewController {
+@implementation CPAAuthorizationViewController {
 @private
     CGFloat _progress;
 }
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithRequest:(NSURLRequest *)request
+- (instancetype)initWithVerificationURL:(NSURL *)verificationURL userCode:(NSString *)userCode
 {
-    if (self = [super initWithNibName:@"CPAWebViewController" bundle:[NSBundle cpa_resourceBundle]]) {
-        self.request = request;
+    NSParameterAssert(verificationURL);
+    NSParameterAssert(userCode);
+    
+    if (self = [super initWithNibName:@"CPAAuthorizationViewController" bundle:[NSBundle cpa_resourceBundle]]) {
+        NSURL *fullURL = CPAFullVerificationURL(verificationURL, userCode);
+        self.request = [NSURLRequest requestWithURL:fullURL];
     }
     return self;
 }
@@ -417,7 +426,8 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
     }
     
     if ([URL.scheme isEqualToString:CPAWebViewCallbackURLScheme]) {
-        self.callbackURLBlock ? self.callbackURLBlock(URL) : nil;
+        NSError *error = CPAErrorFromCallbackURL(URL);
+        self.completionBlock ? self.completionBlock(error) : nil;
     }
 }
 
@@ -601,3 +611,44 @@ static const NSTimeInterval CPAWebViewFadeAnimationDuration = 0.3;
 
 @end
 
+#pragma mark Static functions
+
+static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode)
+{
+    // To automatically enter the user code, we need to add a user_code and a redirect_uri paramters to the URL. The redirect URI could be
+    // used as a way to return to the application if Safari was used to enter credentials. This safe way of supplying credentials sadly leads
+    // to App Store rejection nowadays (see http://furbo.org/2014/09/24/in-app-browsers-considered-harmful/, for example), an in-app web
+    // browser is therefore used
+    NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
+    callbackURLComponents.scheme = CPAWebViewCallbackURLScheme;
+    callbackURLComponents.host = @"verification";
+    NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
+    
+    // .query automatically adds percent encoding
+    NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
+    fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
+    
+    return fullVerificationURLComponents.URL;
+}
+
+static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL)
+{
+    // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
+    //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:callbackURL resolvingAgainstBaseURL:NO];
+    NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
+    
+    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+    for (NSString *queryItemString in queryItemStrings) {
+        NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
+        NSString *key = [queryItemComponents firstObject];
+        NSString *value = [queryItemComponents lastObject];
+        
+        if (key && value) {
+            [queryItems setObject:value forKey:key];
+        }
+    }
+    
+    NSString *errorIdentifier = queryItems[@"info"];
+    return errorIdentifier ? CPAErrorFromIdentifier(errorIdentifier) : nil;
+}

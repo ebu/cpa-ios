@@ -10,7 +10,7 @@
 #import "CPAStatelessRequest.h"
 #import "CPAUICKeyChainStore.h"
 #import "CPAToken+Private.h"
-#import "CPAWebViewController.h"
+#import "CPAAuthorizationViewController.h"
 
 #import <UIKit/UIKit.h>
 
@@ -19,10 +19,6 @@ typedef void (^CPAVoidCompletionBlock)(NSError *error);
 
 // Globals
 static CPAProvider *s_defaultProvider = nil;
-
-// Static functions
-static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode);
-static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 @interface CPAProvider ()
 
@@ -168,19 +164,15 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
                 
                 // Open verification URL built-in browser
                 if (verificationURL) {
-                    NSURL *fullVerificationURL = CPAFullVerificationURL(verificationURL, userCode);
-                    NSURLRequest *request = [NSURLRequest requestWithURL:fullVerificationURL];
-                    CPAWebViewController *webViewController = [[CPAWebViewController alloc] initWithRequest:request];
+                    CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
                     
                     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-                    webViewController.callbackURLBlock = ^(NSURL *callbackURL) {
+                    authorizationViewController.completionBlock = ^(NSError *error) {
                         [rootViewController dismissViewControllerAnimated:YES completion:nil];
-                        
-                        NSError *callbackError = CPAErrorFromCallbackURL(callbackURL);
-                        userTokenRequestBlock(callbackError);
+                        userTokenRequestBlock(error);
                     };
                     
-                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:authorizationViewController];
                     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
                     [rootViewController presentViewController:navigationController animated:YES completion:nil];
                 }
@@ -230,43 +222,3 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 }
 
 @end
-
-static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode)
-{
-    // To automatically enter the user code, we need to add a user_code and a redirect_uri paramters to the URL. The redirect URI could be
-    // used as a way to return to the application if Safari was used to enter credentials. This safe way of supplying credentials sadly leads
-    // to App Store rejection nowadays (see http://furbo.org/2014/09/24/in-app-browsers-considered-harmful/, for example), an in-app web
-    // browser is therefore used
-    NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
-    callbackURLComponents.scheme = CPAWebViewCallbackURLScheme;
-    callbackURLComponents.host = @"verification";
-    NSString *callbackURLString = callbackURLComponents.URL.absoluteString;
-    
-    // .query automatically adds percent encoding
-    NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
-    fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
-    
-    return fullVerificationURLComponents.URL;
-}
-
-static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL)
-{
-    // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
-    //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:callbackURL resolvingAgainstBaseURL:NO];
-    NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
-    
-    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
-    for (NSString *queryItemString in queryItemStrings) {
-        NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
-        NSString *key = [queryItemComponents firstObject];
-        NSString *value = [queryItemComponents lastObject];
-        
-        if (key && value) {
-            [queryItems setObject:value forKey:key];
-        }
-    }
-    
-    NSString *errorIdentifier = queryItems[@"info"];
-    return errorIdentifier ? CPAErrorFromIdentifier(errorIdentifier) : nil;
-}
