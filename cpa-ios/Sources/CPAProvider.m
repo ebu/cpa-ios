@@ -21,7 +21,6 @@ typedef void (^CPAVoidCompletionBlock)(NSError *error);
 
 // Globals
 static CPAProvider *s_defaultProvider = nil;
-static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 
 @interface CPAProvider ()
 
@@ -33,16 +32,6 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 @implementation CPAProvider
 
 #pragma mark Class methods
-
-+ (void)initialize
-{
-    if (self != [CPAProvider class]) {
-        return;
-    }
-    
-    // Will be used to store completion blocks to be called after a roundtrip to Safari
-    s_callbackCompletionBlocks = [NSMutableDictionary dictionary];
-}
 
 + (CPAProvider *)setDefaultProvider:(CPAProvider *)provider
 {
@@ -188,15 +177,39 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                     NSURLComponents *fullVerificationURLComponents = [NSURLComponents componentsWithURL:verificationURL resolvingAgainstBaseURL:NO];
                     fullVerificationURLComponents.query = [NSString stringWithFormat:@"user_code=%@&redirect_uri=%@", userCode, callbackURLString];
                     
-                    // Save for execution when coming back from the browser. A scheme univoquely points at an authentication provider
-                    [s_callbackCompletionBlocks setObject:userTokenRequestBlock forKey:@"http"];
-                    
                     NSURLRequest *request = [NSURLRequest requestWithURL:fullVerificationURLComponents.URL];
                     CPAWebViewController *webViewController = [[CPAWebViewController alloc] initWithRequest:request];
-                    webViewController.callbackURLBlock = ^(NSURL *URL) {
-                        NSLog(@"%@", URL);
-                    };
+                    
                     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    webViewController.callbackURLBlock = ^(NSURL *URL) {
+                        [rootViewController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
+                        //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
+                        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+                        NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
+                        
+                        NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+                        for (NSString *queryItemString in queryItemStrings) {
+                            NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
+                            NSString *key = [queryItemComponents firstObject];
+                            NSString *value = [queryItemComponents lastObject];
+                            
+                            if (key && value) {
+                                [queryItems setObject:value forKey:key];
+                            }
+                        }
+                        
+                        NSString *errorIdentifier = queryItems[@"info"];
+                        if (errorIdentifier) {
+                            NSError *error = CPAErrorFromIdentifier(errorIdentifier);
+                            userTokenRequestBlock(error);
+                        }
+                        else {
+                            userTokenRequestBlock(nil);
+                        }
+                    };
+                    
                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
                     [rootViewController presentViewController:navigationController animated:YES completion:nil];
                 }
