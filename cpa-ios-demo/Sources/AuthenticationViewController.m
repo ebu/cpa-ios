@@ -8,6 +8,11 @@
 
 #import "CPAProvider.h"
 
+typedef NS_ENUM(NSInteger, TransitionStyle) {
+    TransitionStyleModal,
+    TransitionStyleNavigation
+};
+
 static NSString * const kDomain = @"cpa.rts.ch";
 
 @interface AuthenticationViewController ()
@@ -15,6 +20,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
 @property (nonatomic, weak) IBOutlet UILabel *tokenLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *userTokenSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *forceRenewalSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *customTransitionSwitch;
 
 @end
 
@@ -42,7 +48,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
     }
 }
 
-#pragma mark Actions
+#pragma mark Token retrieval
 
 - (IBAction)retrieveToken:(id)sender
 {
@@ -57,8 +63,20 @@ static NSString * const kDomain = @"cpa.rts.ch";
         return;
     }
     
+    CPACredentialsPresentationBlock credentialsPresentationBlock = nil;
+    if (self.customTransitionSwitch.on) {
+        credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
+            if (isPresenting) {
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+            else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        };
+    }
+    
     CPATokenType type = self.userTokenSwitch.on ? CPATokenTypeUser : CPATokenTypeClient;
-    [[CPAProvider defaultProvider] requestTokenForDomain:kDomain withType:type completionBlock:^(CPAToken *token, NSError *error) {
+    [[CPAProvider defaultProvider] requestTokenForDomain:kDomain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:^(CPAToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
@@ -71,6 +89,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
         
         [self reloadData];
     }];
+
 }
 
 @end

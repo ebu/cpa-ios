@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KSl-Ht-YmI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9F7-Qo-aJC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--Authentication View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="8Am-1x-xkE">
+            <objects>
+                <navigationController id="9F7-Qo-aJC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2kh-kA-HHW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KSl-Ht-YmI" kind="relationship" relationship="rootViewController" id="9GM-6n-9y3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ve0-YX-8j6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="450" y="-277"/>
+        </scene>
+        <!--CPA demo-->
         <scene sceneID="f66-Lo-z75">
             <objects>
                 <viewController id="KSl-Ht-YmI" customClass="AuthenticationViewController" sceneMemberID="viewController">
@@ -21,19 +37,25 @@
                                 <rect key="frame" x="144" y="164" width="312" height="271"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Force renewal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6f-lp-DQy" userLabel="Force Label">
-                                        <rect key="frame" x="19" y="72" width="173" height="21"/>
+                                        <rect key="frame" x="19" y="72" width="216" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Custom transition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pes-Sn-1ct" userLabel="Force Label">
+                                        <rect key="frame" x="19" y="119" width="216" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;token&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xig-6E-LWj" userLabel="Token Label">
-                                        <rect key="frame" x="-27" y="204" width="364" height="47"/>
+                                        <rect key="frame" x="-27" y="216" width="364" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Authenticated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKC-gB-Iyh" userLabel="Authenticated Label">
-                                        <rect key="frame" x="19" y="25" width="173" height="21"/>
+                                        <rect key="frame" x="19" y="25" width="216" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -45,7 +67,7 @@
                                         <rect key="frame" x="243" y="20" width="51" height="31"/>
                                     </switch>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXy-lv-sL5" userLabel="Token Button">
-                                        <rect key="frame" x="67" y="159" width="176" height="30"/>
+                                        <rect key="frame" x="67" y="178" width="176" height="30"/>
                                         <state key="normal" title="Retrieve token">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -53,6 +75,9 @@
                                             <action selector="retrieveToken:" destination="KSl-Ht-YmI" eventType="touchUpInside" id="hOV-4g-c7i"/>
                                         </connections>
                                     </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rLP-VQ-2EK" userLabel="Force Switch">
+                                        <rect key="frame" x="243" y="114" width="51" height="31"/>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -67,7 +92,9 @@
                             <constraint firstAttribute="centerX" secondItem="7uy-vA-okb" secondAttribute="centerX" id="xND-in-N5W"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="CPA demo" id="E22-7v-7aL"/>
                     <connections>
+                        <outlet property="customTransitionSwitch" destination="rLP-VQ-2EK" id="sXu-XQ-kkn"/>
                         <outlet property="forceRenewalSwitch" destination="txS-SE-bUR" id="PGC-db-Una"/>
                         <outlet property="tokenLabel" destination="Xig-6E-LWj" id="gNb-w9-fzQ"/>
                         <outlet property="userTokenSwitch" destination="ADn-67-F4k" id="gQJ-RJ-r8U"/>

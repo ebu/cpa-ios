@@ -48,9 +48,9 @@
 		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E67F4B811ADD60F700332BE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
+		E67F4B831ADD610C00332BE5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 		E684D3E31AD81E0400EDCA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
-		E684D3E51AD81E2A00EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
-		E684D3E61AD81E3900EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 		E684D3E81AD81EB200EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E684D3EA1AD81EB800EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,8 +248,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E684D3E31AD81E0400EDCA66 /* Base */,
-				E684D3E51AD81E2A00EDCA66 /* en */,
-				E684D3E61AD81E3900EDCA66 /* fr */,
+				E67F4B811ADD60F700332BE5 /* en */,
+				E67F4B831ADD610C00332BE5 /* fr */,
 			);
 			name = Application.storyboard;
 			sourceTree = "<group>";
