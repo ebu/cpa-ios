@@ -8,11 +8,6 @@
 
 #import "CPAProvider.h"
 
-typedef NS_ENUM(NSInteger, TransitionStyle) {
-    TransitionStyleModal,
-    TransitionStyleNavigation
-};
-
 static NSString * const kDomain = @"cpa.rts.ch";
 
 @interface AuthenticationViewController ()
