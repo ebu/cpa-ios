@@ -26,6 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSString *value;
 
 /**
+ * The client identifier for which the token was requested
+ */
+@property (nonatomic, readonly, copy) NSString *clientIdentifier;
+
+/**
+ * The client secret
+ */
+@property (nonatomic, readonly, copy) NSString *clientSecret;
+
+/**
  * The domain to which the token is associated
  */
 @property (nonatomic, readonly, copy) NSString *domain;

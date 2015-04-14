@@ -129,6 +129,39 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 - (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(CPATokenCompletionBlock)completionBlock
 {
     NSParameterAssert(domain);
+    
+    // User tokens can be refreshed without requiring the application to be paired again with the user account, provided the previously
+    // granted access has not been revoked and the client identifier and secret have not been lost
+    CPAToken *token = [self tokenForDomain:domain];
+    if (token && token.type == CPATokenTypeUser) {
+        [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+            if (error) {
+                // The application has been revoked. Register again
+                if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
+                    [self registerAndRequestTokenForDomain:domain withType:type completionBlock:completionBlock];
+                    return;
+                }
+                
+                completionBlock ? completionBlock(nil, error) : nil;
+                return;
+            }
+            
+            CPAToken *freshToken = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain];
+            freshToken.domainName = domainName;
+            freshToken.type = type;
+            [self setToken:freshToken forDomain:domain];
+            
+            completionBlock ? completionBlock(token, nil) : nil;
+        }];
+    }
+    else {
+        [self registerAndRequestTokenForDomain:domain withType:type completionBlock:completionBlock];
+    }
+}
+
+- (void)registerAndRequestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(CPATokenCompletionBlock)completionBlock
+{
+    NSParameterAssert(domain);
         
     NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
     NSAssert(clientName, @"A client name is required");
@@ -151,7 +184,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                 return;
             }
             
-            CPAToken *token = [[CPAToken alloc] initWithValue:accessToken domain:domain];
+            CPAToken *token = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain];
             token.domainName = domainName;
             token.type = type;
             [self setToken:token forDomain:domain];

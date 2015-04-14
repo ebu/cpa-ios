@@ -13,9 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CPAToken (Private)
 
 /**
- * Create a token with the specified value and domain (both mandatory)
+ * Create a token with the specified value and domain, associated with the specified client (all parameters are
+ * mandatory)
  */
-- (instancetype)initWithValue:(NSString *)value domain:(NSString *)domain;
+- (instancetype)initWithValue:(NSString *)value
+             clientIdentifier:(NSString *)clientIdentifier
+                 clientSecret:(NSString *)clientSecret
+                       domain:(NSString *)domain;
 
 /**
  * The friendly domain name (defaults to nil)
