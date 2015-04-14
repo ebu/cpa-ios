@@ -9,6 +9,7 @@
 /**
  * Private interface for implementation purposes
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface CPAToken (Private)
 
 /**
@@ -19,7 +20,7 @@
 /**
  * The friendly domain name (defaults to nil)
  */
-@property (nonatomic, copy) NSString *domainName;
+@property (nonatomic, copy, nullable) NSString *domainName;
 
 /**
  * Token type. Defaults to CPATokenTypeClient
@@ -32,3 +33,4 @@
 @property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end
+NS_ASSUME_NONNULL_END

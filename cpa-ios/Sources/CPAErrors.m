@@ -13,6 +13,8 @@ NSString * const CPAErrorDomain = @"ch.ebu.cpa.error";
 
 CPAErrorCode CPAErrorCodeForIdentifier(NSString *errorIdentifier)
 {
+    NSCParameterAssert(errorIdentifier);
+    
     static NSDictionary *s_errorCodes;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
@@ -45,6 +47,8 @@ NSString *CPALocalizedErrorDescriptionForCode(CPAErrorCode errorCode)
 
 NSString *CPALocalizedErrorDescriptionForIdentifier(NSString *errorIdentifier)
 {
+    NSCParameterAssert(errorIdentifier);
+    
     CPAErrorCode errorCode = CPAErrorCodeForIdentifier(errorIdentifier);
     return CPALocalizedErrorDescriptionForCode(errorCode);
 }
@@ -69,5 +73,5 @@ NSString *CPALocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 {
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
     NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
-    return [bundle localizedStringForKey:key value:nil table:nil];
+    return [bundle localizedStringForKey:key value:CPALocalizedString(@"An unknown error has been encountered", <#comment#>) table:nil];
 }

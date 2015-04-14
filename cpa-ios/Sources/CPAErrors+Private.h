@@ -10,6 +10,8 @@
  * Private interface for implementation purposes
  */
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Return the error code matching a given identifier
  */
@@ -31,3 +33,5 @@ NSError *CPAErrorFromIdentifier(NSString *errorIdentifier);
  * Return nicer CFNetwork-related error messages
  */
 NSString *CPALocalizedDescriptionForCFNetworkError(NSInteger errorCode);
+
+NS_ASSUME_NONNULL_END

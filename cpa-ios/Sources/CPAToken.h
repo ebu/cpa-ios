@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 /**
  * Service token
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface CPAToken : NSObject <NSCoding>
 
 /**
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 /**
  * The friendly domain name
  */
-@property (nonatomic, readonly, copy) NSString *domainName;
+@property (nonatomic, readonly, copy, nullable) NSString *domainName;
 
 /**
  * The token type
@@ -51,3 +52,4 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

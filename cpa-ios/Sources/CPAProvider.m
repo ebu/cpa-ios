@@ -126,7 +126,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     return tokenData ? [NSKeyedUnarchiver unarchiveObjectWithData:tokenData] : nil;
 }
 
-- (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(void (^)(CPAToken *, NSError *))completionBlock
+- (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(CPATokenCompletionBlock)completionBlock
 {
     NSParameterAssert(domain);
         
@@ -211,6 +211,8 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 
 - (void)discardTokenForDomain:(NSString *)domain
 {
+    NSParameterAssert(domain);
+    
     NSString *key = [self keyChainKeyForDomain:domain];
     [self.keyChainStore removeItemForKey:key];
 }

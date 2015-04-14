@@ -9,6 +9,7 @@
 #define CPALocalizedString(key, comment) \
     [[NSBundle cpa_resourceBundle] localizedStringForKey:(key) value:@"" table:nil]
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSBundle (CPAExtensions)
 
 /**
@@ -17,3 +18,4 @@
 + (NSBundle *)cpa_resourceBundle;
 
 @end
+NS_ASSUME_NONNULL_END

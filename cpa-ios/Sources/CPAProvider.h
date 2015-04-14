@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+// Types
+typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * __nullable error);
+
 /**
  * Authentication provider managing cross-platform authentication (CPA) with an authorization provider.
  *
@@ -33,12 +38,12 @@
 /**
  * Set the default authentication provider, returning the previously installed one (if any)
  */
-+ (CPAProvider *)setDefaultProvider:(CPAProvider *)provider;
++ (nullable CPAProvider *)setDefaultProvider:(nullable CPAProvider *)provider;
 
 /**
  * Return the currently set authentication provider, nil if none
  */
-+ (CPAProvider *)defaultProvider;
++ (nullable CPAProvider *)defaultProvider;
 
 /**
  * Call this method from your application delegate - application:openURL:sourceApplication:annotation: method implementation
@@ -52,7 +57,7 @@
  */
 - (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
                                callbackURLScheme:(NSString *)callbackURLScheme
-                             keyChainAccessGroup:(NSString *)keyChainAccessGroup NS_DESIGNATED_INITIALIZER;
+                             keyChainAccessGroup:(nullable NSString *)keyChainAccessGroup NS_DESIGNATED_INITIALIZER;
 
 /**
  * Create an authentication provider connecting to the specified authorization provider URL (mandatory) without
@@ -68,7 +73,7 @@
 /**
  * Return the token locally available for a given domain, nil if none
  */
-- (CPAToken *)tokenForDomain:(NSString *)domain;
+- (nullable CPAToken *)tokenForDomain:(NSString *)domain;
 
 /**
  * Retrieve a token for the specified domain with a given type. Before calling this method, you should check whether
@@ -81,7 +86,7 @@
  *
  * For possible errors, check CPAErrors.h
  */
-- (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(void (^)(CPAToken *token, NSError *error))completionBlock;
+- (void)requestTokenForDomain:(NSString *)domain withType:(CPATokenType)type completionBlock:(nullable CPATokenCompletionBlock)completionBlock;
 
 /**
  * Discard a locally available token for the given domain, if any
@@ -95,3 +100,4 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END
