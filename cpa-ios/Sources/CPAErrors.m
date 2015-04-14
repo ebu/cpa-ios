@@ -40,6 +40,7 @@ NSString *CPALocalizedErrorDescriptionForCode(CPAErrorCode errorCode)
                                           @(CPAErrorInvalidClient) : CPALocalizedString(@"The client is invalid", nil),
                                           @(CPAErrorTooFast) : CPALocalizedString(@"Too many requests are being made", nil),
                                           @(CPAErrorPendingAuthorization) : CPALocalizedString(@"Authorization is still pending", nil),
+                                          @(CPAErrorAuthorizationCancelled) : CPALocalizedString(@"The authorization request has been cancelled", nil),
                                           @(CPAErrorAuthorizationDenied) : CPALocalizedString(@"Authorization was denied", nil)};
     });
     return s_localizedErrorDescriptions[@(errorCode)];

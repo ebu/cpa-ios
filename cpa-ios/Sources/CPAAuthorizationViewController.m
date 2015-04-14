@@ -237,6 +237,11 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     
     self.normalToolbarItems = self.toolbar.items;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(close)];
+    
     // Build the toolbar displayed when the web view is loading content
     NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
@@ -575,6 +580,12 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
         [(UIWebView *)self.webView stopLoading];
     }
     [self updateInterfaceAnimated:YES];
+}
+
+- (void)close
+{
+    NSError *error = CPAErrorFromCode(CPAErrorAuthorizationCancelled);
+    self.completionBlock ? self.completionBlock(error) : nil;
 }
 
 #pragma mark Timer callbacks

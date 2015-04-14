@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, CPAErrorCode) {
     CPAErrorInvalidClient,                          // The client is invalid
     CPAErrorTooFast,                                // Requests are made too fast. Slow down
     CPAErrorPendingAuthorization,                   // Authorization has not yet been made
+    CPAErrorAuthorizationCancelled,                 // The authorization request has been cancelled
     CPAErrorAuthorizationDenied                     // The user denied access to the application
 };
 
