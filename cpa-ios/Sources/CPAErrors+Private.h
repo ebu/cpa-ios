@@ -30,8 +30,8 @@ NSError *CPAErrorFromCode(CPAErrorCode errorCode);
 NSError *CPAErrorFromIdentifier(NSString *errorIdentifier);
 
 /**
- * Return nicer CFNetwork-related error messages
+ * Return nicer CFNetwork-related error messages (return nil if no match is found)
  */
-NSString *CPALocalizedDescriptionForCFNetworkError(NSInteger errorCode);
+NSString * __nullable CPALocalizedDescriptionForCFNetworkError(NSInteger errorCode);
 
 NS_ASSUME_NONNULL_END

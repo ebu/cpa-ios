@@ -73,5 +73,5 @@ NSString *CPALocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 {
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
     NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
-    return [bundle localizedStringForKey:key value:CPALocalizedString(@"An unknown error has been encountered", <#comment#>) table:nil];
+    return [bundle localizedStringForKey:key value:nil table:nil];
 }

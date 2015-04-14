@@ -13,6 +13,7 @@
 		E606504F1AD673A5008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504D1AD673A5008FC7EE /* main.m */; };
 		E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* AuthenticationViewController.m */; };
 		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
+		E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E21AD81E0400EDCA66 /* Application.storyboard */; };
 		E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
 		E6897B4C1AD800660083E1BB /* cpa-ios-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */; };
@@ -46,6 +47,7 @@
 		E60650551AD67926008FC7EE /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E684D3E31AD81E0400EDCA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
 		E684D3E51AD81E2A00EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
 		E684D3E61AD81E3900EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */,
 				E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */,
 				E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */,
 			);
@@ -130,6 +133,7 @@
 		E6257CB01AD6D327005FE6D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */,
 				E6257CAD1AD6D321005FE6D2 /* Security.framework */,
 			);
 			name = Frameworks;

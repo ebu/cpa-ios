@@ -15,15 +15,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSURL *providerURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
-    CPAProvider *provider = [[CPAProvider alloc] initWithAuthorizationProviderURL:providerURL callbackURLScheme:@"cpademo"];
+    CPAProvider *provider = [[CPAProvider alloc] initWithAuthorizationProviderURL:providerURL];
     [CPAProvider setDefaultProvider:provider];
     
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    [CPAProvider handleURL:URL];
     return YES;
 }
 

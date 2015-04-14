@@ -10,6 +10,7 @@
 #import "CPAStatelessRequest.h"
 #import "CPAUICKeyChainStore.h"
 #import "CPAToken+Private.h"
+#import "CPAWebViewController.h"
 
 #import <UIKit/UIKit.h>
 
@@ -25,7 +26,6 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 @interface CPAProvider ()
 
 @property (nonatomic) NSURL *authorizationProviderURL;
-@property (nonatomic, copy) NSString *callbackURLScheme;
 @property (nonatomic) CPAUICKeyChainStore *keyChainStore;
 
 @end
@@ -94,15 +94,12 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
 #pragma mark Object lifecycle
 
 - (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                               callbackURLScheme:(NSString *)callbackURLScheme
                              keyChainAccessGroup:(NSString *)keyChainAccessGroup
 {
     NSParameterAssert(authorizationProviderURL);
-    NSParameterAssert(callbackURLScheme);
     
     if (self = [super init]) {
         self.authorizationProviderURL = authorizationProviderURL;
-        self.callbackURLScheme = callbackURLScheme;
         
         NSString *serviceIdentifier = [NSBundle mainBundle].bundleIdentifier;
         self.keyChainStore = [CPAUICKeyChainStore keyChainStoreWithService:serviceIdentifier accessGroup:keyChainAccessGroup];
@@ -110,9 +107,9 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
     return self;
 }
 
-- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL callbackURLScheme:(NSString *)callbackURLScheme
+- (instancetype)initWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
 {
-    return [self initWithAuthorizationProviderURL:authorizationProviderURL callbackURLScheme:callbackURLScheme keyChainAccessGroup:nil];
+    return [self initWithAuthorizationProviderURL:authorizationProviderURL keyChainAccessGroup:nil];
 }
 
 #pragma mark Token retrieval and management
@@ -213,6 +210,14 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                 // Open verification URL in (trusted) Safari. If no verification URL is received, this means that single sign-on is provided by the authorization
                 // provider when connecting to a new service provider affiliated to it (see 8.2.2.3 in spec)
                 if (verificationURL) {
+                    NSURLRequest *request = [NSURLRequest requestWithURL:verificationURL];
+                    CPAWebViewController *webViewController = [[CPAWebViewController alloc] initWithRequest:request];
+                    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+                    [rootViewController presentViewController:navigationController animated:YES completion:nil];
+                    
+                    
+#if 0
                     // Use a callback URL of the form scheme://callback. If the user does not authorize the application, an info parameter will be
                     // appended to it with value user_code:denied
                     NSURLComponents *callbackURLComponents = [[NSURLComponents alloc] init];
@@ -228,6 +233,7 @@ static NSMutableDictionary *s_callbackCompletionBlocks = nil;
                     
                     // Save for execution when coming back from the browser. A scheme univoquely points at an authentication provider
                     [s_callbackCompletionBlocks setObject:userTokenRequestBlock forKey:self.callbackURLScheme];
+#endif
                 }
                 else {
                     userTokenRequestBlock(nil);
