@@ -181,6 +181,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
                     };
                     
                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+                    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
                     [rootViewController presentViewController:navigationController animated:YES completion:nil];
                 }
                 // If no verification URL is received, this means that single sign-on is provided by the authorization provider when connecting
