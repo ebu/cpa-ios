@@ -199,7 +199,7 @@
     [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, 0, nil) : nil;
+                completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
                 return;
             }
             
