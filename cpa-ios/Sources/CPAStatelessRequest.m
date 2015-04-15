@@ -124,7 +124,7 @@
             NSString *userName = responseDictionary[@"user_name"];
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_name"];
+            NSString *domainName = responseDictionary[@"domain_display_name"];
             NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
             completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
@@ -165,7 +165,7 @@
             NSString *userName = responseDictionary[@"user_name"];
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_name"];
+            NSString *domainName = responseDictionary[@"domain_display_name"];
             NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
             completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
