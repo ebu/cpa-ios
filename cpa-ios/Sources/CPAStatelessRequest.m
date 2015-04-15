@@ -51,7 +51,7 @@
                                    clientIdentifier:(NSString *)clientIdentifier
                                        clientSecret:(NSString *)clientSecret
                                              domain:(NSString *)domain
-                                    completionBlock:(void (^)(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError *error))completionBlock
+                                    completionBlock:(void (^)(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger lifetimeInSeconds, NSError *error))completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
@@ -81,9 +81,9 @@
             NSString *verificationURLString = responseDictionary[@"verification_uri"];
             NSURL *verificationURL = verificationURLString ? [NSURL URLWithString:verificationURLString] : nil;
             NSInteger pollingIntervalInSeconds = [responseDictionary[@"interval"] integerValue];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, expiresInSeconds, nil) : nil;
+            completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, lifetimeInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -93,7 +93,7 @@
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock
+                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(deviceCode);
@@ -125,9 +125,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
+            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -136,7 +136,7 @@
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock
+                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
@@ -166,9 +166,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
+            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -177,7 +177,7 @@
                                             clientIdentifier:(NSString *)clientIdentifier
                                                 clientSecret:(NSString *)clientSecret
                                                       domain:(NSString *)domain
-                                             completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock
+                                             completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
@@ -206,9 +206,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
+            completionBlock ? completionBlock(accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
         });
     }] resume];
 }

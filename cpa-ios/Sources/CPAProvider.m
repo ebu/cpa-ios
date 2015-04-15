@@ -92,7 +92,7 @@ static CPAProvider *s_defaultProvider = nil;
     // granted access has not been revoked and the client identifier and secret have not been lost
     CPAToken *token = [self tokenForDomain:domain];
     if (token && token.type == CPATokenTypeUser) {
-        [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
             if (error) {
                 // The application has been revoked. Register again
                 if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
@@ -107,6 +107,7 @@ static CPAProvider *s_defaultProvider = nil;
             CPAToken *freshToken = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain];
             freshToken.domainName = domainName;
             freshToken.type = type;
+            freshToken.lifetimeInSeconds = lifetimeInSeconds;
             [self setToken:freshToken forDomain:domain];
             
             completionBlock ? completionBlock(token, nil) : nil;
@@ -160,7 +161,7 @@ static CPAProvider *s_defaultProvider = nil;
         }
         
         // Common token request completion code
-        void (^tokenRequestCompletionBlock)(NSString *, NSString *, NSError *) = ^(NSString *accessToken, NSString *domainName, NSError *error) {
+        void (^tokenRequestCompletionBlock)(NSString *, NSString *, NSInteger, NSError *) = ^(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
             if (error) {
                 completionBlock ? completionBlock(nil, error) : nil;
                 return;
@@ -169,6 +170,7 @@ static CPAProvider *s_defaultProvider = nil;
             CPAToken *token = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain];
             token.domainName = domainName;
             token.type = type;
+            token.lifetimeInSeconds = lifetimeInSeconds;
             [self setToken:token forDomain:domain];
             
             completionBlock ? completionBlock(token, nil) : nil;
@@ -176,7 +178,7 @@ static CPAProvider *s_defaultProvider = nil;
         
         // User token: Request user code first
         if (type == CPATokenTypeUser) {
-            [CPAStatelessRequest requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
+            [CPAStatelessRequest requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger lifetimeInSeconds, NSError *error) {
                 if (error) {
                     completionBlock ? completionBlock(nil, error) : nil;
                     return;
@@ -189,8 +191,8 @@ static CPAProvider *s_defaultProvider = nil;
                         return;
                     }
                     
-                    [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                        tokenRequestCompletionBlock(accessToken, domainName, error);
+                    [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+                        tokenRequestCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
                     }];
                 };
                 
@@ -214,8 +216,8 @@ static CPAProvider *s_defaultProvider = nil;
         }
         // Client token
         else {
-            [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                tokenRequestCompletionBlock(accessToken, domainName, error);
+            [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+                tokenRequestCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
             }];
         }
     }];

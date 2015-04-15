@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
                                    clientIdentifier:(NSString *)clientIdentifier
                                        clientSecret:(NSString *)clientSecret
                                              domain:(NSString *)domain
-                                    completionBlock:(void (^)(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError *error))completionBlock;
+                                    completionBlock:(void (^)(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger lifetimeInSeconds, NSError *error))completionBlock;
 
 /**
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In user mode, a token
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock;
+                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock;
 
 /**
  * To replace an expired token with a new access token, the client makes a HTTP POST request to the authorization provider's /token endpoint
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock;
+                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock;
 
 /**
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In client mode, since
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
                                             clientIdentifier:(NSString *)clientIdentifier
                                                 clientSecret:(NSString *)clientSecret
                                                       domain:(NSString *)domain
-                                             completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock;
+                                             completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock;
 
 @end
 
