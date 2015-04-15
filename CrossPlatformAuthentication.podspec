@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   s.weak_frameworks = 'WebKit'
 
   s.requires_arc = true
-  s.source_files = 'cpa-ios/Framework/CrossPlatformAuthentication.h', 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}'
-  s.public_header_files = 'CrossPlatformAuthentication.h', 'CPAProvider.h', 'CPAErrors.h', 'CPAToken.h'
+  s.source_files = 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}', 'cpa-ios/Framework/**/.{h,m}'
+  s.public_header_files = 'cpa-ios/Framework/CrossPlatformAuthentication.h', 'cpa-ios/Sources/CPAProvider.h', 'cpa-ios/Sources/CPAErrors.h', 'cpa-ios/Sources/CPAToken.h'
 
   s.resource_bundle = { 'CrossPlatformAuthentication-resources' => ['cpa-ios/Resources/{HTML,Images,Nibs}/*', 'cpa-ios/Resources/*.lproj'] }
 end
