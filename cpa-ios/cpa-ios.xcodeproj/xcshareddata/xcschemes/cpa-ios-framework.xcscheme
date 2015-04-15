@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6064FA21AD659B2008FC7EE"
-               BuildableName = "libcpa-ios.a"
-               BlueprintName = "cpa-ios"
+               BlueprintIdentifier = "E69096571ADE3D5200B62EB6"
+               BuildableName = "cpa-ios-framework.framework"
+               BlueprintName = "cpa-ios-framework"
                ReferencedContainer = "container:cpa-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FA21AD659B2008FC7EE"
-            BuildableName = "libcpa-ios.a"
-            BlueprintName = "cpa-ios"
+            BlueprintIdentifier = "E69096571ADE3D5200B62EB6"
+            BuildableName = "cpa-ios-framework.framework"
+            BlueprintName = "cpa-ios-framework"
             ReferencedContainer = "container:cpa-ios.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -51,9 +51,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FA21AD659B2008FC7EE"
-            BuildableName = "libcpa-ios.a"
-            BlueprintName = "cpa-ios"
+            BlueprintIdentifier = "E69096571ADE3D5200B62EB6"
+            BuildableName = "cpa-ios-framework.framework"
+            BlueprintName = "cpa-ios-framework"
             ReferencedContainer = "container:cpa-ios.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -69,9 +69,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6064FA21AD659B2008FC7EE"
-            BuildableName = "libcpa-ios.a"
-            BlueprintName = "cpa-ios"
+            BlueprintIdentifier = "E69096571ADE3D5200B62EB6"
+            BuildableName = "cpa-ios-framework.framework"
+            BlueprintName = "cpa-ios-framework"
             ReferencedContainer = "container:cpa-ios.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
