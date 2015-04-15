@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define CPALocalizedString(key, comment) \
     [[NSBundle cpa_resourceBundle] localizedStringForKey:(key) value:@"" table:nil]
 
-NS_ASSUME_NONNULL_BEGIN
 @interface NSBundle (CPAExtensions)
 
 /**
@@ -18,4 +19,5 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSBundle *)cpa_resourceBundle;
 
 @end
+
 NS_ASSUME_NONNULL_END

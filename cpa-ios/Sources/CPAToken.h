@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Token type
  */
@@ -17,7 +19,6 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 /**
  * Service token
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface CPAToken : NSObject <NSCoding>
 
 /**
@@ -62,4 +63,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

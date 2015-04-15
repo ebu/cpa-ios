@@ -10,10 +10,10 @@
 
 @interface CPAKeyboardInformation ()
 
-@property (nonatomic, assign) CGRect beginFrame;
-@property (nonatomic, assign) CGRect endFrame;
-@property (nonatomic, assign) NSTimeInterval animationDuration;
-@property (nonatomic, assign) UIViewAnimationCurve animationCurve;
+@property (nonatomic) CGRect beginFrame;
+@property (nonatomic) CGRect endFrame;
+@property (nonatomic) NSTimeInterval animationDuration;
+@property (nonatomic) UIViewAnimationCurve animationCurve;
 
 @end
 

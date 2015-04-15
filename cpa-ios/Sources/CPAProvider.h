@@ -108,4 +108,5 @@ typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * _
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

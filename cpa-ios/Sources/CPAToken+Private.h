@@ -6,10 +6,11 @@
 
 #import "CPAToken.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Private interface for implementation purposes
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface CPAToken (Private)
 
 /**
@@ -37,4 +38,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end
+
 NS_ASSUME_NONNULL_END

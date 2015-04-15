@@ -6,11 +6,11 @@
 
 #import "CPAErrors.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Private interface for implementation purposes
  */
-
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Return the error code matching a given identifier

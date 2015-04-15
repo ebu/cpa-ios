@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Stateless requests, for implementation purposes only
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface CPAStatelessRequest : NSObject
 
 /**
@@ -65,4 +66,5 @@ NS_ASSUME_NONNULL_BEGIN
                                              completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error))completionBlock;
 
 @end
+
 NS_ASSUME_NONNULL_END

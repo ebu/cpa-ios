@@ -25,4 +25,5 @@ typedef void (^CPAURLSessionDictionaryResponseBlock)(NSDictionary * __nullable r
 - (NSURLSessionDataTask *)cpa_JSONDictionaryTaskWithRequest:(NSURLRequest *)request completionHandler:(nullable CPAURLSessionDictionaryResponseBlock)completionHandler;
 
 @end
+
 NS_ASSUME_NONNULL_END
