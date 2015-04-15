@@ -10,8 +10,9 @@
 		E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E606503B1AD65D15008FC7EE /* libcpa-ios.a */; };
 		E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504C1AD673A5008FC7EE /* AppDelegate.m */; };
 		E606504F1AD673A5008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504D1AD673A5008FC7EE /* main.m */; };
-		E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* AuthenticationViewController.m */; };
+		E60650571AD67926008FC7EE /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* ServiceViewController.m */; };
 		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
+		E67470061ADE6DBA0061621B /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470051ADE6DBA0061621B /* ServicesViewController.m */; };
 		E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E21AD81E0400EDCA66 /* Application.storyboard */; };
 		E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
@@ -50,12 +51,14 @@
 		E606504B1AD673A5008FC7EE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E606504C1AD673A5008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E606504D1AD673A5008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E60650551AD67926008FC7EE /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
-		E60650561AD67926008FC7EE /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
+		E60650551AD67926008FC7EE /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		E60650561AD67926008FC7EE /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E67470041ADE6DBA0061621B /* ServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController.h; sourceTree = "<group>"; };
+		E67470051ADE6DBA0061621B /* ServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController.m; sourceTree = "<group>"; };
+		E67470081ADE7FA00061621B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
+		E674700A1ADE7FA70061621B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 		E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		E67F4B811ADD60F700332BE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
-		E67F4B831ADD610C00332BE5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 		E684D3E31AD81E0400EDCA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
 		E684D3E81AD81EB200EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E684D3EA1AD81EB800EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -108,12 +111,14 @@
 		E60650291AD65BCB008FC7EE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E684D3E21AD81E0400EDCA66 /* Application.storyboard */,
 				E606504B1AD673A5008FC7EE /* AppDelegate.h */,
 				E606504C1AD673A5008FC7EE /* AppDelegate.m */,
-				E60650551AD67926008FC7EE /* AuthenticationViewController.h */,
-				E60650561AD67926008FC7EE /* AuthenticationViewController.m */,
+				E684D3E21AD81E0400EDCA66 /* Application.storyboard */,
 				E606504D1AD673A5008FC7EE /* main.m */,
+				E67470041ADE6DBA0061621B /* ServicesViewController.h */,
+				E67470051ADE6DBA0061621B /* ServicesViewController.m */,
+				E60650551AD67926008FC7EE /* ServiceViewController.h */,
+				E60650561AD67926008FC7EE /* ServiceViewController.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -131,8 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				E606503B1AD65D15008FC7EE /* libcpa-ios.a */,
-				E6897B451AD7FC4A0083E1BB /* cpa-ios-resources.bundle */,
-				E69096731ADE3D8200B62EB6 /* cpa-ios-framework.framework */,
+				E6897B451AD7FC4A0083E1BB /* CrossPlatformAuthentication-resources.bundle */,
+				E69096731ADE3D8200B62EB6 /* CrossPlatformAuthentication.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,17 +219,17 @@
 			remoteRef = E606503A1AD65D15008FC7EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E6897B451AD7FC4A0083E1BB /* cpa-ios-resources.bundle */ = {
+		E6897B451AD7FC4A0083E1BB /* CrossPlatformAuthentication-resources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "cpa-ios-resources.bundle";
+			path = "CrossPlatformAuthentication-resources.bundle";
 			remoteRef = E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E69096731ADE3D8200B62EB6 /* cpa-ios-framework.framework */ = {
+		E69096731ADE3D8200B62EB6 /* CrossPlatformAuthentication.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = "cpa-ios-framework.framework";
+			path = CrossPlatformAuthentication.framework;
 			remoteRef = E69096721ADE3D8200B62EB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -249,7 +254,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E606504F1AD673A5008FC7EE /* main.m in Sources */,
-				E60650571AD67926008FC7EE /* AuthenticationViewController.m in Sources */,
+				E60650571AD67926008FC7EE /* ServiceViewController.m in Sources */,
+				E67470061ADE6DBA0061621B /* ServicesViewController.m in Sources */,
 				E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,8 +267,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E684D3E31AD81E0400EDCA66 /* Base */,
-				E67F4B811ADD60F700332BE5 /* en */,
-				E67F4B831ADD610C00332BE5 /* fr */,
+				E67470081ADE7FA00061621B /* en */,
+				E674700A1ADE7FA70061621B /* fr */,
 			);
 			name = Application.storyboard;
 			sourceTree = "<group>";

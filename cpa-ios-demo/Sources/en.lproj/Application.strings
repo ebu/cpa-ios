@@ -1,12 +1,11 @@
-
-/* Class = "UINavigationItem"; title = "CPA demo"; ObjectID = "E22-7v-7aL"; */
-"E22-7v-7aL.title" = "CPA demo";
-
 /* Class = "UILabel"; text = "Authenticated"; ObjectID = "KKC-gB-Iyh"; */
 "KKC-gB-Iyh.text" = "Authenticated";
 
-/* Class = "UILabel"; text = "<token>"; ObjectID = "Xig-6E-LWj"; */
-"Xig-6E-LWj.text" = "<token>";
+/* Class = "UINavigationItem"; title = "Services"; ObjectID = "bqd-uq-MxB"; */
+"bqd-uq-MxB.title" = "Services";
+
+/* Class = "UILabel"; text = "HbbTV"; ObjectID = "dq0-wd-qmK"; */
+"dq0-wd-qmK.text" = "HbbTV";
 
 /* Class = "UILabel"; text = "Force renewal"; ObjectID = "m6f-lp-DQy"; */
 "m6f-lp-DQy.text" = "Force renewal";
@@ -16,3 +15,6 @@
 
 /* Class = "UIButton"; normalTitle = "Retrieve token"; ObjectID = "rXy-lv-sL5"; */
 "rXy-lv-sL5.normalTitle" = "Retrieve token";
+
+/* Class = "UILabel"; text = "Playlist"; ObjectID = "syr-Dc-clK"; */
+"syr-Dc-clK.text" = "Playlist";

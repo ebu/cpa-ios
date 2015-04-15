@@ -6,6 +6,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AuthenticationViewController : UIViewController
+@interface ServicesViewController : UITableViewController
 
 @end

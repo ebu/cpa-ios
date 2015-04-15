@@ -4,13 +4,33 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "AuthenticationViewController.h"
+#import "ServiceViewController.h"
 
 #import "CPAProvider.h"
 
-static NSString * const kDomain = @"cpa.rts.ch";
+NSString *NameForService(NSString *serviceIdentifier)
+{
+    static NSDictionary *s_names = nil;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @"playlist" : NSLocalizedString(@"Playlist", nil),
+                     @"hbbtv" : NSLocalizedString(@"HbbTV", nil) };
+    });
+    return s_names[serviceIdentifier] ?: @"unknown";
+}
 
-@interface AuthenticationViewController ()
+NSString *DomainForService(NSString *serviceIdentifier)
+{
+    static NSDictionary *s_domains = nil;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_domains = @{ @"playlist" : @"playlist.rts.ch",
+                       @"hbbtv" : @"hbbtv.rts.ch" };
+    });
+    return s_domains[serviceIdentifier] ?: @"unknown";
+}
+
+@interface ServiceViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *tokenLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *userTokenSwitch;
@@ -19,7 +39,16 @@ static NSString * const kDomain = @"cpa.rts.ch";
 
 @end
 
-@implementation AuthenticationViewController
+@implementation ServiceViewController
+
+#pragma mark Accessors and mutators
+
+- (void)setServiceIdentifier:(NSString *)serviceIdentifier
+{
+    _serviceIdentifier = serviceIdentifier;
+    
+    self.title = [NSString stringWithFormat:@"%@ (%@)", NameForService(serviceIdentifier), DomainForService(serviceIdentifier)];
+}
 
 #pragma mark View lifecycle
 
@@ -34,7 +63,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
 
 - (void)reloadData
 {
-    CPAToken *token = [[CPAProvider defaultProvider] tokenForDomain:kDomain];
+    CPAToken *token = [[CPAProvider defaultProvider] tokenForDomain:DomainForService(self.serviceIdentifier)];
     if (token) {
         self.tokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == CPATokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
     }
@@ -47,7 +76,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
 
 - (IBAction)retrieveToken:(id)sender
 {
-    CPAToken *existingToken = [[CPAProvider defaultProvider] tokenForDomain:kDomain];
+    CPAToken *existingToken = [[CPAProvider defaultProvider] tokenForDomain:DomainForService(self.serviceIdentifier)];
     if (existingToken && ! self.forceRenewalSwitch.on) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", nil)
                                                             message:NSLocalizedString(@"A token is already available", nil)
@@ -71,7 +100,7 @@ static NSString * const kDomain = @"cpa.rts.ch";
     }
     
     CPATokenType type = self.userTokenSwitch.on ? CPATokenTypeUser : CPATokenTypeClient;
-    [[CPAProvider defaultProvider] requestTokenForDomain:kDomain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:^(CPAToken *token, NSError *error) {
+    [[CPAProvider defaultProvider] requestTokenForDomain:DomainForService(self.serviceIdentifier) withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:^(CPAToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]
