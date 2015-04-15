@@ -22,6 +22,7 @@ CPAErrorCode CPAErrorCodeForIdentifier(NSString *errorIdentifier)
                           @"invalid_client" : @(CPAErrorInvalidClient),
                           @"slow_down" : @(CPAErrorTooFast),
                           @"authorization_pending" : @(CPAErrorPendingAuthorization),
+                          @"cancelled" : @(CPAErrorAuthorizationDenied),
                           @"user_code:denied" : @(CPAErrorAuthorizationDenied) };
     });
     
