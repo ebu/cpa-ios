@@ -23,7 +23,8 @@ CPAErrorCode CPAErrorCodeForIdentifier(NSString *errorIdentifier)
                           @"slow_down" : @(CPAErrorTooFast),
                           @"authorization_pending" : @(CPAErrorPendingAuthorization),
                           @"cancelled" : @(CPAErrorAuthorizationDenied),
-                          @"user_code:denied" : @(CPAErrorAuthorizationDenied) };
+                          @"user_code:denied" : @(CPAErrorAuthorizationDenied),
+                          @"expired" : @(CPAErrorAuthorizationRequestExpired) };
     });
     
     NSNumber *errorCode = s_errorCodes[errorIdentifier];
@@ -42,7 +43,8 @@ NSString *CPALocalizedErrorDescriptionForCode(CPAErrorCode errorCode)
                                           @(CPAErrorTooFast) : CPALocalizedString(@"Too many requests are being made", nil),
                                           @(CPAErrorPendingAuthorization) : CPALocalizedString(@"Authorization is still pending", nil),
                                           @(CPAErrorAuthorizationCancelled) : CPALocalizedString(@"The authorization request has been cancelled", nil),
-                                          @(CPAErrorAuthorizationDenied) : CPALocalizedString(@"Authorization was denied", nil)};
+                                          @(CPAErrorAuthorizationDenied) : CPALocalizedString(@"Authorization was denied", nil),
+                                          @(CPAErrorAuthorizationRequestExpired) : CPALocalizedString(@"The authorization request has expired", nil) };
     });
     return s_localizedErrorDescriptions[@(errorCode)];
 }
