@@ -170,9 +170,11 @@ static CPAProvider *s_defaultProvider = nil;
         if (token && token.type == type) {
             [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
                 if (error) {
-                    // A token was never delivered for this domain, or the access has been revoked
+                    // A token was never delivered for this domain, or the client access has been revoked. Discard and start
+                    // from the beginning, registering a new client
                     if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
-                        [self requestCodeAndUserAccessTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:accessTokenCompletionBlock];
+                        [self discardIdentity];
+                        [self requestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
                         return;
                     }
                     
@@ -261,6 +263,11 @@ static CPAProvider *s_defaultProvider = nil;
 {
     NSData *identityData = [NSKeyedArchiver archivedDataWithRootObject:identity];
     [self.keyChainStore setData:identityData forKey:self.keyChainIdentifier];
+}
+
+- (void)discardIdentity
+{
+    [self.keyChainStore removeItemForKey:self.keyChainIdentifier];
 }
 
 - (NSString *)keyChainKeyForDomain:(NSString *)domain
