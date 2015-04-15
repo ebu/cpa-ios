@@ -84,7 +84,6 @@ static NSString * const kDomain = @"cpa.rts.ch";
         
         [self reloadData];
     }];
-
 }
 
 @end
