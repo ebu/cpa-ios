@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithValue:(NSString *)value
                        domain:(NSString *)domain
                    domainName:(NSString *)domainName
-                         type:(CPATokenType)type
+                     userName:(NSString *)userName
             lifetimeInSeconds:(NSInteger)lifetimeInSeconds;
 
 @end

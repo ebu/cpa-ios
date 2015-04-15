@@ -37,6 +37,11 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 @property (nonatomic, readonly, copy, nullable) NSString *domainName;
 
 /**
+ * The friendly name of the user account associated with the token, nil for a client token
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *userName;
+
+/**
  * The token type
  */
 @property (nonatomic, readonly) CPATokenType type;

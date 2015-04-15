@@ -18,7 +18,7 @@
 
 // Typedefs
 typedef void (^CPAVoidCompletionBlock)(NSError *error);
-typedef void (^CPAAccessTokenCompletionBlock)(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error);
+typedef void (^CPAAccessTokenCompletionBlock)(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error);
 
 // Globals
 static CPAProvider *s_defaultProvider = nil;
@@ -148,7 +148,7 @@ static CPAProvider *s_defaultProvider = nil;
  credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
               completionBlock:(CPATokenCompletionBlock)completionBlock
 {
-    CPAAccessTokenCompletionBlock accessTokenCompletionBlock = ^(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+    CPAAccessTokenCompletionBlock accessTokenCompletionBlock = ^(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
         if (error) {
             completionBlock ? completionBlock(nil, error) : nil;
             return;
@@ -157,7 +157,7 @@ static CPAProvider *s_defaultProvider = nil;
         CPAToken *token = [[CPAToken alloc] initWithValue:accessToken
                                                    domain:domain
                                                domainName:domainName
-                                                     type:type
+                                                 userName:userName
                                         lifetimeInSeconds:lifetimeInSeconds];
         [self setToken:token forDomain:domain];
         
@@ -182,7 +182,7 @@ static CPAProvider *s_defaultProvider = nil;
                     return;
                 }
                 
-                accessTokenCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
+                accessTokenCompletionBlock(userName, accessToken, domainName, lifetimeInSeconds, error);
             }];
         }
         else {
@@ -191,7 +191,7 @@ static CPAProvider *s_defaultProvider = nil;
     }
     else {
         [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-            accessTokenCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
+            accessTokenCompletionBlock(nil, accessToken, domainName, lifetimeInSeconds, error);
         }];
     }
 }
@@ -203,19 +203,19 @@ static CPAProvider *s_defaultProvider = nil;
 {
     [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger lifetimeInSeconds, NSError *error) {
         if (error) {
-            completionBlock ? completionBlock(nil, nil, 0, error) : nil;
+            completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
             return;
         }
         
         // Common user token request code
         CPAVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
             if (error) {
-                completionBlock ? completionBlock(nil, nil, 0, error) : nil;
+                completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
                 return;
             }
             
             [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-                completionBlock(accessToken, domainName, lifetimeInSeconds, error);
+                completionBlock(userName, accessToken, domainName, lifetimeInSeconds, error);
             }];
         };
         

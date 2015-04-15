@@ -11,7 +11,7 @@
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) NSString *domain;
 @property (nonatomic, copy) NSString *domainName;
-@property (nonatomic) CPATokenType type;
+@property (nonatomic, copy) NSString *userName;
 @property (nonatomic) NSInteger lifetimeInSeconds;
 
 @end
@@ -23,7 +23,7 @@
 - (instancetype)initWithValue:(NSString *)value
                        domain:(NSString *)domain
                    domainName:(NSString *)domainName
-                         type:(CPATokenType)type
+                     userName:(NSString *)userName
             lifetimeInSeconds:(NSInteger)lifetimeInSeconds
 {
     NSParameterAssert(value);
@@ -34,10 +34,17 @@
         self.value = value;
         self.domain = domain;
         self.domainName = domainName;
-        self.type = type;
+        self.userName = userName;
         self.lifetimeInSeconds = lifetimeInSeconds;
     }
     return self;
+}
+
+#pragma mark Accessors and mutators
+
+- (CPATokenType)type
+{
+    return (self.userName != nil) ? CPATokenTypeUser : CPATokenTypeClient;
 }
 
 #pragma mark NSCoding protocol
@@ -48,7 +55,7 @@
     token.value = [aDecoder decodeObjectForKey:@"value"];
     token.domain = [aDecoder decodeObjectForKey:@"domain"];
     token.domainName = [aDecoder decodeObjectForKey:@"domainName"];
-    token.type = [aDecoder decodeIntegerForKey:@"type"];
+    token.userName = [aDecoder decodeObjectForKey:@"userName"];
     token.lifetimeInSeconds = [aDecoder decodeIntegerForKey:@"lifetimeInSeconds"];
     return token;
 }
@@ -58,7 +65,7 @@
     [aCoder encodeObject:self.value forKey:@"value"];
     [aCoder encodeObject:self.domain forKey:@"domain"];
     [aCoder encodeObject:self.domainName forKey:@"domainName"];
-    [aCoder encodeInteger:self.type forKey:@"type"];
+    [aCoder encodeObject:self.userName forKey:@"userName"];
     [aCoder encodeInteger:self.lifetimeInSeconds forKey:@"lifetimeInSeconds"];
 }
 
@@ -66,12 +73,13 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; type: %@; lifetimeInSeconds: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; userName: %@; type: %@; lifetimeInSeconds: %@>",
             [self class],
             self,
             self.value,
             self.domain,
             self.domainName,
+            self.userName,
             (self.type == CPATokenTypeClient) ? @"Client" : @"User",
             @(self.lifetimeInSeconds)];
 }
