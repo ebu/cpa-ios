@@ -1,3 +1,4 @@
+
 /* Class = "UILabel"; text = "Authentifié"; ObjectID = "KKC-gB-Iyh"; */
 "KKC-gB-Iyh.text" = "Authentifié";
 
@@ -16,5 +17,8 @@
 /* Class = "UIButton"; normalTitle = "Récupérer token"; ObjectID = "rXy-lv-sL5"; */
 "rXy-lv-sL5.normalTitle" = "Récupérer token";
 
+/* Class = "UILabel"; text = "Unsupported service"; ObjectID = "sHz-8E-gQG"; */
+"sHz-8E-gQG.text" = "Service non géré";
+
 /* Class = "UILabel"; text = "Playlist"; ObjectID = "syr-Dc-clK"; */
-"syr-Dc-clK.text" = "Playlist";
+"syr-Dc-clK.text" = "Liste de lecture";

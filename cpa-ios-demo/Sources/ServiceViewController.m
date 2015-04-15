@@ -14,9 +14,10 @@ NSString *NameForService(NSString *serviceIdentifier)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @"playlist" : NSLocalizedString(@"Playlist", nil),
-                     @"hbbtv" : NSLocalizedString(@"HbbTV", nil) };
+                     @"hbbtv" : NSLocalizedString(@"HbbTV", nil),
+                     @"unsupported" : NSLocalizedString(@"Unsupported service", nil) };
     });
-    return s_names[serviceIdentifier] ?: @"unknown";
+    return s_names[serviceIdentifier] ?: NSLocalizedString(@"Unknown service", nil);
 }
 
 NSString *DomainForService(NSString *serviceIdentifier)
@@ -25,7 +26,8 @@ NSString *DomainForService(NSString *serviceIdentifier)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_domains = @{ @"playlist" : @"playlist.rts.ch",
-                       @"hbbtv" : @"hbbtv.rts.ch" };
+                       @"hbbtv" : @"hbbtv.rts.ch",
+                       @"unsupported" : @"unsupported.service.ch" };
     });
     return s_domains[serviceIdentifier] ?: @"unknown";
 }
