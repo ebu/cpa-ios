@@ -93,9 +93,7 @@ NSString *DomainForService(NSString *serviceIdentifier)
             if (isPresenting) {
                 [self.navigationController pushViewController:viewController animated:YES];
             }
-            else {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+            // Nothing to do when dismissing
         };
     }
     
