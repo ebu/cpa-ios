@@ -28,7 +28,7 @@ static CPAKeyboardInformation *s_instance = nil;
     return s_instance;
 }
 
-#pragma mark Object creation and destruction
+#pragma mark Object lifecycle
 
 - (instancetype)initWithUserInfo:(NSDictionary *)userInfo
 {

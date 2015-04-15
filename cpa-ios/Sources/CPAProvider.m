@@ -6,6 +6,7 @@
 
 #import "CPAProvider.h"
 
+#import "CPAIdentity+Private.h"
 #import "CPAErrors+Private.h"
 #import "CPAStatelessRequest.h"
 #import "CPAUICKeyChainStore.h"
@@ -17,6 +18,7 @@
 
 // Typedefs
 typedef void (^CPAVoidCompletionBlock)(NSError *error);
+typedef void (^CPAAccessTokenCompletionBlock)(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error);
 
 // Globals
 static CPAProvider *s_defaultProvider = nil;
@@ -25,6 +27,8 @@ static CPAProvider *s_defaultProvider = nil;
 
 @property (nonatomic) NSURL *authorizationProviderURL;
 @property (nonatomic) CPAUICKeyChainStore *keyChainStore;
+
+@property (nonatomic, readonly, copy) NSString *keyChainIdentifier;
 
 @end
 
@@ -65,7 +69,7 @@ static CPAProvider *s_defaultProvider = nil;
     return [self initWithAuthorizationProviderURL:authorizationProviderURL keyChainAccessGroup:nil];
 }
 
-#pragma mark Token retrieval and management
+#pragma mark Token retrieval
 
 - (CPAToken *)tokenForDomain:(NSString *)domain
 {
@@ -88,52 +92,6 @@ static CPAProvider *s_defaultProvider = nil;
 {
     NSParameterAssert(domain);
     
-    // User tokens can be refreshed without requiring the application to be paired again with the user account, provided the previously
-    // granted access has not been revoked and the client identifier and secret have not been lost
-    CPAToken *token = [self tokenForDomain:domain];
-    if (token && token.type == CPATokenTypeUser) {
-        [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-            if (error) {
-                // The application has been revoked. Register again
-                if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
-                    [self registerAndRequestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
-                    return;
-                }
-                
-                completionBlock ? completionBlock(nil, error) : nil;
-                return;
-            }
-            
-            CPAToken *freshToken = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:token.clientIdentifier clientSecret:token.clientSecret domain:domain];
-            freshToken.domainName = domainName;
-            freshToken.type = type;
-            freshToken.lifetimeInSeconds = lifetimeInSeconds;
-            [self setToken:freshToken forDomain:domain];
-            
-            completionBlock ? completionBlock(token, nil) : nil;
-        }];
-    }
-    else {
-        [self registerAndRequestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
-    }
-}
-
-- (void)registerAndRequestTokenForDomain:(NSString *)domain
-                                withType:(CPATokenType)type
-            credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
-                         completionBlock:(CPATokenCompletionBlock)completionBlock
-{
-    NSParameterAssert(domain);
-        
-    NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
-    NSAssert(clientName, @"A client name is required");
-    
-    NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
-    NSAssert(softwareIdentifier, @"A software identifier is required");
-    
-    NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-    NSAssert(softwareVersion, @"A software version is required");
-    
     // Default: Modal presentation, wrapped in a navigation controller, with a cancel button at the top left
     if (! credentialsPresentationBlock) {
         credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
@@ -154,71 +112,126 @@ static CPAProvider *s_defaultProvider = nil;
         };
     }
     
-    [CPAStatelessRequest registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
-        if (error) {
-            completionBlock ? completionBlock(nil, error) : nil;
-            return;
-        }
+    // If an identity has already been retrieved for this provider, reuse it. This makes single sign-on possible (the AP
+    // might automatically grant a token for a domain if a token for an affiliated domain has already been granted)
+    CPAIdentity *identity = [self identity];
+    if (identity) {
+        [self requestTokenForDomain:domain withType:type identity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
+    }
+    else {
+        NSString *clientName = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
+        NSAssert(clientName, @"A client name is required");
         
-        // Common token request completion code
-        void (^tokenRequestCompletionBlock)(NSString *, NSString *, NSInteger, NSError *) = ^(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+        NSString *softwareIdentifier = [NSBundle mainBundle].bundleIdentifier;
+        NSAssert(softwareIdentifier, @"A software identifier is required");
+        
+        NSString *softwareVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+        NSAssert(softwareVersion, @"A software version is required");
+        
+        [CPAStatelessRequest registerClientWithAuthorizationProviderURL:self.authorizationProviderURL clientName:clientName softwareIdentifier:softwareIdentifier softwareVersion:softwareVersion completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
             if (error) {
                 completionBlock ? completionBlock(nil, error) : nil;
                 return;
             }
             
-            CPAToken *token = [[CPAToken alloc] initWithValue:accessToken clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain];
-            token.domainName = domainName;
-            token.type = type;
-            token.lifetimeInSeconds = lifetimeInSeconds;
-            [self setToken:token forDomain:domain];
+            CPAIdentity *identity = [[CPAIdentity alloc] initWithIdentifier:clientIdentifier secret:clientSecret];
+            [self setIdentity:identity];
             
-            completionBlock ? completionBlock(token, nil) : nil;
-        };
+            [self requestTokenForDomain:domain withType:type identity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
+        }];
+    }
+}
+
+- (void)requestTokenForDomain:(NSString *)domain
+                     withType:(CPATokenType)type
+                     identity:(CPAIdentity *)identity
+ credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
+              completionBlock:(CPATokenCompletionBlock)completionBlock
+{
+    CPAAccessTokenCompletionBlock accessTokenCompletionBlock = ^(NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+        if (error) {
+            completionBlock ? completionBlock(nil, error) : nil;
+            return;
+        }
         
-        // User token: Request user code first
-        if (type == CPATokenTypeUser) {
-            [CPAStatelessRequest requestUserCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger lifetimeInSeconds, NSError *error) {
+        CPAToken *token = [[CPAToken alloc] initWithValue:accessToken
+                                                   domain:domain
+                                               domainName:domainName
+                                                     type:type
+                                        lifetimeInSeconds:lifetimeInSeconds];
+        [self setToken:token forDomain:domain];
+        
+        completionBlock ? completionBlock(token, nil) : nil;
+    };
+    
+    if (type == CPATokenTypeUser) {
+        // User tokens can be refreshed (i.e. not need to get a user code again, and no need to supply credentials again)
+        CPAToken *token = [self tokenForDomain:domain];
+        if (token && token.type == type) {
+            [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
                 if (error) {
+                    // A token was never delivered for this domain, or the access has been revoked
+                    if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
+                        [self requestCodeAndUserAccessTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:accessTokenCompletionBlock];
+                        return;
+                    }
+                    
                     completionBlock ? completionBlock(nil, error) : nil;
                     return;
                 }
                 
-                // Common user token request code
-                CPAVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
-                    if (error) {
-                        completionBlock ? completionBlock(nil, error) : nil;
-                        return;
-                    }
-                    
-                    [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-                        tokenRequestCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
-                    }];
-                };
-                
-                // Open verification URL built-in browser
-                if (verificationURL) {
-                    CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
-                    credentialsPresentationBlock(authorizationViewController, YES);
-
-                    __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
-                    authorizationViewController.completionBlock = ^(NSError *error) {
-                        credentialsPresentationBlock(weakAuthorizationViewController, NO);
-                        userTokenRequestBlock(error);
-                    };
-                }
-                // If no verification URL is received, this means that single sign-on is provided by the authorization provider when connecting
-                // to a new service provider affiliated to it (see 8.2.2.3 in spec). Proceed with token retrieval
-                else {
-                    userTokenRequestBlock(nil);
-                }
+                accessTokenCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
             }];
         }
-        // Client token
         else {
-            [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:clientIdentifier clientSecret:clientSecret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-                tokenRequestCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
+            [self requestCodeAndUserAccessTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:accessTokenCompletionBlock];
+        }
+    }
+    else {
+        [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+            accessTokenCompletionBlock(accessToken, domainName, lifetimeInSeconds, error);
+        }];
+    }
+}
+
+- (void)requestCodeAndUserAccessTokenForDomain:(NSString *)domain
+                                  withIdentity:(CPAIdentity *)identity
+                  credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
+                               completionBlock:(CPAAccessTokenCompletionBlock)completionBlock
+{
+    [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger lifetimeInSeconds, NSError *error) {
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, 0, error) : nil;
+            return;
+        }
+        
+        // Common user token request code
+        CPAVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
+            if (error) {
+                completionBlock ? completionBlock(nil, nil, 0, error) : nil;
+                return;
+            }
+            
+            [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+                completionBlock(accessToken, domainName, lifetimeInSeconds, error);
             }];
+        };
+        
+        // Open verification URL built-in browser
+        if (verificationURL) {
+            CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
+            credentialsPresentationBlock(authorizationViewController, YES);
+            
+            __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
+            authorizationViewController.completionBlock = ^(NSError *error) {
+                credentialsPresentationBlock(weakAuthorizationViewController, NO);
+                userTokenRequestBlock(error);
+            };
+        }
+        // If no verification URL is received, this means that single sign-on is provided by the authorization provider when connecting
+        // to a new service provider affiliated to it (see 8.2.2.3 in spec). Proceed with token retrieval
+        else {
+            userTokenRequestBlock(nil);
         }
     }];
 }
@@ -233,6 +246,23 @@ static CPAProvider *s_defaultProvider = nil;
 
 #pragma mark Keychain storage management
 
+- (NSString *)keyChainIdentifier
+{
+    return self.authorizationProviderURL.absoluteString;
+}
+
+- (CPAIdentity *)identity
+{
+    NSData *identityData = [self.keyChainStore dataForKey:self.keyChainIdentifier];
+    return identityData ? [NSKeyedUnarchiver unarchiveObjectWithData:identityData] : nil;
+}
+
+- (void)setIdentity:(CPAIdentity *)identity
+{
+    NSData *identityData = [NSKeyedArchiver archivedDataWithRootObject:identity];
+    [self.keyChainStore setData:identityData forKey:self.keyChainIdentifier];
+}
+
 - (NSString *)keyChainKeyForDomain:(NSString *)domain
 {
     NSParameterAssert(domain);
@@ -240,7 +270,7 @@ static CPAProvider *s_defaultProvider = nil;
     // FIXME: If we want to support multiple users per application, the key should also contain a reference
     //        to a reliable user identifier. Currently only the user display name can be retrieved (user_name),
     //        which is sadly not reliable enough since it might change
-    return [NSString stringWithFormat:@"%@_%@", self.authorizationProviderURL.absoluteString, domain];
+    return [NSString stringWithFormat:@"%@_%@", self.keyChainIdentifier, domain];
 }
 
 - (void)setToken:(CPAToken *)token forDomain:(NSString *)domain

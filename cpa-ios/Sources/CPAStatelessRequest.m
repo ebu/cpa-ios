@@ -14,7 +14,7 @@
                                         clientName:(NSString *)clientName
                                 softwareIdentifier:(NSString *)softwareIdentifier
                                    softwareVersion:(NSString *)softwareVersion
-                                   completionBlock:(void (^)(NSString *clientIdentifier, NSString *clientSecret, NSError *error))completionBlock
+                                   completionBlock:(CPAClientRegistrationCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientName);
@@ -47,11 +47,11 @@
     }] resume];
 }
 
-+ (void)requestUserCodeWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                   clientIdentifier:(NSString *)clientIdentifier
-                                       clientSecret:(NSString *)clientSecret
-                                             domain:(NSString *)domain
-                                    completionBlock:(void (^)(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger lifetimeInSeconds, NSError *error))completionBlock
++ (void)requestCodeWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                               clientIdentifier:(NSString *)clientIdentifier
+                                   clientSecret:(NSString *)clientSecret
+                                         domain:(NSString *)domain
+                                completionBlock:(CPAUserCodeRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
@@ -93,7 +93,7 @@
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
+                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(deviceCode);
@@ -136,7 +136,7 @@
                                           clientIdentifier:(NSString *)clientIdentifier
                                               clientSecret:(NSString *)clientSecret
                                                     domain:(NSString *)domain
-                                           completionBlock:(void (^)(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
+                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
@@ -177,7 +177,7 @@
                                             clientIdentifier:(NSString *)clientIdentifier
                                                 clientSecret:(NSString *)clientSecret
                                                       domain:(NSString *)domain
-                                             completionBlock:(void (^)(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error))completionBlock
+                                             completionBlock:(CPAClientAccessTokenRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);

@@ -60,7 +60,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     BOOL _isFinished;
 }
 
-#pragma mark Object creation and destruction
+#pragma mark Object lifecycle
 
 - (instancetype)initWithVerificationURL:(NSURL *)verificationURL userCode:(NSString *)userCode
 {

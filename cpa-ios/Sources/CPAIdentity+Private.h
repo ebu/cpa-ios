@@ -4,23 +4,20 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "CPAToken.h"
+#import "CPAIdentity.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Private interface for implementation purposes
  */
-@interface CPAToken (Private)
+@interface CPAIdentity (Private)
 
 /**
  * Create a token with the specified parameters (all mandatory)
  */
-- (instancetype)initWithValue:(NSString *)value
-                       domain:(NSString *)domain
-                   domainName:(NSString *)domainName
-                         type:(CPATokenType)type
-            lifetimeInSeconds:(NSInteger)lifetimeInSeconds;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                            secret:(NSString *)secret;
 
 @end
 

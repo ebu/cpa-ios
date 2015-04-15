@@ -13,6 +13,10 @@
 		E65A41721AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */; };
 		E65A41751AD7EABC00D8F289 /* CPAErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* CPAErrors.m */; };
 		E65A417B1AD7F76600D8F289 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
+		E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470201ADE8DDC0061621B /* CPAIdentity.m */; };
+		E67470221ADE8DF20061621B /* CPAIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = E674701F1ADE8DDC0061621B /* CPAIdentity.h */; };
+		E67470231ADE8DFA0061621B /* CPAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470201ADE8DDC0061621B /* CPAIdentity.m */; };
+		E67470271ADE91090061621B /* CPAIdentity+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E67470241ADE90F70061621B /* CPAIdentity+Private.h */; };
 		E67F11B91ADCF83100AFC2C7 /* CPAAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */; };
 		E67F11BE1ADD027B00AFC2C7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */; };
 		E67F11D81ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */; };
@@ -108,6 +112,9 @@
 		E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAErrors+Private.h"; sourceTree = "<group>"; };
 		E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CPAExtensions.h"; sourceTree = "<group>"; };
 		E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CPAExtensions.m"; sourceTree = "<group>"; };
+		E674701F1ADE8DDC0061621B /* CPAIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAIdentity.h; sourceTree = "<group>"; };
+		E67470201ADE8DDC0061621B /* CPAIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAIdentity.m; sourceTree = "<group>"; };
+		E67470241ADE90F70061621B /* CPAIdentity+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAIdentity+Private.h"; sourceTree = "<group>"; };
 		E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAAuthorizationViewController.h; sourceTree = "<group>"; };
 		E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAAuthorizationViewController.m; sourceTree = "<group>"; };
 		E67F11BD1ADD027B00AFC2C7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -189,22 +196,25 @@
 			children = (
 				E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */,
 				E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */,
-				E60650321AD65CFB008FC7EE /* CPAProvider.h */,
-				E60650331AD65CFB008FC7EE /* CPAProvider.m */,
 				E65A41731AD7EABC00D8F289 /* CPAErrors.h */,
 				E65A41741AD7EABC00D8F289 /* CPAErrors.m */,
 				E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */,
+				E674701F1ADE8DDC0061621B /* CPAIdentity.h */,
+				E67470201ADE8DDC0061621B /* CPAIdentity.m */,
+				E67470241ADE90F70061621B /* CPAIdentity+Private.h */,
 				E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */,
 				E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */,
+				E60650321AD65CFB008FC7EE /* CPAProvider.h */,
+				E60650331AD65CFB008FC7EE /* CPAProvider.m */,
 				E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */,
 				E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */,
 				E6257C981AD6C044005FE6D2 /* CPAToken.h */,
 				E6257C991AD6C044005FE6D2 /* CPAToken.m */,
 				E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */,
-				E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */,
-				E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */,
 				E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */,
 				E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */,
+				E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */,
+				E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -292,6 +302,7 @@
 				E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */,
 				E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */,
 				E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */,
+				E67470221ADE8DF20061621B /* CPAIdentity.h in Headers */,
 				E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */,
 				E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */,
 				E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */,
@@ -301,6 +312,7 @@
 				E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */,
 				E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */,
 				E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */,
+				E67470271ADE91090061621B /* CPAIdentity+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65A41721AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m in Sources */,
+				E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */,
 				E6257C9A1AD6C044005FE6D2 /* CPAToken.m in Sources */,
 				E67F11B91ADCF83100AFC2C7 /* CPAAuthorizationViewController.m in Sources */,
 				E65A41751AD7EABC00D8F289 /* CPAErrors.m in Sources */,
@@ -468,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */,
+				E67470231ADE8DFA0061621B /* CPAIdentity.m in Sources */,
 				E69096881ADE3F4500B62EB6 /* NSURLSession+CPAExtensions.m in Sources */,
 				E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */,
 				E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */,
@@ -697,6 +711,7 @@
 				E690966C1ADE3D5200B62EB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */ = {
 			isa = XCConfigurationList;
