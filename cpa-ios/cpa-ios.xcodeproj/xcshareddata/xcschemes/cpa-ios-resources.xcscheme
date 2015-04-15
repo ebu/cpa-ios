@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E6CAEBFB1AD7F9E8008EB753"
-               BuildableName = "cpa-ios-resources.bundle"
+               BuildableName = "CrossPlatformAuthentication-resources.bundle"
                BlueprintName = "cpa-ios-resources"
                ReferencedContainer = "container:cpa-ios.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6CAEBFB1AD7F9E8008EB753"
-            BuildableName = "cpa-ios-resources.bundle"
+            BuildableName = "CrossPlatformAuthentication-resources.bundle"
             BlueprintName = "cpa-ios-resources"
             ReferencedContainer = "container:cpa-ios.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6CAEBFB1AD7F9E8008EB753"
-            BuildableName = "cpa-ios-resources.bundle"
+            BuildableName = "CrossPlatformAuthentication-resources.bundle"
             BlueprintName = "cpa-ios-resources"
             ReferencedContainer = "container:cpa-ios.xcodeproj">
          </BuildableReference>
