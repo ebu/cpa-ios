@@ -2,11 +2,11 @@
 /* Class = "UILabel"; text = "Authenticated"; ObjectID = "KKC-gB-Iyh"; */
 "KKC-gB-Iyh.text" = "Authenticated";
 
-/* Class = "UINavigationItem"; title = "Services"; ObjectID = "bqd-uq-MxB"; */
-"bqd-uq-MxB.title" = "Services";
+/* Class = "UINavigationItem"; title = "Domains"; ObjectID = "bqd-uq-MxB"; */
+"bqd-uq-MxB.title" = "Domains";
 
-/* Class = "UILabel"; text = "HbbTV"; ObjectID = "dq0-wd-qmK"; */
-"dq0-wd-qmK.text" = "HbbTV";
+/* Class = "UILabel"; text = "RTS HbbTV"; ObjectID = "dq0-wd-qmK"; */
+"dq0-wd-qmK.text" = "RTS HbbTV";
 
 /* Class = "UILabel"; text = "Force renewal"; ObjectID = "m6f-lp-DQy"; */
 "m6f-lp-DQy.text" = "Force renewal";
@@ -17,8 +17,8 @@
 /* Class = "UIButton"; normalTitle = "Retrieve token"; ObjectID = "rXy-lv-sL5"; */
 "rXy-lv-sL5.normalTitle" = "Retrieve token";
 
-/* Class = "UILabel"; text = "Unsupported service"; ObjectID = "sHz-8E-gQG"; */
-"sHz-8E-gQG.text" = "Unsupported service";
+/* Class = "UILabel"; text = "Unsupported domain"; ObjectID = "sHz-8E-gQG"; */
+"sHz-8E-gQG.text" = "Unsupported domain";
 
-/* Class = "UILabel"; text = "Playlist"; ObjectID = "syr-Dc-clK"; */
-"syr-Dc-clK.text" = "Playlist";
+/* Class = "UILabel"; text = "RTS Playlist"; ObjectID = "syr-Dc-clK"; */
+"syr-Dc-clK.text" = "RTS Playlist";

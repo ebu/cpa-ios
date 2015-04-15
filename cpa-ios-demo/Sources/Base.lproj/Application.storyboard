@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="450" y="-277"/>
         </scene>
-        <!--Services-->
+        <!--Domains-->
         <scene sceneID="C0b-si-fwM">
             <objects>
-                <tableViewController id="yMc-2H-eWx" customClass="ServicesViewController" sceneMemberID="viewController">
+                <tableViewController id="yMc-2H-eWx" customClass="DomainsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mrM-Ef-io8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aGu-RQ-Im5" id="mDK-M1-xGQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playlist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syr-Dc-clK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RTS Playlist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syr-Dc-clK">
                                                     <rect key="frame" x="20" y="11" width="560" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -46,7 +46,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="playlist" id="8LN-nr-Mdm"/>
+                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="playlist.rts.ch" id="8LN-nr-Mdm"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Fji-TM-l4s">
@@ -54,7 +54,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fji-TM-l4s" id="a7P-jW-Ve0">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HbbTV" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dq0-wd-qmK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RTS HbbTV" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dq0-wd-qmK">
                                                     <rect key="frame" x="20" y="11" width="560" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,7 +63,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="hbbtv" id="t3l-db-aey"/>
+                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="hbbtv.rts.ch" id="t3l-db-aey"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tUF-tr-pXz">
@@ -71,7 +71,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tUF-tr-pXz" id="xsy-wa-YKc">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unsupported service" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-8E-gQG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unsupported domain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-8E-gQG">
                                                     <rect key="frame" x="20" y="11" width="560" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -80,7 +80,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="unsupported" id="6VQ-Bd-j5J"/>
+                                            <segue destination="KSl-Ht-YmI" kind="show" identifier="unsupported.ch" id="6VQ-Bd-j5J"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -91,7 +91,7 @@
                             <outlet property="delegate" destination="yMc-2H-eWx" id="3th-8d-ery"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Services" id="bqd-uq-MxB"/>
+                    <navigationItem key="navigationItem" title="Domains" id="bqd-uq-MxB"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hi7-vV-eye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,7 +100,7 @@
         <!--<domain>-->
         <scene sceneID="f66-Lo-z75">
             <objects>
-                <viewController id="KSl-Ht-YmI" customClass="ServiceViewController" sceneMemberID="viewController">
+                <viewController id="KSl-Ht-YmI" customClass="DomainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vun-hA-Dji"/>
                         <viewControllerLayoutGuide type="bottom" id="e9x-Ev-RQ6"/>

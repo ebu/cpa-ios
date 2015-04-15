@@ -4,35 +4,23 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "ServiceViewController.h"
+#import "DomainViewController.h"
 
 #import "CPAProvider.h"
 
-NSString *NameForService(NSString *serviceIdentifier)
+NSString *NameForDomain(NSString *domain)
 {
     static NSDictionary *s_names = nil;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @"playlist" : NSLocalizedString(@"Playlist", nil),
-                     @"hbbtv" : NSLocalizedString(@"HbbTV", nil),
-                     @"unsupported" : NSLocalizedString(@"Unsupported service", nil) };
+        s_names = @{ @"playlist.rts.ch" : NSLocalizedString(@"RTS Playlist", nil),
+                     @"hbbtv.rts.ch" : NSLocalizedString(@"RTS HbbTV", nil),
+                     @"unsupported.ch" : NSLocalizedString(@"Unsupported domain", nil) };
     });
-    return s_names[serviceIdentifier] ?: NSLocalizedString(@"Unknown service", nil);
+    return s_names[domain] ?: NSLocalizedString(@"Unknown domain", nil);
 }
 
-NSString *DomainForService(NSString *serviceIdentifier)
-{
-    static NSDictionary *s_domains = nil;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_domains = @{ @"playlist" : @"playlist.rts.ch",
-                       @"hbbtv" : @"hbbtv.rts.ch",
-                       @"unsupported" : @"unsupported.service.ch" };
-    });
-    return s_domains[serviceIdentifier] ?: @"unknown";
-}
-
-@interface ServiceViewController ()
+@interface DomainViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *tokenLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *userTokenSwitch;
@@ -41,15 +29,15 @@ NSString *DomainForService(NSString *serviceIdentifier)
 
 @end
 
-@implementation ServiceViewController
+@implementation DomainViewController
 
 #pragma mark Accessors and mutators
 
-- (void)setServiceIdentifier:(NSString *)serviceIdentifier
+- (void)setDomain:(NSString *)domain
 {
-    _serviceIdentifier = serviceIdentifier;
+    _domain = domain;
     
-    self.title = [NSString stringWithFormat:@"%@ (%@)", NameForService(serviceIdentifier), DomainForService(serviceIdentifier)];
+    self.title = [NSString stringWithFormat:@"%@ (%@)", NameForDomain(domain), domain];
 }
 
 #pragma mark View lifecycle
@@ -65,7 +53,7 @@ NSString *DomainForService(NSString *serviceIdentifier)
 
 - (void)reloadData
 {
-    CPAToken *token = [[CPAProvider defaultProvider] tokenForDomain:DomainForService(self.serviceIdentifier)];
+    CPAToken *token = [[CPAProvider defaultProvider] tokenForDomain:self.domain];
     if (token) {
         self.tokenLabel.text = [NSString stringWithFormat:@"%@\n(%@)", token.value, (token.type == CPATokenTypeClient) ? NSLocalizedString(@"Client", nil) : NSLocalizedString(@"User", nil)];
     }
@@ -78,7 +66,7 @@ NSString *DomainForService(NSString *serviceIdentifier)
 
 - (IBAction)retrieveToken:(id)sender
 {
-    CPAToken *existingToken = [[CPAProvider defaultProvider] tokenForDomain:DomainForService(self.serviceIdentifier)];
+    CPAToken *existingToken = [[CPAProvider defaultProvider] tokenForDomain:self.domain];
     if (existingToken && ! self.forceRenewalSwitch.on) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Information", nil)
                                                             message:NSLocalizedString(@"A token is already available", nil)
@@ -100,7 +88,7 @@ NSString *DomainForService(NSString *serviceIdentifier)
     }
     
     CPATokenType type = self.userTokenSwitch.on ? CPATokenTypeUser : CPATokenTypeClient;
-    [[CPAProvider defaultProvider] requestTokenForDomain:DomainForService(self.serviceIdentifier) withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:^(CPAToken *token, NSError *error) {
+    [[CPAProvider defaultProvider] requestTokenForDomain:self.domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:^(CPAToken *token, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                                 message:[error localizedDescription]

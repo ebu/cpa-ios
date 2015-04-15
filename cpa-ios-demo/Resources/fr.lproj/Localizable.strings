@@ -8,9 +8,10 @@
 "Client"="Client";
 "Dismiss"="Fermer";
 "Error"="Erreur";
-"HbbTV"="HbbTV";
 "Information"="Information";
 "None"="Aucun";
-"Playlist"="Liste de lecture";
-"Unknown service"="Service inconnu";
+"RTS HbbTV"="HbbTV RTS";
+"RTS Playlist"="Liste de lecture RTS";
+"Unknown domain"="Domaine inconnu";
+"Unsupported domain"="Domaine non géré";
 "User"="Utilisateur";

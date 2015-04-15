@@ -6,6 +6,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ServicesViewController : UITableViewController
+@interface DomainsViewController : UITableViewController
 
 @end

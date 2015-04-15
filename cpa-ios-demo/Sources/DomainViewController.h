@@ -6,8 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ServiceViewController : UIViewController
+@interface DomainViewController : UIViewController
 
-@property (nonatomic, copy) NSString *serviceIdentifier;
+@property (nonatomic, copy) NSString *domain;
 
 @end
