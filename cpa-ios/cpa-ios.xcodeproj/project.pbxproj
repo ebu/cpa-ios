@@ -30,6 +30,41 @@
 		E67F11E41ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */; };
 		E67F11EA1ADD0B4800AFC2C7 /* CPAKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */; };
 		E684D3DA1AD80AE600EDCA66 /* CPAStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */; };
+		E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */; };
+		E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */; };
+		E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */; };
+		E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = E60650321AD65CFB008FC7EE /* CPAProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E690967C1ADE3F2400B62EB6 /* CPAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* CPAProvider.m */; };
+		E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41731AD7EABC00D8F289 /* CPAErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* CPAErrors.m */; };
+		E690967F1ADE3F2D00B62EB6 /* CPAErrors+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */; };
+		E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */; };
+		E69096811ADE3F3200B62EB6 /* CPAKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */; };
+		E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */; };
+		E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */; };
+		E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C981AD6C044005FE6D2 /* CPAToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69096851ADE3F3E00B62EB6 /* CPAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* CPAToken.m */; };
+		E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */; };
+		E69096871ADE3F4300B62EB6 /* NSURLSession+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */; };
+		E69096881ADE3F4500B62EB6 /* NSURLSession+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */; };
+		E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */; };
+		E690968A1ADE3F4B00B62EB6 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
+		E690968B1ADE3F5A00B62EB6 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */; };
+		E690968C1ADE3F5A00B62EB6 /* EmbossedIcon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CA1ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png */; };
+		E690968D1ADE3F5A00B62EB6 /* EmbossedIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CB1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png */; };
+		E690968E1ADE3F5A00B62EB6 /* EmbossedIcon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CC1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png */; };
+		E690968F1ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html */; };
+		E69096901ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CE1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html */; };
+		E69096911ADE3F5F00B62EB6 /* ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D01ADD08D600AFC2C7 /* ButtonBarArrowLeft.png */; };
+		E69096921ADE3F5F00B62EB6 /* ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D11ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png */; };
+		E69096931ADE3F5F00B62EB6 /* ButtonBarArrowLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D21ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png */; };
+		E69096941ADE3F5F00B62EB6 /* ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D31ADD08D600AFC2C7 /* ButtonBarArrowRight.png */; };
+		E69096951ADE3F5F00B62EB6 /* ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D41ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png */; };
+		E69096961ADE3F5F00B62EB6 /* ButtonBarArrowRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D51ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png */; };
+		E69096971ADE3F6400B62EB6 /* CPAAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */; };
+		E69096981ADE3F6800B62EB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */; };
+		E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */; };
+		E69096A01ADE407000B62EB6 /* CPAUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,12 +129,22 @@
 		E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAKeyboardInformation.m; sourceTree = "<group>"; };
 		E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAStatelessRequest.h; sourceTree = "<group>"; };
 		E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAStatelessRequest.m; sourceTree = "<group>"; };
-		E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrossPlatformAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69096751ADE3E5300B62EB6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossPlatformAuthentication.h; sourceTree = "<group>"; };
+		E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CAEC031AD7FAB7008EB753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E6064FA01AD659B2008FC7EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69096541ADE3D5200B62EB6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,6 +167,7 @@
 				E6257CA51AD6D2FA005FE6D2 /* Externals */,
 				E60650311AD65CD5008FC7EE /* Sources */,
 				E6CAEBF71AD7F9CE008EB753 /* Resources */,
+				E69096741ADE3E5300B62EB6 /* Framework */,
 				E6064FA41AD659B2008FC7EE /* Products */,
 				E60650451AD66275008FC7EE /* LICENSE */,
 				E606503E1AD661AE008FC7EE /* version.xcconfig */,
@@ -132,7 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				E6064FA31AD659B2008FC7EE /* libcpa-ios.a */,
-				E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */,
+				E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */,
+				E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +261,15 @@
 			path = Nibs;
 			sourceTree = "<group>";
 		};
+		E69096741ADE3E5300B62EB6 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */,
+				E69096751ADE3E5300B62EB6 /* Info.plist */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		E6CAEBF71AD7F9CE008EB753 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +283,28 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E69096551ADE3D5200B62EB6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */,
+				E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */,
+				E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */,
+				E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */,
+				E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */,
+				E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */,
+				E69096871ADE3F4300B62EB6 /* NSURLSession+CPAExtensions.h in Headers */,
+				E690967F1ADE3F2D00B62EB6 /* CPAErrors+Private.h in Headers */,
+				E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */,
+				E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */,
+				E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */,
+				E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		E6064FA21AD659B2008FC7EE /* cpa-ios */ = {
@@ -247,6 +325,24 @@
 			productReference = E6064FA31AD659B2008FC7EE /* libcpa-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		E69096571ADE3D5200B62EB6 /* cpa-ios-framework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E690966F1ADE3D5200B62EB6 /* Build configuration list for PBXNativeTarget "cpa-ios-framework" */;
+			buildPhases = (
+				E69096531ADE3D5200B62EB6 /* Sources */,
+				E69096541ADE3D5200B62EB6 /* Frameworks */,
+				E69096551ADE3D5200B62EB6 /* Headers */,
+				E69096561ADE3D5200B62EB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-framework";
+			productName = "cpa-ios-framework";
+			productReference = E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */;
@@ -261,7 +357,7 @@
 			);
 			name = "cpa-ios-resources";
 			productName = "cpa-ios-resources";
-			productReference = E6CAEBFC1AD7F9E8008EB753 /* cpa-ios-resources.bundle */;
+			productReference = E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -276,6 +372,9 @@
 				TargetAttributes = {
 					E6064FA21AD659B2008FC7EE = {
 						CreatedOnToolsVersion = 6.2;
+					};
+					E69096571ADE3D5200B62EB6 = {
+						CreatedOnToolsVersion = 6.3;
 					};
 					E6CAEBFB1AD7F9E8008EB753 = {
 						CreatedOnToolsVersion = 6.2;
@@ -297,11 +396,33 @@
 			targets = (
 				E6064FA21AD659B2008FC7EE /* cpa-ios */,
 				E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */,
+				E69096571ADE3D5200B62EB6 /* cpa-ios-framework */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E69096561ADE3D5200B62EB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E690968B1ADE3F5A00B62EB6 /* EmbossedIcon@2x~ipad.png in Resources */,
+				E690968C1ADE3F5A00B62EB6 /* EmbossedIcon@2x~iphone.png in Resources */,
+				E69096911ADE3F5F00B62EB6 /* ButtonBarArrowLeft.png in Resources */,
+				E69096981ADE3F6800B62EB6 /* Localizable.strings in Resources */,
+				E69096931ADE3F5F00B62EB6 /* ButtonBarArrowLeft@3x.png in Resources */,
+				E69096941ADE3F5F00B62EB6 /* ButtonBarArrowRight.png in Resources */,
+				E69096901ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */,
+				E69096961ADE3F5F00B62EB6 /* ButtonBarArrowRight@3x.png in Resources */,
+				E690968F1ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */,
+				E69096921ADE3F5F00B62EB6 /* ButtonBarArrowLeft@2x.png in Resources */,
+				E69096971ADE3F6400B62EB6 /* CPAAuthorizationViewController.xib in Resources */,
+				E690968E1ADE3F5A00B62EB6 /* EmbossedIcon~iphone.png in Resources */,
+				E690968D1ADE3F5A00B62EB6 /* EmbossedIcon~ipad.png in Resources */,
+				E69096951ADE3F5F00B62EB6 /* ButtonBarArrowRight@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6CAEBFA1AD7F9E8008EB753 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -339,6 +460,22 @@
 				E65A417B1AD7F76600D8F289 /* NSBundle+CPAExtensions.m in Sources */,
 				E6257CAA1AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m in Sources */,
 				E67F11EA1ADD0B4800AFC2C7 /* CPAKeyboardInformation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69096531ADE3D5200B62EB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */,
+				E69096881ADE3F4500B62EB6 /* NSURLSession+CPAExtensions.m in Sources */,
+				E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */,
+				E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */,
+				E69096811ADE3F3200B62EB6 /* CPAKeyboardInformation.m in Sources */,
+				E690968A1ADE3F4B00B62EB6 /* NSBundle+CPAExtensions.m in Sources */,
+				E69096851ADE3F3E00B62EB6 /* CPAToken.m in Sources */,
+				E690967C1ADE3F2400B62EB6 /* CPAProvider.m in Sources */,
+				E69096A01ADE407000B62EB6 /* CPAUICKeyChainStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,12 +603,60 @@
 			};
 			name = Release;
 		};
+		E690966B1ADE3D5200B62EB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E690966C1ADE3D5200B62EB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		E6CAEC011AD7F9E8008EB753 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Resources/Info.plist;
-				PRODUCT_NAME = "cpa-ios-resources";
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
 			};
 			name = Debug;
 		};
@@ -480,7 +665,7 @@
 			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Resources/Info.plist;
-				PRODUCT_NAME = "cpa-ios-resources";
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
 			};
 			name = Release;
 		};
@@ -504,6 +689,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E690966F1ADE3D5200B62EB6 /* Build configuration list for PBXNativeTarget "cpa-ios-framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E690966B1ADE3D5200B62EB6 /* Debug */,
+				E690966C1ADE3D5200B62EB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */ = {
 			isa = XCConfigurationList;

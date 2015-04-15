@@ -206,7 +206,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     //
     // TODO: Remove when a fix is available
     if ([WKWebView class]) {
-        NSString *temporaryResourceBundlePath = [NSTemporaryDirectory() stringByAppendingString:@"cpa-ios-resources.bundle"];
+        NSString *temporaryResourceBundlePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:CPAResourcesBundleName] stringByAppendingPathComponent:@"bundle"];
         
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{

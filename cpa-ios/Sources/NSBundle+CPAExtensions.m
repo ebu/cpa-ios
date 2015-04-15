@@ -8,6 +8,8 @@
 
 #import "CPAToken.h"
 
+NSString * const CPAResourcesBundleName = @"CrossPlatformAuthentication-resources";
+
 @implementation NSBundle (CPAExtensions)
 
 + (NSBundle *)cpa_principalBundle
@@ -22,7 +24,7 @@
 
 + (NSBundle *)cpa_resourceBundle
 {
-    NSString *resourceBundlePath = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"cpa-ios-resources.bundle"];
+    NSString *resourceBundlePath = [[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:CPAResourcesBundleName] stringByAppendingPathExtension:@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
     if (! resourceBundle) {
         resourceBundle = [self cpa_principalBundle];

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name = 'cpa-ios'
+  s.name = 'CrossPlatformAuthentication'
   s.version = '1.0'
   s.license = 'BSD'
   s.summary = 'iOS library for the Cross-Platform Authentication Protocol (CPA)'
@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   s.weak_frameworks = 'WebKit'
 
   s.requires_arc = true
-  s.source_files = 'cpa-ios/cpa-ios.h', 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}'
-  s.public_header_files = 'cpa-ios.h', 'CPAProvider.h', 'CPAErrors.h', 'CPAToken.h'
+  s.source_files = 'cpa-ios/Framework/CrossPlatformAuthentication.h', 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}'
+  s.public_header_files = 'CrossPlatformAuthentication.h', 'CPAProvider.h', 'CPAErrors.h', 'CPAToken.h'
 
-  s.resource_bundle = { 'cpa-ios-resources' => ['cpa-ios/Resources/{HTML,Images,Nibs}/*', 'cpa-ios/Resources/*.lproj'] }
+  s.resource_bundle = { 'CrossPlatformAuthentication-resources' => ['cpa-ios/Resources/{HTML,Images,Nibs}/*', 'cpa-ios/Resources/*.lproj'] }
 end

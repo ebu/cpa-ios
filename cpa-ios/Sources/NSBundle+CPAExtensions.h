@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 #define CPALocalizedString(key, comment) \
     [[NSBundle cpa_resourceBundle] localizedStringForKey:(key) value:@"" table:nil]
 
+/**
+ * The name of the associated resource bundle
+ */
+OBJC_EXPORT NSString * const CPAResourcesBundleName;
+
 @interface NSBundle (CPAExtensions)
 
 /**

@@ -16,7 +16,7 @@
 		E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E21AD81E0400EDCA66 /* Application.storyboard */; };
 		E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
-		E6897B4C1AD800660083E1BB /* cpa-ios-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */; };
+		E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +33,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = E6CAEBFC1AD7F9E8008EB753;
 			remoteInfo = "cpa-ios-resources";
+		};
+		E69096721ADE3D8200B62EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E69096581ADE3D5200B62EB6;
+			remoteInfo = "cpa-ios-framework";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -53,7 +60,7 @@
 		E684D3E31AD81E0400EDCA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
 		E684D3E81AD81EB200EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E684D3EA1AD81EB800EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "cpa-ios-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */,
-				E6897B4B1AD800660083E1BB /* cpa-ios-resources.bundle */,
+				E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -126,6 +133,7 @@
 			children = (
 				E606503B1AD65D15008FC7EE /* libcpa-ios.a */,
 				E6897B451AD7FC4A0083E1BB /* cpa-ios-resources.bundle */,
+				E69096731ADE3D8200B62EB6 /* cpa-ios-framework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +222,13 @@
 			remoteRef = E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E69096731ADE3D8200B62EB6 /* cpa-ios-framework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = "cpa-ios-framework.framework";
+			remoteRef = E69096721ADE3D8200B62EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -223,7 +238,7 @@
 			files = (
 				E60650401AD661BB008FC7EE /* version.xcconfig in Resources */,
 				E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */,
-				E6897B4C1AD800660083E1BB /* cpa-ios-resources.bundle in Resources */,
+				E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */,
 				E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +298,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -324,7 +338,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -347,6 +360,7 @@
 			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
@@ -361,6 +375,7 @@
 			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
