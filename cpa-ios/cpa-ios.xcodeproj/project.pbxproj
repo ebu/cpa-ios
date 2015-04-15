@@ -30,7 +30,7 @@
 		E67F11E41ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */; };
 		E67F11EA1ADD0B4800AFC2C7 /* CPAKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */; };
 		E684D3DA1AD80AE600EDCA66 /* CPAStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */; };
-		E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */; };
+		E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */; };
 		E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */; };
 		E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = E60650321AD65CFB008FC7EE /* CPAProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
