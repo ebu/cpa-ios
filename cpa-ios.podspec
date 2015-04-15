@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   s.weak_frameworks = 'WebKit'
 
   s.requires_arc = true
-  s.source_files = 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}'
-  s.public_header_files = 'CPAProvider.h', 'CPAErrors.h', 'CPAToken.h'
-  
+  s.source_files = 'cpa-ios/cpa-ios.h', 'cpa-ios/Sources/**/*.{h,m}', 'cpa-ios/Externals/**/*.{h,m}'
+  s.public_header_files = 'cpa-ios.h', 'CPAProvider.h', 'CPAErrors.h', 'CPAToken.h'
+
   s.resource_bundle = { 'cpa-ios-resources' => ['cpa-ios/Resources/{HTML,Images,Nibs}/*', 'cpa-ios/Resources/*.lproj'] }
 end
