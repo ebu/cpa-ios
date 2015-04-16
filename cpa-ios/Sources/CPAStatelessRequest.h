@@ -10,9 +10,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Types
 typedef void (^CPAClientRegistrationCompletionBlock)(NSString * __nullable clientIdentifier, NSString * __nullable clientSecret, NSError * __nullable error);
-typedef void (^CPAUserCodeRequestCompletionBlock)(NSString * __nullable deviceCode, NSString * __nullable userCode, NSURL * __nullable verificationURL, NSInteger pollingIntervalInSeconds, NSInteger lifetimeInSeconds, NSError * __nullable error);
-typedef void (^CPAClientAccessTokenRequestCompletionBlock)(NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger lifetimeInSeconds, NSError * __nullable error);
-typedef void (^CPAUserAccessTokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger lifetimeInSeconds, NSError * __nullable error);
+typedef void (^CPAUserCodeRequestCompletionBlock)(NSString * __nullable deviceCode, NSString * __nullable userCode, NSURL * __nullable verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError * __nullable error);
+typedef void (^CPAClientAccessTokenRequestCompletionBlock)(NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
+typedef void (^CPAUserAccessTokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
 
 /**
  * Stateless requests, for implementation purposes only

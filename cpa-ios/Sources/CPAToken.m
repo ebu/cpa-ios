@@ -12,7 +12,7 @@
 @property (nonatomic, copy) NSString *domain;
 @property (nonatomic, copy) NSString *domainName;
 @property (nonatomic, copy) NSString *userName;
-@property (nonatomic) NSInteger lifetimeInSeconds;
+@property (nonatomic) NSDate *expirationDate;
 
 @end
 
@@ -24,18 +24,19 @@
                        domain:(NSString *)domain
                    domainName:(NSString *)domainName
                      userName:(NSString *)userName
-            lifetimeInSeconds:(NSInteger)lifetimeInSeconds
+               expirationDate:(NSDate *)expirationDate
 {
     NSParameterAssert(value);
     NSParameterAssert(domain);
     NSParameterAssert(domainName);
+    NSParameterAssert(expirationDate);
     
     if (self = [super init]) {
         self.value = value;
         self.domain = domain;
         self.domainName = domainName;
         self.userName = userName;
-        self.lifetimeInSeconds = lifetimeInSeconds;
+        self.expirationDate = expirationDate;
     }
     return self;
 }
@@ -56,7 +57,7 @@
     token.domain = [aDecoder decodeObjectForKey:@"domain"];
     token.domainName = [aDecoder decodeObjectForKey:@"domainName"];
     token.userName = [aDecoder decodeObjectForKey:@"userName"];
-    token.lifetimeInSeconds = [aDecoder decodeIntegerForKey:@"lifetimeInSeconds"];
+    token.expirationDate = [aDecoder decodeObjectForKey:@"expirationDate"];
     return token;
 }
 
@@ -66,14 +67,14 @@
     [aCoder encodeObject:self.domain forKey:@"domain"];
     [aCoder encodeObject:self.domainName forKey:@"domainName"];
     [aCoder encodeObject:self.userName forKey:@"userName"];
-    [aCoder encodeInteger:self.lifetimeInSeconds forKey:@"lifetimeInSeconds"];
+    [aCoder encodeObject:self.expirationDate forKey:@"expirationDate"];
 }
 
 #pragma mark Description
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; userName: %@; type: %@; lifetimeInSeconds: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; value: %@; domain: %@; domainName: %@; userName: %@; type: %@; expirationDate: %@>",
             [self class],
             self,
             self.value,
@@ -81,7 +82,7 @@
             self.domainName,
             self.userName,
             (self.type == CPATokenTypeClient) ? @"Client" : @"User",
-            @(self.lifetimeInSeconds)];
+            self.expirationDate];
 }
 
 @end

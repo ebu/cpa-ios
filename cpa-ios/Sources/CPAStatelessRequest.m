@@ -81,9 +81,9 @@
             NSString *verificationURLString = responseDictionary[@"verification_uri"];
             NSURL *verificationURL = verificationURLString ? [NSURL URLWithString:verificationURLString] : nil;
             NSInteger pollingIntervalInSeconds = [responseDictionary[@"interval"] integerValue];
-            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, lifetimeInSeconds, nil) : nil;
+            completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, expiresInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -125,9 +125,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
+            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -166,9 +166,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
+            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
     }] resume];
 }
@@ -206,9 +206,9 @@
             NSString *accessToken = responseDictionary[@"access_token"];
             NSString *tokenType = responseDictionary[@"token_type"];
             NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger lifetimeInSeconds = [responseDictionary[@"expires_in"] integerValue];
+            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
             
-            completionBlock ? completionBlock(accessToken, tokenType, domainName, lifetimeInSeconds, nil) : nil;
+            completionBlock ? completionBlock(accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
     }] resume];
 }

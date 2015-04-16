@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
                        domain:(NSString *)domain
                    domainName:(NSString *)domainName
                      userName:(NSString *)userName
-            lifetimeInSeconds:(NSInteger)lifetimeInSeconds;
+               expirationDate:(NSDate *)expirationDate;
 
 @end
 

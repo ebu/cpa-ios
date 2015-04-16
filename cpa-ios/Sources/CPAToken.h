@@ -47,9 +47,9 @@ typedef NS_ENUM(NSInteger, CPATokenType) {
 @property (nonatomic, readonly) CPATokenType type;
 
 /**
- * Lifetime of the token in seconds
+ * The date at which the token is supposed to expire
  */
-@property (nonatomic, readonly) NSInteger lifetimeInSeconds;
+@property (nonatomic, readonly) NSDate *expirationDate;
 
 @end
 

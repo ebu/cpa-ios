@@ -18,7 +18,7 @@
 
 // Typedefs
 typedef void (^CPAVoidCompletionBlock)(NSError *error);
-typedef void (^CPAAccessTokenCompletionBlock)(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error);
+typedef void (^CPAAccessTokenCompletionBlock)(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger expiresInSeconds, NSError *error);
 
 // Globals
 static CPAProvider *s_defaultProvider = nil;
@@ -148,17 +148,18 @@ static CPAProvider *s_defaultProvider = nil;
  credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
               completionBlock:(CPATokenCompletionBlock)completionBlock
 {
-    CPAAccessTokenCompletionBlock accessTokenCompletionBlock = ^(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+    CPAAccessTokenCompletionBlock accessTokenCompletionBlock = ^(NSString *userName, NSString *accessToken, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
         if (error) {
             completionBlock ? completionBlock(nil, error) : nil;
             return;
         }
         
+        NSDate *expirationDate = [[NSDate date] dateByAddingTimeInterval:expiresInSeconds];
         CPAToken *token = [[CPAToken alloc] initWithValue:accessToken
                                                    domain:domain
                                                domainName:domainName
                                                  userName:userName
-                                        lifetimeInSeconds:lifetimeInSeconds];
+                                           expirationDate:expirationDate];
         [self setToken:token forDomain:domain];
         
         completionBlock ? completionBlock(token, nil) : nil;
@@ -168,7 +169,7 @@ static CPAProvider *s_defaultProvider = nil;
         // User tokens can be refreshed (i.e. not need to get a user code again, and no need to supply credentials again)
         CPAToken *token = [self tokenForDomain:domain];
         if (token && token.type == type) {
-            [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
+            [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                 if (error) {
                     // A token was never delivered for this domain, or the client access has been revoked. Discard and start
                     // from the beginning, registering a new client
@@ -182,7 +183,7 @@ static CPAProvider *s_defaultProvider = nil;
                     return;
                 }
                 
-                accessTokenCompletionBlock(userName, accessToken, domainName, lifetimeInSeconds, error);
+                accessTokenCompletionBlock(userName, accessToken, domainName, expiresInSeconds, error);
             }];
         }
         else {
@@ -190,8 +191,8 @@ static CPAProvider *s_defaultProvider = nil;
         }
     }
     else {
-        [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-            accessTokenCompletionBlock(nil, accessToken, domainName, lifetimeInSeconds, error);
+        [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+            accessTokenCompletionBlock(nil, accessToken, domainName, expiresInSeconds, error);
         }];
     }
 }
@@ -201,7 +202,7 @@ static CPAProvider *s_defaultProvider = nil;
                   credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
                                completionBlock:(CPAAccessTokenCompletionBlock)completionBlock
 {
-    [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger lifetimeInSeconds, NSError *error) {
+    [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingInterval, NSInteger expiresInSeconds, NSError *error) {
         if (error) {
             completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
             return;
@@ -214,8 +215,8 @@ static CPAProvider *s_defaultProvider = nil;
                 return;
             }
             
-            [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger lifetimeInSeconds, NSError *error) {
-                completionBlock(userName, accessToken, domainName, lifetimeInSeconds, error);
+            [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
             }];
         };
         
