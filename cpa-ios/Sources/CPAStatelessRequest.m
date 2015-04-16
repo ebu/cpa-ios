@@ -132,47 +132,6 @@
     }] resume];
 }
 
-+ (void)refreshUserAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                          clientIdentifier:(NSString *)clientIdentifier
-                                              clientSecret:(NSString *)clientSecret
-                                                    domain:(NSString *)domain
-                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock
-{
-    NSParameterAssert(authorizationProviderURL);
-    NSParameterAssert(clientIdentifier);
-    NSParameterAssert(clientSecret);
-    NSParameterAssert(domain);
-    
-    NSURL *URL = [authorizationProviderURL URLByAppendingPathComponent:@"token"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSDictionary *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/client_credentials",
-                                         @"client_id" : clientIdentifier,
-                                         @"client_secret" : clientSecret,
-                                         @"domain" : domain };
-    NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
-    [request setHTTPBody:body];
-
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            NSString *userName = responseDictionary[@"user_name"];
-            NSString *accessToken = responseDictionary[@"access_token"];
-            NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
-            
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
-        });
-    }] resume];
-}
-
 + (void)requestClientAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
                                             clientIdentifier:(NSString *)clientIdentifier
                                                 clientSecret:(NSString *)clientSecret

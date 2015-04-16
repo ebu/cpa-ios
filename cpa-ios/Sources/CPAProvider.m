@@ -165,30 +165,11 @@ static CPAProvider *s_defaultProvider = nil;
         completionBlock ? completionBlock(token, nil) : nil;
     };
     
+    // There is no special code required to refresh a token vs. obtaining the first token. For client tokens, just ask for a new token. For user tokens,
+    // get a user code and request a token. If a user token was already obtained and can be refreshed, no verification will be needed and the token
+    // will be delivered immediately
     if (type == CPATokenTypeUser) {
-        // User tokens can be refreshed (i.e. not need to get a user code again, and no need to supply credentials again)
-        CPAToken *token = [self tokenForDomain:domain];
-        if (token && token.type == type) {
-            [CPAStatelessRequest refreshUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                if (error) {
-                    // A token was never delivered for this domain, or the client access has been revoked. Discard and start
-                    // from the beginning, registering a new client
-                    if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
-                        [self discardIdentity];
-                        [self requestTokenForDomain:domain withType:type credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
-                        return;
-                    }
-                    
-                    completionBlock ? completionBlock(nil, error) : nil;
-                    return;
-                }
-                
-                accessTokenCompletionBlock(userName, accessToken, domainName, expiresInSeconds, error);
-            }];
-        }
-        else {
-            [self requestCodeAndUserAccessTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:accessTokenCompletionBlock];
-        }
+        [self requestCodeAndUserAccessTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:accessTokenCompletionBlock];
     }
     else {
         [CPAStatelessRequest requestClientAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
@@ -231,8 +212,8 @@ static CPAProvider *s_defaultProvider = nil;
                 userTokenRequestBlock(error);
             };
         }
-        // If no verification URL is received, this means that single sign-on is provided by the authorization provider when connecting
-        // to a new service provider affiliated to it (see 8.2.2.3 in spec). Proceed with token retrieval
+        // If no verification URL is received, this means that a refresh can be made without having to enter credentials
+        // and validate the application again. Proceed with token retrieval
         else {
             userTokenRequestBlock(nil);
         }
@@ -264,11 +245,6 @@ static CPAProvider *s_defaultProvider = nil;
 {
     NSData *identityData = [NSKeyedArchiver archivedDataWithRootObject:identity];
     [self.keyChainStore setData:identityData forKey:self.keyChainIdentifier];
-}
-
-- (void)discardIdentity
-{
-    [self.keyChainStore removeItemForKey:self.keyChainIdentifier];
 }
 
 - (NSString *)keyChainKeyForDomain:(NSString *)domain

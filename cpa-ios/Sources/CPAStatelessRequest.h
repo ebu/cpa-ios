@@ -52,15 +52,6 @@ typedef void (^CPAUserAccessTokenRequestCompletionBlock)(NSString * __nullable u
                                            completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock;
 
 /**
- * To replace an expired token with a new access token, the client makes a HTTP POST request to the authorization provider's /token endpoint
- */
-+ (void)refreshUserAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                          clientIdentifier:(NSString *)clientIdentifier
-                                              clientSecret:(NSString *)clientSecret
-                                                    domain:(NSString *)domain
-                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock;
-
-/**
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In client mode, since
  * the authorization provider doesn't require any further action on the part of the user, the authorization provider can automatically
  * issue a token
