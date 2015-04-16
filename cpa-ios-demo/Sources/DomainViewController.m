@@ -62,7 +62,7 @@ NSString *NameForDomain(NSString *domain)
     }
 }
 
-#pragma mark Token retrieval
+#pragma mark Actions
 
 - (IBAction)retrieveToken:(id)sender
 {
