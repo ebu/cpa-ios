@@ -442,22 +442,9 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
-- (void)webView:(UIView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation
 {
-    NSURL *URL = nil;
-    if ([WKWebView class]) {
-        URL = ((WKWebView *)self.webView).URL;
-    }
-    else {
-        URL = ((UIWebView *)self.webView).request.URL;
-    }
-    
-    if ([URL.scheme isEqualToString:CPAWebViewCallbackURLScheme]) {
-        _isFinished = YES;
-        
-        NSError *error = CPAErrorFromCallbackURL(URL);
-        self.completionBlock ? self.completionBlock(YES, error) : nil;
-    }
+    [self processURL:webView.URL];
 }
 
 - (void)webView:(UIView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
@@ -544,8 +531,20 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [self webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:nil];
+    [self processURL:request.URL];
     return YES;
+}
+
+#pragma mark Authentication result
+
+- (void)processURL:(NSURL *)URL
+{
+    if ([URL.scheme isEqualToString:CPAWebViewCallbackURLScheme]) {
+        _isFinished = YES;
+        
+        NSError *error = CPAErrorFromCallbackURL(URL);
+        self.completionBlock ? self.completionBlock(YES, error) : nil;
+    }
 }
 
 #pragma mark Action callbacks
