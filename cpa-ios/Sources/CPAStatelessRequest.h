@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Types
 typedef void (^CPAClientRegistrationCompletionBlock)(NSString * __nullable clientIdentifier, NSString * __nullable clientSecret, NSError * __nullable error);
 typedef void (^CPAUserCodeRequestCompletionBlock)(NSString * __nullable deviceCode, NSString * __nullable userCode, NSURL * __nullable verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError * __nullable error);
-typedef void (^CPAClientAccessTokenRequestCompletionBlock)(NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
-typedef void (^CPAUserAccessTokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
+typedef void (^CPAClientTokenRequestCompletionBlock)(NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
+typedef void (^CPAUserTokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
 
 /**
  * Stateless requests, for implementation purposes only
@@ -44,23 +44,23 @@ typedef void (^CPAUserAccessTokenRequestCompletionBlock)(NSString * __nullable u
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In user mode, a token
  * will be obtained after the user has visited the verification URL, entered her credentials and authorized the device
  */
-+ (void)requestUserAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                                deviceCode:(NSString *)deviceCode
-                                          clientIdentifier:(NSString *)clientIdentifier
-                                              clientSecret:(NSString *)clientSecret
-                                                    domain:(NSString *)domain
-                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock;
++ (void)requestUserTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                                          deviceCode:(NSString *)deviceCode
+                                    clientIdentifier:(NSString *)clientIdentifier
+                                        clientSecret:(NSString *)clientSecret
+                                              domain:(NSString *)domain
+                                     completionBlock:(CPAUserTokenRequestCompletionBlock)completionBlock;
 
 /**
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In client mode, since
  * the authorization provider doesn't require any further action on the part of the user, the authorization provider can automatically
  * issue a token
  */
-+ (void)requestClientAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                            clientIdentifier:(NSString *)clientIdentifier
-                                                clientSecret:(NSString *)clientSecret
-                                                      domain:(NSString *)domain
-                                             completionBlock:(CPAClientAccessTokenRequestCompletionBlock)completionBlock;
++ (void)requestClientTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                                      clientIdentifier:(NSString *)clientIdentifier
+                                          clientSecret:(NSString *)clientSecret
+                                                domain:(NSString *)domain
+                                       completionBlock:(CPAClientTokenRequestCompletionBlock)completionBlock;
 
 @end
 

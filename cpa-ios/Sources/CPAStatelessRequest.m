@@ -88,12 +88,12 @@
     }] resume];
 }
 
-+ (void)requestUserAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                                deviceCode:(NSString *)deviceCode
-                                          clientIdentifier:(NSString *)clientIdentifier
-                                              clientSecret:(NSString *)clientSecret
-                                                    domain:(NSString *)domain
-                                           completionBlock:(CPAUserAccessTokenRequestCompletionBlock)completionBlock
++ (void)requestUserTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                                          deviceCode:(NSString *)deviceCode
+                                    clientIdentifier:(NSString *)clientIdentifier
+                                        clientSecret:(NSString *)clientSecret
+                                              domain:(NSString *)domain
+                                     completionBlock:(CPAUserTokenRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(deviceCode);
@@ -132,11 +132,11 @@
     }] resume];
 }
 
-+ (void)requestClientAccessTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
-                                            clientIdentifier:(NSString *)clientIdentifier
-                                                clientSecret:(NSString *)clientSecret
-                                                      domain:(NSString *)domain
-                                             completionBlock:(CPAClientAccessTokenRequestCompletionBlock)completionBlock
++ (void)requestClientTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                                      clientIdentifier:(NSString *)clientIdentifier
+                                          clientSecret:(NSString *)clientSecret
+                                                domain:(NSString *)domain
+                                       completionBlock:(CPAClientTokenRequestCompletionBlock)completionBlock
 {
     NSParameterAssert(authorizationProviderURL);
     NSParameterAssert(clientIdentifier);
