@@ -14,9 +14,9 @@
 		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
 		E67470061ADE6DBA0061621B /* DomainsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470051ADE6DBA0061621B /* DomainsViewController.m */; };
 		E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E21AD81E0400EDCA66 /* Application.storyboard */; };
 		E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
 		E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */; };
+		E69AF8EA1ADF9A5900AC87FF /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E69AF8E71ADF9A5900AC87FF /* Application.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +56,13 @@
 		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E67470041ADE6DBA0061621B /* DomainsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainsViewController.h; sourceTree = "<group>"; };
 		E67470051ADE6DBA0061621B /* DomainsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainsViewController.m; sourceTree = "<group>"; };
-		E674701C1ADE8C640061621B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
-		E674701E1ADE8C6B0061621B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 		E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		E684D3E31AD81E0400EDCA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
 		E684D3E81AD81EB200EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E684D3EA1AD81EB800EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69AF8E81ADF9A5900AC87FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
+		E69AF8EE1ADF9A7600AC87FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
+		E69AF8EF1ADF9A7800AC87FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +102,7 @@
 		E60650271AD65BCB008FC7EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E69AF8E71ADF9A5900AC87FF /* Application.storyboard */,
 				E684D3E71AD81EB200EDCA66 /* Localizable.strings */,
 				E60650281AD65BCB008FC7EE /* Info.plist */,
 			);
@@ -113,7 +114,6 @@
 			children = (
 				E606504B1AD673A5008FC7EE /* AppDelegate.h */,
 				E606504C1AD673A5008FC7EE /* AppDelegate.m */,
-				E684D3E21AD81E0400EDCA66 /* Application.storyboard */,
 				E606504D1AD673A5008FC7EE /* main.m */,
 				E67470041ADE6DBA0061621B /* DomainsViewController.h */,
 				E67470051ADE6DBA0061621B /* DomainsViewController.m */,
@@ -241,8 +241,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */,
+				E69AF8EA1ADF9A5900AC87FF /* Application.storyboard in Resources */,
 				E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */,
-				E684D3E41AD81E0400EDCA66 /* Application.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,16 +263,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E684D3E21AD81E0400EDCA66 /* Application.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E684D3E31AD81E0400EDCA66 /* Base */,
-				E674701C1ADE8C640061621B /* en */,
-				E674701E1ADE8C6B0061621B /* fr */,
-			);
-			name = Application.storyboard;
-			sourceTree = "<group>";
-		};
 		E684D3E71AD81EB200EDCA66 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,6 +270,16 @@
 				E684D3EA1AD81EB800EDCA66 /* fr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E69AF8E71ADF9A5900AC87FF /* Application.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E69AF8E81ADF9A5900AC87FF /* Base */,
+				E69AF8EE1ADF9A7600AC87FF /* en */,
+				E69AF8EF1ADF9A7800AC87FF /* fr */,
+			);
+			name = Application.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
