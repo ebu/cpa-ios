@@ -210,11 +210,12 @@ static CPAProvider *s_defaultProvider = nil;
         
         // Open verification URL built-in browser
         if (verificationURL) {
-            CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode completionBlock:^(BOOL isFinished, NSError *error) {
+            __block CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode completionBlock:^(BOOL isFinished, NSError *error) {
                 // The view controller was not dismissed early and must now be dismissed
                 if (isFinished) {
                     credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, CPAPresentationActionDismiss) : nil;
                 }
+                authorizationViewController = nil;
                 
                 if (error) {
                     completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
