@@ -204,18 +204,6 @@ static CPAProvider *s_defaultProvider = nil;
             return;
         }
         
-        // Common user token request code
-        CPAVoidCompletionBlock userTokenRequestBlock = ^(NSError *error) {
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
-                completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
-            }];
-        };
-        
         // Open verification URL built-in browser
         if (verificationURL) {
             CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
@@ -224,13 +212,23 @@ static CPAProvider *s_defaultProvider = nil;
             __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
             authorizationViewController.completionBlock = ^(NSError *error) {
                 credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, NO) : nil;
-                userTokenRequestBlock(error);
+                
+                if (error) {
+                    completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
+                    return;
+                }
+                
+                [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                    completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
+                }];
             };
         }
         // If no verification URL is received, this means that a refresh can be made without having to enter credentials
         // and validate the application again. Proceed with token retrieval
         else {
-            userTokenRequestBlock(nil);
+            [CPAStatelessRequest requestUserAccessTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+                completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
+            }];
         }
     }];
 }
