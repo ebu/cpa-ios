@@ -79,11 +79,13 @@ NSString *NameForDomain(NSString *domain)
     
     CPACredentialsPresentationBlock credentialsPresentationBlock = nil;
     if (self.customTransitionSwitch.on) {
-        credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
-            if (isPresenting) {
+        credentialsPresentationBlock = ^(UIViewController *viewController, CPAPresentationAction action) {
+            if (action == CPAPresentationActionShow) {
                 [self.navigationController pushViewController:viewController animated:YES];
             }
-            // Nothing to do when dismissing
+            else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         };
     }
     

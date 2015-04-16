@@ -11,8 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Actions which must be performed on a view controller when it is presented
+ */
+typedef NS_ENUM(NSInteger, CPAPresentationAction) {
+    CPAPresentationActionShow,               // The view controller must be displayed
+    CPAPresentationActionDismiss,            // The view controller must be dismissed
+};
+
 // Types
-typedef void (^CPACredentialsPresentationBlock)(UIViewController *viewController, BOOL isPresenting);
+typedef void (^CPACredentialsPresentationBlock)(UIViewController *viewController, CPAPresentationAction action);
 typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * __nullable error);
 
 /**

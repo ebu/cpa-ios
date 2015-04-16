@@ -94,14 +94,14 @@ static CPAProvider *s_defaultProvider = nil;
     
     // Default: Modal presentation, wrapped in a navigation controller, with a cancel button at the top left
     if (! credentialsPresentationBlock) {
-        credentialsPresentationBlock = ^(UIViewController *viewController, BOOL isPresenting) {
+        credentialsPresentationBlock = ^(UIViewController *viewController, CPAPresentationAction action) {
             viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CPALocalizedString(@"Cancel", nil)
                                                                                                style:UIBarButtonItemStylePlain
                                                                                               target:self
                                                                                               action:@selector(closeCredentials:)];
             
             UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-            if (isPresenting) {
+            if (action == CPAPresentationActionShow) {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
                 navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
                 [rootViewController presentViewController:navigationController animated:YES completion:nil];
@@ -211,16 +211,20 @@ static CPAProvider *s_defaultProvider = nil;
         // Open verification URL built-in browser
         if (verificationURL) {
             CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
-            credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, YES) : nil;
+            credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, CPAPresentationActionShow) : nil;
             
             __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
             authorizationViewController.completionBlock = ^(NSError *error) {
-                credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, NO) : nil;
-                
                 if (error) {
+                    // Do not call the presentation block if the view controller was dismissed
+                    if (! [error.domain isEqualToString:CPAErrorDomain] || error.code != CPAErrorAuthorizationCancelled) {
+                        credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, CPAPresentationActionDismiss) : nil;
+                    }
                     completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
                     return;
                 }
+                
+                credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, CPAPresentationActionDismiss) : nil;
                 
                 [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                     completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
