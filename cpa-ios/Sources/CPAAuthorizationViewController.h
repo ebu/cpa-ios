@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Types
-typedef void (^CPAAuthorizationCompletionBlock)(NSError *error);
+typedef void (^CPAAuthorizationCompletionBlock)(BOOL isFinished, NSError *error);
 
 /**
  * A basic web browser to grab user credentials
@@ -19,13 +19,22 @@ typedef void (^CPAAuthorizationCompletionBlock)(NSError *error);
 @interface CPAAuthorizationViewController : UIViewController <UIWebViewDelegate, WKNavigationDelegate>
 
 /**
- * Create the browser using the specified verification URL, and supplying the given user code automatically
+ * Create the browser using the specified verification URL, and supplying the given user code automatically. An optional
+ * block can be provided. This block is:
+ *   - called with isFinished = YES when the authorization process finishes, whether the user accepts or rejects the application
+ *     (check the error property)
+ *   - called with isFinished = NO if the view controller was dismissed before the authorization process could finish
  */
-- (instancetype)initWithVerificationURL:(NSURL *)verificationURL userCode:(NSString *)userCode NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVerificationURL:(NSURL *)verificationURL
+                               userCode:(NSString *)userCode
+                        completionBlock:(nullable CPAAuthorizationCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
- * An optional block which gets called when the user finished authorization (whether access was accepted or rejected
- * can be found by checking the associated error)
+ * An optional block which gets called at the
+ 
+ user finishes authorization (whether access was accepted or rejected
+ * can be found by checking the associated error) with isFinished. If the view controller is dismissed before authorization finishes,
+ * the isFinished block parameter is set to NO, otherwise YES
  */
 @property (nonatomic, copy, nullable) CPAAuthorizationCompletionBlock completionBlock;
 

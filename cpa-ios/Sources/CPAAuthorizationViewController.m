@@ -62,7 +62,9 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithVerificationURL:(NSURL *)verificationURL userCode:(NSString *)userCode
+- (instancetype)initWithVerificationURL:(NSURL *)verificationURL
+                               userCode:(NSString *)userCode
+                        completionBlock:(CPAAuthorizationCompletionBlock)completionBlock
 {
     NSParameterAssert(verificationURL);
     NSParameterAssert(userCode);
@@ -70,6 +72,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     if (self = [super initWithNibName:@"CPAAuthorizationViewController" bundle:[NSBundle cpa_resourceBundle]]) {
         NSURL *fullURL = CPAFullVerificationURL(verificationURL, userCode);
         self.request = [NSURLRequest requestWithURL:fullURL];
+        self.completionBlock = completionBlock;
     }
     return self;
 }
@@ -290,7 +293,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     if ([self isMovingFromParentViewController] || isBeingDismissed) {
         if (! _isFinished) {
             NSError *error = CPAErrorFromCode(CPAErrorAuthorizationCancelled);
-            self.completionBlock ? self.completionBlock(error) : nil;
+            self.completionBlock ? self.completionBlock(NO, error) : nil;
         }
     }
 }
@@ -453,7 +456,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
         _isFinished = YES;
         
         NSError *error = CPAErrorFromCallbackURL(URL);
-        self.completionBlock ? self.completionBlock(error) : nil;
+        self.completionBlock ? self.completionBlock(YES, error) : nil;
     }
 }
 

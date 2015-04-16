@@ -210,26 +210,22 @@ static CPAProvider *s_defaultProvider = nil;
         
         // Open verification URL built-in browser
         if (verificationURL) {
-            CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode];
-            credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, CPAPresentationActionShow) : nil;
-            
-            __weak CPAAuthorizationViewController *weakAuthorizationViewController = authorizationViewController;
-            authorizationViewController.completionBlock = ^(NSError *error) {
+            CPAAuthorizationViewController *authorizationViewController = [[CPAAuthorizationViewController alloc] initWithVerificationURL:verificationURL userCode:userCode completionBlock:^(BOOL isFinished, NSError *error) {
+                // The view controller was not dismissed early and must now be dismissed
+                if (isFinished) {
+                    credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, CPAPresentationActionDismiss) : nil;
+                }
+                
                 if (error) {
-                    // Do not call the presentation block if the view controller was dismissed
-                    if (! [error.domain isEqualToString:CPAErrorDomain] || error.code != CPAErrorAuthorizationCancelled) {
-                        credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, CPAPresentationActionDismiss) : nil;
-                    }
                     completionBlock ? completionBlock(nil, nil, nil, 0, error) : nil;
                     return;
                 }
                 
-                credentialsPresentationBlock ? credentialsPresentationBlock(weakAuthorizationViewController, CPAPresentationActionDismiss) : nil;
-                
                 [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:self.authorizationProviderURL deviceCode:deviceCode clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
                     completionBlock(userName, accessToken, domainName, expiresInSeconds, error);
                 }];
-            };
+            }];
+            credentialsPresentationBlock ? credentialsPresentationBlock(authorizationViewController, CPAPresentationActionShow) : nil;
         }
         // If no verification URL is received, this means that a refresh can be made without having to enter credentials
         // and validate the application again. Proceed with token retrieval
