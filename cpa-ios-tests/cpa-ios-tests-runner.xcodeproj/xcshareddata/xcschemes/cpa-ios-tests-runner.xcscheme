@@ -34,6 +34,20 @@
                ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6E56E991AE10E3200C3626E"
+               BuildableName = "cpa-ios-tests.xctest"
+               BlueprintName = "cpa-ios-tests"
+               ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "E684D3BE1AD8093000EDCA66"
                BuildableName = "cpa-ios-tests-runnerTests.xctest"
                BlueprintName = "cpa-ios-tests-runnerTests"
+               ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6E56E991AE10E3200C3626E"
+               BuildableName = "cpa-ios-tests.xctest"
+               BlueprintName = "cpa-ios-tests"
                ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
             </BuildableReference>
          </TestableReference>

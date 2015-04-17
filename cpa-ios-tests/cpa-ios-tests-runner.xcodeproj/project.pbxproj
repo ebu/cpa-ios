@@ -8,17 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		E684D3D51AD809D400EDCA66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D31AD809D400EDCA66 /* main.m */; };
+		E6E56EA71AE10F1E00C3626E /* CPAStatelessRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E6E56EA01AE10E3200C3626E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E684D39E1AD8093000EDCA66 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E684D3A51AD8093000EDCA66;
+			remoteInfo = "cpa-ios-tests-runner";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-tests-runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E684D3D11AD809D400EDCA66 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E684D3D31AD809D400EDCA66 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E684D3D61AD80A6600EDCA66 /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAStatelessRequestTestCase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E684D3A31AD8093000EDCA66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E56E971AE10E3200C3626E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */,
+				E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +78,18 @@
 		E684D3D21AD809D400EDCA66 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E6E56EA51AE10F1E00C3626E /* Tests */,
 				E684D3D31AD809D400EDCA66 /* main.m */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		E6E56EA51AE10F1E00C3626E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +112,24 @@
 			productReference = E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E6E56E991AE10E3200C3626E /* cpa-ios-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6E56EA41AE10E3200C3626E /* Build configuration list for PBXNativeTarget "cpa-ios-tests" */;
+			buildPhases = (
+				E6E56E961AE10E3200C3626E /* Sources */,
+				E6E56E971AE10E3200C3626E /* Frameworks */,
+				E6E56E981AE10E3200C3626E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6E56EA11AE10E3200C3626E /* PBXTargetDependency */,
+			);
+			name = "cpa-ios-tests";
+			productName = "cpa-ios-tests";
+			productReference = E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +141,10 @@
 				TargetAttributes = {
 					E684D3A51AD8093000EDCA66 = {
 						CreatedOnToolsVersion = 6.2;
+					};
+					E6E56E991AE10E3200C3626E = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = E684D3A51AD8093000EDCA66;
 					};
 				};
 			};
@@ -110,12 +162,20 @@
 			projectRoot = "";
 			targets = (
 				E684D3A51AD8093000EDCA66 /* cpa-ios-tests-runner */,
+				E6E56E991AE10E3200C3626E /* cpa-ios-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E684D3A41AD8093000EDCA66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E56E981AE10E3200C3626E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -133,7 +193,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6E56E961AE10E3200C3626E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E56EA71AE10F1E00C3626E /* CPAStatelessRequestTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E6E56EA11AE10E3200C3626E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E684D3A51AD8093000EDCA66 /* cpa-ios-tests-runner */;
+			targetProxy = E6E56EA01AE10E3200C3626E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E684D3C71AD8093000EDCA66 /* Debug */ = {
@@ -236,6 +312,46 @@
 			};
 			name = Release;
 		};
+		E6E56EA21AE10E3200C3626E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cpa-ios-tests-runner.app/cpa-ios-tests-runner";
+			};
+			name = Debug;
+		};
+		E6E56EA31AE10E3200C3626E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cpa-ios-tests-runner.app/cpa-ios-tests-runner";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -256,6 +372,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E6E56EA41AE10E3200C3626E /* Build configuration list for PBXNativeTarget "cpa-ios-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6E56EA21AE10E3200C3626E /* Debug */,
+				E6E56EA31AE10E3200C3626E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
