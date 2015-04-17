@@ -6,4 +6,7 @@ before_install:
 
 script: 
     - set -o pipefail
-    - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo | xcpretty -c
+    # 32 bits
+    - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
+    # 64 bits
+    - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
