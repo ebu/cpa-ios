@@ -69,6 +69,7 @@
 		E69096981ADE3F6800B62EB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */; };
 		E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */; };
 		E69096A01ADE407000B62EB6 /* CPAUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */; };
+		E69D7CAD1AE1015B005970BC /* CPANullability.h in Headers */ = {isa = PBXBuildFile; fileRef = E69D7CAC1AE1015B005970BC /* CPANullability.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrossPlatformAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69096751ADE3E5300B62EB6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossPlatformAuthentication.h; sourceTree = "<group>"; };
+		E69D7CAC1AE1015B005970BC /* CPANullability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPANullability.h; sourceTree = "<group>"; };
 		E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CAEC031AD7FAB7008EB753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +206,7 @@
 				E67470241ADE90F70061621B /* CPAIdentity+Private.h */,
 				E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */,
 				E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */,
+				E69D7CAC1AE1015B005970BC /* CPANullability.h */,
 				E60650321AD65CFB008FC7EE /* CPAProvider.h */,
 				E60650331AD65CFB008FC7EE /* CPAProvider.m */,
 				E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */,
@@ -301,6 +304,7 @@
 			files = (
 				E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */,
 				E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */,
+				E69D7CAD1AE1015B005970BC /* CPANullability.h in Headers */,
 				E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */,
 				E67470221ADE8DF20061621B /* CPAIdentity.h in Headers */,
 				E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */,

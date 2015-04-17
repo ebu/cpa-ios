@@ -5,5 +5,6 @@
 //
 
 #import <CrossPlatformAuthentication/CPAErrors.h>
+#import <CrossPlatformAuthentication/CPANullability.h>
 #import <CrossPlatformAuthentication/CPAProvider.h>
 #import <CrossPlatformAuthentication/CPAToken.h>
