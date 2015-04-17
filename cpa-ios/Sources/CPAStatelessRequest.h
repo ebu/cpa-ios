@@ -13,8 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Types
 typedef void (^CPAClientRegistrationCompletionBlock)(NSString * __nullable clientIdentifier, NSString * __nullable clientSecret, NSError * __nullable error);
 typedef void (^CPAUserCodeRequestCompletionBlock)(NSString * __nullable deviceCode, NSString * __nullable userCode, NSURL * __nullable verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError * __nullable error);
-typedef void (^CPAClientTokenRequestCompletionBlock)(NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
-typedef void (^CPAUserTokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
+typedef void (^CPATokenRequestCompletionBlock)(NSString * __nullable userName, NSString * __nullable accessToken, NSString * __nullable tokenType, NSString * __nullable domainName, NSInteger expiresInSeconds, NSError * __nullable error);
 
 /**
  * Stateless requests, for implementation purposes only
@@ -51,7 +50,7 @@ typedef void (^CPAUserTokenRequestCompletionBlock)(NSString * __nullable userNam
                                     clientIdentifier:(NSString *)clientIdentifier
                                         clientSecret:(NSString *)clientSecret
                                               domain:(NSString *)domain
-                                     completionBlock:(CPAUserTokenRequestCompletionBlock)completionBlock;
+                                     completionBlock:(CPATokenRequestCompletionBlock)completionBlock;
 
 /**
  * To obtain an access token, the client makes a request to the authorization provider's token endpoint, /token. In client mode, since
@@ -62,7 +61,17 @@ typedef void (^CPAUserTokenRequestCompletionBlock)(NSString * __nullable userNam
                                       clientIdentifier:(NSString *)clientIdentifier
                                           clientSecret:(NSString *)clientSecret
                                                 domain:(NSString *)domain
-                                       completionBlock:(CPAClientTokenRequestCompletionBlock)completionBlock;
+                                       completionBlock:(CPATokenRequestCompletionBlock)completionBlock;
+
+/**
+ * To replace an expired client or user token with a new access token, the client makes a HTTP POST request to the authorization 
+ * provider's /token endpoint
+ */
++ (void)refreshTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
+                                clientIdentifier:(NSString *)clientIdentifier
+                                    clientSecret:(NSString *)clientSecret
+                                          domain:(NSString *)domain
+                                 completionBlock:(CPATokenRequestCompletionBlock)completionBlock;
 
 @end
 
