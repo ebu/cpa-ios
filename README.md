@@ -80,7 +80,7 @@ You can similarly import individual files, e.g.
 If you use Carthage or CocoaPods with the `use_frameworks!` directive, it is easier to import the `CrossPlatformAuthentication` module itself where needed:
 
 ```objective-c
-@import CrossPlatformAuthentication
+@import CrossPlatformAuthentication;
 ```
 
 #### Usage from Swift source files
