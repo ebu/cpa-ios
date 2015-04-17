@@ -8,5 +8,7 @@ script:
     - set -o pipefail
     # 32 bits
     - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
+    - xcodebuild test -workspace cpa-ios.xcworkspace -scheme cpa-ios-tests-runner -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     # 64 bits
     - xcodebuild -workspace cpa-ios.xcworkspace -scheme cpa-ios-demo -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
+    - xcodebuild test -workspace cpa-ios.xcworkspace -scheme cpa-ios-tests-runner -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
