@@ -207,7 +207,13 @@ The two playlist and HbbTV services should provide single sign-on. This means th
 
 ## Contributing
 
-You can contribute to the project using pull requests.
+You can contribute to the project using pull requests. Simply checkout the project and update CocoaPods dependencies by running:
+
+```
+$ pod install
+```
+
+from the main project directory.
 
 An `install_git_hooks.sh` script is available from the main directory. You should run it once to install convenient git hooks which take care of properly assigning Travis CI badges on a branch basis.
 
