@@ -1,10 +1,12 @@
 PODS:
-  - VCRURLConnection (0.2.0)
+  - OHHTTPStubs (3.1.11):
+    - OHHTTPStubs/Core (= 3.1.11)
+  - OHHTTPStubs/Core (3.1.11)
 
 DEPENDENCIES:
-  - VCRURLConnection (= 0.2.0)
+  - OHHTTPStubs (= 3.1.11)
 
 SPEC CHECKSUMS:
-  VCRURLConnection: accd771ebd4be11183a3e4d5a4403f180a9a235e
+  OHHTTPStubs: 5624a5d20d97d46d47e15a68ca8808b59ccf0512
 
 COCOAPODS: 0.36.4

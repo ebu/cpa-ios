@@ -13,5 +13,5 @@ xcodeproj 'cpa-ios-tests/cpa-ios-tests-runner.xcodeproj'
 
 target 'cpa-ios-tests' do
 	xcodeproj 'cpa-ios-tests/cpa-ios-tests-runner.xcodeproj'
-	pod 'VCRURLConnection', '0.2.0'
+	pod 'OHHTTPStubs', '3.1.11'
 end

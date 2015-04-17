@@ -8,9 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		85346CE1776AFB2F45717B78 /* libPods-cpa-ios-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */; };
+		E63FF9481AE1428100047B24 /* associate.request in Resources */ = {isa = PBXBuildFile; fileRef = E63FF93D1AE1428100047B24 /* associate.request */; };
+		E63FF9491AE1428100047B24 /* associate.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF93E1AE1428100047B24 /* associate.response */; };
+		E63FF94A1AE1428100047B24 /* client_token.request in Resources */ = {isa = PBXBuildFile; fileRef = E63FF93F1AE1428100047B24 /* client_token.request */; };
+		E63FF94B1AE1428100047B24 /* client_token.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9401AE1428100047B24 /* client_token.response */; };
+		E63FF94C1AE1428100047B24 /* register.request in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9411AE1428100047B24 /* register.request */; };
+		E63FF94D1AE1428100047B24 /* register.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9421AE1428100047B24 /* register.response */; };
+		E63FF94E1AE1428100047B24 /* user_token.request in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9431AE1428100047B24 /* user_token.request */; };
+		E63FF94F1AE1428100047B24 /* user_token_accepted.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9441AE1428100047B24 /* user_token_accepted.response */; };
+		E63FF9501AE1428100047B24 /* user_token_pending.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9451AE1428100047B24 /* user_token_pending.response */; };
+		E63FF9511AE1428100047B24 /* user_token_refresh.request in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9461AE1428100047B24 /* user_token_refresh.request */; };
+		E63FF9521AE1428100047B24 /* user_token_refresh.response in Resources */ = {isa = PBXBuildFile; fileRef = E63FF9471AE1428100047B24 /* user_token_refresh.response */; };
 		E684D3D51AD809D400EDCA66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D31AD809D400EDCA66 /* main.m */; };
 		E6E56EA71AE10F1E00C3626E /* CPAStatelessRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */; };
-		E6E56EB51AE11AF400C3626E /* cassette_client_token_success.json in Resources */ = {isa = PBXBuildFile; fileRef = E6E56EB41AE11AF400C3626E /* cassette_client_token_success.json */; };
 		E6E56EBA1AE12E0C00C3626E /* NSBundle+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E56EB81AE11B4300C3626E /* NSBundle+Tests.m */; };
 		E6E56EC91AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6E56EC81AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle */; };
 		E6E56ECA1AE133EE00C3626E /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E56EC31AE1302C00C3626E /* libcpa-ios.a */; };
@@ -51,13 +61,23 @@
 		3CB3ED470DBCCF15644C899B /* Pods-cpa-ios-tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.release.xcconfig"; sourceTree = "<group>"; };
 		6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cpa-ios-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E63FF93D1AE1428100047B24 /* associate.request */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = associate.request; sourceTree = "<group>"; };
+		E63FF93E1AE1428100047B24 /* associate.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = associate.response; sourceTree = "<group>"; };
+		E63FF93F1AE1428100047B24 /* client_token.request */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = client_token.request; sourceTree = "<group>"; };
+		E63FF9401AE1428100047B24 /* client_token.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = client_token.response; sourceTree = "<group>"; };
+		E63FF9411AE1428100047B24 /* register.request */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = register.request; sourceTree = "<group>"; };
+		E63FF9421AE1428100047B24 /* register.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = register.response; sourceTree = "<group>"; };
+		E63FF9431AE1428100047B24 /* user_token.request */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_token.request; sourceTree = "<group>"; };
+		E63FF9441AE1428100047B24 /* user_token_accepted.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_token_accepted.response; sourceTree = "<group>"; };
+		E63FF9451AE1428100047B24 /* user_token_pending.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_token_pending.response; sourceTree = "<group>"; };
+		E63FF9461AE1428100047B24 /* user_token_refresh.request */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_token_refresh.request; sourceTree = "<group>"; };
+		E63FF9471AE1428100047B24 /* user_token_refresh.response */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_token_refresh.response; sourceTree = "<group>"; };
 		E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-tests-runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E684D3D11AD809D400EDCA66 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E684D3D31AD809D400EDCA66 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E684D3D61AD80A6600EDCA66 /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAStatelessRequestTestCase.m; sourceTree = "<group>"; };
-		E6E56EB41AE11AF400C3626E /* cassette_client_token_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cassette_client_token_success.json; sourceTree = "<group>"; };
 		E6E56EB71AE11B4300C3626E /* NSBundle+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Tests.h"; sourceTree = "<group>"; };
 		E6E56EB81AE11B4300C3626E /* NSBundle+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Tests.m"; sourceTree = "<group>"; };
 		E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cpa-ios.xcodeproj"; path = "../cpa-ios/cpa-ios.xcodeproj"; sourceTree = "<group>"; };
@@ -101,6 +121,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E63FF93C1AE1428100047B24 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				E63FF93D1AE1428100047B24 /* associate.request */,
+				E63FF93E1AE1428100047B24 /* associate.response */,
+				E63FF93F1AE1428100047B24 /* client_token.request */,
+				E63FF9401AE1428100047B24 /* client_token.response */,
+				E63FF9411AE1428100047B24 /* register.request */,
+				E63FF9421AE1428100047B24 /* register.response */,
+				E63FF9431AE1428100047B24 /* user_token.request */,
+				E63FF9441AE1428100047B24 /* user_token_accepted.response */,
+				E63FF9451AE1428100047B24 /* user_token_pending.response */,
+				E63FF9461AE1428100047B24 /* user_token_refresh.request */,
+				E63FF9471AE1428100047B24 /* user_token_refresh.response */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
 		E684D39D1AD8093000EDCA66 = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +164,7 @@
 		E684D3D01AD809D400EDCA66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E6E56EB31AE11AF400C3626E /* Cassettes */,
+				E63FF93C1AE1428100047B24 /* Stubs */,
 				E684D3D11AD809D400EDCA66 /* Info.plist */,
 			);
 			path = Resources;
@@ -148,14 +186,6 @@
 				E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		E6E56EB31AE11AF400C3626E /* Cassettes */ = {
-			isa = PBXGroup;
-			children = (
-				E6E56EB41AE11AF400C3626E /* cassette_client_token_success.json */,
-			);
-			path = Cassettes;
 			sourceTree = "<group>";
 		};
 		E6E56EB61AE11B4300C3626E /* Helpers */ = {
@@ -305,7 +335,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6E56EB51AE11AF400C3626E /* cassette_client_token_success.json in Resources */,
+				E63FF94E1AE1428100047B24 /* user_token.request in Resources */,
+				E63FF94D1AE1428100047B24 /* register.response in Resources */,
+				E63FF9481AE1428100047B24 /* associate.request in Resources */,
+				E63FF94B1AE1428100047B24 /* client_token.response in Resources */,
+				E63FF9491AE1428100047B24 /* associate.response in Resources */,
+				E63FF94A1AE1428100047B24 /* client_token.request in Resources */,
+				E63FF94C1AE1428100047B24 /* register.request in Resources */,
+				E63FF9501AE1428100047B24 /* user_token_pending.response in Resources */,
+				E63FF9511AE1428100047B24 /* user_token_refresh.request in Resources */,
+				E63FF9521AE1428100047B24 /* user_token_refresh.response in Resources */,
+				E63FF94F1AE1428100047B24 /* user_token_accepted.response in Resources */,
 				E6E56EC91AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

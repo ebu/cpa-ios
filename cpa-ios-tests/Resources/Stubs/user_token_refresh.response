@@ -1,0 +1,18 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 17 Apr 2015 13:25:49 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 221
+Connection: close
+X-Powered-By: Express
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  "access_token": "238e39ed96eef7ec2e46f92ba4bcb1b0",
+  "token_type": "bearer",
+  "expires_in": 2591999,
+  "domain": "cpa.rts.ch",
+  "domain_display_name": "RTS - HbbTV demo",
+  "user_name": "samuel.defago@factor8.ch"
+}

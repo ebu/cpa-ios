@@ -177,6 +177,7 @@ static CPAProvider *s_defaultProvider = nil;
  credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
               completionBlock:(CPATokenInformationCompletionBlock)completionBlock
 {
+    // FIXME: No! Refreshing a client token seems to work as expected
     // There is no special code required to refresh a token vs. obtaining the first token. For client tokens, just ask for a new token. For user tokens,
     // get a user code and request a token. If a user token was already obtained and can be refreshed, no verification will be needed and the token
     // will be delivered immediately

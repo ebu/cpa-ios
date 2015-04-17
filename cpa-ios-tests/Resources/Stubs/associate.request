@@ -1,0 +1,9 @@
+POST /associate HTTP/1.1
+Content-Type: application/json
+Cookie: connect.sid=s%3AbzgzHy8clX2mpXWtWNeHy8Zf.J52kzqBv6yIpVmULUoR8j7ARNNDUgssq0ZFIGu6uUzQ
+Host: cpa.rts.ch
+Connection: close
+User-Agent: Paw/2.1.1 (Macintosh; OS X/10.10.3) GCDHTTPRequest
+Content-Length: 92
+
+{"client_id":"407","client_secret":"f9f1c336a59219e05a59eecb40eb49eb","domain":"cpa.rts.ch"}
