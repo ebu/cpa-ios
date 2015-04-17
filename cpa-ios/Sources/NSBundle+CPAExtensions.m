@@ -24,11 +24,18 @@ NSString * const CPAResourcesBundleName = @"CrossPlatformAuthentication-resource
 
 + (NSBundle *)cpa_resourceBundle
 {
+    // Look for a resource bundle in the main bundle first (e.g. CocoaPods without use_frameworks!)
     NSString *resourceBundlePath = [[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:CPAResourcesBundleName] stringByAppendingPathExtension:@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
     if (! resourceBundle) {
-        resourceBundle = [self cpa_principalBundle];
-        NSAssert(resourceBundle, @"The EBU CPA resource bundle must be available");
+        // Look for a resource bundle in the associated .framework, if any (e.g. CocoaPods with use_frameworks!)
+        NSBundle *principalBundle = [self cpa_resourceBundle];
+        NSString *embeddedFrameworkResourceBundlePath = [[principalBundle.bundlePath stringByAppendingPathComponent:CPAResourcesBundleName] stringByAppendingPathExtension:@"bundle"];
+        resourceBundle = [NSBundle bundleWithPath:embeddedFrameworkResourceBundlePath];
+        if (! resourceBundle) {
+            // Look for resources in the main .framework, standard way of bundling resources (e.g. Carthage)
+            resourceBundle = [self cpa_principalBundle];
+        }
     }
     return resourceBundle;
 }
