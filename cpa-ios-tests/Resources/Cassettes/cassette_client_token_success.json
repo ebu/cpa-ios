@@ -1,0 +1,33 @@
+[
+  {
+    "body" : "{\n  \"client_id\": \"405\",\n  \"client_secret\": \"cdf0385877f7d065211d55a2e470adac\"\n}",
+    "headers" : {
+      "Server" : "nginx",
+      "Content-Type" : "application\/json; charset=utf-8",
+      "X-Powered-By" : "Express",
+      "Content-Length" : "79",
+      "Connection" : "keep-alive",
+      "Date" : "Fri, 17 Apr 2015 10:39:54 GMT",
+      "Set-Cookie" : "connect.sid=s%3AwWXguCEEUCn0l72ZVVygc0ur.5CEuUBVm1OMmbP%2Fq94ZHXwEIdvBY96idTJfzdh1d15w; Path=\/; Expires=Fri, 24 Apr 2015 10:39:54 GMT; HttpOnly"
+    },
+    "method" : "POST",
+    "status" : 201,
+    "uri" : "https:\/\/cpa.rts.ch\/register"
+  },
+  {
+    "body" : "{\n  \"access_token\": \"5afe784a34003019ca6411159e5dc701\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 2591999,\n  \"domain\": \"playlist.rts.ch\",\n  \"domain_display_name\": \"RTS - iOS dev 1\"\n}",
+    "headers" : {
+      "Server" : "nginx",
+      "Content-Type" : "application\/json; charset=utf-8",
+      "X-Powered-By" : "Express",
+      "Content-Length" : "182",
+      "Connection" : "keep-alive",
+      "Date" : "Fri, 17 Apr 2015 10:39:54 GMT",
+      "Cache-Control" : "no-store",
+      "Pragma" : "no-cache"
+    },
+    "method" : "POST",
+    "status" : 200,
+    "uri" : "https:\/\/cpa.rts.ch\/token"
+  }
+]
