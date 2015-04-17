@@ -643,7 +643,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode)
 {
-    // To automatically enter the user code, we need to add a user_code and a redirect_uri paramters to the URL. The redirect URI could be
+    // To automatically enter the user code, we need to add a user_code and a redirect_uri parameters to the URL. The redirect URI could be
     // used as a way to return to the application if Safari was used to enter credentials. This safe way of supplying credentials sadly leads
     // to App Store rejection nowadays (see http://furbo.org/2014/09/24/in-app-browsers-considered-harmful/, for example), an in-app web
     // browser is therefore used
