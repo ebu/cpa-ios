@@ -29,7 +29,7 @@ NSString * const CPAResourcesBundleName = @"CrossPlatformAuthentication-resource
     NSBundle *resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
     if (! resourceBundle) {
         // Look for a resource bundle in the associated .framework, if any (e.g. CocoaPods with use_frameworks!)
-        NSBundle *principalBundle = [self cpa_resourceBundle];
+        NSBundle *principalBundle = [self cpa_principalBundle];
         NSString *embeddedFrameworkResourceBundlePath = [[principalBundle.bundlePath stringByAppendingPathComponent:CPAResourcesBundleName] stringByAppendingPathExtension:@"bundle"];
         resourceBundle = [NSBundle bundleWithPath:embeddedFrameworkResourceBundlePath];
         if (! resourceBundle) {
