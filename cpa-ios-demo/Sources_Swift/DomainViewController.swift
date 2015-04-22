@@ -32,10 +32,10 @@ class DomainViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var tokenLabel: UILabel!
-    @IBOutlet weak var userTokenSwitch: UISwitch!
-    @IBOutlet weak var forceRenewalSwitch: UISwitch!
-    @IBOutlet weak var customTransitionSwitch: UISwitch!
+    @IBOutlet private weak var tokenLabel: UILabel!
+    @IBOutlet private weak var userTokenSwitch: UISwitch!
+    @IBOutlet private weak var forceRenewalSwitch: UISwitch!
+    @IBOutlet private weak var customTransitionSwitch: UISwitch!
     
     // MARK: View lifecycle
     
