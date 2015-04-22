@@ -176,15 +176,6 @@ static CPAProvider *s_defaultProvider = nil;
  credentialsPresentationBlock:(CPACredentialsPresentationBlock)credentialsPresentationBlock
               completionBlock:(CPATokenRequestCompletionBlock)completionBlock
 {
-    void (^requestTokenBlock)() = ^{
-        if (type == CPATokenTypeUser) {
-            [self requestCodeAndUserTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
-        }
-        else {
-            [CPAStatelessRequest requestClientTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:completionBlock];
-        }
-    };
-    
     // Token of the same type already available from the keychain. Attempt a refresh
     CPAToken *token = [self tokenForDomain:domain];
     if (token && token.type == type) {
@@ -206,7 +197,19 @@ static CPAProvider *s_defaultProvider = nil;
         }];
     }
     else {
-        requestTokenBlock();
+        // Requesting a client token when a user token is already available. We must discard the identity first, otherwise refreshing the token
+        // (which is the same for client and user tokens) at a later time would return a user token. The identity remain valid on the AP, though,
+        // and can manually be discarded by logging into the AP user account
+        if (token && token.type == CPATokenTypeUser && type != token.type) {
+            [self discardIdentity];
+        }
+        
+        if (type == CPATokenTypeUser) {
+            [self requestCodeAndUserTokenForDomain:domain withIdentity:identity credentialsPresentationBlock:credentialsPresentationBlock completionBlock:completionBlock];
+        }
+        else {
+            [CPAStatelessRequest requestClientTokenWithAuthorizationProviderURL:self.authorizationProviderURL clientIdentifier:identity.identifier clientSecret:identity.secret domain:domain completionBlock:completionBlock];
+        }
     }
 }
 
