@@ -193,7 +193,7 @@ static CPAProvider *s_defaultProvider = nil;
                 // The client has been revoked and the token cannot thus be refreshed. Start again from scratch, registering a new client
                 if ([error.domain isEqualToString:CPAErrorDomain] && error.code == CPAErrorInvalidClient) {
                     [self discardIdentity];
-                    [self registerAndRequestTokenForDomain:domain withType:CPATokenTypeUser
+                    [self registerAndRequestTokenForDomain:domain withType:type
                               credentialsPresentationBlock:credentialsPresentationBlock
                                            completionBlock:completionBlock];
                     return;
@@ -295,7 +295,7 @@ static CPAProvider *s_defaultProvider = nil;
 
 - (void)discardIdentity
 {
-    [self.keyChainStore removeItemForKey:self.keyChainIdentifier];
+    [self.keyChainStore removeAllItems];
 }
 
 - (NSString *)keyChainKeyForDomain:(NSString *)domain
