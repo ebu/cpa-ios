@@ -19,7 +19,7 @@ More information on the [EBU Cross-Platform Authentication project](http://tech.
 * [CPA Authentication Provider](https://github.com/ebu/cpa-auth-provider)
 * [CPA Service Provider](https://github.com/ebu/cpa-service-provider)
 * *Clients*
-  * [cpa.js](https://github.com/ebu/cpa-js)
+  * [cpa.js](https://github.com/ebu/cpa.js)
   * [demonstrator](https://github.com/ebu/cpa-client)
 
 
