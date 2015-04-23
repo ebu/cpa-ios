@@ -6,10 +6,6 @@
 
 #import "HTTPStubFile.h"
 
-// Function declarations
-static NSString *NameForHTTPMethod(HTTPMethod method);
-static HTTPMethod HTTPMethodForName(NSString *name);
-
 @interface HTTPStubFile ()
 
 @property (nonatomic) HTTPMethod method;
@@ -18,7 +14,7 @@ static HTTPMethod HTTPMethodForName(NSString *name);
 @property (nonatomic) NSInteger statusCode;
 
 @property (nonatomic) NSDictionary *headers;
-@property (nonatomic, copy) NSString *body;
+@property (nonatomic) NSData *bodyData;
 
 @end
 
@@ -49,7 +45,11 @@ static HTTPMethod HTTPMethodForName(NSString *name);
     
     // Separate metadata and body with an empty line
     NSArray *components = [fileContents componentsSeparatedByString:@"\n\n"];
-    self.body = [components lastObject];
+    if ([components count] != 2) {
+        return NO;
+    }
+    
+    self.bodyData = [[components lastObject] dataUsingEncoding:NSUTF8StringEncoding];
     
     // Parse metadata
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
@@ -93,39 +93,13 @@ static HTTPMethod HTTPMethodForName(NSString *name);
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; method: %@; path: %@; statusCode: %@; headers: %@; body: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; method: %@; path: %@; statusCode: %@; headers: %@>",
             [self class],
             self,
             NameForHTTPMethod(self.method),
             self.path,
             @(self.statusCode),
-            self.headers,
-            self.body];
+            self.headers];
 }
 
 @end
-
-#pragma mark Functions
-
-static NSDictionary *HTTPMethodNames(void)
-{
-    static NSDictionary *s_names;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(HTTPMethodGET) : @"GET",
-                     @(HTTPMethodPOST) : @"POST",
-                     @(HTTPMethodPUT) : @"PUT",
-                     @(HTTPMethodDELETE) : @"DELETE" };
-    });
-    return s_names;
-}
-
-static NSString *NameForHTTPMethod(HTTPMethod method)
-{
-    return HTTPMethodNames()[@(method)];
-}
-
-static HTTPMethod HTTPMethodForName(NSString *name)
-{
-    return [[[HTTPMethodNames() allKeysForObject:name] firstObject] integerValue];
-}

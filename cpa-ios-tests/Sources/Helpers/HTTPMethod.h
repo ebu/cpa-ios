@@ -13,3 +13,6 @@ typedef NS_ENUM(NSInteger, HTTPMethod) {
     HTTPMethodPUT,
     HTTPMethodDELETE
 };
+
+NSString *NameForHTTPMethod(HTTPMethod method);
+HTTPMethod HTTPMethodForName(NSString *name);

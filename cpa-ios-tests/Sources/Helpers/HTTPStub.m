@@ -55,41 +55,19 @@
     return self;
 }
 
-#pragma mark Accessors and mutators
+#pragma mark Request conformance and response construction
 
-- (HTTPMethod)method
+- (BOOL)matchesRequest:(NSURLRequest *)request
 {
-    return self.requestStubFile.method;
+    return HTTPMethodForName(request.HTTPMethod) == self.requestStubFile.method
+        && [request.URL.path isEqualToString:self.requestStubFile.path];
 }
 
-- (NSString *)path
+- (OHHTTPStubsResponse *)response
 {
-    return self.requestStubFile.path;
-}
-
-- (NSInteger)statusCode
-{
-    return self.responseStubFile.statusCode;
-}
-
-- (NSDictionary *)requestHeaders
-{
-    return self.requestStubFile.headers;
-}
-
-- (NSString *)requestBody
-{
-    return self.requestStubFile.body;
-}
-
-- (NSDictionary *)responseHeaders
-{
-    return self.responseStubFile.headers;
-}
-
-- (NSString *)responseBody
-{
-    return self.responseStubFile.body;
+    return [OHHTTPStubsResponse responseWithData:self.responseStubFile.bodyData
+                                      statusCode:(int)self.responseStubFile.statusCode
+                                         headers:self.responseStubFile.headers];
 }
 
 #pragma mark Description
@@ -101,22 +79,6 @@
             self,
             self.requestStubFile,
             self.responseStubFile];
-}
-
-@end
-
-@implementation HTTPStub (JSONExtensions)
-
-- (NSDictionary *)requestJSONBody
-{
-    NSData *data = [self.requestBody dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-}
-
-- (NSDictionary *)responseJSONBody
-{
-    NSData *data = [self.responseBody dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
 }
 
 @end

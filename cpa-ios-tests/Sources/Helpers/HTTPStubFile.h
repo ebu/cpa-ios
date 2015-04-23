@@ -18,6 +18,6 @@
 @property (nonatomic, readonly) NSInteger statusCode;
 
 @property (nonatomic, readonly) NSDictionary *headers;
-@property (nonatomic, readonly, copy) NSString *body;
+@property (nonatomic, readonly) NSData *bodyData;
 
 @end
