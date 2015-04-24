@@ -5,8 +5,7 @@
 //
 
 #import "CPAStatelessRequest.h"
-#import "NSBundle+Tests.h"
-#import "OHHTTPStubs.h"
+#import "HTTPStub.h"
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
@@ -23,19 +22,12 @@ static NSTimeInterval kConnectionTimeOut = 60;
 
 - (void)setUp
 {
-    // TODO: Setup stubs
-#if 0
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-        
-    } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-        
-    }];
-#endif
+    [HTTPStub install];
 }
 
 - (void)tearDown
 {
-    [OHHTTPStubs removeAllStubs];
+    [HTTPStub uninstall];
 }
 
 #pragma mark Tests

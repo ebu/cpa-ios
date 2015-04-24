@@ -8,6 +8,7 @@
 
 #import "HTTPStubFile.h"
 #import "NSBundle+Tests.h"
+#import "OHHTTPStubs.h"
 
 @interface HTTPStub ()
 
@@ -20,19 +21,49 @@
 
 #pragma mark Class methods
 
-+ (instancetype)HTTPStubWithName:(NSString *)name
++ (NSArray *)HTTPStubs
 {
-    return [[[self class] alloc] initWithName:name];
+    static NSArray *s_stubs;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        NSArray *stubDirectoryPaths = [[NSBundle testBundle] pathsForResourcesOfType:nil inDirectory:@"Stubs"];
+        
+        NSMutableArray *stubs = [NSMutableArray array];
+        for (NSString *stubDirectoryPath in stubDirectoryPaths) {
+            HTTPStub *stub = [[HTTPStub alloc] initWithDirectoryPath:stubDirectoryPath];
+            if (stub) {
+                [stubs addObject:stub];
+            }
+        }
+        s_stubs = [NSArray arrayWithArray:stubs];
+    });
+    return s_stubs;
+}
+
++ (void)install
+{
+    for (HTTPStub *stub in [HTTPStub HTTPStubs]) {
+        [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+            return [stub matchesRequest:request];
+        } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+            return [stub response];
+        }];
+    }
+}
+
++ (void)uninstall
+{
+    [OHHTTPStubs removeAllStubs];
 }
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithName:(NSString *)name
+- (instancetype)initWithDirectoryPath:(NSString *)directoryPath
 {
-    NSParameterAssert(name);
+    NSParameterAssert(directoryPath);
     
     if (self = [super init]) {
-        NSString *requestFilePath = [[NSBundle testBundle] pathForResource:name ofType:@"request"];
+        NSString *requestFilePath = [directoryPath stringByAppendingPathComponent:@"request"];
         if (! requestFilePath) {
             return nil;
         }
@@ -42,7 +73,7 @@
             return nil;
         }
         
-        NSString *responseFilePath = [[NSBundle testBundle] pathForResource:name ofType:@"response"];
+        NSString *responseFilePath = [directoryPath stringByAppendingPathComponent:@"response"];
         if (! responseFilePath) {
             return nil;
         }

@@ -11,9 +11,8 @@
 
 @interface HTTPStub : NSObject
 
-+ (instancetype)HTTPStubWithName:(NSString *)name;
-
-- (instancetype)initWithName:(NSString *)name;
++ (void)install;
++ (void)uninstall;
 
 - (BOOL)matchesRequest:(NSURLRequest *)request;
 - (OHHTTPStubsResponse *)response;
