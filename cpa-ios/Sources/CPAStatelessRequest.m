@@ -6,7 +6,7 @@
 
 #import "CPAStatelessRequest.h"
 
-#import "NSURLSession+CPAExtensions.h"
+#import "NSURLConnection+CPAExtensions.h"
 
 @implementation CPAStatelessRequest
 
@@ -32,7 +32,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, error) : nil;
@@ -44,7 +44,7 @@
             
             completionBlock ? completionBlock(clientIdentifier, clientSecret, nil) : nil;
         });
-    }] resume];
+    }];
 }
 
 + (void)requestCodeWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -69,7 +69,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
@@ -85,7 +85,7 @@
             
             completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, expiresInSeconds, nil) : nil;
         });
-    }] resume];
+    }];
 }
 
 + (void)requestUserTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -114,7 +114,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
@@ -129,7 +129,7 @@
             
             completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
-    }] resume];
+    }];
 }
 
 + (void)requestClientTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -155,7 +155,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
@@ -169,7 +169,7 @@
             
             completionBlock ? completionBlock(nil, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
-    }] resume];
+    }];
 }
 
 + (void)refreshTokenWithAuthorizationProviderURL:(NSURL *)authorizationProviderURL
@@ -195,7 +195,7 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
-    [[[NSURLSession sharedSession] cpa_JSONDictionaryTaskWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
+    [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
@@ -210,7 +210,7 @@
             
             completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
         });
-    }] resume];
+    }];
 }
 
 @end

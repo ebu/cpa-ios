@@ -10,7 +10,7 @@
 		E60650341AD65CFB008FC7EE /* CPAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* CPAProvider.m */; };
 		E6257C9A1AD6C044005FE6D2 /* CPAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* CPAToken.m */; };
 		E6257CAA1AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		E65A41721AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */; };
+		E65A41721AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */; };
 		E65A41751AD7EABC00D8F289 /* CPAErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* CPAErrors.m */; };
 		E65A417B1AD7F76600D8F289 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
 		E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470201ADE8DDC0061621B /* CPAIdentity.m */; };
@@ -49,8 +49,8 @@
 		E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C981AD6C044005FE6D2 /* CPAToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69096851ADE3F3E00B62EB6 /* CPAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* CPAToken.m */; };
 		E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */; };
-		E69096871ADE3F4300B62EB6 /* NSURLSession+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */; };
-		E69096881ADE3F4500B62EB6 /* NSURLSession+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */; };
+		E69096871ADE3F4300B62EB6 /* NSURLConnection+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */; };
+		E69096881ADE3F4500B62EB6 /* NSURLConnection+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */; };
 		E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */; };
 		E690968A1ADE3F4B00B62EB6 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
 		E690968B1ADE3F5A00B62EB6 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */; };
@@ -106,8 +106,8 @@
 		E6257CA71AD6D2FA005FE6D2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAUICKeyChainStore.h; sourceTree = "<group>"; };
 		E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAUICKeyChainStore.m; sourceTree = "<group>"; };
-		E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+CPAExtensions.h"; sourceTree = "<group>"; };
-		E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+CPAExtensions.m"; sourceTree = "<group>"; };
+		E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+CPAExtensions.h"; sourceTree = "<group>"; };
+		E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+CPAExtensions.m"; sourceTree = "<group>"; };
 		E65A41731AD7EABC00D8F289 /* CPAErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAErrors.h; sourceTree = "<group>"; };
 		E65A41741AD7EABC00D8F289 /* CPAErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAErrors.m; sourceTree = "<group>"; };
 		E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAErrors+Private.h"; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 				E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */,
 				E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */,
 				E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */,
-				E65A41701AD7E8C300D8F289 /* NSURLSession+CPAExtensions.h */,
-				E65A41711AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m */,
+				E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */,
+				E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 				E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */,
 				E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */,
 				E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */,
-				E69096871ADE3F4300B62EB6 /* NSURLSession+CPAExtensions.h in Headers */,
+				E69096871ADE3F4300B62EB6 /* NSURLConnection+CPAExtensions.h in Headers */,
 				E690967F1ADE3F2D00B62EB6 /* CPAErrors+Private.h in Headers */,
 				E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */,
 				E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */,
@@ -467,7 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E65A41721AD7E8C300D8F289 /* NSURLSession+CPAExtensions.m in Sources */,
+				E65A41721AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m in Sources */,
 				E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */,
 				E6257C9A1AD6C044005FE6D2 /* CPAToken.m in Sources */,
 				E67F11B91ADCF83100AFC2C7 /* CPAAuthorizationViewController.m in Sources */,
@@ -486,7 +486,7 @@
 			files = (
 				E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */,
 				E67470231ADE8DFA0061621B /* CPAIdentity.m in Sources */,
-				E69096881ADE3F4500B62EB6 /* NSURLSession+CPAExtensions.m in Sources */,
+				E69096881ADE3F4500B62EB6 /* NSURLConnection+CPAExtensions.m in Sources */,
 				E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */,
 				E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */,
 				E69096811ADE3F3200B62EB6 /* CPAKeyboardInformation.m in Sources */,
