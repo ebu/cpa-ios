@@ -33,17 +33,15 @@
     [request setHTTPBody:body];
     
     [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, error) : nil;
-                return;
-            }
-            
-            NSString *clientIdentifier = responseDictionary[@"client_id"];
-            NSString *clientSecret = responseDictionary[@"client_secret"];
-            
-            completionBlock ? completionBlock(clientIdentifier, clientSecret, nil) : nil;
-        });
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, error) : nil;
+            return;
+        }
+        
+        NSString *clientIdentifier = responseDictionary[@"client_id"];
+        NSString *clientSecret = responseDictionary[@"client_secret"];
+        
+        completionBlock ? completionBlock(clientIdentifier, clientSecret, nil) : nil;
     }];
 }
 
@@ -70,21 +68,19 @@
     [request setHTTPBody:body];
     
     [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
-                return;
-            }
-            
-            NSString *deviceCode = responseDictionary[@"device_code"];
-            NSString *userCode = responseDictionary[@"user_code"];
-            NSString *verificationURLString = responseDictionary[@"verification_uri"];
-            NSURL *verificationURL = verificationURLString ? [NSURL URLWithString:verificationURLString] : nil;
-            NSInteger pollingIntervalInSeconds = [responseDictionary[@"interval"] integerValue];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
-            
-            completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, expiresInSeconds, nil) : nil;
-        });
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, nil, 0, 0, error) : nil;
+            return;
+        }
+        
+        NSString *deviceCode = responseDictionary[@"device_code"];
+        NSString *userCode = responseDictionary[@"user_code"];
+        NSString *verificationURLString = responseDictionary[@"verification_uri"];
+        NSURL *verificationURL = verificationURLString ? [NSURL URLWithString:verificationURLString] : nil;
+        NSInteger pollingIntervalInSeconds = [responseDictionary[@"interval"] integerValue];
+        NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+        
+        completionBlock ? completionBlock(deviceCode, userCode, verificationURL, pollingIntervalInSeconds, expiresInSeconds, nil) : nil;
     }];
 }
 
@@ -115,20 +111,18 @@
     [request setHTTPBody:body];
     
     [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            NSString *userName = responseDictionary[@"user_name"];
-            NSString *accessToken = responseDictionary[@"access_token"];
-            NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
-            
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
-        });
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
+            return;
+        }
+        
+        NSString *userName = responseDictionary[@"user_name"];
+        NSString *accessToken = responseDictionary[@"access_token"];
+        NSString *tokenType = responseDictionary[@"token_type"];
+        NSString *domainName = responseDictionary[@"domain_display_name"];
+        NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+        
+        completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
     }];
 }
 
@@ -156,19 +150,17 @@
     [request setHTTPBody:body];
     
     [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            NSString *accessToken = responseDictionary[@"access_token"];
-            NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
-            
-            completionBlock ? completionBlock(nil, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
-        });
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
+            return;
+        }
+        
+        NSString *accessToken = responseDictionary[@"access_token"];
+        NSString *tokenType = responseDictionary[@"token_type"];
+        NSString *domainName = responseDictionary[@"domain_display_name"];
+        NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+        
+        completionBlock ? completionBlock(nil, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
     }];
 }
 
@@ -196,20 +188,18 @@
     [request setHTTPBody:body];
     
     [NSURLConnection cpa_JSONDictionaryWithRequest:request completionHandler:^(NSDictionary *responseDictionary, NSURLResponse *response, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
-                return;
-            }
-            
-            NSString *userName = responseDictionary[@"user_name"];
-            NSString *accessToken = responseDictionary[@"access_token"];
-            NSString *tokenType = responseDictionary[@"token_type"];
-            NSString *domainName = responseDictionary[@"domain_display_name"];
-            NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
-            
-            completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
-        });
+        if (error) {
+            completionBlock ? completionBlock(nil, nil, nil, nil, 0, error) : nil;
+            return;
+        }
+        
+        NSString *userName = responseDictionary[@"user_name"];
+        NSString *accessToken = responseDictionary[@"access_token"];
+        NSString *tokenType = responseDictionary[@"token_type"];
+        NSString *domainName = responseDictionary[@"domain_display_name"];
+        NSInteger expiresInSeconds = [responseDictionary[@"expires_in"] integerValue];
+        
+        completionBlock ? completionBlock(userName, accessToken, tokenType, domainName, expiresInSeconds, nil) : nil;
     }];
 }
 
