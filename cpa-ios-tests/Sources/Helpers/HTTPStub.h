@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- * Load a stub. Stubs are expected in the Stubs directory of the test bundle. A stub is defined by creating a directory
+ * Represent a stub. Stubs are expected in the Stubs directory of the test bundle. A stub is defined by creating a directory
  * containing two files:
  *   - a file called 'request' containing the request data (HTTP method, path, headers and JSON body), as
  *     follows:
@@ -23,18 +23,24 @@
  *       - On the following lines, headers given by Name: Value, one header per line
  *       - A blank line
  *       - The JSON body
+ * The name of the folder is the name of the stub.
  *
- * This format matches the one of Paw (https://luckymarmot.com/paw). It therefore suffices to create and run a request
+ * The file format matches the one of Paw (https://luckymarmot.com/paw). It therefore suffices to create and run a request
  * with Paw, and to copy the raw request contents to 'request' and 'response' files put in a common folder to create
  * a new stub.
  */
 @interface HTTPStub : NSObject
 
 /**
- * Install / remove stubs
+ * Install the stub with the given name
  */
-+ (void)install;
-+ (void)uninstall;
++ (void)installStubWithName:(NSString *)name;
++ (void)removeStubWithName:(NSString *)name;
+
+/**
+ * Remove all installed stubs
+ */
++ (void)removeAllStubs;
 
 /**
  * The stub name

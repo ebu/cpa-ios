@@ -45,7 +45,7 @@
     
     // Separate metadata and body with an empty line
     NSArray *components = [fileContents componentsSeparatedByString:@"\n\n"];
-    if ([components count] != 2) {
+    if (components.count != 2) {
         return NO;
     }
     
@@ -58,7 +58,7 @@
         // Lines containing : correspond to headers key : value
         if ([metadataLine rangeOfString:@": "].length != 0) {
             NSArray *lineComponents = [metadataLine componentsSeparatedByString:@": "];
-            if ([lineComponents count] == 2) {
+            if (lineComponents.count == 2) {
                 NSString *headerName = [lineComponents firstObject];
                 NSString *headerValue = [lineComponents lastObject];
                 headers[headerName] = headerValue;
@@ -67,14 +67,14 @@
         // Response status
         else if ([metadataLine hasPrefix:@"HTTP"]) {
             NSArray *lineCompoments = [metadataLine componentsSeparatedByString:@" "];
-            if ([lineCompoments count] >= 2) {
+            if (lineCompoments.count >= 2) {
                 self.statusCode = [[lineCompoments objectAtIndex:1] integerValue];
             }
         }
         // Otherwise method and path
         else {
             NSArray *lineComponents = [metadataLine componentsSeparatedByString:@" "];
-            if ([lineComponents count] >= 2) {
+            if (lineComponents.count >= 2) {
                 self.method = HTTPMethodForName([lineComponents firstObject]);
                 if (self.method == HTTPMethodUnknown) {
                     return NO;

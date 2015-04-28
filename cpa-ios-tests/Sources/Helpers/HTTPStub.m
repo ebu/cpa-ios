@@ -10,6 +10,9 @@
 #import "NSBundle+Tests.h"
 #import "OHHTTPStubs.h"
 
+static __weak id<OHHTTPStubsDescriptor> s_defaultStubDescriptor = nil;
+static NSMutableDictionary *s_stubDescriptors = nil;
+
 @interface HTTPStub ()
 
 @property (nonatomic, copy) NSString *name;
@@ -23,74 +26,92 @@
 
 #pragma mark Class methods
 
-+ (NSArray *)HTTPStubs
++ (void)initialize
 {
-    static NSArray *s_stubs;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        NSArray *stubDirectoryPaths = [[NSBundle testBundle] pathsForResourcesOfType:nil inDirectory:@"Stubs"];
-        
-        NSMutableArray *stubs = [NSMutableArray array];
-        for (NSString *stubDirectoryPath in stubDirectoryPaths) {
-            HTTPStub *stub = [[HTTPStub alloc] initWithDirectoryPath:stubDirectoryPath];
-            if (stub) {
-                [stubs addObject:stub];
-            }
-        }
-        s_stubs = [NSArray arrayWithArray:stubs];
-    });
-    return s_stubs;
+    if (self != [HTTPStub class]) {
+        return;
+    }
+    
+    s_stubDescriptors = [NSMutableDictionary dictionary];
 }
 
-+ (void)install
++ (void)installStubWithName:(NSString *)name
 {
-    // Add a default handler so that if no stub is found no network connection is made instead
-    [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
-        return YES;
+    NSParameterAssert(name);
+    
+    HTTPStub *stub = [[HTTPStub alloc] initWithName:name];
+    if (! stub) {
+        return;
+    }
+    
+    if (s_stubDescriptors.count == 0) {
+        // Add a default handler so that if no stub is found no network connection is made instead. This default
+        // handler must be installed first so that it is checked last
+        s_defaultStubDescriptor = [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+            return YES;
+        } withStubResponse:^(NSURLRequest *request) {
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : @"No stub matches this request" };
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorResourceUnavailable userInfo:userInfo];
+            return [OHHTTPStubsResponse responseWithError:error];
+        }];
+    }
+    
+    // Install the stub
+    id<OHHTTPStubsDescriptor> stubDescriptor = [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+        return [stub matchesRequest:request];
     } withStubResponse:^(NSURLRequest *request) {
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : @"No stub matches this request" };
-        NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorResourceUnavailable userInfo:userInfo];
-        return [OHHTTPStubsResponse responseWithError:error];
+        return stub.response;
     }];
     
-    for (HTTPStub *stub in [HTTPStub HTTPStubs]) {
-        [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
-            return [stub matchesRequest:request];
-        } withStubResponse:^(NSURLRequest *request) {
-            return [stub response];
-        }];
+    // Weak references to stub descriptors suffice, see OHHTTPStubs.h
+    s_stubDescriptors[name] = [NSValue valueWithNonretainedObject:stubDescriptor];
+}
+
++ (void)removeStubWithName:(NSString *)name
+{
+    NSParameterAssert(name);
+    
+    id<OHHTTPStubsDescriptor> stubDescriptor = [s_stubDescriptors[name] pointerValue];
+    if (! stubDescriptor) {
+        return;
+    }
+    
+    [OHHTTPStubs removeStub:stubDescriptor];
+    [s_stubDescriptors removeObjectForKey:name];
+    
+    if (s_stubDescriptors.count == 0) {
+        [OHHTTPStubs removeStub:s_defaultStubDescriptor];
     }
 }
 
-+ (void)uninstall
++ (void)removeAllStubs
 {
-    [OHHTTPStubs removeAllStubs];
+    for (NSString *name in [s_stubDescriptors allKeys]) {
+        [self removeStubWithName:name];
+    }
 }
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithDirectoryPath:(NSString *)directoryPath
+- (instancetype)initWithName:(NSString *)name
 {
-    NSParameterAssert(directoryPath);
+    NSParameterAssert(name);
     
     if (self = [super init]) {
-        self.name = [directoryPath lastPathComponent];
+        self.name = name;
         
-        NSString *requestFilePath = [directoryPath stringByAppendingPathComponent:@"request"];
-        if (! requestFilePath) {
+        NSString *stubDirectoryPath = [[NSBundle testBundle] pathForResource:name ofType:nil inDirectory:@"Stubs"];
+        if (! stubDirectoryPath) {
             return nil;
         }
         
+        NSString *requestFilePath = [stubDirectoryPath stringByAppendingPathComponent:@"request"];
         self.requestStubFile = [[HTTPStubFile alloc] initWithFilePath:requestFilePath];
         if (! self.requestStubFile) {
             return nil;
         }
         
-        NSString *responseFilePath = [directoryPath stringByAppendingPathComponent:@"response"];
-        if (! responseFilePath) {
-            return nil;
-        }
-        
+        NSString *responseFilePath = [stubDirectoryPath stringByAppendingPathComponent:@"response"];
         self.responseStubFile = [[HTTPStubFile alloc] initWithFilePath:responseFilePath];
         if (! self.responseStubFile) {
             return nil;
