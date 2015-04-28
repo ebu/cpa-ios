@@ -42,10 +42,19 @@
 
 + (void)install
 {
+    // Add a default handler so that if no stub is found no network connection is made instead
+    [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+        return YES;
+    } withStubResponse:^(NSURLRequest *request) {
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : @"No stub matches this request" };
+        NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorResourceUnavailable userInfo:userInfo];
+        return [OHHTTPStubsResponse responseWithError:error];
+    }];
+    
     for (HTTPStub *stub in [HTTPStub HTTPStubs]) {
         [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
             return [stub matchesRequest:request];
-        } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+        } withStubResponse:^(NSURLRequest *request) {
             return [stub response];
         }];
     }
