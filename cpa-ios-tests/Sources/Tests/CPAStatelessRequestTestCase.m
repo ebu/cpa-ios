@@ -37,7 +37,7 @@ static NSTimeInterval kConnectionTimeOut = 60;
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client registration request"];
     NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
     
-    [CPAStatelessRequest registerClientWithAuthorizationProviderURL:authorizationProviderURL clientName:@"a" softwareIdentifier:@"b" softwareVersion:@"c" completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
+    [CPAStatelessRequest registerClientWithAuthorizationProviderURL:authorizationProviderURL clientName:@"iOS Test" softwareIdentifier:@"ch.ebu.ios_test" softwareVersion:@"0.1" completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
         // ...
         
         [expectation fulfill];

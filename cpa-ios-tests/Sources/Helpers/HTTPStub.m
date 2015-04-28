@@ -90,8 +90,12 @@
 
 - (BOOL)matchesRequest:(NSURLRequest *)request
 {
+    NSDictionary *requestHTTPBodyDictionary = [NSJSONSerialization JSONObjectWithData:request.HTTPBody options:0 error:NULL];
+    NSDictionary *HTTPBodyDictionary = [NSJSONSerialization JSONObjectWithData:self.requestStubFile.bodyData options:0 error:NULL];
+    
     return HTTPMethodForName(request.HTTPMethod) == self.requestStubFile.method
-        && [request.URL.path isEqualToString:self.requestStubFile.path];
+        && [request.URL.path isEqualToString:self.requestStubFile.path]
+        && [requestHTTPBodyDictionary isEqualToDictionary:HTTPBodyDictionary];
 }
 
 - (OHHTTPStubsResponse *)response
