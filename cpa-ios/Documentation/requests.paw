@@ -60,38 +60,26 @@
             </plist>
         </metadata>
     </databaseInfo>
-    <object type="LMENVIRONMENT" id="z102">
-        <attribute name="uuid" type="string">4FB4CDE3-98F8-4ABF-8FA4-AEFE93398B9B</attribute>
-        <attribute name="order" type="int64">1</attribute>
-        <attribute name="name" type="string">RTS</attribute>
-        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z106 z122 z117 z128 z118"></relationship>
-    </object>
     <object type="LMENVIRONMENTDOMAIN" id="z103">
         <attribute name="uuid" type="string">F6E0123F-46FD-46C8-9174-CDA5717B60FB</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Default Domain</attribute>
-        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z102 z108"></relationship>
-        <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE" idrefs="z119 z116 z105 z127 z123"></relationship>
+        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z108"></relationship>
+        <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE" idrefs="z105 z123 z119 z116 z127"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLE" id="z105">
         <attribute name="uuid" type="string">87A59087-08B6-41F6-A455-B4BC897D642F</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">BASE_URL</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z106 z111"></relationship>
-    </object>
-    <object type="LMENVIRONMENTVARIABLEVALUE" id="z106">
-        <attribute name="value" type="string">https://cpa.rts.ch</attribute>
-        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z105"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z111"></relationship>
     </object>
     <object type="LMENVIRONMENT" id="z108">
         <attribute name="uuid" type="string">D4DDFEF1-5C0A-4E65-BAA2-D2445A34EE7F</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">Default Environment</attribute>
+        <attribute name="name" type="string">RTS</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z115 z129 z120 z111 z121"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z111 z120 z129 z121 z115"></relationship>
     </object>
     <object type="LMCOOKIEJAR" id="z110">
         <attribute name="uuid" type="string">D6BA751E-55DE-4B86-B77C-8CE56C41D831</attribute>
@@ -149,24 +137,14 @@
         <attribute name="order" type="int64">1</attribute>
         <attribute name="name" type="string">CLIENT_NAME</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z117 z121"></relationship>
-    </object>
-    <object type="LMENVIRONMENTVARIABLEVALUE" id="z117">
-        <attribute name="value" type="string"></attribute>
-        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z116"></relationship>
-    </object>
-    <object type="LMENVIRONMENTVARIABLEVALUE" id="z118">
-        <attribute name="value" type="string"></attribute>
-        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z123"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z121"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLE" id="z119">
         <attribute name="uuid" type="string">15208061-4A54-4B95-97AC-4FB6A371B50E</attribute>
         <attribute name="order" type="int64">2</attribute>
         <attribute name="name" type="string">SOFTWARE_ID</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z122 z120"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z120"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLEVALUE" id="z120">
         <attribute name="value" type="string">ch.ebu.ios_test</attribute>
@@ -178,17 +156,12 @@
         <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z108"></relationship>
         <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z116"></relationship>
     </object>
-    <object type="LMENVIRONMENTVARIABLEVALUE" id="z122">
-        <attribute name="value" type="string"></attribute>
-        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z119"></relationship>
-    </object>
     <object type="LMENVIRONMENTVARIABLE" id="z123">
         <attribute name="uuid" type="string">429420FC-7D0E-4C28-9BDB-382993741137</attribute>
         <attribute name="order" type="int64">3</attribute>
         <attribute name="name" type="string">SOFTWARE_VERSION</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z118 z115"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z115"></relationship>
     </object>
     <object type="LMREQUEST" id="z124">
         <attribute name="body" type="string">[{"data":{"json":"{\\"client_id\\":\\"[{\\\\\\"data\\\\\\":{\\\\\\"request\\\\\\":\\\\\\"69C1D815-22CC-4D2C-9AA9-8E85A8992B5F\\\\\\",\\\\\\"keyPath\\\\\\":\\\\\\"client_id\\\\\\",\\\\\\"format\\\\\\":1},\\\\\\"identifier\\\\\\":\\\\\\"com.luckymarmot.ResponseBodyPathDynamicValue\\\\\\"}]\\",\\"client_secret\\":\\"[{\\\\\\"data\\\\\\":{\\\\\\"request\\\\\\":\\\\\\"69C1D815-22CC-4D2C-9AA9-8E85A8992B5F\\\\\\",\\\\\\"keyPath\\\\\\":\\\\\\"client_secret\\\\\\",\\\\\\"format\\\\\\":1},\\\\\\"identifier\\\\\\":\\\\\\"com.luckymarmot.ResponseBodyPathDynamicValue\\\\\\"}]\\",\\"domain\\":\\"[{\\\\\\"data\\\\\\":{\\\\\\"environmentVariable\\\\\\":\\\\\\"FD9E2B27-283D-40B3-8E86-570CEF4E894F\\\\\\"},\\\\\\"identifier\\\\\\":\\\\\\"com.luckymarmot.EnvironmentVariableDynamicValue\\\\\\"}]\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
@@ -231,12 +204,7 @@
         <attribute name="order" type="int64">4</attribute>
         <attribute name="name" type="string">DOMAIN</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z103"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z129 z128"></relationship>
-    </object>
-    <object type="LMENVIRONMENTVARIABLEVALUE" id="z128">
-        <attribute name="value" type="string"></attribute>
-        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z127"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z129"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLEVALUE" id="z129">
         <attribute name="value" type="string">cpa.rts.ch</attribute>
