@@ -12,6 +12,8 @@
 
 @interface HTTPStub ()
 
+@property (nonatomic, copy) NSString *name;
+
 @property (nonatomic) HTTPStubFile *requestStubFile;
 @property (nonatomic) HTTPStubFile *responseStubFile;
 
@@ -72,6 +74,8 @@
     NSParameterAssert(directoryPath);
     
     if (self = [super init]) {
+        self.name = [directoryPath lastPathComponent];
+        
         NSString *requestFilePath = [directoryPath stringByAppendingPathComponent:@"request"];
         if (! requestFilePath) {
             return nil;
@@ -102,10 +106,10 @@
     return HTTPMethodForName(request.HTTPMethod) == self.requestStubFile.method
         && [request.URL.path isEqualToString:self.requestStubFile.path]
         && [self matchesBodyOfRequest:request]
-        && [self matchesHeadersOFRequest:request];
+        && [self matchesHeadersOfRequest:request];
 }
 
-- (BOOL)matchesHeadersOFRequest:(NSURLRequest *)request
+- (BOOL)matchesHeadersOfRequest:(NSURLRequest *)request
 {
     static NSArray *s_ignoredFields;
     static dispatch_once_t s_onceToken;
@@ -140,9 +144,10 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; requestStubFile: %@; responseStubFile: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; name: %@; requestStubFile: %@; responseStubFile: %@>",
             [self class],
             self,
+            self.name,
             self.requestStubFile,
             self.responseStubFile];
 }

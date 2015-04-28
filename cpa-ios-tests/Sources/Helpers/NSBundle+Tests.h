@@ -8,6 +8,9 @@
 
 @interface NSBundle (Tests)
 
+/**
+ * Return the test bundle
+ */
 + (NSBundle *)testBundle;
 
 @end
