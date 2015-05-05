@@ -49,6 +49,28 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
+- (void)testRegisterClientNetworkError
+{
+    [HTTPStub installStubWithName:HTTPStubNetworkConnectionLost];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Register client (network error)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest registerClientWithAuthorizationProviderURL:authorizationProviderURL clientName:@"iOS Test" softwareIdentifier:@"ch.ebu.ios_test" softwareVersion:@"0.1" completionBlock:^(NSString *clientIdentifier, NSString *clientSecret, NSError *error) {
+        XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
+        XCTAssertEqual(error.code, NSURLErrorNetworkConnectionLost);
+        
+        XCTAssertNil(clientIdentifier);
+        XCTAssertNil(clientSecret);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
 - (void)testRequestCode
 {
     [HTTPStub installStubWithName:@"request_code"];
@@ -64,6 +86,56 @@ static NSTimeInterval kConnectionTimeOut = 60;
         XCTAssertEqualObjects(verificationURL, [NSURL URLWithString:@"https://cpa.rts.ch"]);
         XCTAssertEqual(pollingIntervalInSeconds, 5);
         XCTAssertEqual(expiresInSeconds, 3599);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestCodeInvalidClient
+{
+    [HTTPStub installStubWithName:@"request_code_invalid_client"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request code (invalid client)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"1NV4L1DCL13N7" clientSecret:@"1NV4L1D53CR37" domain:@"cpa.rts.ch" completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorInvalidClient);
+        
+        XCTAssertNil(deviceCode);
+        XCTAssertNil(userCode);
+        XCTAssertNil(verificationURL);
+        XCTAssertEqual(pollingIntervalInSeconds, 0);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestCodeNetworkError
+{
+    [HTTPStub installStubWithName:HTTPStubNetworkConnectionLost];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request code (network error)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestCodeWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *deviceCode, NSString *userCode, NSURL *verificationURL, NSInteger pollingIntervalInSeconds, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
+        XCTAssertEqual(error.code, NSURLErrorNetworkConnectionLost);
+        
+        XCTAssertNil(deviceCode);
+        XCTAssertNil(userCode);
+        XCTAssertNil(verificationURL);
+        XCTAssertEqual(pollingIntervalInSeconds, 0);
+        XCTAssertEqual(expiresInSeconds, 0);
         
         [expectation fulfill];
     }];
@@ -97,11 +169,61 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
-- (void)testRequestUserTokenAccepted
+- (void)testRequestClientTokenInvalidClient
 {
-    [HTTPStub installStubWithName:@"request_user_token_accepted"];
+    [HTTPStub installStubWithName:@"request_client_token_invalid_client"];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token (authorization accepted)"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request client token (invalid client)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestClientTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"1NV4L1DCL13N7" clientSecret:@"1NV4L1D53CR37" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorInvalidClient);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestClientTokenNetworkError
+{
+    [HTTPStub installStubWithName:HTTPStubNetworkConnectionLost];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request client token (network error)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestClientTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"0b596bf22cf992b8fd8202126ee5db40" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
+        XCTAssertEqual(error.code, NSURLErrorNetworkConnectionLost);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestUserToken
+{
+    [HTTPStub installStubWithName:@"request_user_token"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token"];
     NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
     
     [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1" clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
@@ -121,9 +243,9 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
-- (void)testRequestUserTokenPending
+- (void)testRequestUserTokenAuthorizationPending
 {
-    [HTTPStub installStubWithName:@"request_user_token_pending"];
+    [HTTPStub installStubWithName:@"request_user_token_authorization_pending"];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token (pending authorization)"];
     NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
@@ -146,11 +268,160 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
-- (void)testRefreshUserToken
+- (void)testRequestUserTokenInvalidClient
 {
-    [HTTPStub installStubWithName:@"refresh_user_token"];
+    [HTTPStub installStubWithName:@"request_user_token_invalid_client"];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh user token"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token (invalid client)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"1NV4L1DCOD3" clientIdentifier:@"1NV4L1DCL13N7" clientSecret:@"1NV4L1D53CR37" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorInvalidClient);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestUserTokenNetworkError
+{
+    [HTTPStub installStubWithName:HTTPStubNetworkConnectionLost];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1" clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
+        XCTAssertEqual(error.code, NSURLErrorNetworkConnectionLost);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestUserTokenSlowDown
+{
+    [HTTPStub installStubWithName:@"request_user_token_slow_down"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1" clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorTooFast);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRefreshTokenClient
+{
+    [HTTPStub installStubWithName:@"refresh_token_client"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh token (client)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest refreshTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"0b596bf22cf992b8fd8202126ee5db40" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertNil(error);
+        
+        XCTAssertNil(userName);
+        XCTAssertEqualObjects(accessToken, @"2232af6d5daa04f073561a859e95ba77");
+        XCTAssertEqualObjects(tokenType, @"bearer");
+        XCTAssertEqualObjects(domainName, @"RTS - HbbTV demo");
+        XCTAssertEqual(expiresInSeconds, 2591999);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRefreshTokenInvalidClient
+{
+    [HTTPStub installStubWithName:@"refresh_token_invalid_client"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh client token (invalid client)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest refreshTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"1NV4L1DCL13N7" clientSecret:@"1NV4L1D53CR37" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorInvalidClient);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRefreshClientTokenNetworkError
+{
+    [HTTPStub installStubWithName:HTTPStubNetworkConnectionLost];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh client token (network error)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest refreshTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
+        XCTAssertEqual(error.code, NSURLErrorNetworkConnectionLost);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRefreshTokenUser
+{
+    [HTTPStub installStubWithName:@"refresh_token_user"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh token (user)"];
     NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
     
     [CPAStatelessRequest refreshTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {

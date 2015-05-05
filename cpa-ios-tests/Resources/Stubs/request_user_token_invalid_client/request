@@ -1,0 +1,9 @@
+POST /token HTTP/1.1
+Content-Type: application/json
+Cookie: connect.sid=s%3A6oPqyeU3jYBJIzyTnDB8Doch.cC1ElGW3%2BGVDWvAHSF7qGsf%2F88PFQ1v4UfC81HOoeek
+Host: cpa.rts.ch
+Connection: close
+User-Agent: Paw/2.2.1 (Macintosh; OS X/10.10.3) GCDHTTPRequest
+Content-Length: 165
+
+{"grant_type":"http://tech.ebu.ch/cpa/1.0/device_code","device_code":"1NV4L1DCOD3","client_id":"1NV4L1DCL13N7","client_secret":"1NV4L1D53CR37","domain":"cpa.rts.ch"}

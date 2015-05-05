@@ -10,6 +10,8 @@
 #import "NSBundle+Tests.h"
 #import "OHHTTPStubs.h"
 
+NSString * const HTTPStubNetworkConnectionLost = @"HTTPStubNetworkConnectionLost_reserved";
+
 static __weak id<OHHTTPStubsDescriptor> s_defaultStubDescriptor = nil;
 static NSMutableDictionary *s_stubDescriptors = nil;
 
@@ -35,12 +37,23 @@ static NSMutableDictionary *s_stubDescriptors = nil;
     s_stubDescriptors = [NSMutableDictionary dictionary];
 }
 
++ (NSArray *)availableStubNames
+{
+    NSString *stubDirectoryPath = [[NSBundle testBundle] pathForResource:@"Stubs" ofType:nil];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stubDirectoryPath error:NULL];
+}
+
 + (void)installStubWithName:(NSString *)name
 {
     NSParameterAssert(name);
     
-    HTTPStub *stub = [[HTTPStub alloc] initWithName:name];
-    if (! stub) {
+    // Already installed
+    if (s_stubDescriptors[name]) {
+        return;
+    }
+    
+    // Check availability
+    if (! [[self availableStubNames] containsObject:name] && ! [name isEqualToString:HTTPStubNetworkConnectionLost]) {
         return;
     }
     
@@ -56,12 +69,29 @@ static NSMutableDictionary *s_stubDescriptors = nil;
         }];
     }
     
-    // Install the stub
-    id<OHHTTPStubsDescriptor> stubDescriptor = [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
-        return [stub matchesRequest:request];
-    } withStubResponse:^(NSURLRequest *request) {
-        return stub.response;
-    }];
+    id<OHHTTPStubsDescriptor> stubDescriptor = nil;
+    if (! [name isEqualToString:HTTPStubNetworkConnectionLost]) {
+        HTTPStub *stub = [[HTTPStub alloc] initWithName:name];
+        if (! stub) {
+            return;
+        }
+        
+        // Install the stub
+        stubDescriptor = [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+            return [stub matchesRequest:request];
+        } withStubResponse:^(NSURLRequest *request) {
+            return stub.response;
+        }];
+    }
+    else {
+        stubDescriptor = [OHHTTPStubs stubRequestsPassingTest:^(NSURLRequest *request) {
+            return YES;
+        } withStubResponse:^(NSURLRequest *request) {
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : @"A stubbed network error has occurred" };
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorNetworkConnectionLost userInfo:userInfo];
+            return [OHHTTPStubsResponse responseWithError:error];
+        }];
+    }
     
     // Weak references to stub descriptors suffice, see OHHTTPStubs.h
     s_stubDescriptors[name] = [NSValue valueWithNonretainedObject:stubDescriptor];

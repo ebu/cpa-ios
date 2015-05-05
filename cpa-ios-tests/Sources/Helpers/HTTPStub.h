@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+OBJC_EXPORT NSString * const HTTPStubNetworkConnectionLost;
+
 /**
  * Represent a stub. Stubs are expected in the Stubs directory of the test bundle. A stub is defined by creating a directory
  * containing two files:
@@ -32,7 +34,13 @@
 @interface HTTPStub : NSObject
 
 /**
- * Install the stub with the given name
+ * Return all available stub names (except HTTPStubNetworkConnectionLost which is alaways available)
+ */
++ (NSArray *)availableStubNames;
+
+/**
+ * Install the stub with the given name. Pass HTTPStubNetworkConnectionLost as name to install a stub simulating
+ * network errors (errors in NSURLDomain with code NSURLErrorNetworkConnectionLost are returned)
  */
 + (void)installStubWithName:(NSString *)name;
 + (void)removeStubWithName:(NSString *)name;
