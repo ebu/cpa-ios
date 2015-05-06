@@ -217,6 +217,33 @@ from the main project directory.
 
 An `install_git_hooks.sh` script is available from the main directory. You should run it once to install convenient git hooks which take care of properly assigning Travis CI badges on a branch basis.
 
+### Code coverage
+
+To get code coverage results locally, proceed as follows:
+
+* Clone XcodeCoverage somewhere:
+
+    ```
+    $ git clone git@github.com:jonreid/XcodeCoverage.git
+    ```
+    
+* Switch to the `cpa-ios` subdirectory and create a symbolic link to your XcodeCoverage working copy:
+
+    ```
+    $ cd cpa-ios
+    $ ln -s /path/to/XcodeCoverage
+    ```
+
+* Run the tests within Xcode by switching to the `cpa-ios-tests-runner` target and pressing ⌘+U
+* Generate the code coverage report by running the `getcov` command:
+
+    ```
+    $ cd cpa-ios
+    $ ./XcodeCoverage/getcov
+    ```
+    
+Your default browser should open and display the coverage results.
+
 ## Related projects
 
 * [CPA Authentication Provider](https://github.com/ebu/cpa-auth-provider)
