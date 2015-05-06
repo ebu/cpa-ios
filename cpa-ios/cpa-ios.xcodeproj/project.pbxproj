@@ -330,6 +330,7 @@
 				E6064F9F1AD659B2008FC7EE /* Sources */,
 				E6064FA01AD659B2008FC7EE /* Frameworks */,
 				E6064FA11AD659B2008FC7EE /* CopyFiles */,
+				C2BCBBC41AFA48800046B912 /* Export Environment for XcodeCoverage */,
 			);
 			buildRules = (
 			);
@@ -462,6 +463,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C2BCBBC41AFA48800046B912 /* Export Environment for XcodeCoverage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Export Environment for XcodeCoverage";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find -L . -name exportenv.sh -exec {} \\;";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E6064F9F1AD659B2008FC7EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -527,6 +545,93 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C2BCBBC51AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Coverage;
+		};
+		C2BCBBC61AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Coverage;
+		};
+		C2BCBBC71AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
+			};
+			name = Coverage;
+		};
+		C2BCBBC81AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Coverage;
+		};
 		E6064FB51AD659B2008FC7EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -694,6 +799,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6064FB51AD659B2008FC7EE /* Debug */,
+				C2BCBBC51AFA48CE0046B912 /* Coverage */,
 				E6064FB61AD659B2008FC7EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -703,6 +809,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6064FB81AD659B2008FC7EE /* Debug */,
+				C2BCBBC61AFA48CE0046B912 /* Coverage */,
 				E6064FB91AD659B2008FC7EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -712,6 +819,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E690966B1ADE3D5200B62EB6 /* Debug */,
+				C2BCBBC81AFA48CE0046B912 /* Coverage */,
 				E690966C1ADE3D5200B62EB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -721,6 +829,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6CAEC011AD7F9E8008EB753 /* Debug */,
+				C2BCBBC71AFA48CE0046B912 /* Coverage */,
 				E6CAEC021AD7F9E8008EB753 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
