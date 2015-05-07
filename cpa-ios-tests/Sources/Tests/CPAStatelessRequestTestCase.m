@@ -441,4 +441,28 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
+- (void)testRefreshTokenJSONWithNull
+{
+    [HTTPStub installStubWithName:@"refresh_token_json_with_null"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Refresh token (JSON With Null)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest refreshTokenWithAuthorizationProviderURL:authorizationProviderURL clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertNil(error);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
 @end
