@@ -239,7 +239,7 @@ To get code coverage results locally, proceed as follows:
 
     ```
     $ cd cpa-ios
-    $ ./XcodeCoverage/getcov
+    $ ./XcodeCoverage/getcov -s
     ```
     
 Your default browser should open and display the coverage results.
