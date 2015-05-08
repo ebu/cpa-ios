@@ -29,7 +29,7 @@
         }
         
         id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
-        if (! responseJSON || ! [responseJSON isKindOfClass:[NSDictionary class]]) {
+        if (! responseJSON || ! [responseJSON isKindOfClass:[NSMutableDictionary class]]) {
             NSError *parsingError = CPAErrorFromCode(CPAErrorInvalidResponse);
             completionHandler ? completionHandler(nil, response, parsingError) : nil;
             return;
