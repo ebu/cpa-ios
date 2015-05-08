@@ -268,6 +268,56 @@ static NSTimeInterval kConnectionTimeOut = 60;
     }];
 }
 
+- (void)testRequestUserTokenDenied
+{
+    [HTTPStub installStubWithName:@"request_user_token_denied"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token (denied)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1" clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorAuthorizationDenied);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)testRequestUserTokenExpired
+{
+    [HTTPStub installStubWithName:@"request_user_token_expired"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request user token (expired)"];
+    NSURL *authorizationProviderURL = [NSURL URLWithString:@"https://cpa.rts.ch"];
+    
+    [CPAStatelessRequest requestUserTokenWithAuthorizationProviderURL:authorizationProviderURL deviceCode:@"3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1" clientIdentifier:@"407" clientSecret:@"f9f1c336a59219e05a59eecb40eb49eb" domain:@"cpa.rts.ch" completionBlock:^(NSString *userName, NSString *accessToken, NSString *tokenType, NSString *domainName, NSInteger expiresInSeconds, NSError *error) {
+        XCTAssertEqualObjects(error.domain, CPAErrorDomain);
+        XCTAssertEqual(error.code, CPAErrorAuthorizationRequestExpired);
+        
+        XCTAssertNil(userName);
+        XCTAssertNil(accessToken);
+        XCTAssertNil(tokenType);
+        XCTAssertNil(domainName);
+        XCTAssertEqual(expiresInSeconds, 0);
+        
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kConnectionTimeOut handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+}
+
 - (void)testRequestUserTokenInvalidClient
 {
     [HTTPStub installStubWithName:@"request_user_token_invalid_client"];
