@@ -28,14 +28,19 @@
             return;
         }
         
-        id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+        id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
         if (! responseJSON || ! [responseJSON isKindOfClass:[NSDictionary class]]) {
             NSError *parsingError = CPAErrorFromCode(CPAErrorInvalidResponse);
             completionHandler ? completionHandler(nil, response, parsingError) : nil;
             return;
         }
         
-        NSDictionary *responseDictionary = responseJSON;
+        NSMutableDictionary *responseDictionary = responseJSON;
+        [[responseDictionary copy] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            if (obj == [NSNull null]) {
+                [responseDictionary removeObjectForKey:key];
+            }
+        }];
         
         // Deal with errors which might have been returned in the response JSON
         NSString *errorIdentifier = responseDictionary[@"error"] ?: responseDictionary[@"reason"];
