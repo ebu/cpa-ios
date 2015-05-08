@@ -61,6 +61,7 @@
 		E684D3D31AD809D400EDCA66 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E684D3D61AD80A6600EDCA66 /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		E68FE5A21AFA50F0002FC50A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.coverage.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.coverage.xcconfig"; sourceTree = "<group>"; };
 		E6E3F5A71AE8AA1700044009 /* HTTPStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStub.h; sourceTree = "<group>"; };
 		E6E3F5A81AE8AA1700044009 /* HTTPStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPStub.m; sourceTree = "<group>"; };
 		E6E3F5E31AE97A3600044009 /* HTTPStubFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStubFile.h; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		DE0238BEB87EAA408753FBFC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */,
 				6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */,
 				3CB3ED470DBCCF15644C899B /* Pods-cpa-ios-tests.release.xcconfig */,
 			);
@@ -458,7 +460,7 @@
 		};
 		C2BCBBCB1AFA49230046B912 /* Coverage */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */;
+			baseConfigurationReference = E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
