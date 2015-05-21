@@ -106,9 +106,15 @@ typedef void (^CPATokenCompletionBlock)(CPAToken * __nullable token, NSError * _
               completionBlock:(nullable CPATokenCompletionBlock)completionBlock;
 
 /**
- * Discard a locally available token for the given domain, if any
+ * Discard a locally available token for the given domain, if any. The identity itself does not get discarded, a new
+ * user token can therefore be obtained without entering credentials again
  */
 - (void)discardTokenForDomain:(NSString *)domain;
+
+/**
+ * Discard the identity and all associated tokens
+ */
+- (void)discardIdentity;
 
 @end
 
