@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 17 Apr 2015 13:16:55 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 169
+Connection: close
+X-Powered-By: Express
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  "device_code": "3ddd6b1e-d710-4eeb-ada8-a0d48f6cb0d1",
+  "user_code": "KjaCtqSC",
+  "verification_uri": "https://cpa.rts.ch",
+  "interval": 5,
+  "expires_in": 3599
+}

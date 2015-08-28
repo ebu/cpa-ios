@@ -5,6 +5,12 @@
       location = "group:cpa-ios/cpa-ios.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:cpa-ios-tests/cpa-ios-tests-runner.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:cpa-ios-demo/cpa-ios-demo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

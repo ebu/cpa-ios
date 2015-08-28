@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Authenticated"; ObjectID = "KKC-gB-Iyh"; */
+"KKC-gB-Iyh.text" = "Authentifié";
+
+/* Class = "UINavigationItem"; title = "Domains"; ObjectID = "bqd-uq-MxB"; */
+"bqd-uq-MxB.title" = "Domaines";
+
+/* Class = "UILabel"; text = "RTS HbbTV"; ObjectID = "dq0-wd-qmK"; */
+"dq0-wd-qmK.text" = "HbbTV RTS";
+
+/* Class = "UILabel"; text = "Force renewal"; ObjectID = "m6f-lp-DQy"; */
+"m6f-lp-DQy.text" = "Forcer renouvellement";
+
+/* Class = "UILabel"; text = "Custom transition"; ObjectID = "pes-Sn-1ct"; */
+"pes-Sn-1ct.text" = "Transition personnalisée";
+
+/* Class = "UIButton"; normalTitle = "Retrieve token"; ObjectID = "rXy-lv-sL5"; */
+"rXy-lv-sL5.normalTitle" = "Récupéréer token";
+
+/* Class = "UILabel"; text = "Unsupported domain"; ObjectID = "sHz-8E-gQG"; */
+"sHz-8E-gQG.text" = "Domaine non géré";
+
+/* Class = "UILabel"; text = "RTS Playlist"; ObjectID = "syr-Dc-clK"; */
+"syr-Dc-clK.text" = "Liste de lecture RTS";

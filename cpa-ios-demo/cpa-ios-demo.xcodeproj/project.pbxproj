@@ -7,10 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E606502F1AD65BCB008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502C1AD65BCB008FC7EE /* AppDelegate.m */; };
-		E60650301AD65BCB008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606502D1AD65BCB008FC7EE /* main.m */; };
 		E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E606503B1AD65D15008FC7EE /* libcpa-ios.a */; };
-		E60650401AD661BB008FC7EE /* version.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E606503F1AD661BB008FC7EE /* version.xcconfig */; };
+		E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504C1AD673A5008FC7EE /* AppDelegate.m */; };
+		E606504F1AD673A5008FC7EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E606504D1AD673A5008FC7EE /* main.m */; };
+		E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
+		E63352191ADFB9F6009027B7 /* DomainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650561AD67926008FC7EE /* DomainViewController.m */; };
+		E633521D1ADFC078009027B7 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E633521B1ADFC078009027B7 /* Application.storyboard */; };
+		E63352241ADFC0F8009027B7 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E63352221ADFC0F8009027B7 /* Application.storyboard */; };
+		E67470061ADE6DBA0061621B /* DomainsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470051ADE6DBA0061621B /* DomainsViewController.m */; };
+		E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
+		E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */; };
+		E69AF8F71ADF9B0E00AC87FF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E69AF8F81ADF9B0E00AC87FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6257CAD1AD6D321005FE6D2 /* Security.framework */; };
+		E69AF8F91ADF9B0E00AC87FF /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E606503B1AD65D15008FC7EE /* libcpa-ios.a */; };
+		E69AF8FB1ADF9B0E00AC87FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E684D3E71AD81EB200EDCA66 /* Localizable.strings */; };
+		E69AF8FD1ADF9B0E00AC87FF /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */; };
+		E6EA44A41ADFAAE100D2F333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EA44A11ADFAAE100D2F333 /* AppDelegate.swift */; };
+		E6EA44A51ADFAAE100D2F333 /* DomainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EA44A21ADFAAE100D2F333 /* DomainsViewController.swift */; };
+		E6EA44A61ADFAAE100D2F333 /* DomainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EA44A31ADFAAE100D2F333 /* DomainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -21,16 +36,50 @@
 			remoteGlobalIDString = E6064FA31AD659B2008FC7EE;
 			remoteInfo = "cpa-ios";
 		};
+		E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6CAEBFC1AD7F9E8008EB753;
+			remoteInfo = "cpa-ios-resources";
+		};
+		E69096721ADE3D8200B62EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E69096581ADE3D5200B62EB6;
+			remoteInfo = "cpa-ios-framework";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E6064FF81AD65B0C008FC7EE /* cpa-ios-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60650281AD65BCB008FC7EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E606502B1AD65BCB008FC7EE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E606502C1AD65BCB008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E606502D1AD65BCB008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cpa-ios.xcodeproj"; path = "../cpa-ios/cpa-ios.xcodeproj"; sourceTree = "<group>"; };
 		E606503F1AD661BB008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		E606504B1AD673A5008FC7EE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E606504C1AD673A5008FC7EE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E606504D1AD673A5008FC7EE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E60650551AD67926008FC7EE /* DomainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainViewController.h; sourceTree = "<group>"; };
+		E60650561AD67926008FC7EE /* DomainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainViewController.m; sourceTree = "<group>"; };
+		E6257CAD1AD6D321005FE6D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E633521C1ADFC078009027B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
+		E633521F1ADFC082009027B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
+		E63352211ADFC086009027B7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
+		E63352231ADFC0F8009027B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
+		E63352251ADFC101009027B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Application.strings; sourceTree = "<group>"; };
+		E63352261ADFC104009027B7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Application.strings; sourceTree = "<group>"; };
+		E67470041ADE6DBA0061621B /* DomainsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainsViewController.h; sourceTree = "<group>"; };
+		E67470051ADE6DBA0061621B /* DomainsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainsViewController.m; sourceTree = "<group>"; };
+		E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E684D3E81AD81EB200EDCA66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E684D3EA1AD81EB800EDCA66 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69AF9011ADF9B0E00AC87FF /* cpa-ios-demo-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-demo-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6EA44A01ADFAAE000D2F333 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		E6EA44A11ADFAAE100D2F333 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E6EA44A21ADFAAE100D2F333 /* DomainsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainsViewController.swift; sourceTree = "<group>"; };
+		E6EA44A31ADFAAE100D2F333 /* DomainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +87,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67F11EC1ADD0D5A00AFC2C7 /* WebKit.framework in Frameworks */,
+				E6257CAE1AD6D321005FE6D2 /* Security.framework in Frameworks */,
 				E606503C1AD65D21008FC7EE /* libcpa-ios.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69AF8F61ADF9B0E00AC87FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69AF8F71ADF9B0E00AC87FF /* WebKit.framework in Frameworks */,
+				E69AF8F81ADF9B0E00AC87FF /* Security.framework in Frameworks */,
+				E69AF8F91ADF9B0E00AC87FF /* libcpa-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,7 +111,9 @@
 			children = (
 				E60650351AD65D0C008FC7EE /* Dependencies */,
 				E60650291AD65BCB008FC7EE /* Sources */,
+				E6EA446E1ADFA98A00D2F333 /* Sources_Swift */,
 				E60650271AD65BCB008FC7EE /* Resources */,
+				E6257CB01AD6D327005FE6D2 /* Frameworks */,
 				E6064FF91AD65B0C008FC7EE /* Products */,
 				E606503F1AD661BB008FC7EE /* version.xcconfig */,
 			);
@@ -60,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				E6064FF81AD65B0C008FC7EE /* cpa-ios-demo.app */,
+				E69AF9011ADF9B0E00AC87FF /* cpa-ios-demo-swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +131,7 @@
 		E60650271AD65BCB008FC7EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E684D3E71AD81EB200EDCA66 /* Localizable.strings */,
 				E60650281AD65BCB008FC7EE /* Info.plist */,
 			);
 			path = Resources;
@@ -75,25 +140,23 @@
 		E60650291AD65BCB008FC7EE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E606502A1AD65BCB008FC7EE /* Application */,
+				E606504B1AD673A5008FC7EE /* AppDelegate.h */,
+				E606504C1AD673A5008FC7EE /* AppDelegate.m */,
+				E633521B1ADFC078009027B7 /* Application.storyboard */,
+				E67470041ADE6DBA0061621B /* DomainsViewController.h */,
+				E67470051ADE6DBA0061621B /* DomainsViewController.m */,
+				E60650551AD67926008FC7EE /* DomainViewController.h */,
+				E60650561AD67926008FC7EE /* DomainViewController.m */,
+				E606504D1AD673A5008FC7EE /* main.m */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		E606502A1AD65BCB008FC7EE /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				E606502B1AD65BCB008FC7EE /* AppDelegate.h */,
-				E606502C1AD65BCB008FC7EE /* AppDelegate.m */,
-				E606502D1AD65BCB008FC7EE /* main.m */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		E60650351AD65D0C008FC7EE /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				E60650361AD65D15008FC7EE /* cpa-ios.xcodeproj */,
+				E6897B4B1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -102,8 +165,31 @@
 			isa = PBXGroup;
 			children = (
 				E606503B1AD65D15008FC7EE /* libcpa-ios.a */,
+				E6897B451AD7FC4A0083E1BB /* CrossPlatformAuthentication-resources.bundle */,
+				E69096731ADE3D8200B62EB6 /* CrossPlatformAuthentication.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E6257CB01AD6D327005FE6D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E67F11EB1ADD0D5A00AFC2C7 /* WebKit.framework */,
+				E6257CAD1AD6D321005FE6D2 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6EA446E1ADFA98A00D2F333 /* Sources_Swift */ = {
+			isa = PBXGroup;
+			children = (
+				E6EA44A11ADFAAE100D2F333 /* AppDelegate.swift */,
+				E63352221ADFC0F8009027B7 /* Application.storyboard */,
+				E6EA44A01ADFAAE000D2F333 /* BridgingHeader.h */,
+				E6EA44A21ADFAAE100D2F333 /* DomainsViewController.swift */,
+				E6EA44A31ADFAAE100D2F333 /* DomainViewController.swift */,
+			);
+			path = Sources_Swift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +212,23 @@
 			productReference = E6064FF81AD65B0C008FC7EE /* cpa-ios-demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E69AF8F01ADF9B0E00AC87FF /* cpa-ios-demo-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E69AF8FE1ADF9B0E00AC87FF /* Build configuration list for PBXNativeTarget "cpa-ios-demo-swift" */;
+			buildPhases = (
+				E69AF8F11ADF9B0E00AC87FF /* Sources */,
+				E69AF8F61ADF9B0E00AC87FF /* Frameworks */,
+				E69AF8FA1ADF9B0E00AC87FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-demo-swift";
+			productName = "cpa-ios-demo";
+			productReference = E69AF9011ADF9B0E00AC87FF /* cpa-ios-demo-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -133,7 +236,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "European Broadcasting Union";
 				TargetAttributes = {
 					E6064FF71AD65B0C008FC7EE = {
@@ -146,8 +249,9 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				fr,
 			);
 			mainGroup = E6064FEF1AD65B0C008FC7EE;
 			productRefGroup = E6064FF91AD65B0C008FC7EE /* Products */;
@@ -161,6 +265,7 @@
 			projectRoot = "";
 			targets = (
 				E6064FF71AD65B0C008FC7EE /* cpa-ios-demo */,
+				E69AF8F01ADF9B0E00AC87FF /* cpa-ios-demo-swift */,
 			);
 		};
 /* End PBXProject section */
@@ -173,6 +278,20 @@
 			remoteRef = E606503A1AD65D15008FC7EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E6897B451AD7FC4A0083E1BB /* CrossPlatformAuthentication-resources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CrossPlatformAuthentication-resources.bundle";
+			remoteRef = E6897B441AD7FC4A0083E1BB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E69096731ADE3D8200B62EB6 /* CrossPlatformAuthentication.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CrossPlatformAuthentication.framework;
+			remoteRef = E69096721ADE3D8200B62EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -180,7 +299,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60650401AD661BB008FC7EE /* version.xcconfig in Resources */,
+				E684D3E91AD81EB200EDCA66 /* Localizable.strings in Resources */,
+				E6897B4C1AD800660083E1BB /* CrossPlatformAuthentication-resources.bundle in Resources */,
+				E633521D1ADFC078009027B7 /* Application.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69AF8FA1ADF9B0E00AC87FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69AF8FB1ADF9B0E00AC87FF /* Localizable.strings in Resources */,
+				E69AF8FD1ADF9B0E00AC87FF /* CrossPlatformAuthentication-resources.bundle in Resources */,
+				E63352241ADFC0F8009027B7 /* Application.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,12 +322,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60650301AD65BCB008FC7EE /* main.m in Sources */,
-				E606502F1AD65BCB008FC7EE /* AppDelegate.m in Sources */,
+				E63352191ADFB9F6009027B7 /* DomainViewController.m in Sources */,
+				E606504F1AD673A5008FC7EE /* main.m in Sources */,
+				E67470061ADE6DBA0061621B /* DomainsViewController.m in Sources */,
+				E606504E1AD673A5008FC7EE /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69AF8F11ADF9B0E00AC87FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6EA44A61ADFAAE100D2F333 /* DomainViewController.swift in Sources */,
+				E6EA44A51ADFAAE100D2F333 /* DomainsViewController.swift in Sources */,
+				E6EA44A41ADFAAE100D2F333 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E633521B1ADFC078009027B7 /* Application.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E633521C1ADFC078009027B7 /* Base */,
+				E633521F1ADFC082009027B7 /* en */,
+				E63352211ADFC086009027B7 /* fr */,
+			);
+			name = Application.storyboard;
+			sourceTree = "<group>";
+		};
+		E63352221ADFC0F8009027B7 /* Application.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E63352231ADFC0F8009027B7 /* Base */,
+				E63352251ADFC101009027B7 /* en */,
+				E63352261ADFC104009027B7 /* fr */,
+			);
+			name = Application.storyboard;
+			sourceTree = "<group>";
+		};
+		E684D3E71AD81EB200EDCA66 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E684D3E81AD81EB200EDCA66 /* en */,
+				E684D3EA1AD81EB800EDCA66 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E60650191AD65B0C008FC7EE /* Debug */ = {
@@ -216,7 +391,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -257,7 +432,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -282,8 +457,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
 			};
 			name = Debug;
 		};
@@ -294,8 +474,52 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
+			};
+			name = Release;
+		};
+		E69AF8FF1ADF9B0E00AC87FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "cpa-ios-demo-swift";
+				SWIFT_OBJC_BRIDGING_HEADER = Sources_Swift/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
+			};
+			name = Debug;
+		};
+		E69AF9001ADF9B0E00AC87FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503F1AD661BB008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "cpa-ios-demo-swift";
+				SWIFT_OBJC_BRIDGING_HEADER = Sources_Swift/BridgingHeader.h;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
 			};
 			name = Release;
 		};
@@ -316,6 +540,15 @@
 			buildConfigurations = (
 				E606501C1AD65B0C008FC7EE /* Debug */,
 				E606501D1AD65B0C008FC7EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E69AF8FE1ADF9B0E00AC87FF /* Build configuration list for PBXNativeTarget "cpa-ios-demo-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E69AF8FF1ADF9B0E00AC87FF /* Debug */,
+				E69AF9001ADF9B0E00AC87FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,8 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m */; };
+		E60650341AD65CFB008FC7EE /* CPAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* CPAProvider.m */; };
+		E6257C9A1AD6C044005FE6D2 /* CPAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* CPAToken.m */; };
+		E6257CAA1AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E65A41721AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */; };
+		E65A41751AD7EABC00D8F289 /* CPAErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* CPAErrors.m */; };
+		E65A417B1AD7F76600D8F289 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
+		E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470201ADE8DDC0061621B /* CPAIdentity.m */; };
+		E67470221ADE8DF20061621B /* CPAIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = E674701F1ADE8DDC0061621B /* CPAIdentity.h */; };
+		E67470231ADE8DFA0061621B /* CPAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E67470201ADE8DDC0061621B /* CPAIdentity.m */; };
+		E67470271ADE91090061621B /* CPAIdentity+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E67470241ADE90F70061621B /* CPAIdentity+Private.h */; };
+		E67F11B91ADCF83100AFC2C7 /* CPAAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */; };
+		E67F11BE1ADD027B00AFC2C7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */; };
+		E67F11D81ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */; };
+		E67F11D91ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CA1ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png */; };
+		E67F11DA1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CB1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png */; };
+		E67F11DB1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CC1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png */; };
+		E67F11DC1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html */; };
+		E67F11DD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CE1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html */; };
+		E67F11DE1ADD08D600AFC2C7 /* ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D01ADD08D600AFC2C7 /* ButtonBarArrowLeft.png */; };
+		E67F11DF1ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D11ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png */; };
+		E67F11E01ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D21ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png */; };
+		E67F11E11ADD08D600AFC2C7 /* ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D31ADD08D600AFC2C7 /* ButtonBarArrowRight.png */; };
+		E67F11E21ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D41ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png */; };
+		E67F11E31ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D51ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png */; };
+		E67F11E41ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */; };
+		E67F11EA1ADD0B4800AFC2C7 /* CPAKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */; };
+		E684D3DA1AD80AE600EDCA66 /* CPAStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */; };
+		E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */; };
+		E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */; };
+		E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = E60650321AD65CFB008FC7EE /* CPAProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E690967C1ADE3F2400B62EB6 /* CPAProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E60650331AD65CFB008FC7EE /* CPAProvider.m */; };
+		E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41731AD7EABC00D8F289 /* CPAErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41741AD7EABC00D8F289 /* CPAErrors.m */; };
+		E690967F1ADE3F2D00B62EB6 /* CPAErrors+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */; };
+		E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */; };
+		E69096811ADE3F3200B62EB6 /* CPAKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */; };
+		E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */; };
+		E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */; };
+		E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C981AD6C044005FE6D2 /* CPAToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69096851ADE3F3E00B62EB6 /* CPAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257C991AD6C044005FE6D2 /* CPAToken.m */; };
+		E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */; };
+		E69096871ADE3F4300B62EB6 /* NSURLConnection+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */; };
+		E69096881ADE3F4500B62EB6 /* NSURLConnection+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */; };
+		E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */; };
+		E690968A1ADE3F4B00B62EB6 /* NSBundle+CPAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */; };
+		E690968B1ADE3F5A00B62EB6 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */; };
+		E690968C1ADE3F5A00B62EB6 /* EmbossedIcon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CA1ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png */; };
+		E690968D1ADE3F5A00B62EB6 /* EmbossedIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CB1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png */; };
+		E690968E1ADE3F5A00B62EB6 /* EmbossedIcon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CC1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png */; };
+		E690968F1ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html */; };
+		E69096901ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */ = {isa = PBXBuildFile; fileRef = E67F11CE1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html */; };
+		E69096911ADE3F5F00B62EB6 /* ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D01ADD08D600AFC2C7 /* ButtonBarArrowLeft.png */; };
+		E69096921ADE3F5F00B62EB6 /* ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D11ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png */; };
+		E69096931ADE3F5F00B62EB6 /* ButtonBarArrowLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D21ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png */; };
+		E69096941ADE3F5F00B62EB6 /* ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D31ADD08D600AFC2C7 /* ButtonBarArrowRight.png */; };
+		E69096951ADE3F5F00B62EB6 /* ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D41ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png */; };
+		E69096961ADE3F5F00B62EB6 /* ButtonBarArrowRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D51ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png */; };
+		E69096971ADE3F6400B62EB6 /* CPAAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */; };
+		E69096981ADE3F6800B62EB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */; };
+		E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */; };
+		E69096A01ADE407000B62EB6 /* CPAUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */; };
+		E69D7CAD1AE1015B005970BC /* CPANullability.h in Headers */ = {isa = PBXBuildFile; fileRef = E69D7CAC1AE1015B005970BC /* CPANullability.h */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E6897B4D1AD800BA0083E1BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6064F9B1AD659B2008FC7EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6CAEBFB1AD7F9E8008EB753;
+			remoteInfo = "cpa-ios-resources";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		E6064FA11AD659B2008FC7EE /* CopyFiles */ = {
@@ -24,14 +96,71 @@
 
 /* Begin PBXFileReference section */
 		E6064FA31AD659B2008FC7EE /* libcpa-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcpa-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E60650321AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBUCrossPlatformAuthenticationService.h; sourceTree = "<group>"; };
-		E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBUCrossPlatformAuthenticationService.m; sourceTree = "<group>"; };
+		E60650321AD65CFB008FC7EE /* CPAProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAProvider.h; sourceTree = "<group>"; };
+		E60650331AD65CFB008FC7EE /* CPAProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAProvider.m; sourceTree = "<group>"; };
 		E606503E1AD661AE008FC7EE /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		E60650451AD66275008FC7EE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E6257C981AD6C044005FE6D2 /* CPAToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAToken.h; sourceTree = "<group>"; };
+		E6257C991AD6C044005FE6D2 /* CPAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAToken.m; sourceTree = "<group>"; };
+		E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAToken+Private.h"; sourceTree = "<group>"; };
+		E6257CA71AD6D2FA005FE6D2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAUICKeyChainStore.h; sourceTree = "<group>"; };
+		E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAUICKeyChainStore.m; sourceTree = "<group>"; };
+		E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+CPAExtensions.h"; sourceTree = "<group>"; };
+		E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+CPAExtensions.m"; sourceTree = "<group>"; };
+		E65A41731AD7EABC00D8F289 /* CPAErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAErrors.h; sourceTree = "<group>"; };
+		E65A41741AD7EABC00D8F289 /* CPAErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAErrors.m; sourceTree = "<group>"; };
+		E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAErrors+Private.h"; sourceTree = "<group>"; };
+		E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CPAExtensions.h"; sourceTree = "<group>"; };
+		E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CPAExtensions.m"; sourceTree = "<group>"; };
+		E674701F1ADE8DDC0061621B /* CPAIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAIdentity.h; sourceTree = "<group>"; };
+		E67470201ADE8DDC0061621B /* CPAIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAIdentity.m; sourceTree = "<group>"; };
+		E67470241ADE90F70061621B /* CPAIdentity+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPAIdentity+Private.h"; sourceTree = "<group>"; };
+		E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAAuthorizationViewController.h; sourceTree = "<group>"; };
+		E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAAuthorizationViewController.m; sourceTree = "<group>"; };
+		E67F11BD1ADD027B00AFC2C7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E67F11BF1ADD028000AFC2C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon@2x~ipad.png"; sourceTree = "<group>"; };
+		E67F11CA1ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon@2x~iphone.png"; sourceTree = "<group>"; };
+		E67F11CB1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon~ipad.png"; sourceTree = "<group>"; };
+		E67F11CC1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon~iphone.png"; sourceTree = "<group>"; };
+		E67F11CD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "CPAWebViewControllerErrorTemplate~ipad.html"; sourceTree = "<group>"; };
+		E67F11CE1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "CPAWebViewControllerErrorTemplate~iphone.html"; sourceTree = "<group>"; };
+		E67F11D01ADD08D600AFC2C7 /* ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		E67F11D11ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
+		E67F11D21ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeft@3x.png"; sourceTree = "<group>"; };
+		E67F11D31ADD08D600AFC2C7 /* ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowRight.png; sourceTree = "<group>"; };
+		E67F11D41ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
+		E67F11D51ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRight@3x.png"; sourceTree = "<group>"; };
+		E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPAAuthorizationViewController.xib; sourceTree = "<group>"; };
+		E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAKeyboardInformation.h; sourceTree = "<group>"; };
+		E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAKeyboardInformation.m; sourceTree = "<group>"; };
+		E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAStatelessRequest.h; sourceTree = "<group>"; };
+		E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAStatelessRequest.m; sourceTree = "<group>"; };
+		E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrossPlatformAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69096751ADE3E5300B62EB6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossPlatformAuthentication.h; sourceTree = "<group>"; };
+		E69D7CAC1AE1015B005970BC /* CPANullability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPANullability.h; sourceTree = "<group>"; };
+		E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6CAEC031AD7FAB7008EB753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E6064FA01AD659B2008FC7EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69096541ADE3D5200B62EB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6CAEBF91AD7F9E8008EB753 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -44,7 +173,10 @@
 		E6064F9A1AD659B2008FC7EE = {
 			isa = PBXGroup;
 			children = (
+				E6257CA51AD6D2FA005FE6D2 /* Externals */,
 				E60650311AD65CD5008FC7EE /* Sources */,
+				E6CAEBF71AD7F9CE008EB753 /* Resources */,
+				E69096741ADE3E5300B62EB6 /* Framework */,
 				E6064FA41AD659B2008FC7EE /* Products */,
 				E60650451AD66275008FC7EE /* LICENSE */,
 				E606503E1AD661AE008FC7EE /* version.xcconfig */,
@@ -55,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				E6064FA31AD659B2008FC7EE /* libcpa-ios.a */,
+				E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */,
+				E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,13 +196,131 @@
 		E60650311AD65CD5008FC7EE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E60650321AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.h */,
-				E60650331AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m */,
+				E67F11B71ADCF83100AFC2C7 /* CPAAuthorizationViewController.h */,
+				E67F11B81ADCF83100AFC2C7 /* CPAAuthorizationViewController.m */,
+				E65A41731AD7EABC00D8F289 /* CPAErrors.h */,
+				E65A41741AD7EABC00D8F289 /* CPAErrors.m */,
+				E65A41761AD7EB4400D8F289 /* CPAErrors+Private.h */,
+				E674701F1ADE8DDC0061621B /* CPAIdentity.h */,
+				E67470201ADE8DDC0061621B /* CPAIdentity.m */,
+				E67470241ADE90F70061621B /* CPAIdentity+Private.h */,
+				E67F11E81ADD0B4800AFC2C7 /* CPAKeyboardInformation.h */,
+				E67F11E91ADD0B4800AFC2C7 /* CPAKeyboardInformation.m */,
+				E69D7CAC1AE1015B005970BC /* CPANullability.h */,
+				E60650321AD65CFB008FC7EE /* CPAProvider.h */,
+				E60650331AD65CFB008FC7EE /* CPAProvider.m */,
+				E684D3D81AD80AE600EDCA66 /* CPAStatelessRequest.h */,
+				E684D3D91AD80AE600EDCA66 /* CPAStatelessRequest.m */,
+				E6257C981AD6C044005FE6D2 /* CPAToken.h */,
+				E6257C991AD6C044005FE6D2 /* CPAToken.m */,
+				E6257C9B1AD6C3B8005FE6D2 /* CPAToken+Private.h */,
+				E65A41791AD7F76600D8F289 /* NSBundle+CPAExtensions.h */,
+				E65A417A1AD7F76600D8F289 /* NSBundle+CPAExtensions.m */,
+				E65A41701AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.h */,
+				E65A41711AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		E6257CA51AD6D2FA005FE6D2 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				E6257CA61AD6D2FA005FE6D2 /* UICKeyChainStore-2.0.4 */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		E6257CA61AD6D2FA005FE6D2 /* UICKeyChainStore-2.0.4 */ = {
+			isa = PBXGroup;
+			children = (
+				E6257CA71AD6D2FA005FE6D2 /* LICENSE */,
+				E6257CA81AD6D2FA005FE6D2 /* CPAUICKeyChainStore.h */,
+				E6257CA91AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m */,
+			);
+			path = "UICKeyChainStore-2.0.4";
+			sourceTree = "<group>";
+		};
+		E67F11C81ADD08D600AFC2C7 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				E67F11C91ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png */,
+				E67F11CA1ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png */,
+				E67F11CB1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png */,
+				E67F11CC1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png */,
+				E67F11CD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html */,
+				E67F11CE1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html */,
+			);
+			path = HTML;
+			sourceTree = "<group>";
+		};
+		E67F11CF1ADD08D600AFC2C7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E67F11D01ADD08D600AFC2C7 /* ButtonBarArrowLeft.png */,
+				E67F11D11ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png */,
+				E67F11D21ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png */,
+				E67F11D31ADD08D600AFC2C7 /* ButtonBarArrowRight.png */,
+				E67F11D41ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png */,
+				E67F11D51ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		E67F11D61ADD08D600AFC2C7 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				E67F11D71ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		E69096741ADE3E5300B62EB6 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				E69096771ADE3F0700B62EB6 /* CrossPlatformAuthentication.h */,
+				E69096751ADE3E5300B62EB6 /* Info.plist */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		E6CAEBF71AD7F9CE008EB753 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E67F11C81ADD08D600AFC2C7 /* HTML */,
+				E67F11CF1ADD08D600AFC2C7 /* Images */,
+				E67F11D61ADD08D600AFC2C7 /* Nibs */,
+				E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */,
+				E6CAEC031AD7FAB7008EB753 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E69096551ADE3D5200B62EB6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69096791ADE3F1500B62EB6 /* CPAAuthorizationViewController.h in Headers */,
+				E69096801ADE3F3000B62EB6 /* CPAKeyboardInformation.h in Headers */,
+				E69D7CAD1AE1015B005970BC /* CPANullability.h in Headers */,
+				E69096861ADE3F4000B62EB6 /* CPAToken+Private.h in Headers */,
+				E67470221ADE8DF20061621B /* CPAIdentity.h in Headers */,
+				E69096781ADE3F0700B62EB6 /* CrossPlatformAuthentication.h in Headers */,
+				E690967D1ADE3F2700B62EB6 /* CPAErrors.h in Headers */,
+				E690969F1ADE407000B62EB6 /* CPAUICKeyChainStore.h in Headers */,
+				E69096871ADE3F4300B62EB6 /* NSURLConnection+CPAExtensions.h in Headers */,
+				E690967F1ADE3F2D00B62EB6 /* CPAErrors+Private.h in Headers */,
+				E69096841ADE3F3A00B62EB6 /* CPAToken.h in Headers */,
+				E69096821ADE3F3500B62EB6 /* CPAStatelessRequest.h in Headers */,
+				E69096891ADE3F4700B62EB6 /* NSBundle+CPAExtensions.h in Headers */,
+				E690967B1ADE3F2000B62EB6 /* CPAProvider.h in Headers */,
+				E67470271ADE91090061621B /* CPAIdentity+Private.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		E6064FA21AD659B2008FC7EE /* cpa-ios */ = {
@@ -78,15 +330,52 @@
 				E6064F9F1AD659B2008FC7EE /* Sources */,
 				E6064FA01AD659B2008FC7EE /* Frameworks */,
 				E6064FA11AD659B2008FC7EE /* CopyFiles */,
+				C2BCBBC41AFA48800046B912 /* Export Environment for XcodeCoverage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E6897B4E1AD800BA0083E1BB /* PBXTargetDependency */,
 			);
 			name = "cpa-ios";
 			productName = "cpa-ios";
 			productReference = E6064FA31AD659B2008FC7EE /* libcpa-ios.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		E69096571ADE3D5200B62EB6 /* cpa-ios-framework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E690966F1ADE3D5200B62EB6 /* Build configuration list for PBXNativeTarget "cpa-ios-framework" */;
+			buildPhases = (
+				E69096531ADE3D5200B62EB6 /* Sources */,
+				E69096541ADE3D5200B62EB6 /* Frameworks */,
+				E69096551ADE3D5200B62EB6 /* Headers */,
+				E69096561ADE3D5200B62EB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-framework";
+			productName = "cpa-ios-framework";
+			productReference = E69096581ADE3D5200B62EB6 /* CrossPlatformAuthentication.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */;
+			buildPhases = (
+				E6CAEBF81AD7F9E8008EB753 /* Sources */,
+				E6CAEBF91AD7F9E8008EB753 /* Frameworks */,
+				E6CAEBFA1AD7F9E8008EB753 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-resources";
+			productName = "cpa-ios-resources";
+			productReference = E6CAEBFC1AD7F9E8008EB753 /* CrossPlatformAuthentication-resources.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -94,11 +383,17 @@
 		E6064F9B1AD659B2008FC7EE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = EBU;
+				CLASSPREFIX = CPA;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "European Broadcasting Union";
 				TargetAttributes = {
 					E6064FA21AD659B2008FC7EE = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					E69096571ADE3D5200B62EB6 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					E6CAEBFB1AD7F9E8008EB753 = {
 						CreatedOnToolsVersion = 6.2;
 					};
 				};
@@ -109,6 +404,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
 			);
 			mainGroup = E6064F9A1AD659B2008FC7EE;
 			productRefGroup = E6064FA41AD659B2008FC7EE /* Products */;
@@ -116,22 +412,226 @@
 			projectRoot = "";
 			targets = (
 				E6064FA21AD659B2008FC7EE /* cpa-ios */,
+				E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */,
+				E69096571ADE3D5200B62EB6 /* cpa-ios-framework */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E69096561ADE3D5200B62EB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E690968B1ADE3F5A00B62EB6 /* EmbossedIcon@2x~ipad.png in Resources */,
+				E690968C1ADE3F5A00B62EB6 /* EmbossedIcon@2x~iphone.png in Resources */,
+				E69096911ADE3F5F00B62EB6 /* ButtonBarArrowLeft.png in Resources */,
+				E69096981ADE3F6800B62EB6 /* Localizable.strings in Resources */,
+				E69096931ADE3F5F00B62EB6 /* ButtonBarArrowLeft@3x.png in Resources */,
+				E69096941ADE3F5F00B62EB6 /* ButtonBarArrowRight.png in Resources */,
+				E69096901ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */,
+				E69096961ADE3F5F00B62EB6 /* ButtonBarArrowRight@3x.png in Resources */,
+				E690968F1ADE3F5A00B62EB6 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */,
+				E69096921ADE3F5F00B62EB6 /* ButtonBarArrowLeft@2x.png in Resources */,
+				E69096971ADE3F6400B62EB6 /* CPAAuthorizationViewController.xib in Resources */,
+				E690968E1ADE3F5A00B62EB6 /* EmbossedIcon~iphone.png in Resources */,
+				E690968D1ADE3F5A00B62EB6 /* EmbossedIcon~ipad.png in Resources */,
+				E69096951ADE3F5F00B62EB6 /* ButtonBarArrowRight@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6CAEBFA1AD7F9E8008EB753 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E67F11E21ADD08D600AFC2C7 /* ButtonBarArrowRight@2x.png in Resources */,
+				E67F11E11ADD08D600AFC2C7 /* ButtonBarArrowRight.png in Resources */,
+				E67F11E31ADD08D600AFC2C7 /* ButtonBarArrowRight@3x.png in Resources */,
+				E67F11E41ADD08D600AFC2C7 /* CPAAuthorizationViewController.xib in Resources */,
+				E67F11E01ADD08D600AFC2C7 /* ButtonBarArrowLeft@3x.png in Resources */,
+				E67F11D81ADD08D600AFC2C7 /* EmbossedIcon@2x~ipad.png in Resources */,
+				E67F11BE1ADD027B00AFC2C7 /* Localizable.strings in Resources */,
+				E67F11DC1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~ipad.html in Resources */,
+				E67F11DD1ADD08D600AFC2C7 /* CPAWebViewControllerErrorTemplate~iphone.html in Resources */,
+				E67F11DE1ADD08D600AFC2C7 /* ButtonBarArrowLeft.png in Resources */,
+				E67F11DF1ADD08D600AFC2C7 /* ButtonBarArrowLeft@2x.png in Resources */,
+				E67F11DA1ADD08D600AFC2C7 /* EmbossedIcon~ipad.png in Resources */,
+				E67F11DB1ADD08D600AFC2C7 /* EmbossedIcon~iphone.png in Resources */,
+				E67F11D91ADD08D600AFC2C7 /* EmbossedIcon@2x~iphone.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C2BCBBC41AFA48800046B912 /* Export Environment for XcodeCoverage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Export Environment for XcodeCoverage";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find -L . -name exportenv.sh -exec {} \\;";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E6064F9F1AD659B2008FC7EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60650341AD65CFB008FC7EE /* EBUCrossPlatformAuthenticationService.m in Sources */,
+				E65A41721AD7E8C300D8F289 /* NSURLConnection+CPAExtensions.m in Sources */,
+				E67470211ADE8DDC0061621B /* CPAIdentity.m in Sources */,
+				E6257C9A1AD6C044005FE6D2 /* CPAToken.m in Sources */,
+				E67F11B91ADCF83100AFC2C7 /* CPAAuthorizationViewController.m in Sources */,
+				E65A41751AD7EABC00D8F289 /* CPAErrors.m in Sources */,
+				E60650341AD65CFB008FC7EE /* CPAProvider.m in Sources */,
+				E684D3DA1AD80AE600EDCA66 /* CPAStatelessRequest.m in Sources */,
+				E65A417B1AD7F76600D8F289 /* NSBundle+CPAExtensions.m in Sources */,
+				E6257CAA1AD6D2FA005FE6D2 /* CPAUICKeyChainStore.m in Sources */,
+				E67F11EA1ADD0B4800AFC2C7 /* CPAKeyboardInformation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69096531ADE3D5200B62EB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E690967E1ADE3F2B00B62EB6 /* CPAErrors.m in Sources */,
+				E67470231ADE8DFA0061621B /* CPAIdentity.m in Sources */,
+				E69096881ADE3F4500B62EB6 /* NSURLConnection+CPAExtensions.m in Sources */,
+				E690967A1ADE3F1E00B62EB6 /* CPAAuthorizationViewController.m in Sources */,
+				E69096831ADE3F3700B62EB6 /* CPAStatelessRequest.m in Sources */,
+				E69096811ADE3F3200B62EB6 /* CPAKeyboardInformation.m in Sources */,
+				E690968A1ADE3F4B00B62EB6 /* NSBundle+CPAExtensions.m in Sources */,
+				E69096851ADE3F3E00B62EB6 /* CPAToken.m in Sources */,
+				E690967C1ADE3F2400B62EB6 /* CPAProvider.m in Sources */,
+				E69096A01ADE407000B62EB6 /* CPAUICKeyChainStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6CAEBF81AD7F9E8008EB753 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E6897B4E1AD800BA0083E1BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6CAEBFB1AD7F9E8008EB753 /* cpa-ios-resources */;
+			targetProxy = E6897B4D1AD800BA0083E1BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E67F11BC1ADD027B00AFC2C7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E67F11BD1ADD027B00AFC2C7 /* fr */,
+				E67F11BF1ADD028000AFC2C7 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		C2BCBBC51AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Coverage;
+		};
+		C2BCBBC61AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Coverage;
+		};
+		C2BCBBC71AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
+			};
+			name = Coverage;
+		};
+		C2BCBBC81AFA48CE0046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Coverage;
+		};
 		E6064FB51AD659B2008FC7EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -226,6 +726,72 @@
 			};
 			name = Release;
 		};
+		E690966B1ADE3D5200B62EB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E690966C1ADE3D5200B62EB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CrossPlatformAuthentication;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E6CAEC011AD7F9E8008EB753 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
+			};
+			name = Debug;
+		};
+		E6CAEC021AD7F9E8008EB753 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -233,6 +799,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6064FB51AD659B2008FC7EE /* Debug */,
+				C2BCBBC51AFA48CE0046B912 /* Coverage */,
 				E6064FB61AD659B2008FC7EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -242,7 +809,28 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6064FB81AD659B2008FC7EE /* Debug */,
+				C2BCBBC61AFA48CE0046B912 /* Coverage */,
 				E6064FB91AD659B2008FC7EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E690966F1ADE3D5200B62EB6 /* Build configuration list for PBXNativeTarget "cpa-ios-framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E690966B1ADE3D5200B62EB6 /* Debug */,
+				C2BCBBC81AFA48CE0046B912 /* Coverage */,
+				E690966C1ADE3D5200B62EB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6CAEC001AD7F9E8008EB753 /* Build configuration list for PBXNativeTarget "cpa-ios-resources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6CAEC011AD7F9E8008EB753 /* Debug */,
+				C2BCBBC71AFA48CE0046B912 /* Coverage */,
+				E6CAEC021AD7F9E8008EB753 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

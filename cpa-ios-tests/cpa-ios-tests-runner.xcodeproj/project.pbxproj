@@ -1,0 +1,663 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		85346CE1776AFB2F45717B78 /* libPods-cpa-ios-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E636507E1AE985E500BE8DD0 /* Stubs in Resources */ = {isa = PBXBuildFile; fileRef = E636507D1AE985E500BE8DD0 /* Stubs */; };
+		E684D3D51AD809D400EDCA66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D31AD809D400EDCA66 /* main.m */; };
+		E68FE5A31AFA50F0002FC50A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68FE5A21AFA50F0002FC50A /* WebKit.framework */; };
+		E6E3F5A91AE8AA1700044009 /* HTTPStub.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E3F5A81AE8AA1700044009 /* HTTPStub.m */; };
+		E6E3F5EA1AE97AD400044009 /* HTTPStubFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E3F5E41AE97A3600044009 /* HTTPStubFile.m */; };
+		E6E3F5ED1AE980C100044009 /* HTTPMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E3F5EB1AE980BF00044009 /* HTTPMethod.m */; };
+		E6E56EA71AE10F1E00C3626E /* CPAStatelessRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */; };
+		E6E56EBA1AE12E0C00C3626E /* NSBundle+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E56EB81AE11B4300C3626E /* NSBundle+Tests.m */; };
+		E6E56EC91AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6E56EC81AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle */; };
+		E6E56ECA1AE133EE00C3626E /* libcpa-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E56EC31AE1302C00C3626E /* libcpa-ios.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E6E56EA01AE10E3200C3626E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E684D39E1AD8093000EDCA66 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E684D3A51AD8093000EDCA66;
+			remoteInfo = "cpa-ios-tests-runner";
+		};
+		E6E56EC21AE1302C00C3626E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6064FA31AD659B2008FC7EE;
+			remoteInfo = "cpa-ios";
+		};
+		E6E56EC41AE1302C00C3626E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6CAEBFC1AD7F9E8008EB753;
+			remoteInfo = "cpa-ios-resources";
+		};
+		E6E56EC61AE1302C00C3626E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E69096581ADE3D5200B62EB6;
+			remoteInfo = "cpa-ios-framework";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3CB3ED470DBCCF15644C899B /* Pods-cpa-ios-tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.release.xcconfig"; sourceTree = "<group>"; };
+		6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cpa-ios-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E636507D1AE985E500BE8DD0 /* Stubs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stubs; sourceTree = "<group>"; };
+		E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpa-ios-tests-runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E684D3D11AD809D400EDCA66 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E684D3D31AD809D400EDCA66 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E684D3D61AD80A6600EDCA66 /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		E68FE5A21AFA50F0002FC50A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-cpa-ios-tests.coverage.xcconfig"; path = "../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests.coverage.xcconfig"; sourceTree = "<group>"; };
+		E6E3F5A71AE8AA1700044009 /* HTTPStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStub.h; sourceTree = "<group>"; };
+		E6E3F5A81AE8AA1700044009 /* HTTPStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPStub.m; sourceTree = "<group>"; };
+		E6E3F5E31AE97A3600044009 /* HTTPStubFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStubFile.h; sourceTree = "<group>"; };
+		E6E3F5E41AE97A3600044009 /* HTTPStubFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPStubFile.m; sourceTree = "<group>"; };
+		E6E3F5E91AE97AD000044009 /* HTTPMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPMethod.h; sourceTree = "<group>"; };
+		E6E3F5EB1AE980BF00044009 /* HTTPMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPMethod.m; sourceTree = "<group>"; };
+		E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cpa-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAStatelessRequestTestCase.m; sourceTree = "<group>"; };
+		E6E56EB71AE11B4300C3626E /* NSBundle+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Tests.h"; sourceTree = "<group>"; };
+		E6E56EB81AE11B4300C3626E /* NSBundle+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Tests.m"; sourceTree = "<group>"; };
+		E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "cpa-ios.xcodeproj"; path = "../cpa-ios/cpa-ios.xcodeproj"; sourceTree = "<group>"; };
+		E6E56EC81AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CrossPlatformAuthentication-resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E684D3A31AD8093000EDCA66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E56E971AE10E3200C3626E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E68FE5A31AFA50F0002FC50A /* WebKit.framework in Frameworks */,
+				E6E56ECA1AE133EE00C3626E /* libcpa-ios.a in Frameworks */,
+				85346CE1776AFB2F45717B78 /* libPods-cpa-ios-tests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEDCE8812F9FD73F44987130 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E68FE5A21AFA50F0002FC50A /* WebKit.framework */,
+				9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE0238BEB87EAA408753FBFC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */,
+				6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */,
+				3CB3ED470DBCCF15644C899B /* Pods-cpa-ios-tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E684D39D1AD8093000EDCA66 = {
+			isa = PBXGroup;
+			children = (
+				E6E56EBB1AE1301E00C3626E /* Dependencies */,
+				E684D3D21AD809D400EDCA66 /* Sources */,
+				E684D3D01AD809D400EDCA66 /* Resources */,
+				E684D3A71AD8093000EDCA66 /* Products */,
+				DE0238BEB87EAA408753FBFC /* Pods */,
+				CEDCE8812F9FD73F44987130 /* Frameworks */,
+				E684D3D61AD80A6600EDCA66 /* version.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		E684D3A71AD8093000EDCA66 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */,
+				E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E684D3D01AD809D400EDCA66 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E636507D1AE985E500BE8DD0 /* Stubs */,
+				E684D3D11AD809D400EDCA66 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E684D3D21AD809D400EDCA66 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EB61AE11B4300C3626E /* Helpers */,
+				E6E56EA51AE10F1E00C3626E /* Tests */,
+				E684D3D31AD809D400EDCA66 /* main.m */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		E6E56EA51AE10F1E00C3626E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EA61AE10F1E00C3626E /* CPAStatelessRequestTestCase.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		E6E56EB61AE11B4300C3626E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EB71AE11B4300C3626E /* NSBundle+Tests.h */,
+				E6E56EB81AE11B4300C3626E /* NSBundle+Tests.m */,
+				E6E3F5A71AE8AA1700044009 /* HTTPStub.h */,
+				E6E3F5A81AE8AA1700044009 /* HTTPStub.m */,
+				E6E3F5E31AE97A3600044009 /* HTTPStubFile.h */,
+				E6E3F5E41AE97A3600044009 /* HTTPStubFile.m */,
+				E6E3F5E91AE97AD000044009 /* HTTPMethod.h */,
+				E6E3F5EB1AE980BF00044009 /* HTTPMethod.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E6E56EBB1AE1301E00C3626E /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */,
+				E6E56EC81AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		E6E56EBD1AE1302C00C3626E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E6E56EC31AE1302C00C3626E /* libcpa-ios.a */,
+				E6E56EC51AE1302C00C3626E /* CrossPlatformAuthentication-resources.bundle */,
+				E6E56EC71AE1302C00C3626E /* CrossPlatformAuthentication.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E684D3A51AD8093000EDCA66 /* cpa-ios-tests-runner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E684D3C91AD8093000EDCA66 /* Build configuration list for PBXNativeTarget "cpa-ios-tests-runner" */;
+			buildPhases = (
+				E684D3A21AD8093000EDCA66 /* Sources */,
+				E684D3A31AD8093000EDCA66 /* Frameworks */,
+				E684D3A41AD8093000EDCA66 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cpa-ios-tests-runner";
+			productName = "cpa-ios-tests-runner";
+			productReference = E684D3A61AD8093000EDCA66 /* cpa-ios-tests-runner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E6E56E991AE10E3200C3626E /* cpa-ios-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6E56EA41AE10E3200C3626E /* Build configuration list for PBXNativeTarget "cpa-ios-tests" */;
+			buildPhases = (
+				FDC010A7E635A20FAD688E40 /* Check Pods Manifest.lock */,
+				E6E56E961AE10E3200C3626E /* Sources */,
+				E6E56E971AE10E3200C3626E /* Frameworks */,
+				E6E56E981AE10E3200C3626E /* Resources */,
+				658AD702D5D8986F7B25E340 /* Copy Pods Resources */,
+				C2BCBBCF1AFA493E0046B912 /* Delete *.gcda files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6E56EA11AE10E3200C3626E /* PBXTargetDependency */,
+			);
+			name = "cpa-ios-tests";
+			productName = "cpa-ios-tests";
+			productReference = E6E56E9A1AE10E3200C3626E /* cpa-ios-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E684D39E1AD8093000EDCA66 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "European Broadcasting Union";
+				TargetAttributes = {
+					E684D3A51AD8093000EDCA66 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					E6E56E991AE10E3200C3626E = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = E684D3A51AD8093000EDCA66;
+					};
+				};
+			};
+			buildConfigurationList = E684D3A11AD8093000EDCA66 /* Build configuration list for PBXProject "cpa-ios-tests-runner" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E684D39D1AD8093000EDCA66;
+			productRefGroup = E684D3A71AD8093000EDCA66 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E6E56EBD1AE1302C00C3626E /* Products */;
+					ProjectRef = E6E56EBC1AE1302C00C3626E /* cpa-ios.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				E684D3A51AD8093000EDCA66 /* cpa-ios-tests-runner */,
+				E6E56E991AE10E3200C3626E /* cpa-ios-tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E6E56EC31AE1302C00C3626E /* libcpa-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcpa-ios.a";
+			remoteRef = E6E56EC21AE1302C00C3626E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E6E56EC51AE1302C00C3626E /* CrossPlatformAuthentication-resources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CrossPlatformAuthentication-resources.bundle";
+			remoteRef = E6E56EC41AE1302C00C3626E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E6E56EC71AE1302C00C3626E /* CrossPlatformAuthentication.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CrossPlatformAuthentication.framework;
+			remoteRef = E6E56EC61AE1302C00C3626E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E684D3A41AD8093000EDCA66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E56E981AE10E3200C3626E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E636507E1AE985E500BE8DD0 /* Stubs in Resources */,
+				E6E56EC91AE1310D00C3626E /* CrossPlatformAuthentication-resources.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		658AD702D5D8986F7B25E340 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2BCBBCF1AFA493E0046B912 /* Delete *.gcda files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Delete *.gcda files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find \"${CONFIGURATION_TEMP_DIR}\" -name \"*.gcda\" -delete";
+		};
+		FDC010A7E635A20FAD688E40 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E684D3A21AD8093000EDCA66 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E684D3D51AD809D400EDCA66 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E56E961AE10E3200C3626E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E56EBA1AE12E0C00C3626E /* NSBundle+Tests.m in Sources */,
+				E6E3F5A91AE8AA1700044009 /* HTTPStub.m in Sources */,
+				E6E56EA71AE10F1E00C3626E /* CPAStatelessRequestTestCase.m in Sources */,
+				E6E3F5EA1AE97AD400044009 /* HTTPStubFile.m in Sources */,
+				E6E3F5ED1AE980C100044009 /* HTTPMethod.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E6E56EA11AE10E3200C3626E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E684D3A51AD8093000EDCA66 /* cpa-ios-tests-runner */;
+			targetProxy = E6E56EA01AE10E3200C3626E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C2BCBBC91AFA49230046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Coverage;
+		};
+		C2BCBBCA1AFA49230046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E684D3D61AD80A6600EDCA66 /* version.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Coverage;
+		};
+		C2BCBBCB1AFA49230046B912 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E69906431AFCBD67005ED143 /* Pods-cpa-ios-tests.coverage.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cpa-ios-tests-runner.app/cpa-ios-tests-runner";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
+			};
+			name = Coverage;
+		};
+		E684D3C71AD8093000EDCA66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E684D3C81AD8093000EDCA66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E684D3CA1AD8093000EDCA66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E684D3D61AD80A6600EDCA66 /* version.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E684D3CB1AD8093000EDCA66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E684D3D61AD80A6600EDCA66 /* version.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E6E56EA21AE10E3200C3626E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A5399D12C1B536B876001BE /* Pods-cpa-ios-tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cpa-ios-tests-runner.app/cpa-ios-tests-runner";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
+			};
+			name = Debug;
+		};
+		E6E56EA31AE10E3200C3626E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CB3ED470DBCCF15644C899B /* Pods-cpa-ios-tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cpa-ios-tests-runner.app/cpa-ios-tests-runner";
+				USER_HEADER_SEARCH_PATHS = "../cpa-ios/Sources/**";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E684D3A11AD8093000EDCA66 /* Build configuration list for PBXProject "cpa-ios-tests-runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E684D3C71AD8093000EDCA66 /* Debug */,
+				C2BCBBC91AFA49230046B912 /* Coverage */,
+				E684D3C81AD8093000EDCA66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E684D3C91AD8093000EDCA66 /* Build configuration list for PBXNativeTarget "cpa-ios-tests-runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E684D3CA1AD8093000EDCA66 /* Debug */,
+				C2BCBBCA1AFA49230046B912 /* Coverage */,
+				E684D3CB1AD8093000EDCA66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6E56EA41AE10E3200C3626E /* Build configuration list for PBXNativeTarget "cpa-ios-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6E56EA21AE10E3200C3626E /* Debug */,
+				C2BCBBCB1AFA49230046B912 /* Coverage */,
+				E6E56EA31AE10E3200C3626E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E684D39E1AD8093000EDCA66 /* Project object */;
+}
