@@ -248,8 +248,9 @@ Your default browser should open and display the coverage results.
 
 * [CPA Authentication Provider](https://github.com/ebu/cpa-auth-provider)
 * [CPA Service Provider](https://github.com/ebu/cpa-service-provider)
-* Clients
-  * [cpa.js](https://github.com/ebu/cpa-js)
+
+* *Clients*
+  * [cpa.js](https://github.com/ebu/cpa.js)
   * [demonstrator](https://github.com/ebu/cpa-client)
 
 ## Contributors
