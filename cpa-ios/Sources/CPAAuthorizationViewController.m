@@ -1,7 +1,7 @@
 //
 //  Copyright (c) European Broadcasting Union. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 // Most of this implementation has been borrowed from CoconutKit HLSWebViewController (see https://github.com/defagos/CoconutKit)
