@@ -250,6 +250,7 @@ Your default browser should open and display the coverage results.
 * [CPA Service Provider](https://github.com/ebu/cpa-service-provider)
 
 * *Clients*
+  * [cpa-android](https://github.com/ebu/cpa-android)
   * [cpa.js](https://github.com/ebu/cpa.js)
   * [demonstrator](https://github.com/ebu/cpa-client)
 
