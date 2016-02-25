@@ -77,6 +77,18 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     return self;
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -309,7 +321,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;

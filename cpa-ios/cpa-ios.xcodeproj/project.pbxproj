@@ -384,7 +384,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CPA;
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "European Broadcasting Union";
 				TargetAttributes = {
 					E6064FA21AD659B2008FC7EE = {
@@ -602,6 +602,7 @@
 			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
 			};
 			name = Coverage;
@@ -624,6 +625,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CrossPlatformAuthentication;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,6 +653,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -744,6 +747,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CrossPlatformAuthentication;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -766,6 +770,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CrossPlatformAuthentication;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -779,6 +784,7 @@
 			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
 			};
 			name = Debug;
@@ -788,6 +794,7 @@
 			baseConfigurationReference = E606503E1AD661AE008FC7EE /* version.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Resources/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ebu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "CrossPlatformAuthentication-resources";
 			};
 			name = Release;
