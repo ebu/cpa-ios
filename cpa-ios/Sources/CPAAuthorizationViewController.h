@@ -18,7 +18,7 @@ typedef void (^CPAAuthorizationCompletionBlock)(BOOL isFinished, NSError *error)
 /**
  * A basic web browser to grab user credentials
  */
-@interface CPAAuthorizationViewController : UIViewController <UIWebViewDelegate, WKNavigationDelegate>
+@interface CPAAuthorizationViewController : UIViewController <WKNavigationDelegate>
 
 /**
  * Create the browser using the specified verification URL, and supplying the given user code automatically. An optional
