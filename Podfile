@@ -13,5 +13,5 @@ xcodeproj 'cpa-ios-tests/cpa-ios-tests-runner.xcodeproj'
 
 target 'cpa-ios-tests' do
 	xcodeproj 'cpa-ios-tests/cpa-ios-tests-runner.xcodeproj'
-	pod 'OHHTTPStubs', '3.1.11'
+	pod 'OHHTTPStubs', '4.7.1'
 end

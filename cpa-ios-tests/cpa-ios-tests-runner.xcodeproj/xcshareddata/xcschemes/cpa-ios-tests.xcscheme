@@ -79,15 +79,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6E56E991AE10E3200C3626E"
-            BuildableName = "cpa-ios-tests.xctest"
-            BlueprintName = "cpa-ios-tests"
-            ReferencedContainer = "container:cpa-ios-tests-runner.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
