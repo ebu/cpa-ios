@@ -649,6 +649,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL)
         }
     }
     
-    NSString *errorIdentifier = queryItems[@"info"];
-    return errorIdentifier ? CPAErrorFromIdentifier(errorIdentifier) : nil;
+    NSString *errorIdentifier = queryItems[@"result"];
+    return ! [errorIdentifier isEqualToString:@"success"] ? CPAErrorFromIdentifier(errorIdentifier) : nil;
 }
