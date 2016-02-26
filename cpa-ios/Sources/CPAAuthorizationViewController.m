@@ -91,8 +91,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     if ([WKWebView class]) {
         @try {
             [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -261,11 +259,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     
     [self updateTitle];
     [self updateErrorDescription];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidChangeFrame:)
-                                                 name:UIKeyboardDidChangeFrameNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -310,28 +303,12 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     }
 }
 
-#pragma mark Layout
+#pragma mark Layout and display
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     
-    [self layoutForSize:self.view.frame.size];
-}
-
-#pragma mark Orientation management
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [self layoutForSize:size];
-}
-
-#pragma mark Layout and display
-
-- (void)layoutForSize:(CGSize)size
-{
     // Position the progress view under the top layout guide when wrapped in a navigation controller
     self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
                                          self.navigationController ? self.topLayoutGuide.length : 0.f,
@@ -615,13 +592,6 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     if (arc4random_uniform(3) == 0) {
         [self setProgress:[self progress] + CPAWebViewFakeTimerProgressIncrement animated:YES];
     }
-}
-
-#pragma mark Notification callbacks
-
-- (void)keyboardDidChangeFrame:(NSNotification *)notification
-{
-    [self layoutForSize:self.view.frame.size];
 }
 
 #pragma mark KVO
