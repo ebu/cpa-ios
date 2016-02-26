@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Authentication error codes
  */
@@ -25,3 +27,5 @@ typedef NS_ENUM(NSInteger, CPAErrorCode) {
  * Common domain of cross-platform authentication errors
  */
 OBJC_EXPORT NSString * const CPAErrorDomain;
+
+NS_ASSUME_NONNULL_END

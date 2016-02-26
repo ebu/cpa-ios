@@ -26,9 +26,9 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *requestDictionary = @{ @"client_name" : clientName,
-                                         @"software_id" : softwareIdentifier,
-                                         @"software_version" : softwareVersion };
+    NSDictionary<NSString *, NSString *> *requestDictionary = @{ @"client_name" : clientName,
+                                                                 @"software_id" : softwareIdentifier,
+                                                                 @"software_version" : softwareVersion };
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
@@ -61,9 +61,9 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *requestDictionary = @{ @"client_id" : clientIdentifier,
-                                         @"client_secret" : clientSecret,
-                                         @"domain" : domain };
+    NSDictionary<NSString *, NSString *> *requestDictionary = @{ @"client_id" : clientIdentifier,
+                                                                 @"client_secret" : clientSecret,
+                                                                 @"domain" : domain };
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
@@ -102,11 +102,11 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/device_code",
-                                         @"device_code" : deviceCode,
-                                         @"client_id" : clientIdentifier,
-                                         @"client_secret" : clientSecret,
-                                         @"domain" : domain };
+    NSDictionary<NSString *, NSString *> *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/device_code",
+                                                                 @"device_code" : deviceCode,
+                                                                 @"client_id" : clientIdentifier,
+                                                                 @"client_secret" : clientSecret,
+                                                                 @"domain" : domain };
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
@@ -142,10 +142,10 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/client_credentials",
-                                         @"client_id" : clientIdentifier,
-                                         @"client_secret" : clientSecret,
-                                         @"domain" : domain };
+    NSDictionary<NSString *, NSString *> *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/client_credentials",
+                                                                 @"client_id" : clientIdentifier,
+                                                                 @"client_secret" : clientSecret,
+                                                                 @"domain" : domain };
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     
@@ -180,10 +180,10 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/client_credentials",
-                                         @"client_id" : clientIdentifier,
-                                         @"client_secret" : clientSecret,
-                                         @"domain" : domain };
+    NSDictionary<NSString *, NSString *> *requestDictionary = @{ @"grant_type" : @"http://tech.ebu.ch/cpa/1.0/client_credentials",
+                                                                 @"client_id" : clientIdentifier,
+                                                                 @"client_secret" : clientSecret,
+                                                                 @"domain" : domain };
     NSData *body = [NSJSONSerialization dataWithJSONObject:requestDictionary options:0 error:NULL];
     [request setHTTPBody:body];
     

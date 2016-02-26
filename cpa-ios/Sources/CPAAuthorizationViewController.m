@@ -37,8 +37,8 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 
-@property (nonatomic) NSArray *normalToolbarItems;
-@property (nonatomic) NSArray *loadingToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *normalToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *loadingToolbarItems;
 
 @end
 
@@ -192,7 +192,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
     self.normalToolbarItems = self.toolbar.items;
     
     // Build the toolbar displayed when the web view is loading content
-    NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
+    NSMutableArray<UIBarButtonItem *> *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
     [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
@@ -434,7 +434,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 #pragma mark KVO
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
     if (context != s_KVOContext) {
         return;
