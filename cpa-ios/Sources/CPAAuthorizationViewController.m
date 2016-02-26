@@ -316,31 +316,21 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 {
     [super viewWillLayoutSubviews];
     
-    [self layoutForInterfaceOrientation:self.interfaceOrientation];
+    [self layoutForSize:self.view.frame.size];
 }
 
 #pragma mark Orientation management
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
-    }
-    else {
-        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-    }
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    [self layoutForInterfaceOrientation:toInterfaceOrientation];
+    [self layoutForSize:size];
 }
 
 #pragma mark Layout and display
 
-- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)layoutForSize:(CGSize)size
 {
     // Position the progress view under the top layout guide when wrapped in a navigation controller
     self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
@@ -631,7 +621,7 @@ static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL);
 
 - (void)keyboardDidChangeFrame:(NSNotification *)notification
 {
-    [self layoutForInterfaceOrientation:self.interfaceOrientation];
+    [self layoutForSize:self.view.frame.size];
 }
 
 #pragma mark KVO
