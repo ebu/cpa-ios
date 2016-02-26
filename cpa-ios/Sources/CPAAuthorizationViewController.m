@@ -471,22 +471,9 @@ static NSURL *CPAFullVerificationURL(NSURL *verificationURL, NSString *userCode)
 
 static NSError *CPAErrorFromCallbackURL(NSURL *callbackURL)
 {
-    // TODO: When minimal supported version is iOS 8, can use -[NSURLComponents queryItems]. The code below does not handle
-    //       all cases correctly (e.g. parameters containing = when percent decoded) but should suffice
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:callbackURL resolvingAgainstBaseURL:NO];
-    NSArray *queryItemStrings = [URLComponents.query componentsSeparatedByString:@"&"];
-    
-    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
-    for (NSString *queryItemString in queryItemStrings) {
-        NSArray *queryItemComponents = [queryItemString componentsSeparatedByString:@"="];
-        NSString *key = [queryItemComponents firstObject];
-        NSString *value = [queryItemComponents lastObject];
-        
-        if (key && value) {
-            [queryItems setObject:value forKey:key];
-        }
-    }
-    
-    NSString *errorIdentifier = queryItems[@"result"];
-    return ! [errorIdentifier isEqualToString:@"success"] ? CPAErrorFromIdentifier(errorIdentifier) : nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == 'result'"];
+    NSURLQueryItem *resultQueryItem = [URLComponents.queryItems filteredArrayUsingPredicate:predicate].firstObject;
+    NSString *result = resultQueryItem.value;
+    return ! [result isEqualToString:@"success"] ? CPAErrorFromIdentifier(result) : nil;
 }
