@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85346CE1776AFB2F45717B78 /* libPods-cpa-ios-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		85346CE1776AFB2F45717B78 /* libPods-cpa-ios-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD3027DE9154407AAD8B52 /* libPods-cpa-ios-tests.a */; };
 		E636507E1AE985E500BE8DD0 /* Stubs in Resources */ = {isa = PBXBuildFile; fileRef = E636507D1AE985E500BE8DD0 /* Stubs */; };
 		E684D3D51AD809D400EDCA66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E684D3D31AD809D400EDCA66 /* main.m */; };
 		E68FE5A31AFA50F0002FC50A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68FE5A21AFA50F0002FC50A /* WebKit.framework */; };
@@ -229,6 +229,7 @@
 				E6E56E981AE10E3200C3626E /* Resources */,
 				658AD702D5D8986F7B25E340 /* Copy Pods Resources */,
 				C2BCBBCF1AFA493E0046B912 /* Delete *.gcda files */,
+				821E33697571451187D378FB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -342,6 +343,21 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		821E33697571451187D378FB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-cpa-ios-tests/Pods-cpa-ios-tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C2BCBBCF1AFA493E0046B912 /* Delete *.gcda files */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -439,7 +455,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -516,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -552,7 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

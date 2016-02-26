@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors = { 'Samuel Défago' => 'defagos@gmail.com', 'Michael Barroco' => 'barroco@ebu.ch' }
   s.source = { :git => 'https://github.com/ebu/cpa-ios.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/EBU_TECH'
-  s.platform = :ios, '7.0'
+  s.platform = :ios, '8.0'
   
   s.description = <<-DESC
                   This project contains a reference implementation of the Cross-Platform Authentication client for iOS.
