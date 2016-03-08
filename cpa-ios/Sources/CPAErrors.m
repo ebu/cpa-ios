@@ -15,7 +15,7 @@ CPAErrorCode CPAErrorCodeForIdentifier(NSString *errorIdentifier)
 {
     NSCParameterAssert(errorIdentifier);
     
-    static NSDictionary *s_errorCodes;
+    static NSDictionary<NSString *, NSNumber *> *s_errorCodes;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_errorCodes = @{ @"invalid_request" : @(CPAErrorInvalidRequest),
@@ -33,7 +33,7 @@ CPAErrorCode CPAErrorCodeForIdentifier(NSString *errorIdentifier)
 
 NSString *CPALocalizedErrorDescriptionForCode(CPAErrorCode errorCode)
 {
-    static NSDictionary *s_localizedErrorDescriptions;
+    static NSDictionary<NSNumber *, NSString *> *s_localizedErrorDescriptions;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_localizedErrorDescriptions = @{ @(CPAErrorUnknown) : CPALocalizedString(@"An unknown error has been encountered", nil),

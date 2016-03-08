@@ -68,6 +68,12 @@ static CPAProvider *s_defaultProvider = nil;
     return [self initWithAuthorizationProviderURL:authorizationProviderURL keyChainAccessGroup:nil];
 }
 
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 #pragma mark Token retrieval
 
 - (CPAToken *)tokenForDomain:(NSString *)domain

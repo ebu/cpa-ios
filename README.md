@@ -1,6 +1,6 @@
 # Cross-Platform Authentication - iOS Client
 
-[![Build Status](https://img.shields.io/travis/ebu/cpa-ios/develop.svg?style=flat)](https://travis-ci.org/ebu/cpa-ios)
+[![Build Status](https://img.shields.io/travis/ebu/cpa-ios/feature/issue12.svg?style=flat)](https://travis-ci.org/ebu/cpa-ios)
 [![Platform](https://img.shields.io/cocoapods/p/cpa-ios.svg?style=flat)](http://cocoadocs.org/docsets/cpa-ios/)
 [![Pod Version](https://img.shields.io/cocoapods/v/cpa-ios.svg?style=flat)](http://cocoadocs.org/docsets/cpa-ios/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -16,13 +16,13 @@ More information is available on the [EBU Cross-Platform Authentication project 
 
 The CPA iOS library requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 6.3
-* iOS 8.3 SDK
+* Xcode 7.2
+* iOS 9.2 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
-* iOS 7.x
 * iOS 8.x
+* iOS 9.x
 
 All architectures are supported:
 
@@ -43,13 +43,13 @@ Add `CrossPlatformAuthentication` as dependency in your `Podfile`:
 pod 'CrossPlatformAuthentication', '<version>'
 ```
 
-Then run `pod install` to update the dependencies. For targets starting with iOS 8, you can also add the `use_frameworks!` directive in your `Podfile`, which embeds the library as a native Cocoa Touch framework.
+Then run `pod install` to update the dependencies. You can also add the `use_frameworks!` directive in your `Podfile`, which embeds the library as a native Cocoa Touch framework.
 
 For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
 
 ### Installation with Carthage
 
-For targets starting with iOS 8, you can use the library as an embedded Cocoa Touch framework, conveniently managed using Carthage. 
+You can use the library as an embedded Cocoa Touch framework, conveniently managed using Carthage. 
 
 Add `cpa-ios` as dependency in your `Cartfile`:
 
