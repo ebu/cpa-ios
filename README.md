@@ -1,6 +1,6 @@
 # Cross-Platform Authentication - iOS Client
 
-[![Build Status](https://img.shields.io/travis/ebu/cpa-ios/feature/issue12.svg?style=flat)](https://travis-ci.org/ebu/cpa-ios)
+[![Build Status](https://img.shields.io/travis/ebu/cpa-ios/develop.svg?style=flat)](https://travis-ci.org/ebu/cpa-ios)
 [![Platform](https://img.shields.io/cocoapods/p/cpa-ios.svg?style=flat)](http://cocoadocs.org/docsets/cpa-ios/)
 [![Pod Version](https://img.shields.io/cocoapods/v/cpa-ios.svg?style=flat)](http://cocoadocs.org/docsets/cpa-ios/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
