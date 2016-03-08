@@ -1,0 +1,17 @@
+//
+//  Copyright (c) European Broadcasting Union. All rights reserved.
+//
+//  License information is available from the LICENSE file.
+//
+
+"A token is already available"="Un token est déjà disponible";
+"Client"="Client";
+"Dismiss"="Fermer";
+"Error"="Erreur";
+"Information"="Information";
+"None"="Aucun";
+"RTS HbbTV"="HbbTV RTS";
+"RTS Playlist"="Liste de lecture RTS";
+"Unknown domain"="Domaine inconnu";
+"Unsupported domain"="Domaine non géré";
+"User"="Utilisateur";

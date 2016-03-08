@@ -1,0 +1,17 @@
+//
+//  Copyright (c) European Broadcasting Union. All rights reserved.
+//
+//  License information is available from the LICENSE file.
+//
+
+"An unknown error has been encountered"="An unknown error has been encountered";
+"Authorization is still pending"="Authorization is still pending";
+"Authorization was denied"="Authorization was denied";
+"Cancel"="Cancel";
+"The authorization request has been cancelled"="The authorization request has been cancelled";
+"The authorization request has expired"="The authorization request has expired";
+"The client is invalid"="The client is invalid";
+"The request is invalid"="The request is invalid";
+"The response is invalid"="The response is invalid";
+"Too many requests are being made"="Too many requests are being made";
+"Untitled"="Untitled";

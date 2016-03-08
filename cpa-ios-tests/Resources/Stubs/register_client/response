@@ -1,0 +1,12 @@
+HTTP/1.1 201 Created
+Server: nginx
+Date: Fri, 17 Apr 2015 13:16:15 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 79
+Connection: close
+X-Powered-By: Express
+
+{
+  "client_id": "407",
+  "client_secret": "f9f1c336a59219e05a59eecb40eb49eb"
+}
