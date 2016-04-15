@@ -244,15 +244,15 @@ To get code coverage results locally, proceed as follows:
     
 Your default browser should open and display the coverage results.
 
+
 ## Related projects
 
-* [CPA Authentication Provider](https://github.com/ebu/cpa-auth-provider)
-* [CPA Service Provider](https://github.com/ebu/cpa-service-provider)
+* [Tutorial](https://github.com/ebu/cpa-tutorial)
+* [Authentication Provider](https://github.com/ebu/cpa-auth-provider)
+* [Service Provider](https://github.com/ebu/cpa-service-provider)
+* [Android Client](https://github.com/ebu/cpa-android)
+* [JavaScript Client](https://github.com/ebu/cpa.js)
 
-* *Clients*
-  * [cpa-android](https://github.com/ebu/cpa-android)
-  * [cpa.js](https://github.com/ebu/cpa.js)
-  * [demonstrator](https://github.com/ebu/cpa-client)
 
 ## Contributors
 
