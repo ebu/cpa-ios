@@ -261,6 +261,6 @@ Your default browser should open and display the coverage results.
 
 ## Copyright & license
 
-Copyright (c) 2015, EBU-UER Technology & Innovation
+Copyright (c) 2015-2016, EBU-UER Technology & Innovation
 
 The code is under BSD (3-Clause) License. (see LICENSE)
