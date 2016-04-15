@@ -8,7 +8,7 @@
 
 The Cross-platform Authentication (CPA) protocol provides a common formalism between device manufacturers and content providers to offer personalized services to their audience. It makes it possible for a user to conveniently access these services as a single identity accross devices and applications.
 
-This project contains a reference implementation of the Cross-Platform Authentication client for iOS version 1.0. Extensive information is available from the official [EBU Tech 3366 specification document](https://tech.ebu.ch/docs/tech/tech3366.pdf).
+This software implements version 1.0 of the Cross-Platform Authentication Protocol ([ETSI TS 103 407](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=47970)).
 
 More information is available on the [EBU Cross-Platform Authentication project page](http://tech.ebu.ch/cpa).
 
